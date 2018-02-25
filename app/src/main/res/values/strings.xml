@@ -1,15 +1,16 @@
 <resources>
-    <!--total-->
+
+    <!--Total-->
     <string name="app_name">Marvel</string>
     <string name="settings">settings</string>
     <string name="error">Error</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-    <!--comics screen-->
+    <!--Comics screen-->
     <string name="comics">Comics</string>
     <string name="title_description">Description:</string>
-    <string name="text_empty_characters">There are now any characters yet</string>
+    <string name="text_empty_comics">There are now any comics yet</string>
     <string name="title_price">Price:</string>
     <string name="price_format">%s$</string>
     <string name="title_pages">Pages:</string>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.itis.android.lessontwo">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -10,12 +12,20 @@
         android:roundIcon="@mipmap/ic_marvel_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.base.BaseActivity">
+        <activity android:name=".ui.comicslist.ComicsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.comics.ComicsActivity"
+            android:label="@string/comics"
+            android:parentActivityName=".ui.comicslist.ComicsListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.comicslist.ComicsListActivity" />
         </activity>
     </application>
 

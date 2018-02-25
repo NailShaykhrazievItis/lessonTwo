@@ -25,8 +25,8 @@
     <dimen name="text_xxxlarge">32sp</dimen>
 
     <dimen name="height_nav_header">160dp</dimen>
-    <dimen name="height_app_bar">180dp</dimen>
-    <dimen name="size_image_list">40dp</dimen>
+    <dimen name="height_app_bar">240dp</dimen>
+    <dimen name="size_image_list">48dp</dimen>
     <dimen name="size_item_large">72dp</dimen>
 
 </resources>

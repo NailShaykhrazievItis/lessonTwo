@@ -15,9 +15,9 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.itis.android.lessontwo.utils.Const.API_KEY_PARAM;
-import static com.itis.android.lessontwo.utils.Const.HASH_PARAM;
-import static com.itis.android.lessontwo.utils.Const.TIMESTAMP_PARAM;
+import static com.itis.android.lessontwo.utils.Constants.API_KEY_PARAM;
+import static com.itis.android.lessontwo.utils.Constants.HASH_PARAM;
+import static com.itis.android.lessontwo.utils.Constants.TIMESTAMP_PARAM;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.

@@ -1,5 +1,6 @@
 package com.itis.android.lessontwo.ui.base;
 
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,8 +11,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.itis.android.lessontwo.R;
+import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     protected DrawerLayout mDrawer;
     protected NavigationView mNavigationView;
@@ -52,7 +54,8 @@ public class BaseActivity extends AppCompatActivity {
             int id = menuItem.getItemId();
             switch (id) {
                 case R.id.menu_comics:
-
+                    Intent intent = new Intent(getApplicationContext(), ComicsListActivity.class);
+                    startActivity(intent);
                     break;
             }
             return true;

@@ -1,0 +1,69 @@
+package com.itis.android.lessontwo.ui.base;
+
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+
+import com.itis.android.lessontwo.R;
+
+public class BaseActivity extends AppCompatActivity {
+
+    protected DrawerLayout mDrawer;
+    protected NavigationView mNavigationView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_base);
+        mDrawer = findViewById(R.id.drawer_layout);
+        mNavigationView = findViewById(R.id.nav_view);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+            mDrawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    protected void supportActionBar(Toolbar toolbar) {
+        setSupportActionBar(toolbar);
+        initNavigationDrawer(toolbar);
+    }
+
+    protected void setBackArrow(Toolbar toolbar) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            toolbar.setNavigationOnClickListener(v -> onBackPressed());
+        }
+    }
+
+    private void initNavigationDrawer(Toolbar toolbar) {
+        mNavigationView.setNavigationItemSelectedListener(menuItem -> {
+            int id = menuItem.getItemId();
+            switch (id) {
+                case R.id.menu_comics:
+
+                    break;
+            }
+            return true;
+        });
+        setActionBar(toolbar);
+    }
+
+    private void setActionBar(Toolbar toolbar) {
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar,
+                R.string.drawer_open, R.string.drawer_close);
+        mDrawer.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+    }
+}

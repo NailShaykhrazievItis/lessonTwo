@@ -1,13 +1,10 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
 import android.support.annotation.NonNull;
-
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.ui.base.BaseView;
-
-import java.util.List;
-
 import io.reactivex.disposables.Disposable;
+import java.util.List;
 
 /**
  * Created by Nail Shaykhraziev on 26.02.2018.
@@ -21,6 +18,10 @@ public interface ComicsListContract {
 
         void showDetails(Comics item);
 
+        void addMoreItems(List<Comics> items);
+
+        void setNotLoading();
+
         void showLoading(Disposable disposable);
 
         void hideLoading();
@@ -29,6 +30,8 @@ public interface ComicsListContract {
     interface Presenter {
 
         void loadComics();
+
+        void loadNextElements(int page);
 
         void onItemClick(Comics comics);
     }

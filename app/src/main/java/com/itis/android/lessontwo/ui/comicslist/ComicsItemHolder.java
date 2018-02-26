@@ -6,12 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.ui.general.ListItemHolder;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by Nail Shaykhraziev on 26.02.2018.
@@ -19,7 +16,7 @@ import com.squareup.picasso.Picasso;
 
 public class ComicsItemHolder extends RecyclerView.ViewHolder {
 
-    private static final int MAX_LENGTH = 50;
+    private static final int MAX_LENGTH = 80;
     private static final String MORE_TEXT = "...";
 
     private TextView name;

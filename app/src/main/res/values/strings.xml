@@ -9,10 +9,12 @@
 
     <!--Comics screen-->
     <string name="comics">Comics</string>
+    <string name="characters">Characters</string>
     <string name="title_description">Description:</string>
-    <string name="text_empty_comics">There are now any comics yet</string>
+    <string name="text_empty_comics">There are no any comics yet</string>
     <string name="title_price">Price:</string>
     <string name="price_format">%s$</string>
     <string name="title_pages">Pages:</string>
+    <string name="title_name">Name</string>
 
 </resources>

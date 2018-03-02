@@ -15,7 +15,11 @@ import retrofit2.http.Query;
 public interface CharactersService {
 
     @GET("characters")
-    Observable<CharactersResponse> characters(@Query("offset") Long offset, @Query("limit") Long limit);
+    Observable<CharactersResponse> characters(@Query("offset") Long offset, @Query("limit") Long limit,
+                                              @Query("orderBy") String orderBy);
+
+    @GET("characters/{characterId}")
+    Observable<CharactersResponse> character(@Path("characterId") Long id);
 
     @GET("characters/{characterId/comics}")
     Observable<ComicsResponse> comicsByCharacter(@Path("characterId") Long id);

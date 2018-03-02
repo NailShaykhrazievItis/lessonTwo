@@ -13,6 +13,7 @@ public final class Constants {
     public final static Long PAGE_SIZE = 20L;
     public final static Long ZERO_OFFSET = 0L;
     public static final String DEFAULT_COMICS_SORT = "-onsaleDate";
+    public static final String DEFAULT_CHARACTER_SORT = "-name";
 
     public final static String ID_KEY = "id";
     public final static String IMAGE_KEY = "image";

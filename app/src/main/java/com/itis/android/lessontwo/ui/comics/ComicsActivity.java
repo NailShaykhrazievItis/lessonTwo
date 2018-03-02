@@ -9,19 +9,14 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-import com.itis.android.lessontwo.utils.RxUtils;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
@@ -29,7 +24,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity {
+public class ComicsActivity extends BaseActivity  implements ComicsContract.View{
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -37,7 +32,8 @@ public class ComicsActivity extends BaseActivity {
     private TextView tvDescription;
     private TextView tvPrice;
     private TextView tvPages;
-    private ProgressBar progressBar;
+
+    private ComicsContract.Presenter presenter;
 
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
         Intent intent = new Intent(activity, ComicsActivity.class);
@@ -54,14 +50,13 @@ public class ComicsActivity extends BaseActivity {
         initViews();
 
         long id = getIntent().getLongExtra(ID_KEY, 0);
-        // TODO: 26.02.2018 move to presenter
-        ApiFactory.getComicsService()
-                .comics(id)
-                .map(ComicsResponse::getData)
-                .map(ComicsResponseData::getResults)
-                .map(list -> list.get(0))
-                .compose(RxUtils.async())
-                .subscribe(this::showComics, this::handleError);
+        new ComicsPresenter(this);
+        presenter.loadComics(id);
+    }
+
+    @Override
+    public void setPresenter(ComicsContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
     private void initViews() {
@@ -80,11 +75,13 @@ public class ComicsActivity extends BaseActivity {
         tvPages = findViewById(R.id.tv_pages);
     }
 
-    private void handleError(Throwable error) {
+    @Override
+    public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    private void showComics(Comics comics) {
+    @Override
+    public void showComics(@NonNull Comics comics) {
         ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
                 comics.getImage().getExtension()));
         if (comics.getTextObjects() != null){

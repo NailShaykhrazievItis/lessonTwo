@@ -27,6 +27,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.comicslist.ComicsListActivity" />
         </activity>
+        <activity
+            android:name=".ui.characters_list.CharactersListActivity">
+        </activity>
+        <activity
+            android:name=".ui.characters.CharactersActivity"
+            android:label="@string/characters"
+            android:parentActivityName=".ui.characters_list.CharactersListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.characters_list.CharactersListActivity" />
+        </activity>
     </application>
 
 </manifest>

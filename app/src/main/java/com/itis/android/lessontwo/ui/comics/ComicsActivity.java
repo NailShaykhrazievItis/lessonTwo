@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -14,14 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-import com.itis.android.lessontwo.utils.RxUtils;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
@@ -29,7 +26,9 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity {
+public class ComicsActivity extends BaseActivity implements ComicsContract.View {
+
+    ComicsContract.Presenter presenter;
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -49,19 +48,15 @@ public class ComicsActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         FrameLayout contentFrameLayout = findViewById(R.id.container);
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
         initViews();
 
+        new ComicsPresenter(this);
+
         long id = getIntent().getLongExtra(ID_KEY, 0);
-        // TODO: 26.02.2018 move to presenter
-        ApiFactory.getComicsService()
-                .comics(id)
-                .map(ComicsResponse::getData)
-                .map(ComicsResponseData::getResults)
-                .map(list -> list.get(0))
-                .compose(RxUtils.async())
-                .subscribe(this::showComics, this::handleError);
+        presenter.loadComics(id);
     }
 
     private void initViews() {
@@ -80,21 +75,33 @@ public class ComicsActivity extends BaseActivity {
         tvPages = findViewById(R.id.tv_pages);
     }
 
-    private void handleError(Throwable error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+    @Override
+    public void setPresenter(ComicsContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
-    private void showComics(Comics comics) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
+    @Override
+    public void handleError(Throwable error) {
+        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+        Log.e("Alm", error.getMessage());
+        error.printStackTrace();
+    }
+
+    @Override
+    public void showComics(Comics comics) {
+        //image may be null,because images array may be empty
+        if (comics.getImage() != null) {
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
                 comics.getImage().getExtension()));
-        if (comics.getTextObjects() != null){
+        }
+        if (comics.getTextObjects() != null) {
             StringBuilder description = new StringBuilder();
             for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
                 description.append(comicsTextObject.getText()).append("\n");
             }
             tvDescription.setText(description.toString().trim());
         }
-        if (comics.getPrices() != null && !comics.getPrices().isEmpty()){
+        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
             tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
         tvPages.setText(String.valueOf(comics.getPageCount()));

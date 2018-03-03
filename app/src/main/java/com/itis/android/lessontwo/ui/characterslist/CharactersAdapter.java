@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.characters_list;
+package com.itis.android.lessontwo.ui.characterslist;
 
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;

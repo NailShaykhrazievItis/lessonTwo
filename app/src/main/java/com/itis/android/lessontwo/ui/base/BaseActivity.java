@@ -10,8 +10,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.ui.characters_list.CharactersListActivity;
+import com.itis.android.lessontwo.ui.characterslist.CharactersListActivity;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
+import com.itis.android.lessontwo.ui.creatorslist.CreatorsListActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -61,6 +62,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
                 case R.id.menu_characters:
                     intent = new Intent(getApplicationContext(), CharactersListActivity.class);
+                    startActivity(intent);
+                    break;
+
+                case R.id.menu_creators:
+                    intent = new Intent(getApplicationContext(), CreatorsListActivity.class);
                     startActivity(intent);
                     break;
             }

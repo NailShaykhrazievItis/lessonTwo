@@ -7,14 +7,21 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <!--General screen-->
+    <string name="title_name">Name</string>
+    <string name="title_description">Description:</string>
+    <string name="text_empty_content">There are no any content yet</string>
+
     <!--Comics screen-->
     <string name="comics">Comics</string>
-    <string name="characters">Characters</string>
-    <string name="title_description">Description:</string>
-    <string name="text_empty_comics">There are no any comics yet</string>
     <string name="title_price">Price:</string>
     <string name="price_format">%s$</string>
     <string name="title_pages">Pages:</string>
-    <string name="title_name">Name</string>
+
+    <!--Characters screen-->
+    <string name="characters">Characters</string>
+
+    <!--Creators screen-->
+    <string name="creators">Creators</string>
 
 </resources>

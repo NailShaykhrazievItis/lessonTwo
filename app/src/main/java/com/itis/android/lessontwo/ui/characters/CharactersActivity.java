@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
+import com.itis.android.lessontwo.ui.base.BaseContract;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
@@ -24,7 +25,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
  * Created by Ruslan on 02.03.2018.
  */
 
-public class CharactersActivity extends BaseActivity implements CharactersContract.View{
+public class CharactersActivity extends BaseActivity implements BaseContract.View<Character>{
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -32,7 +33,7 @@ public class CharactersActivity extends BaseActivity implements CharactersContra
     private TextView tvDescription;
     private TextView tvName;
 
-    private CharactersContract.Presenter presenter;
+    private BaseContract.Presenter presenter;
 
     public static void start(@NonNull Activity activity, @NonNull Character character) {
         Intent intent = new Intent(activity, CharactersActivity.class);
@@ -50,11 +51,11 @@ public class CharactersActivity extends BaseActivity implements CharactersContra
 
         long id = getIntent().getLongExtra(ID_KEY, 0);
         new CharactersPresenter(this);
-        presenter.loadCharacter(id);
+        presenter.load(id);
     }
 
     @Override
-    public void setPresenter(CharactersContract.Presenter presenter) {
+    public void setPresenter(BaseContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
@@ -79,7 +80,7 @@ public class CharactersActivity extends BaseActivity implements CharactersContra
     }
 
     @Override
-    public void showCharacter(@NonNull Character character) {
+    public void show(@NonNull Character character) {
         ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                 character.getImage().getExtension()));
 

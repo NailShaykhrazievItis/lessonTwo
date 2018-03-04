@@ -10,7 +10,6 @@ import com.google.gson.annotations.SerializedName;
 public class CreatorsResponse {
 
     @SerializedName("data")
-    @Expose
     private CreatorsResponseData data;
 
     public CreatorsResponseData getData() {

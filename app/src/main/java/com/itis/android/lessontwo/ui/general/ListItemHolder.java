@@ -34,7 +34,7 @@ public class ListItemHolder extends RecyclerView.ViewHolder {
     public ListItemHolder(View itemView) {
         super(itemView);
         //name = itemView.findViewById(R.id.tv_name);
-        description = itemView.findViewById(R.id.tv_description);
+        //description = itemView.findViewById(R.id.tv_description);
         //imageView = itemView.findViewById(R.id.iv_cover);
     }
 

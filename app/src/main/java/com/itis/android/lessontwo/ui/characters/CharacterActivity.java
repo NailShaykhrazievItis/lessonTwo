@@ -76,7 +76,12 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
                 character.getImage().getExtension()));
 
         tvDescription.setText(character.getDescription());
-        tvName.setText(character.getName());
+
+        if (!character.getDescription().equals("")) {
+            tvDescription.setText(character.getDescription());
+        } else {
+            tvDescription.setText("Описание отсутствует.");
+        }
     }
 
     private void initViews() {
@@ -90,6 +95,6 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         collapsingToolbar = findViewById(R.id.ct_characters);
         toolbar = findViewById(R.id.tb_characters);
         ivCover = findViewById(R.id.iv_characters);
-        tvDescription = findViewById(R.id.tv_description_character);
+        tvDescription = findViewById(R.id.tv_description_details_character);
     }
 }

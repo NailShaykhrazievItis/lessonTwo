@@ -12,6 +12,8 @@
         android:roundIcon="@mipmap/ic_marvel_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--Comics-->
         <activity android:name=".ui.comicslist.ComicsListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +29,31 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.comicslist.ComicsListActivity" />
         </activity>
-    </application>
 
+        <!--Characters-->
+        <activity
+            android:name=".ui.characterslist.CharactersListActivity">
+        </activity>
+        <activity
+            android:name=".ui.characters.CharactersActivity"
+            android:label="@string/characters"
+            android:parentActivityName=".ui.characterslist.CharactersListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.characterslist.CharactersListActivity" />
+        </activity>
+
+        <!--Creators-->
+        <activity
+            android:name=".ui.creatorslist.CreatorsListActivity">
+        </activity>
+        <activity
+            android:name=".ui.creators.CreatorsActivity"
+            android:label="@string/creators"
+            android:parentActivityName=".ui.creatorslist.CreatorsListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.creatorslist.CreatorsListActivity" />
+        </activity>
+    </application>
 </manifest>

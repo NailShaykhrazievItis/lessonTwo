@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.comics;
+package com.itis.android.lessontwo.ui.characters;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,8 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsTextObject;
+import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseContract;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
@@ -23,23 +22,23 @@ import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 
 /**
- * Created by Nail Shaykhraziev on 25.02.2018.
+ * Created by Ruslan on 02.03.2018.
  */
-public class ComicsActivity extends BaseActivity  implements BaseContract.View<Comics>{
+
+public class CharactersActivity extends BaseActivity implements BaseContract.View<Character>{
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
     private ImageView ivCover;
     private TextView tvDescription;
-    private TextView tvPrice;
-    private TextView tvPages;
+    private TextView tvName;
 
     private BaseContract.Presenter presenter;
 
-    public static void start(@NonNull Activity activity, @NonNull Comics comics) {
-        Intent intent = new Intent(activity, ComicsActivity.class);
-        intent.putExtra(NAME_KEY, comics.getName());
-        intent.putExtra(ID_KEY, comics.getId());
+    public static void start(@NonNull Activity activity, @NonNull Character character) {
+        Intent intent = new Intent(activity, CharactersActivity.class);
+        intent.putExtra(NAME_KEY, character.getName());
+        intent.putExtra(ID_KEY, character.getId());
         activity.startActivity(intent);
     }
 
@@ -47,11 +46,11 @@ public class ComicsActivity extends BaseActivity  implements BaseContract.View<C
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
-        getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
+        getLayoutInflater().inflate(R.layout.activity_characters, contentFrameLayout);
         initViews();
 
         long id = getIntent().getLongExtra(ID_KEY, 0);
-        new ComicsPresenter(this);  // странный способ связывания view и presenter
+        new CharactersPresenter(this);
         presenter.load(id);
     }
 
@@ -68,12 +67,11 @@ public class ComicsActivity extends BaseActivity  implements BaseContract.View<C
     }
 
     private void findViews() {
-        collapsingToolbar = findViewById(R.id.ct_comics);
-        toolbar = findViewById(R.id.tb_comics);
-        ivCover = findViewById(R.id.iv_comics);
+        collapsingToolbar = findViewById(R.id.ct_character);
+        toolbar = findViewById(R.id.tb_character);
+        ivCover = findViewById(R.id.iv_character);
         tvDescription = findViewById(R.id.tv_description);
-        tvPrice = findViewById(R.id.tv_price);
-        tvPages = findViewById(R.id.tv_pages);
+        tvName = findViewById(R.id.tv_name);
     }
 
     @Override
@@ -82,19 +80,11 @@ public class ComicsActivity extends BaseActivity  implements BaseContract.View<C
     }
 
     @Override
-    public void show(@NonNull Comics comics) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
-                comics.getImage().getExtension()));
-        if (comics.getTextObjects() != null){
-            StringBuilder description = new StringBuilder();
-            for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
-                description.append(comicsTextObject.getText()).append("\n");
-            }
-            tvDescription.setText(description.toString().trim());
-        }
-        if (comics.getPrices() != null && !comics.getPrices().isEmpty()){
-            tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
-        }
-        tvPages.setText(String.valueOf(comics.getPageCount()));
+    public void show(@NonNull Character character) {
+        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
+                character.getImage().getExtension()));
+
+        tvName.setText(character.getName());
+        tvDescription.setText(character.getDescription().trim());
     }
 }

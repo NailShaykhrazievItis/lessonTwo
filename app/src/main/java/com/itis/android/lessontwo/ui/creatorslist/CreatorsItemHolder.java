@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.general;
+package com.itis.android.lessontwo.ui.creatorslist;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,17 +8,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.general.ListItem;
+import com.itis.android.lessontwo.model.character.Character;
+import com.itis.android.lessontwo.model.creators.Creator;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-import com.squareup.picasso.Picasso;
 
 /**
- * Created by Nail Shaykhraziev on 26.02.2018.
+ * Created by valera071998@gmail.com on 02.03.2018.
  */
 
-public class ListItemHolder extends RecyclerView.ViewHolder {
+public class CreatorsItemHolder extends RecyclerView.ViewHolder {
 
-    private static final int MAX_LENGTH = 50;
+    private static final int MAX_LENGTH = 80;
     private static final String MORE_TEXT = "...";
 
     private TextView name;
@@ -26,26 +26,25 @@ public class ListItemHolder extends RecyclerView.ViewHolder {
     private ImageView imageView;
 
     @NonNull
-    public static ListItemHolder create(@NonNull Context context) {
-        View view = View.inflate(context, R.layout.item_comics, null);
-        ListItemHolder holder = new ListItemHolder(view);
+    public static CreatorsItemHolder create(@NonNull Context context) {
+        View view = View.inflate(context, R.layout.item_creators, null);
+        CreatorsItemHolder holder = new CreatorsItemHolder(view);
         return holder;
     }
 
-    public ListItemHolder(View itemView) {
+    public CreatorsItemHolder(View itemView) {
         super(itemView);
         name = itemView.findViewById(R.id.tv_name);
         description = itemView.findViewById(R.id.tv_description);
         imageView = itemView.findViewById(R.id.iv_cover);
     }
 
-    public void bind(@NonNull ListItem item) {
+    public void bind(@NonNull Creator item) {
         name.setText(item.getName());
         if (item.getDescription() != null) {
             description.setText(cutLongDescription(item.getDescription()));
         }
         if (item.getImage() != null) {
-            // есть готовая реализация из ImageLoadHelper
             ImageLoadHelper.loadPicture(imageView, String.format("%s.%s", item.getImage().getPath(),
                     item.getImage().getExtension()));
         }

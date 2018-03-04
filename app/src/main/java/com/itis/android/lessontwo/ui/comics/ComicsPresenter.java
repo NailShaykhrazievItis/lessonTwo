@@ -1,7 +1,5 @@
 package com.itis.android.lessontwo.ui.comics;
 
-import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
-
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.ComicsResponse;
 import com.itis.android.lessontwo.model.comics.ComicsResponseData;

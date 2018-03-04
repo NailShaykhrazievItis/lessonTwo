@@ -12,31 +12,30 @@ import com.itis.android.lessontwo.model.general.ListItem;
 public class Creator implements ListItem {
 
     @SerializedName("id")
-    @Expose
     private Long id;
+    
     @SerializedName("firstName")
-    @Expose
     private String firstName;
+    
     @SerializedName("middleName")
-    @Expose
     private String middleName;
+    
     @SerializedName("lastName")
-    @Expose
     private String lastName;
+    
     @SerializedName("suffix")
-    @Expose
     private String suffix;
+    
     @SerializedName("fullName")
-    @Expose
     private String fullName;
+    
     @SerializedName("modified")
-    @Expose
     private String modified;
+    
     @SerializedName("resourceURI")
-    @Expose
     private String resourceURI;
+    
     @SerializedName("thumbnail")
-    @Expose
     private Image thumbnail;
 
     @Override

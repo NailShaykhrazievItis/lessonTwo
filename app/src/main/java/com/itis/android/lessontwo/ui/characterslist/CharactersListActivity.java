@@ -1,5 +1,7 @@
 package com.itis.android.lessontwo.ui.characterslist;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -40,6 +42,11 @@ public class CharactersListActivity  extends BaseActivity implements CharactersL
     private CharactersListContract.Presenter presenter;
 
     private boolean isLoading = false;
+
+    public static void start(@NonNull Context context) {
+        Intent intent = new Intent(context, CharactersListActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

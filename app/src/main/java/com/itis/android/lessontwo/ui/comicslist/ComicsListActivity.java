@@ -29,11 +29,15 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         BaseAdapter.OnItemClickListener<Comics> {
 
     private Toolbar toolbar;
+
     private ProgressBar progressBar;
+
     private EmptyStateRecyclerView recyclerView;
+
     private TextView tvEmpty;
 
     private ComicsAdapter adapter;
+
     private ComicsListContract.Presenter presenter;
 
     private boolean isLoading = false;
@@ -103,8 +107,10 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         recyclerView.setHasFixedSize(true);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int currentPage = 0;
+
             // обычно бывает флаг последней страницы, но я че т его не нашел, если не найдется, то можно удалить, всегда тру
             private boolean isLastPage = false;
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);

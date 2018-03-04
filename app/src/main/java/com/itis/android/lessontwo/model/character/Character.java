@@ -8,7 +8,7 @@ import com.itis.android.lessontwo.model.general.ListItem;
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
 
-public class Character implements ListItem{
+public class Character implements ListItem {
 
     @SerializedName("id")
     private Long id;

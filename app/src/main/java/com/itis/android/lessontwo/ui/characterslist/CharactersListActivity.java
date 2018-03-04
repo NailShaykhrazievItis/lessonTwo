@@ -31,11 +31,15 @@ public class CharactersListActivity extends BaseActivity implements CharactersLi
         BaseAdapter.OnItemClickListener<Character> {
 
     private Toolbar toolbar;
+
     private ProgressBar progressBar;
+
     private EmptyStateRecyclerView recyclerView;
+
     private TextView tvEmpty;
 
     private CharactersAdapter adapter;
+
     private CharactersListContract.Presenter presenter;
 
     private boolean isLoading = false;
@@ -107,8 +111,10 @@ public class CharactersListActivity extends BaseActivity implements CharactersLi
         recyclerView.setHasFixedSize(true);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int currentPage = 0;
+
             // обычно бывает флаг последней страницы, но я че т его не нашел, если не найдется, то можно удалить, всегда тру
             private boolean isLastPage = false;
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);

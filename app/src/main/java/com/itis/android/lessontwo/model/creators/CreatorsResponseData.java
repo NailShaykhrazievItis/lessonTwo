@@ -12,19 +12,18 @@ import java.util.List;
 public class CreatorsResponseData {
 
     @SerializedName("offset")
-    @Expose
     private String offset;
+    
     @SerializedName("limit")
-    @Expose
     private String limit;
+    
     @SerializedName("total")
-    @Expose
     private String total;
+    
     @SerializedName("count")
-    @Expose
     private String count;
+    
     @SerializedName("results")
-    @Expose
     private List<Creator> results = null;
 
     public String getOffset() {

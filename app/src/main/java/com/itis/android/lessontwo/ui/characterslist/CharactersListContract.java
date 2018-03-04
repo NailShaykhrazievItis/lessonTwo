@@ -1,9 +1,12 @@
 package com.itis.android.lessontwo.ui.characterslist;
 
 import android.support.annotation.NonNull;
+
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseView;
+
 import io.reactivex.disposables.Disposable;
+
 import java.util.List;
 
 /**

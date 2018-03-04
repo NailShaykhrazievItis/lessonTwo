@@ -18,7 +18,7 @@ public interface CharactersService {
     Observable<CharactersResponse> characters(@Query("offset") Long offset, @Query("limit") Long limit);
 
     @GET("characters/{characterId}")
-    Observable<CharactersResponse> characters(@Path("characterId") Long id);
+    Observable<CharactersResponse> character(@Path("characterId") Long id);
 
     @GET("characters/{characterId/comics}")
     Observable<ComicsResponse> comicsByCharacter(@Path("characterId") Long id);

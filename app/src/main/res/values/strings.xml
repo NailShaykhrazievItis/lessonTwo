@@ -15,4 +15,7 @@
     <string name="price_format">%s$</string>
     <string name="title_pages">Pages:</string>
 
+    <!--Character screen-->
+    <string name="character">Character</string>
+
 </resources>

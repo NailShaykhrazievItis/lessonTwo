@@ -16,7 +16,7 @@ import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
-import com.itis.android.lessontwo.ui.characters.CharacterActivity;
+import com.itis.android.lessontwo.ui.character.CharacterActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
 import io.reactivex.disposables.Disposable;

@@ -8,23 +8,24 @@ import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsResponse;
 import com.itis.android.lessontwo.model.comics.ComicsResponseData;
+import com.itis.android.lessontwo.ui.base.BaseListContract;
 import com.itis.android.lessontwo.utils.RxUtils;
 
 /**
  * Created by Nail Shaykhraziev on 26.02.2018.
  */
 
-public class ComicsListPresenter implements ComicsListContract.Presenter {
+public class ComicsListPresenter implements BaseListContract.Presenter<Comics> {
 
-    private final ComicsListContract.View view;
+    private final BaseListContract.View<Comics> view;
 
-    public ComicsListPresenter(ComicsListContract.View view) {
+    public ComicsListPresenter(BaseListContract.View<Comics> view) {
         this.view = view;
         this.view.setPresenter(this);
     }
 
     @Override
-    public void loadComics() {
+    public void load() {
         ApiFactory.getComicsService()
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .map(ComicsResponse::getData)

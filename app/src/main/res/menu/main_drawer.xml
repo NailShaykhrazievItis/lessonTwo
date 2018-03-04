@@ -9,4 +9,8 @@
         android:id="@+id/menu_characters"
         android:title="@string/characters" />
 
+    <item
+        android:id="@+id/menu_creators"
+        android:title="@string/creators" />
+
 </menu>

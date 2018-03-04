@@ -32,9 +32,9 @@ public class ComicsItemHolder extends RecyclerView.ViewHolder {
 
     public ComicsItemHolder(View itemView) {
         super(itemView);
-        name = itemView.findViewById(R.id.tv_name);
-        description = itemView.findViewById(R.id.tv_description);
-        imageView = itemView.findViewById(R.id.iv_cover);
+        name = itemView.findViewById(R.id.tv_name_comics);
+        description = itemView.findViewById(R.id.tv_description_comics);
+        imageView = itemView.findViewById(R.id.iv_cover_comics);
     }
 
     public void bind(@NonNull Comics item) {

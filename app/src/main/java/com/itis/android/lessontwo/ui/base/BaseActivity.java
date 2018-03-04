@@ -56,6 +56,9 @@ public abstract class BaseActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ComicsListActivity.class);
                     startActivity(intent);
                     break;
+                case R.id.menu_characters:
+                    //todo
+                    break;
             }
             return true;
         });

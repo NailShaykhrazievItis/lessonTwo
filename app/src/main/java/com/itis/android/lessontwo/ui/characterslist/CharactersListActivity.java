@@ -1,6 +1,6 @@
 package com.itis.android.lessontwo.ui.characterslist;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,10 +21,10 @@ import com.itis.android.lessontwo.ui.base.BaseAdapter;
 import com.itis.android.lessontwo.ui.character.CharacterActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
-import io.reactivex.disposables.Disposable;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by Home on 04.03.2018.
@@ -43,9 +43,9 @@ public class CharactersListActivity  extends BaseActivity implements CharactersL
 
     private boolean isLoading = false;
 
-    public static void start(@NonNull Context context) {
-        Intent intent = new Intent(context, CharactersListActivity.class);
-        context.startActivity(intent);
+    public static void start(@NonNull Activity activity) {
+        Intent intent = new Intent(activity, CharactersListActivity.class);
+        activity.startActivity(intent);
     }
 
     @Override

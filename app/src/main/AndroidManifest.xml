@@ -28,6 +28,7 @@
                 android:value=".ui.comicslist.ComicsListActivity" />
         </activity>
         <activity android:name=".ui.characters.CharacterActivity" />
+        <activity android:name=".ui.characterslist.CharactersListActivity" />
     </application>
 
 </manifest>

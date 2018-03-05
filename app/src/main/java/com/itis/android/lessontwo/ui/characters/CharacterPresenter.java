@@ -1,7 +1,6 @@
 package com.itis.android.lessontwo.ui.characters;
 
 import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.model.character.CharactersResponse;
 import com.itis.android.lessontwo.model.character.CharactersResponseData;
 import com.itis.android.lessontwo.utils.RxUtils;
@@ -21,7 +20,7 @@ public class CharacterPresenter implements CharacterContract.Presenter {
 
     @Override
     public void initCharacter(long id) {
-        ApiFactory.getComicsService()
+        ApiFactory.getCharactersService()
                 .characters(id)
                 .map(CharactersResponse::getData)
                 .map(CharactersResponseData::getResults)

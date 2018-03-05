@@ -1,8 +1,7 @@
-package com.itis.android.lessontwo.ui.comicslist;
+package com.itis.android.lessontwo.ui.characterslist;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -11,22 +10,25 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
-import com.itis.android.lessontwo.ui.comics.ComicsActivity;
+import com.itis.android.lessontwo.ui.characters.CharacterActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
-import io.reactivex.disposables.Disposable;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
 /**
- * Created by Nail Shaykhraziev on 25.02.2018.
+ * Created by User on 04.03.2018.
  */
 
-public class ComicsListActivity extends BaseActivity implements ComicsListContract.View,
-        BaseAdapter.OnItemClickListener<Comics> {
+public class CharactersListActivity extends BaseActivity implements CharactersListContract.View,
+        BaseAdapter.OnItemClickListener<Character> {
 
     private Toolbar toolbar;
 
@@ -36,25 +38,25 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
 
     private TextView tvEmpty;
 
-    private ComicsAdapter adapter;
+    private CharactersAdapter adapter;
 
-    private ComicsListContract.Presenter presenter;
+    private CharactersListContract.Presenter presenter;
 
     private boolean isLoading = false;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
-        getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);
+        getLayoutInflater().inflate(R.layout.activity_characters_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new ComicsListPresenter(this);
-        presenter.loadComics();
+        new CharactersListPresenter(this);
+        presenter.loadCharacters();
     }
 
     @Override
-    public void setPresenter(ComicsListContract.Presenter presenter) {
+    public void setPresenter(CharactersListContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
@@ -64,17 +66,17 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
     }
 
     @Override
-    public void showItems(@NonNull List<Comics> items) {
+    public void showItems(@NonNull List<Character> items) {
         adapter.changeDataSet(items);
     }
 
     @Override
-    public void showDetails(Comics item) {
-        ComicsActivity.start(this, item);
+    public void showDetails(Character item) {
+        CharacterActivity.start(this, item);
     }
 
     @Override
-    public void addMoreItems(List<Comics> items) {
+    public void addMoreItems(List<Character> items) {
         adapter.addAll(items);
     }
 
@@ -83,21 +85,23 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         isLoading = false;
     }
 
+    @Override
     public void showLoading(Disposable disposable) {
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
     }
 
     @Override
-    public void onItemClick(@NonNull Comics item) {
+    public void onItemClick(@NonNull Character item) {
         presenter.onItemClick(item);
     }
 
     private void initRecycler() {
-        adapter = new ComicsAdapter(new ArrayList<>());
+        adapter = new CharactersAdapter(new ArrayList<>());
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setEmptyView(tvEmpty);
@@ -130,10 +134,10 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
     }
 
     private void initViews() {
-        toolbar = findViewById(R.id.tb_comics_list);
-        progressBar = findViewById(R.id.pg_comics_list);
-        recyclerView = findViewById(R.id.rv_comics_list);
-        tvEmpty = findViewById(R.id.tv_empty_comics);
+        toolbar = findViewById(R.id.tb_characters_list);
+        progressBar = findViewById(R.id.pg_characters_list);
+        recyclerView = findViewById(R.id.rv_characters_list);
+        tvEmpty = findViewById(R.id.tv_empty_characters);
         supportActionBar(toolbar);
     }
 }

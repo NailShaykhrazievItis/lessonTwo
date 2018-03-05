@@ -101,7 +101,7 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
         collapsingToolbar = findViewById(R.id.ct_comics);
         toolbar = findViewById(R.id.tb_comics);
         ivCover = findViewById(R.id.iv_comics);
-        tvDescription = findViewById(R.id.tv_description);
+        tvDescription = findViewById(R.id.tv_description_details_comics);
         tvPrice = findViewById(R.id.tv_price);
         tvPages = findViewById(R.id.tv_pages);
     }

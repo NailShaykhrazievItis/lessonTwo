@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Nail Shaykhraziev on 26.02.2018.
  */
 
-public class ComicsAdapter extends BaseAdapter<Comics, ComicsItemHolder>{
+public class ComicsAdapter extends BaseAdapter<Comics, ComicsItemHolder> {
 
     public ComicsAdapter(@NonNull List<Comics> items) {
         super(items);

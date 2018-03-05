@@ -6,7 +6,7 @@ import com.itis.android.lessontwo.model.creators.CreatorsResponse;
 import com.itis.android.lessontwo.model.creators.CreatorsResponseData;
 import com.itis.android.lessontwo.utils.RxUtils;
 
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
+import static com.itis.android.lessontwo.utils.Constants.DEFAULT_CREATORS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
@@ -25,7 +25,7 @@ public class CreatorsListPresenter implements CreatorsListContract.Presenter {
     @Override
     public void loadCreators() {
         ApiFactory.getCreatorService()
-                .creators(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
+                .creators(ZERO_OFFSET, PAGE_SIZE, DEFAULT_CREATORS_SORT)
                 .map(CreatorsResponse::getData)
                 .map(CreatorsResponseData::getResults)
 //                .doOnSubscribe(view::showLoading)
@@ -37,7 +37,7 @@ public class CreatorsListPresenter implements CreatorsListContract.Presenter {
     @Override
     public void loadNextElements(int page) {
         ApiFactory.getCreatorService()
-                .creators(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
+                .creators(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_CREATORS_SORT)
                 .map(CreatorsResponse::getData)
                 .map(CreatorsResponseData::getResults)
                 .doOnTerminate(view::setNotLoading)

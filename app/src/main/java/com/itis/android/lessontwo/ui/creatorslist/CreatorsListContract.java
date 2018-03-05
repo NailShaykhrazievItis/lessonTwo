@@ -35,6 +35,6 @@ public class CreatorsListContract {
 
         void loadNextElements(int page);
 
-        void onItemClick(Creators comics);
+        void onItemClick(Creators creators);
     }
 }

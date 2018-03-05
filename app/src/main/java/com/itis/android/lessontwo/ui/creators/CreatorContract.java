@@ -1,6 +1,5 @@
 package com.itis.android.lessontwo.ui.creators;
 
-import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.creators.Creators;
 import com.itis.android.lessontwo.ui.base.BaseView;
 

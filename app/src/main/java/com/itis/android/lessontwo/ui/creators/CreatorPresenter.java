@@ -1,8 +1,6 @@
 package com.itis.android.lessontwo.ui.creators;
 
 import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.creators.CreatorsResponse;
 import com.itis.android.lessontwo.model.creators.CreatorsResponseData;
 import com.itis.android.lessontwo.utils.RxUtils;

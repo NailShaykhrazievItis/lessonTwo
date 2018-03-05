@@ -15,9 +15,6 @@ import android.widget.Toast;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.creators.Creators;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
-import com.itis.android.lessontwo.ui.comics.ComicsActivity;
-import com.itis.android.lessontwo.ui.comics.ComicsContract;
-import com.itis.android.lessontwo.ui.comics.ComicsPresenter;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
@@ -31,14 +28,14 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
     private ImageView ivCover;
-    private TextView tvDescription;
+    private TextView tvName;
     private TextView tvPrice;
     private TextView tvPages;
 
     CreatorContract.Presenter presenter;
 
     public static void start(@NonNull Activity activity, @NonNull Creators creator) {
-        Intent intent = new Intent(activity, ComicsActivity.class);
+        Intent intent = new Intent(activity, CreatorsActivity.class);
         intent.putExtra(NAME_KEY, creator.getFullName());
         intent.putExtra(ID_KEY, creator.getId());
         activity.startActivity(intent);
@@ -47,7 +44,7 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
-        getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
+        getLayoutInflater().inflate(R.layout.activity_creators, contentFrameLayout);
         initViews();
 
         new CreatorPresenter(this);
@@ -64,12 +61,10 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
     }
 
     private void findViews() {
-        collapsingToolbar = findViewById(R.id.ct_comics);
-        toolbar = findViewById(R.id.tb_comics);
-        ivCover = findViewById(R.id.iv_comics);
-        tvDescription = findViewById(R.id.tv_description);
-        tvPrice = findViewById(R.id.tv_price);
-        tvPages = findViewById(R.id.tv_pages);
+        collapsingToolbar = findViewById(R.id.ct_creators);
+        toolbar = findViewById(R.id.tb_creators);
+        ivCover = findViewById(R.id.iv_creators);
+        tvName = findViewById(R.id.tv_name);
     }
 
     @Override
@@ -85,10 +80,9 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
         ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creators.getImage().getPath(),
                 creators.getImage().getExtension()));
         if(creators.getFullName() != null){
-           tvFullName.setText(creators.getFullName().trim());
+           tvName.setText(creators.getFullName().trim());
         }
 
-        tvPages.setText(String.valueOf(creators.getPageCount()));
     }
 }
 

@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.creators.Creators;
-import com.itis.android.lessontwo.ui.general.ListItemHolder;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 /**
@@ -24,14 +23,14 @@ public class CreatorsItemHolder extends RecyclerView.ViewHolder {
 
     @NonNull
     public static CreatorsItemHolder create(@NonNull Context context) {
-        View view = View.inflate(context, R.layout.item_comics, null);
+        View view = View.inflate(context, R.layout.item_creators, null);
         CreatorsItemHolder holder = new CreatorsItemHolder(view);
         return holder;
     }
 
     public CreatorsItemHolder(View itemView) {
         super(itemView);
-        fullName = itemView.findViewById(R.id.tv_fullname);
+        fullName = itemView.findViewById(R.id.tv_name);
         imageView = itemView.findViewById(R.id.iv_cover);
     }
 

@@ -1,6 +1,6 @@
 package com.itis.android.lessontwo.api;
 
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
+
 import com.itis.android.lessontwo.model.creators.CreatorsResponse;
 
 import io.reactivex.Observable;

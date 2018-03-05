@@ -5,18 +5,9 @@
         android:id="@+id/menu_comics"
         android:title="@string/comics" />
     <item
-        android:id="@+id/characters"
+        android:id="@+id/menu_characters"
         android:title="@string/characters" />
     <item
-        android:id="@+id/events"
-        android:title="@string/events" />
-    <item
-        android:id="@+id/series"
-        android:title="@string/series" />
-    <item
-        android:id="@+id/stories"
-        android:title="@string/stories" />
-    <item
-        android:id="@+id/creators"
+        android:id="@+id/menu_creators"
         android:title="@string/creators" />
 </menu>

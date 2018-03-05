@@ -31,15 +31,11 @@ public class CharactersListActivity extends BaseActivity implements CharactersLi
         BaseAdapter.OnItemClickListener<Character> {
 
     private Toolbar toolbar;
-
     private ProgressBar progressBar;
-
     private EmptyStateRecyclerView recyclerView;
-
     private TextView tvEmpty;
 
     private CharactersAdapter adapter;
-
     private CharactersListContract.Presenter presenter;
 
     private boolean isLoading = false;

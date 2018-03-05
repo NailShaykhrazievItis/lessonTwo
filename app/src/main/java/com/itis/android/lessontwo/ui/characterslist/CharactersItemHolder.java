@@ -18,13 +18,10 @@ import com.itis.android.lessontwo.utils.ImageLoadHelper;
 public class CharactersItemHolder extends RecyclerView.ViewHolder {
 
     private static final int MAX_LENGTH = 80;
-
     private static final String MORE_TEXT = "...";
 
     private TextView name;
-
     private TextView description;
-
     private ImageView imageView;
 
     @NonNull

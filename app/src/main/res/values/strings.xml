@@ -14,5 +14,7 @@
     <string name="title_price">Price:</string>
     <string name="price_format">%s$</string>
     <string name="title_pages">Pages:</string>
+    <string name="title_name">Name:</string>
+    <string name="title_stories">Stories:</string>
 
 </resources>

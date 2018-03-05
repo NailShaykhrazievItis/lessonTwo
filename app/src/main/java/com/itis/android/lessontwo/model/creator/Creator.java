@@ -67,7 +67,7 @@ public class Creator implements ListItem {
 
     public List<String> getStories() {
         List<String> storyNames = new ArrayList<>();
-        for (Story story: stories.getStories()) {
+        for (CreatorStory story: stories.getStories()) {
             storyNames.add(story.getName());
         }
         return storyNames;

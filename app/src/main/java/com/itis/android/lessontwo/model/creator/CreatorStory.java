@@ -2,7 +2,7 @@ package com.itis.android.lessontwo.model.creator;
 
 import com.google.gson.annotations.SerializedName;
 
-class Story {
+public class CreatorStory {
 
     @SerializedName("name")
     private String name;

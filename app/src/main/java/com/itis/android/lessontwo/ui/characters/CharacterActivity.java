@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -70,7 +71,11 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                 character.getImage().getExtension()));
 
-        tvDescription.setText(character.getDescription());
+        if (character.getDescription() != null && !character.getDescription().equals("")) {
+            tvDescription.setText(character.getDescription());
+        } else {
+            tvDescription.setText(R.string.empty_desc);
+        }
         tvName.setText(character.getName());
     }
 
@@ -85,6 +90,6 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         collapsingToolbar = findViewById(R.id.ct_characters);
         toolbar = findViewById(R.id.tb_characters);
         ivCover = findViewById(R.id.iv_characters);
-        tvDescription = findViewById(R.id.tv_description_character);
+        tvDescription = findViewById(R.id.tv_description_details_character);
     }
 }

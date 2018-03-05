@@ -16,5 +16,6 @@
     <string name="title_pages">Pages:</string>
     <string name="there_are_no_characters_yet">There are no characters yet</string>
     <string name="characters">Characters</string>
+    <string name="empty_desc">Описание отсутствует.</string>
 
 </resources>

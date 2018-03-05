@@ -15,4 +15,10 @@
     <string name="price_format">%s$</string>
     <string name="title_pages">Pages:</string>
 
+    <!--Character screen-->
+    <string name="character">Character</string>
+    <string name="characters">Characters</string>
+    <string name="text_empty_characters">There are now any characters yet</string>
+    <string name="no_description">No description available</string>
+
 </resources>

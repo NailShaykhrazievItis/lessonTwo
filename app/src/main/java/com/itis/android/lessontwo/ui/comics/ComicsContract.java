@@ -21,7 +21,3 @@ public interface ComicsContract {
         void initComics(long id);
     }
 }
-
-
-
-

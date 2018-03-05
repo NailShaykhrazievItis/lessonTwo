@@ -1,7 +1,7 @@
 package com.itis.android.lessontwo.ui.characters;
 
-import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
-import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
+import static com.itis.android.lessontwo.utils.Constants.ID_KEY_CHARACTER;
+import static com.itis.android.lessontwo.utils.Constants.NAME_KEY_CHARACTER;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,15 +15,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
-import com.itis.android.lessontwo.ui.characters.CharacterContract.Presenter;
-import com.itis.android.lessontwo.ui.comics.ComicsActivity;
-import com.itis.android.lessontwo.ui.comics.ComicsContract;
-import com.itis.android.lessontwo.ui.comics.ComicsPresenter;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 /**
@@ -40,16 +35,12 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
 
     private TextView tvDescription;
 
-    private TextView tvName;
-
-    private ProgressBar progressBar;
-
     private CharacterContract.Presenter presenter;
 
     public static void start(@NonNull Activity activity, @NonNull Character character) {
         Intent intent = new Intent(activity, CharacterActivity.class);
-        intent.putExtra(NAME_KEY, character.getName());
-        intent.putExtra(ID_KEY, character.getId());
+        intent.putExtra(NAME_KEY_CHARACTER, character.getName());
+        intent.putExtra(ID_KEY_CHARACTER, character.getId());
         activity.startActivity(intent);
     }
 
@@ -57,11 +48,10 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
-       /*todo
-        getLayoutInflater().inflate(R.layout.activity_characters, contentFrameLayout);*/
+        getLayoutInflater().inflate(R.layout.activity_characters, contentFrameLayout);
         initViews();
 
-        long id = getIntent().getLongExtra(ID_KEY, 0);
+        long id = getIntent().getLongExtra(ID_KEY_CHARACTER, 0);
         new CharacterPresenter(this);
         presenter.initCharacter(id);
 
@@ -83,20 +73,27 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
                 character.getImage().getExtension()));
 
         tvDescription.setText(character.getDescription());
-        tvName.setText(character.getName());
+
+        if (character.getDescription() != null) {
+            if (!character.getDescription().equals("")) {
+                tvDescription.setText(character.getDescription());
+            } else {
+                tvDescription.setText("Описание отсутствует.");
+            }
+        }
     }
 
     private void initViews() {
         findViews();
         supportActionBar(toolbar);
         setBackArrow(toolbar);
-        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
+        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY_CHARACTER));
     }
 
     private void findViews() {
-        collapsingToolbar = findViewById(R.id.ct_comics);
-        toolbar = findViewById(R.id.tb_comics);
-        ivCover = findViewById(R.id.iv_comics);
-        tvDescription = findViewById(R.id.tv_description);
+        collapsingToolbar = findViewById(R.id.ct_characters);
+        toolbar = findViewById(R.id.tb_characters);
+        ivCover = findViewById(R.id.iv_characters);
+        tvDescription = findViewById(R.id.tv_description_details_character);
     }
 }

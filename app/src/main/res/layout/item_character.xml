@@ -44,5 +44,4 @@
             android:textSize="@dimen/text_small"
             tools:text="Secondary text" />
     </LinearLayout>
-
 </LinearLayout>

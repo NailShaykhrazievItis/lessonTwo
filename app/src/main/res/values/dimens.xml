@@ -25,7 +25,12 @@
 
     <dimen name="height_nav_header">240dp</dimen>
     <dimen name="height_app_bar">240dp</dimen>
+    <dimen name="height_grid_view">90dp</dimen>
     <dimen name="size_image_list">48dp</dimen>
     <dimen name="size_item_large">72dp</dimen>
+
+    <dimen name="grid_horizontal_spacing">10dp</dimen>
+    <dimen name="grid_vertical_spacing">10dp</dimen>
+
 
 </resources>

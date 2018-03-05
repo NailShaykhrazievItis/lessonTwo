@@ -10,6 +10,7 @@ import com.itis.android.lessontwo.utils.RxUtils;
  */
 
 public class CharacterPresenter implements CharacterContract.Presenter {
+
     private final CharacterContract.View view;
 
     public CharacterPresenter(CharacterContract.View view) {

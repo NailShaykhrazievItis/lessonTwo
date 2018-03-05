@@ -1,6 +1,11 @@
 package com.itis.android.lessontwo.ui.creators;
 
 import com.itis.android.lessontwo.api.ApiFactory;
+import com.itis.android.lessontwo.model.comics.ComicsResponse;
+import com.itis.android.lessontwo.model.comics.ComicsResponseData;
+import com.itis.android.lessontwo.model.creators.CreatorsResponse;
+import com.itis.android.lessontwo.model.creators.CreatorsResponseData;
+import com.itis.android.lessontwo.utils.RxUtils;
 
 /**
  * Created by Tony on 3/5/2018.
@@ -16,12 +21,12 @@ public class CreatorPresenter implements CreatorContract.Presenter {
 
     @Override
     public void loadCreators(long id) {
-        ApiFactory.getComicsService()
-                .comics(id)
-                .map(ComicsResponse::getData)
-                .map(ComicsResponseData::getResults)
+        ApiFactory.getCreatorService()
+                .creators(id)
+                .map(CreatorsResponse::getData)
+                .map(CreatorsResponseData::getResults)
                 .map(list -> list.get(0))
                 .compose(RxUtils.async())
-                .subscribe(view::showComics, view::handleError);
+                .subscribe(view::showCreators, view::handleError);
     }
 }

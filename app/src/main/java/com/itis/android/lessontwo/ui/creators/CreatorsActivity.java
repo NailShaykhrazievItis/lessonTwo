@@ -13,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
+import com.itis.android.lessontwo.model.creators.Creators;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.comics.ComicsActivity;
 import com.itis.android.lessontwo.ui.comics.ComicsContract;
+import com.itis.android.lessontwo.ui.comics.ComicsPresenter;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
@@ -25,7 +27,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
  * Created by Tony on 3/5/2018.
  */
 
-public class CreatorsActivity extends BaseActivity implements CreatorContract {
+public class CreatorsActivity extends BaseActivity implements CreatorContract.View {
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
     private ImageView ivCover;
@@ -35,9 +37,9 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract {
 
     CreatorContract.Presenter presenter;
 
-    public static void start(@NonNull Activity activity, @NonNull Creator creator) {
+    public static void start(@NonNull Activity activity, @NonNull Creators creator) {
         Intent intent = new Intent(activity, ComicsActivity.class);
-        intent.putExtra(NAME_KEY, creator.getName());
+        intent.putExtra(NAME_KEY, creator.getFullName());
         intent.putExtra(ID_KEY, creator.getId());
         activity.startActivity(intent);
     }
@@ -48,7 +50,7 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract {
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
         initViews();
 
-        new ComicsPresenter(this);
+        new CreatorPresenter(this);
 
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadCreators(id);
@@ -71,7 +73,7 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract {
     }
 
     @Override
-    public void setPresenter(ComicsContract.Presenter presenter) {
+    public void setPresenter(CreatorContract.Presenter presenter) {
 
     }
 
@@ -82,16 +84,10 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract {
     public void showCreators(Creators creators) {
         ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creators.getImage().getPath(),
                 creators.getImage().getExtension()));
-        if (creators.getTextObjects() != null){
-            StringBuilder description = new StringBuilder();
-            for (CreatorsTextObject creatorsTextObject : creators.getTextObjects()) {
-                description.append(creatorsTextObject.getText()).append("\n");
-            }
-            tvDescription.setText(description.toString().trim());
+        if(creators.getFullName() != null){
+           tvFullName.setText(creators.getFullName().trim());
         }
-        if (creators.getPrices() != null && !creators.getPrices().isEmpty()){
-            tvPrice.setText(getString(R.string.price_format, String.valueOf(creators.getPrices().get(0).getPrice())));
-        }
+
         tvPages.setText(String.valueOf(creators.getPageCount()));
     }
 }

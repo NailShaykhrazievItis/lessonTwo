@@ -1,6 +1,7 @@
 package com.itis.android.lessontwo.api;
 
 import com.itis.android.lessontwo.model.comics.ComicsResponse;
+import com.itis.android.lessontwo.model.creators.CreatorsResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -14,7 +15,7 @@ import retrofit2.http.Query;
 public interface CreatorsService {
     @GET("creators")
     Observable<CreatorsResponse> creators(@Query("offset") Long offset, @Query("limit") Long limit,
-                                      @Query("orderBy") String orderBy);
+                                          @Query("orderBy") String orderBy);
 
     @GET("creators/{creatorId}")
     Observable<CreatorsResponse> creators(@Path("creatorId") Long id);

@@ -1,5 +1,7 @@
 package com.itis.android.lessontwo.ui.creators;
 
+import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.creators.Creators;
 import com.itis.android.lessontwo.ui.base.BaseView;
 
 import io.reactivex.annotations.NonNull;
@@ -10,7 +12,8 @@ import io.reactivex.annotations.NonNull;
 
 public interface CreatorContract {
     interface View extends BaseView<Presenter> {
-        void showComics(@NonNull Creators item);
+        void showCreators(@NonNull Creators creators);
+
     }
     interface Presenter {
         void loadCreators(long id);

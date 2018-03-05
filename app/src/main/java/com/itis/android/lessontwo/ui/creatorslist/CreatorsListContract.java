@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable;
  * Created by Tony on 3/5/2018.
  */
 
-public class CreatorsListContract {
+public interface CreatorsListContract {
     interface View extends BaseView<Presenter> {
 
         void showItems(@NonNull List<Creators> items);

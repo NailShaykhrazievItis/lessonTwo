@@ -24,7 +24,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 
 public class CharacterActivity extends BaseActivity implements CharacterContract.View {
 
-    CharacterContract.Presenter presenter;
+    private CharacterContract.Presenter presenter;
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -88,6 +88,8 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         }
         if (character.getDescription() != null) {
             tvDescription.setText(character.getDescription().trim());
+        }else{
+            tvDescription.setText(R.string.no_description);
         }
     }
 }

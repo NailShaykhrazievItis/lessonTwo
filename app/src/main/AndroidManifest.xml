@@ -30,8 +30,11 @@
         </activity>
         <activity
             android:name=".ui.character.CharacterActivity"
-            android:label="@string/character">
-            <!--TODO parent activity-->
+            android:label="@string/character"
+            android:parentActivityName=".ui.characterslist.CharactersListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.characterslist.CharactersListActivity" />
         </activity>
     </application>
 

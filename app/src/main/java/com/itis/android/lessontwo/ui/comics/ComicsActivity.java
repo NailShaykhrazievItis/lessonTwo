@@ -28,17 +28,11 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 public class ComicsActivity extends BaseActivity implements ComicsContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
-
     private Toolbar toolbar;
-
     private ImageView ivCover;
-
     private TextView tvDescription;
-
     private TextView tvPrice;
-
     private TextView tvPages;
-
     private ProgressBar progressBar;
 
     private ComicsContract.Presenter presenter;

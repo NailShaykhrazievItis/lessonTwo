@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -28,12 +27,11 @@ import com.itis.android.lessontwo.utils.ImageLoadHelper;
 public class CharacterActivity extends BaseActivity implements CharacterContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
-
     private Toolbar toolbar;
-
     private ImageView ivCover;
-
     private TextView tvDescription;
+    private TextView tvName;
+    private ProgressBar progressBar;
 
     private CharacterContract.Presenter presenter;
 
@@ -73,14 +71,7 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
                 character.getImage().getExtension()));
 
         tvDescription.setText(character.getDescription());
-
-        if (character.getDescription() != null) {
-            if (!character.getDescription().equals("")) {
-                tvDescription.setText(character.getDescription());
-            } else {
-                tvDescription.setText("Описание отсутствует.");
-            }
-        }
+        tvName.setText(character.getName());
     }
 
     private void initViews() {
@@ -94,6 +85,6 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         collapsingToolbar = findViewById(R.id.ct_characters);
         toolbar = findViewById(R.id.tb_characters);
         ivCover = findViewById(R.id.iv_characters);
-        tvDescription = findViewById(R.id.tv_description_details_character);
+        tvDescription = findViewById(R.id.tv_description_character);
     }
 }

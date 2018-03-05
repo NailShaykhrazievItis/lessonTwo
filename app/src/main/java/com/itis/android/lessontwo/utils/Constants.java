@@ -18,4 +18,7 @@ public final class Constants {
     public final static String IMAGE_KEY = "image";
     public final static String CHARACTER_KEY = "character";
     public final static String NAME_KEY = "name";
+
+    public final static String ID_KEY_CHARACTER = "id_ch";
+    public final static String NAME_KEY_CHARACTER = "name_ch";
 }

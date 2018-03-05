@@ -8,9 +8,5 @@ public interface ListItem {
 
     Long getId();
 
-    String getName();
-
-    String getDescription();
-
     Image getImage();
 }

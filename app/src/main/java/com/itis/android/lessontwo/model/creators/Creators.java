@@ -1,23 +1,20 @@
-package com.itis.android.lessontwo.model.character;
+package com.itis.android.lessontwo.model.creators;
 
 import com.google.gson.annotations.SerializedName;
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;
 
 /**
- * Created by Nail Shaykhraziev on 25.02.2018.
+ * Created by Aizat on 05.03.2018.
  */
 
-public class Character implements ListItem{
+public class Creators implements ListItem{
 
     @SerializedName("id")
     private Long id;
 
-    @SerializedName("name")
-    private String name;
-
-    @SerializedName("description")
-    private String description;
+    @SerializedName("fullName")
+    private String fullName;
 
     @SerializedName("thumbnail")
     private Image image;
@@ -31,20 +28,12 @@ public class Character implements ListItem{
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     @Override

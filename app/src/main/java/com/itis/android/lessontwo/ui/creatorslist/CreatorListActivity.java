@@ -16,6 +16,7 @@ import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.creator.Creator;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
+import com.itis.android.lessontwo.ui.creators.CreatorsActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class CreatorListActivity extends BaseActivity implements CreatorListCont
 
     @Override
     public void showDetails(Creator item) {
-//        CreatorActivity.start(this, item);
+        CreatorsActivity.start(this, item);
     }
 
     @Override

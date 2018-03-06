@@ -29,5 +29,4 @@ public class ComicsPresenter implements ComicsContract.Presenter {
                 .compose(RxUtils.async())
                 .subscribe(view::showComics, view::handleError);
     }
-
 }

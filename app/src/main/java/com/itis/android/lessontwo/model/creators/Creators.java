@@ -22,8 +22,8 @@ public class Creators implements ListItem{
     @SerializedName("thumbnail")
     private Image image;
 
-    @SerializedName("comics")
-    private List<Comics> comics;
+//    @SerializedName("comics")
+//    private List<Comics> comics;
 
     @Override
     public Long getId() {
@@ -51,11 +51,11 @@ public class Creators implements ListItem{
         this.image = image;
     }
 
-    public List<Comics> getComics() {
-        return comics;
-    }
-
-    public void setComics(List<Comics> comics) {
-        this.comics = comics;
-    }
+//    public List<Comics> getComics() {
+//        return comics;
+//    }
+//
+//    public void setComics(List<Comics> comics) {
+//        this.comics = comics;
+//    }
 }

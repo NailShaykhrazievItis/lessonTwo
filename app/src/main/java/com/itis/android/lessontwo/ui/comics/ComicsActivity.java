@@ -79,7 +79,7 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
 
     @Override
     public void setPresenter(ComicsContract.Presenter presenter) {
-
+        this.presenter = presenter;
     }
 
     public void handleError(Throwable error) {

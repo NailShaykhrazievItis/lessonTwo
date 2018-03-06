@@ -69,7 +69,7 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
 
     @Override
     public void setPresenter(CreatorContract.Presenter presenter) {
-
+        this.presenter = presenter;
     }
 
     public void handleError(Throwable error) {

@@ -23,10 +23,6 @@ public class Creator implements ListItem {
     private CreatorStoryList stories;
 
     public Creator() {
-        description = "";
-        for (String story: getStories()){
-            description += story + " ";
-        }
     }
 
     public void setId(Long id) {
@@ -57,6 +53,14 @@ public class Creator implements ListItem {
 
     @Override
     public String getDescription() {
+        StringBuilder descBuilder = new StringBuilder();
+        for (String story: getStories()){
+            descBuilder.append(story).append(", ");
+        }
+        if (descBuilder.length() >= 2)
+            description = descBuilder.substring(0, descBuilder.length() - 2);
+        else
+            description = descBuilder.toString();
         return description;
     }
 

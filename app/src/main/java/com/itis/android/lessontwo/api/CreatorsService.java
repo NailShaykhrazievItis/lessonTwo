@@ -9,8 +9,8 @@ import retrofit2.http.Query;
 public interface CreatorsService {
 
     @GET("creators")
-    Observable<CreatorResponse> creators(@Query("offset") Long offset, @Query("limit") Long limit,
-            @Query("orderBy") String orderBy);
+    Observable<CreatorResponse> creators(@Query("offset") Long offset, @Query("limit") Long limit, 
+                                         @Query("orderBy") String orderBy);
 
     @GET("creators/{creatorId}")
     Observable<CreatorResponse> creators(@Path("creatorId") Long id);

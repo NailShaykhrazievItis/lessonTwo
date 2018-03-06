@@ -16,7 +16,7 @@ public class Creator implements ListItem {
 
     private String description;
 
-    @SerializedName("images")
+    @SerializedName("thumbnail")
     private Image image;
 
     @SerializedName("stories")

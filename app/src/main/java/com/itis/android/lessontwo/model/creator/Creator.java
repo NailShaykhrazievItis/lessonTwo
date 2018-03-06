@@ -16,17 +16,17 @@ public class Creator implements ListItem {
 
     private String description;
 
-    @SerializedName("images")
+    @SerializedName("thumbnail")
     private Image image;
 
     @SerializedName("stories")
     private CreatorStoryList stories;
 
     public Creator() {
-        description = "";
-        for (String story: getStories()){
-            description += story + " ";
-        }
+//        description = "";
+//        for (String story: getStories()){
+//            description += story + " ";
+//        }
     }
 
     public void setId(Long id) {

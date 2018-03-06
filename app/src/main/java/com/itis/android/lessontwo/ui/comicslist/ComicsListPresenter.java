@@ -8,6 +8,8 @@ import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsResponse;
 import com.itis.android.lessontwo.model.comics.ComicsResponseData;
+import com.itis.android.lessontwo.repository.ErrorReadFromCache;
+import com.itis.android.lessontwo.repository.RewriteCache;
 import com.itis.android.lessontwo.utils.RxUtils;
 
 /**
@@ -29,8 +31,8 @@ public class ComicsListPresenter implements ComicsListContract.Presenter {
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .map(ComicsResponse::getData)
                 .map(ComicsResponseData::getResults)
-//                .doOnSubscribe(view::showLoading)
-//                .doOnTerminate(view::hideLoading)
+                .flatMap(new RewriteCache<>(Comics.class))
+                .onErrorResumeNext(new ErrorReadFromCache<>(Comics.class))
                 .compose(RxUtils.async())
                 .subscribe(view::showItems, view::handleError);
     }

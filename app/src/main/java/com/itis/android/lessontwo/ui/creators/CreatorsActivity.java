@@ -24,13 +24,9 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
-
     private ImageView ivCover;
-
     private Presenter presenter;
-
     private ProgressBar progressBar;
-
     private TextView tvName;
     private TextView tvStories;
 

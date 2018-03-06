@@ -31,7 +31,6 @@ public class Character implements ListItem{
         this.id = id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -40,7 +39,6 @@ public class Character implements ListItem{
         this.name = name;
     }
 
-    @Override
     public String getDescription() {
         return description;
     }

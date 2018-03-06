@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
+import com.itis.android.lessontwo.ui.creatorslist.CreatorsListActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -56,6 +57,14 @@ public abstract class BaseActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ComicsListActivity.class);
                     startActivity(intent);
                     break;
+                case R.id.menu_creators:
+                    Intent creatorsIntent = new Intent(getApplicationContext(), CreatorsListActivity.class);
+                    startActivity(creatorsIntent);
+                    break;
+               // case R.id.menu_characters:
+                    //Intent charactersIntent = new Intent(getApplicationContext(), CharactersListActivity.class);
+                    //startActivity(charactersIntent);
+                   // break;
             }
             return true;
         });
@@ -65,7 +74,6 @@ public abstract class BaseActivity extends AppCompatActivity {
           View header = mNavigationView.getHeaderView(0);
           TextView menuText = header.findViewById(R.id.tv_menu);
          */
-
         setActionBar(toolbar);
     }
 

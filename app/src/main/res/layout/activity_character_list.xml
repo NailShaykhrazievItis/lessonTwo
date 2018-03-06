@@ -7,7 +7,7 @@
     tools:context=".ui.comicslist.ComicsListActivity">
 
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/ab_comics_list"
+        android:id="@+id/ab_character_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -15,7 +15,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/tb_comics_list"
+            android:id="@+id/tb_character_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary"
@@ -23,6 +23,6 @@
             app:layout_scrollFlags="scroll|enterAlways|snap" />
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/fragment_recycler_comics_list"/>
+    <include layout="@layout/fragment_recycler_character_list"/>
 
 </android.support.design.widget.CoordinatorLayout>

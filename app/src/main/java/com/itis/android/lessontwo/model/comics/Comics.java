@@ -82,12 +82,10 @@ public class Comics implements ListItem{
         this.images = images;
     }
 
-    @Override
     public String getName() {
         return getTitle();
     }
 
-    @Override
     public String getDescription() {
         if (!getTextObjects().isEmpty()){
             return getTextObjects().get(0).getText();

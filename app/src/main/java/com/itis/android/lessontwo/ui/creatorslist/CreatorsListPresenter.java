@@ -15,9 +15,10 @@ import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
  */
 
 public class CreatorsListPresenter implements CreatorsListContract.Presenter {
+
     private final CreatorsListContract.View view;
 
-    public CreatorsListPresenter(CreatorsListContract.View view) {
+    CreatorsListPresenter(CreatorsListContract.View view) {
         this.view = view;
         this.view.setPresenter(this);
     }

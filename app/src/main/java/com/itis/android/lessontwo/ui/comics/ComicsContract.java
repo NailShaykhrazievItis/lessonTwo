@@ -10,11 +10,12 @@ import io.reactivex.annotations.NonNull;
  */
 
 public interface ComicsContract {
+
     interface View extends BaseView<Presenter> {
         void showComics(@NonNull Comics item);
     }
+
     interface Presenter {
         void loadComics(long id);
     }
-
 }

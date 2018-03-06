@@ -65,7 +65,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                     //Intent charactersIntent = new Intent(getApplicationContext(), CharactersListActivity.class);
                     //startActivity(charactersIntent);
                    // break;
-
             }
             return true;
         });
@@ -75,7 +74,6 @@ public abstract class BaseActivity extends AppCompatActivity {
           View header = mNavigationView.getHeaderView(0);
           TextView menuText = header.findViewById(R.id.tv_menu);
          */
-
         setActionBar(toolbar);
     }
 

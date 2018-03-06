@@ -10,6 +10,7 @@ import com.itis.android.lessontwo.utils.RxUtils;
  */
 
 public class CreatorPresenter implements CreatorContract.Presenter {
+
     private final CreatorContract.View view;
 
     public CreatorPresenter(CreatorContract.View view) {

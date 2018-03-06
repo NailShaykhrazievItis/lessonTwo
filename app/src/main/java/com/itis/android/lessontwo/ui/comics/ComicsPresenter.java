@@ -11,7 +11,6 @@ import com.itis.android.lessontwo.utils.RxUtils;
 
 public class ComicsPresenter implements ComicsContract.Presenter {
 
-
     private final ComicsContract.View view;
 
     public ComicsPresenter(ComicsContract.View view) {

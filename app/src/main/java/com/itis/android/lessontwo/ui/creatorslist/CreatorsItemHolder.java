@@ -17,7 +17,6 @@ import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 public class CreatorsItemHolder extends RecyclerView.ViewHolder {
 
-
     private TextView fullName;
     private ImageView imageView;
 
@@ -41,5 +40,4 @@ public class CreatorsItemHolder extends RecyclerView.ViewHolder {
                     item.getImage().getExtension()));
         }
     }
-
 }

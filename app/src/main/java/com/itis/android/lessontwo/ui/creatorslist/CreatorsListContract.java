@@ -14,6 +14,7 @@ import io.reactivex.disposables.Disposable;
  */
 
 public interface CreatorsListContract {
+
     interface View extends BaseView<Presenter> {
 
         void showItems(@NonNull List<Creators> items);

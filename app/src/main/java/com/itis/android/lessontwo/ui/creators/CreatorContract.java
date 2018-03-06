@@ -10,10 +10,11 @@ import io.reactivex.annotations.NonNull;
  */
 
 public interface CreatorContract {
+
     interface View extends BaseView<Presenter> {
         void showCreators(@NonNull Creators creators);
-
     }
+
     interface Presenter {
         void loadCreators(long id);
     }

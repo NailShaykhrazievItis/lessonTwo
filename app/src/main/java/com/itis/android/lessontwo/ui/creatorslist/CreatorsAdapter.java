@@ -12,6 +12,7 @@ import java.util.List;
  */
 
 public class CreatorsAdapter extends BaseAdapter<Creators,CreatorsItemHolder> {
+
     public CreatorsAdapter(@NonNull List <Creators> items) {
         super(items);
     }

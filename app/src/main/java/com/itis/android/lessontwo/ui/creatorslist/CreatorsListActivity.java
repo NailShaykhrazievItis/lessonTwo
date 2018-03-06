@@ -31,6 +31,7 @@ import io.reactivex.disposables.Disposable;
 
 public class CreatorsListActivity extends BaseActivity implements CreatorsListContract
         .View,BaseAdapter.OnItemClickListener<Creators> {
+
     private Toolbar toolbar;
     private ProgressBar progressBar;
     private EmptyStateRecyclerView recyclerView;
@@ -108,7 +109,6 @@ public class CreatorsListActivity extends BaseActivity implements CreatorsListCo
         recyclerView.setHasFixedSize(true);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int currentPage = 0;
-
             private boolean isLastPage = false;
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -135,5 +135,4 @@ public class CreatorsListActivity extends BaseActivity implements CreatorsListCo
         tvEmpty = findViewById(R.id.tv_empty);
         supportActionBar(toolbar);
     }
-
 }

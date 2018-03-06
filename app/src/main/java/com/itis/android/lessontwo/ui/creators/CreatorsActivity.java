@@ -25,12 +25,11 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
  */
 
 public class CreatorsActivity extends BaseActivity implements CreatorContract.View {
+
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
     private ImageView ivCover;
     private TextView tvName;
-    private TextView tvPrice;
-    private TextView tvPages;
 
     CreatorContract.Presenter presenter;
 
@@ -40,6 +39,7 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
         intent.putExtra(ID_KEY, creator.getId());
         activity.startActivity(intent);
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +82,6 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
         if(creators.getFullName() != null){
            tvName.setText(creators.getFullName().trim());
         }
-
     }
 }
 

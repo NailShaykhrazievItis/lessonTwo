@@ -1,16 +1,11 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
+import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
+
 import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
-
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
-import com.itis.android.lessontwo.repository.ErrorReadFromCache;
-import com.itis.android.lessontwo.repository.RewriteCache;
-import com.itis.android.lessontwo.utils.RxUtils;
 
 /**
  * Created by Nail Shaykhraziev on 26.02.2018.
@@ -27,24 +22,20 @@ public class ComicsListPresenter implements ComicsListContract.Presenter {
 
     @Override
     public void loadComics() {
-        ApiFactory.getComicsService()
+        RepositoryProvider.provideComicsRepository()
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
-                .map(ComicsResponse::getData)
-                .map(ComicsResponseData::getResults)
-                .flatMap(new RewriteCache<>(Comics.class))
-                .onErrorResumeNext(new ErrorReadFromCache<>(Comics.class))
-                .compose(RxUtils.async())
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
                 .subscribe(view::showItems, view::handleError);
     }
 
     @Override
     public void loadNextElements(int page) {
-        ApiFactory.getComicsService()
+        RepositoryProvider.provideComicsRepository()
                 .comics(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
-                .map(ComicsResponse::getData)
-                .map(ComicsResponseData::getResults)
-                .doOnTerminate(view::setNotLoading)
-                .compose(RxUtils.async())
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
+                .doAfterTerminate(view::setNotLoading)
                 .subscribe(view::addMoreItems, view::handleError);
     }
 

@@ -1,14 +1,14 @@
 package com.itis.android.lessontwo.model.general;
 
 import com.google.gson.annotations.SerializedName;
-
+import io.realm.RealmObject;
 import java.io.Serializable;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
 
-public class Image implements Serializable {
+public class Image extends RealmObject implements Serializable {
 
     @SerializedName("path")
     private String mPath;

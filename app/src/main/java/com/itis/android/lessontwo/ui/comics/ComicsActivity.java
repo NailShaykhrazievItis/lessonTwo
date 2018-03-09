@@ -1,5 +1,8 @@
 package com.itis.android.lessontwo.ui.comics;
 
+import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
+import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +15,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-
-import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
-import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
@@ -69,14 +68,19 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
 
     @Override
     public void showComics(@NonNull Comics comics) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
-                comics.getImage().getExtension()));
+        if (comics.getImage() != null) {
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
+                    comics.getImage().getExtension()));
+        } else {
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
+        }
         if (comics.getTextObjects() != null) {
             StringBuilder description = new StringBuilder();
             for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
                 description.append(comicsTextObject.getText()).append("\n");
             }
-            tvDescription.setText(description.toString().trim());
+            tvDescription.setText(description.length() > 0 ?
+                    description.toString().trim() : getString(R.string.text_desc_not_found));
         }
         if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
             tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));

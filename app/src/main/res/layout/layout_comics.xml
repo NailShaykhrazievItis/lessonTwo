@@ -61,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/text_small"
             tools:text="34"/>
@@ -70,7 +71,7 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_medium"
+            android:layout_marginTop="@dimen/margin_small"
             android:visibility="gone"
             tools:visibility="visible"/>
     </LinearLayout>

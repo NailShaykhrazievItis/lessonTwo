@@ -26,7 +26,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity {
+public class ComicsActivity extends BaseActivity  implements ComicsContract.View{
 
     private CollapsingToolbarLayout collapsingToolbar;
 
@@ -41,6 +41,8 @@ public class ComicsActivity extends BaseActivity {
     private TextView tvPages;
 
     private ProgressBar progressBar;
+
+    private ComicsContract.Presenter presenter;
 
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
         Intent intent = new Intent(activity, ComicsActivity.class);
@@ -57,10 +59,17 @@ public class ComicsActivity extends BaseActivity {
         initViews();
 
         long id = getIntent().getLongExtra(ID_KEY, 0);
-        // TODO: 26.02.2018 move to presenter
+       /* // TODO: 26.02.2018 move to presenter
         RepositoryProvider.provideComicsRepository()
                 .comics(id)
-                .subscribe(this::showComics, this::handleError);
+                .subscribe(this::showComics, this::handleError);*/
+        new ComicsPresenter(this);
+        presenter.loadComics(id);
+    }
+
+    @Override
+    public void setPresenter(ComicsContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
     private void initViews() {
@@ -79,7 +88,8 @@ public class ComicsActivity extends BaseActivity {
         tvPages = findViewById(R.id.tv_pages);
     }
 
-    private void handleError(Throwable error) {
+    @Override
+    public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
@@ -91,6 +101,11 @@ public class ComicsActivity extends BaseActivity {
             ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
         if (comics.getTextObjects() != null) {
+    @Override
+    public void showComics(@NonNull Comics comics) {
+        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
+                comics.getImage().getExtension()));
+        if (comics.getTextObjects() != null){
             StringBuilder description = new StringBuilder();
             for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
                 description.append(comicsTextObject.getText()).append("\n");

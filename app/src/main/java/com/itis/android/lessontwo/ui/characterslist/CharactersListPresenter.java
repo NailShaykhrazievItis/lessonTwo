@@ -1,13 +1,10 @@
 package com.itis.android.lessontwo.ui.characterslist;
 
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.character.Character;
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.character.CharactersResponseData;
+import com.itis.android.lessontwo.model.entity.character.Character;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.base.BaseListContract;
-import com.itis.android.lessontwo.utils.RxUtils;
 
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_CHARACTER_SORT;
+import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
@@ -26,22 +23,20 @@ public class CharactersListPresenter implements BaseListContract.Presenter<Chara
 
     @Override
     public void load() {
-        ApiFactory.getCharactersService()
-                .characters(ZERO_OFFSET, PAGE_SIZE, DEFAULT_CHARACTER_SORT)
-                .map(CharactersResponse::getData)
-                .map(CharactersResponseData::getResults)
-                .compose(RxUtils.async())
+        RepositoryProvider.provideCharacterRepository()
+                .characters(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
                 .subscribe(view::showItems, view::handleError);
     }
 
     @Override
     public void loadNextElements(int page) {
-        ApiFactory.getCharactersService()
-                .characters(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_CHARACTER_SORT)
-                .map(CharactersResponse::getData)
-                .map(CharactersResponseData::getResults)
-                .doOnTerminate(view::setNotLoading)
-                .compose(RxUtils.async())
+        RepositoryProvider.provideCharacterRepository()
+                .characters(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
+                .doAfterTerminate(view::setNotLoading)
                 .subscribe(view::addMoreItems, view::handleError);
     }
 

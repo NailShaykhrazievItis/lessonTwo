@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.character.Character;
+import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
 import com.itis.android.lessontwo.ui.base.BaseListContract;

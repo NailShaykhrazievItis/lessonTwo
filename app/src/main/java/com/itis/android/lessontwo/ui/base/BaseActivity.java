@@ -75,12 +75,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
             return true;
         });
-        /*
-          Если хотите получить элементы из верхней части бокового меню, то это делается так.
-          Example:
-          View header = mNavigationView.getHeaderView(0);
-          TextView menuText = header.findViewById(R.id.tv_menu);
-         */
+
         View header = mNavigationView.getHeaderView(0);
         ImageView menuCover = header.findViewById(R.id.iv_cover);
         ImageLoadHelper.loadPictureByDrawable(menuCover, R.drawable.image_marvel_logo);

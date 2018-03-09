@@ -1,12 +1,12 @@
 package com.itis.android.lessontwo.ui.creatorslist;
 
 import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.character.Character;
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.character.CharactersResponseData;
-import com.itis.android.lessontwo.model.creators.Creator;
-import com.itis.android.lessontwo.model.creators.CreatorsResponse;
-import com.itis.android.lessontwo.model.creators.CreatorsResponseData;
+import com.itis.android.lessontwo.model.entity.character.Character;
+import com.itis.android.lessontwo.model.entity.character.CharactersResponse;
+import com.itis.android.lessontwo.model.entity.character.CharactersResponseData;
+import com.itis.android.lessontwo.model.entity.creators.Creator;
+import com.itis.android.lessontwo.model.entity.creators.CreatorsResponse;
+import com.itis.android.lessontwo.model.entity.creators.CreatorsResponseData;
 import com.itis.android.lessontwo.ui.base.BaseListContract;
 import com.itis.android.lessontwo.utils.RxUtils;
 

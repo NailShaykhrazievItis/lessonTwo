@@ -42,6 +42,7 @@ ext {
     rxdebug = "1.2.0"
     reactive_streams = "1.0.0"
     retrofit = "2.3.0"
+    room = "1.1.0-alpha3"
 }
 
 dependencies {
@@ -77,6 +78,11 @@ dependencies {
     // Stetho
     implementation "com.facebook.stetho:stetho:${stetho}"
     implementation "com.facebook.stetho:stetho-okhttp3:${stetho}"
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:${room}"
+    implementation "android.arch.persistence.room:rxjava2:${room}"
+    annotationProcessor "android.arch.persistence.room:compiler:${room}"
 
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"

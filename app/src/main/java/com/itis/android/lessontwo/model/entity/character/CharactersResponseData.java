@@ -1,30 +1,29 @@
-package com.itis.android.lessontwo.model.creators;
+package com.itis.android.lessontwo.model.entity.character;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 /**
- * Created by valera071998@gamil.com on 02.03.2018.
+ * Created by Nail Shaykhraziev on 25.02.2018.
  */
 
-public class CreatorsResponseData {
+public class CharactersResponseData {
 
     @SerializedName("offset")
     private String offset;
-    
+
     @SerializedName("limit")
     private String limit;
-    
+
     @SerializedName("total")
     private String total;
-    
+
     @SerializedName("count")
     private String count;
-    
+
     @SerializedName("results")
-    private List<Creator> results = null;
+    private List<Character> results;
 
     public String getOffset() {
         return offset;
@@ -58,11 +57,11 @@ public class CreatorsResponseData {
         this.count = count;
     }
 
-    public List<Creator> getResults() {
+    public List<Character> getResults() {
         return results;
     }
 
-    public void setResults(List<Creator> results) {
+    public void setResults(List<Character> results) {
         this.results = results;
     }
 }

@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsTextObject;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseContract;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
@@ -88,19 +88,15 @@ public class ComicsActivity extends BaseActivity  implements BaseContract.View<C
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    /*private void showComics(Comics comics) {
+    @Override
+    public void show(@NonNull Comics comics) {
         if (comics.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
                     comics.getImage().getExtension()));
         } else {
             ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
-        if (comics.getTextObjects() != null) {*/
-    @Override
-    public void show(@NonNull Comics comics) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
-                comics.getImage().getExtension()));
-        if (comics.getTextObjects() != null){
+        if (comics.getTextObjects() != null) {
             StringBuilder description = new StringBuilder();
             for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
                 description.append(comicsTextObject.getText()).append("\n");

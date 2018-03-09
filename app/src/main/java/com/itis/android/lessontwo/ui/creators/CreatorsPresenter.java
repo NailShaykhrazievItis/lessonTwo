@@ -1,9 +1,9 @@
 package com.itis.android.lessontwo.ui.creators;
 
 import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.creators.Creator;
-import com.itis.android.lessontwo.model.creators.CreatorsResponse;
-import com.itis.android.lessontwo.model.creators.CreatorsResponseData;
+import com.itis.android.lessontwo.model.entity.creators.Creator;
+import com.itis.android.lessontwo.model.entity.creators.CreatorsResponse;
+import com.itis.android.lessontwo.model.entity.creators.CreatorsResponseData;
 import com.itis.android.lessontwo.ui.base.BaseContract;
 import com.itis.android.lessontwo.utils.RxUtils;
 

@@ -10,12 +10,22 @@ public class RepositoryProvider {
 
     private static ComicsRepository comicsRepository;
 
+    private static CharacterRepository characterRepository;
+
     @NonNull
     public static ComicsRepository provideComicsRepository() {
         if (comicsRepository == null) {
             comicsRepository = new ComicsRepositoryImpl();
         }
         return comicsRepository;
+    }
+
+    @NonNull
+    public static CharacterRepository provideCharacterRepository() {
+        if (characterRepository == null) {
+            characterRepository = new CharacterRepositoryImpl();
+        }
+        return characterRepository;
     }
 
     @MainThread

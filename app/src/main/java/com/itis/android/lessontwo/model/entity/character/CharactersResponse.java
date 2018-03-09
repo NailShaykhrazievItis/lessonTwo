@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.model.character;
+package com.itis.android.lessontwo.model.entity.character;
 
 import com.google.gson.annotations.SerializedName;
 

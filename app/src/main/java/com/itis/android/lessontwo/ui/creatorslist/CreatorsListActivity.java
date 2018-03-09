@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.characters_list;
+package com.itis.android.lessontwo.ui.creatorslist;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,9 +14,12 @@ import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
+import com.itis.android.lessontwo.model.creators.Creator;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
+import com.itis.android.lessontwo.ui.base.BaseListContract;
 import com.itis.android.lessontwo.ui.characters.CharactersActivity;
+import com.itis.android.lessontwo.ui.creators.CreatorsActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
 import java.util.ArrayList;
@@ -25,19 +28,19 @@ import java.util.List;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by Ruslan on 02.03.2018.
+ * Created by valera071998@gmail.com on 02.03.2018.
  */
 
-public class CharactersListActivity extends BaseActivity implements CharactersListContract.View,
-        BaseAdapter.OnItemClickListener<Character> {
+public class CreatorsListActivity extends BaseActivity implements BaseListContract.View<Creator>,
+        BaseAdapter.OnItemClickListener<Creator> {
 
     private Toolbar toolbar;
     private ProgressBar progressBar;
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
-    private CharactersAdapter adapter;
-    private CharactersListContract.Presenter presenter;
+    private CreatorsAdapter adapter;
+    private BaseListContract.Presenter<Creator> presenter;
 
     private boolean isLoading = false;
 
@@ -45,15 +48,15 @@ public class CharactersListActivity extends BaseActivity implements CharactersLi
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
-        getLayoutInflater().inflate(R.layout.activity_characters_list, contentFrameLayout);
+        getLayoutInflater().inflate(R.layout.activity_creators_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new CharactersListPresenter(this);
-        presenter.loadCharacters();
+        new CreatorsListPresenter(this);
+        presenter.load();
     }
 
     @Override
-    public void setPresenter(CharactersListContract.Presenter presenter) {
+    public void setPresenter(BaseListContract.Presenter<Creator> presenter) {
         this.presenter = presenter;
     }
 
@@ -63,17 +66,17 @@ public class CharactersListActivity extends BaseActivity implements CharactersLi
     }
 
     @Override
-    public void showItems(@NonNull List<Character> items) {
+    public void showItems(@NonNull List<Creator> items) {
         adapter.changeDataSet(items);
     }
 
     @Override
-    public void showDetails(Character item) {
-        CharactersActivity.start(this, item);
+    public void showDetails(Creator item) {
+        CreatorsActivity.start(this, item);
     }
 
     @Override
-    public void addMoreItems(List<Character> items) {
+    public void addMoreItems(List<Creator> items) {
         adapter.addAll(items);
     }
 
@@ -91,12 +94,12 @@ public class CharactersListActivity extends BaseActivity implements CharactersLi
     }
 
     @Override
-    public void onItemClick(@NonNull Character item) {
+    public void onItemClick(@NonNull Creator item) {
         presenter.onItemClick(item);
     }
 
     private void initRecycler() {
-        adapter = new CharactersAdapter(new ArrayList<>());
+        adapter = new CreatorsAdapter(new ArrayList<>());
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setEmptyView(tvEmpty);
@@ -126,7 +129,7 @@ public class CharactersListActivity extends BaseActivity implements CharactersLi
     }
 
     private void initViews() {
-        toolbar = findViewById(R.id.tb_characters_list);
+        toolbar = findViewById(R.id.tb_creators_list);
         progressBar = findViewById(R.id.pg_comics_list);
         recyclerView = findViewById(R.id.rv_comics_list);
         tvEmpty = findViewById(R.id.tv_empty);

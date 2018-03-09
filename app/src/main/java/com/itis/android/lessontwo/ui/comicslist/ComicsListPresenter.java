@@ -11,17 +11,17 @@ import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
  * Created by Nail Shaykhraziev on 26.02.2018.
  */
 
-public class ComicsListPresenter implements ComicsListContract.Presenter {
+public class ComicsListPresenter implements BaseListContract.Presenter<Comics> {
 
-    private final ComicsListContract.View view;
+    private final BaseListContract.View<Comics> view;
 
-    public ComicsListPresenter(ComicsListContract.View view) {
+    public ComicsListPresenter(BaseListContract.View<Comics> view) {
         this.view = view;
         this.view.setPresenter(this);
     }
 
     @Override
-    public void loadComics() {
+    public void load() {
         RepositoryProvider.provideComicsRepository()
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .doOnSubscribe(view::showLoading)

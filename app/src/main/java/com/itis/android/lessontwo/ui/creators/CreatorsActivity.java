@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.characters;
+package com.itis.android.lessontwo.ui.creators;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.character.Character;
+import com.itis.android.lessontwo.model.creators.Creator;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseContract;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
@@ -22,23 +22,22 @@ import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 
 /**
- * Created by Ruslan on 02.03.2018.
+ * Created by valera071998@gmail.com on 25.02.2018.
  */
-
-public class CharactersActivity extends BaseActivity implements BaseContract.View<Character>{
+public class CreatorsActivity extends BaseActivity  implements BaseContract.View<Creator>{
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
     private ImageView ivCover;
-    private TextView tvDescription;
     private TextView tvName;
+    private TextView tvDescription;
 
     private BaseContract.Presenter presenter;
 
-    public static void start(@NonNull Activity activity, @NonNull Character character) {
-        Intent intent = new Intent(activity, CharactersActivity.class);
-        intent.putExtra(NAME_KEY, character.getName());
-        intent.putExtra(ID_KEY, character.getId());
+    public static void start(@NonNull Activity activity, @NonNull Creator creator) {
+        Intent intent = new Intent(activity, CreatorsActivity.class);
+        intent.putExtra(NAME_KEY, creator.getName());
+        intent.putExtra(ID_KEY, creator.getId());
         activity.startActivity(intent);
     }
 
@@ -46,11 +45,11 @@ public class CharactersActivity extends BaseActivity implements BaseContract.Vie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
-        getLayoutInflater().inflate(R.layout.activity_characters, contentFrameLayout);
+        getLayoutInflater().inflate(R.layout.activity_creators, contentFrameLayout);
         initViews();
 
         long id = getIntent().getLongExtra(ID_KEY, 0);
-        new CharactersPresenter(this);
+        new CreatorsPresenter(this);  // странный способ связывания view и presenter
         presenter.load(id);
     }
 
@@ -67,11 +66,11 @@ public class CharactersActivity extends BaseActivity implements BaseContract.Vie
     }
 
     private void findViews() {
-        collapsingToolbar = findViewById(R.id.ct_character);
-        toolbar = findViewById(R.id.tb_character);
-        ivCover = findViewById(R.id.iv_character);
-        tvDescription = findViewById(R.id.tv_description);
+        collapsingToolbar = findViewById(R.id.ct_creator);
+        toolbar = findViewById(R.id.tb_creator);
+        ivCover = findViewById(R.id.iv_creator);
         tvName = findViewById(R.id.tv_name);
+        tvDescription = findViewById(R.id.tv_description);
     }
 
     @Override
@@ -80,11 +79,11 @@ public class CharactersActivity extends BaseActivity implements BaseContract.Vie
     }
 
     @Override
-    public void show(@NonNull Character character) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
-                character.getImage().getExtension()));
+    public void show(@NonNull Creator creator) {
+        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creator.getImage().getPath(),
+                creator.getImage().getExtension()));
 
-        tvName.setText(character.getName());
-        tvDescription.setText(character.getDescription().trim());
+        tvName.setText(creator.getName());
+        tvDescription.setText(creator.getDescription().trim());
     }
 }

@@ -1,5 +1,8 @@
 package com.itis.android.lessontwo.ui.comics;
 
+import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
+import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +15,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-
-import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
-import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.

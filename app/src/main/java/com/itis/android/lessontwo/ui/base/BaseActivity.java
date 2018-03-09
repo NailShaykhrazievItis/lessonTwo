@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.ui.characterslist.CharactersListActivity;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
@@ -77,7 +76,7 @@ public abstract class BaseActivity extends AppCompatActivity {
          */
         View header = mNavigationView.getHeaderView(0);
         ImageView menuCover = header.findViewById(R.id.iv_cover);
-        ImageLoadHelper.loadPictureByDrawable(menuCover, R.drawable.image_marvel_logo);
+        ImageLoadHelper.loadPictureByDrawable(menuCover, R.drawable.spider_man);
         setActionBar(toolbar);
     }
 

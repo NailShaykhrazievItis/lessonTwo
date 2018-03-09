@@ -1,11 +1,11 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.repository.RepositoryProvider;
-
 import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
+
+import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 /**
  * Created by Nail Shaykhraziev on 26.02.2018.

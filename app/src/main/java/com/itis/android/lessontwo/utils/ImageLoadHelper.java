@@ -3,7 +3,6 @@ package com.itis.android.lessontwo.utils;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
-
 import com.itis.android.lessontwo.R;
 import com.squareup.picasso.Picasso;
 

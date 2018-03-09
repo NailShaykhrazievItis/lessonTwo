@@ -1,7 +1,6 @@
 package com.itis.android.lessontwo.utils;
 
 import android.support.annotation.NonNull;
-
 import io.reactivex.CompletableTransformer;
 import io.reactivex.FlowableTransformer;
 import io.reactivex.MaybeTransformer;

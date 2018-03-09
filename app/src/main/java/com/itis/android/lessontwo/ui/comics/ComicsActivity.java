@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
-import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
@@ -93,14 +92,14 @@ public class ComicsActivity extends BaseActivity  implements ComicsContract.View
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    private void showComics(Comics comics) {
+    /*private void showComics(Comics comics) {
         if (comics.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
                     comics.getImage().getExtension()));
         } else {
             ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
-        if (comics.getTextObjects() != null) {
+        if (comics.getTextObjects() != null) {*/
     @Override
     public void showComics(@NonNull Comics comics) {
         ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),

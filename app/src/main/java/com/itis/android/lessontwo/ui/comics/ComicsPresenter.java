@@ -25,7 +25,7 @@ public class ComicsPresenter implements ComicsContract.Presenter {
                 .map(ComicsResponse::getData)
                 .map(ComicsResponseData::getResults)
                 .map(list -> list.get(0))
-                .compose(RxUtils.async())
+                .compose(RxUtils.asyncSingle())
                 .subscribe(this.view::showComics, this.view::handleError);
     }
 }

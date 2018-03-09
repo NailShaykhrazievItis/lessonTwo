@@ -28,12 +28,11 @@ import com.itis.android.lessontwo.utils.ImageLoadHelper;
 public class CharacterActivity extends BaseActivity implements CharacterContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
-
     private Toolbar toolbar;
-
     private ImageView ivCover;
-
     private TextView tvDescription;
+    private TextView tvName;
+    private ProgressBar progressBar;
 
     private CharacterContract.Presenter presenter;
 
@@ -72,15 +71,12 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                 character.getImage().getExtension()));
 
-        tvDescription.setText(character.getDescription());
-
-        if (character.getDescription() != null) {
-            if (!character.getDescription().equals("")) {
-                tvDescription.setText(character.getDescription());
-            } else {
-                tvDescription.setText("Описание отсутствует.");
-            }
+        if (character.getDescription() != null && !character.getDescription().equals("")) {
+            tvDescription.setText(character.getDescription());
+        } else {
+            tvDescription.setText(R.string.empty_desc);
         }
+        tvName.setText(character.getName());
     }
 
     private void initViews() {

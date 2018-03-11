@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.model.comics;
+package com.itis.android.lessontwo.model.entity.comics;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +7,6 @@ import io.realm.RealmObject;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-
 public class ComicsTextObject extends RealmObject {
 
     @SerializedName("text")

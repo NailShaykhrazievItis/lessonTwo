@@ -1,12 +1,10 @@
 package com.itis.android.lessontwo.ui.creatorslist;
 
 import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.entity.character.Character;
-import com.itis.android.lessontwo.model.entity.character.CharactersResponse;
-import com.itis.android.lessontwo.model.entity.character.CharactersResponseData;
 import com.itis.android.lessontwo.model.entity.creators.Creator;
 import com.itis.android.lessontwo.model.entity.creators.CreatorsResponse;
 import com.itis.android.lessontwo.model.entity.creators.CreatorsResponseData;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.base.BaseListContract;
 import com.itis.android.lessontwo.utils.RxUtils;
 
@@ -29,22 +27,20 @@ public class CreatorsListPresenter implements BaseListContract.Presenter<Creator
 
     @Override
     public void load() {
-        ApiFactory.getCreatorsService()
+        RepositoryProvider.provideCreatorRepository()
                 .creators(ZERO_OFFSET, PAGE_SIZE, DEFAULT_CREATOR_SORT)
-                .map(CreatorsResponse::getData)
-                .map(CreatorsResponseData::getResults)
-                .compose(RxUtils.async())
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
                 .subscribe(view::showItems, view::handleError);
     }
 
     @Override
     public void loadNextElements(int page) {
-        ApiFactory.getCreatorsService()
+        RepositoryProvider.provideCreatorRepository()
                 .creators(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_CREATOR_SORT)
-                .map(CreatorsResponse::getData)
-                .map(CreatorsResponseData::getResults)
-                .doOnTerminate(view::setNotLoading)
-                .compose(RxUtils.async())
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
+                .doAfterTerminate(view::setNotLoading)
                 .subscribe(view::addMoreItems, view::handleError);
     }
 

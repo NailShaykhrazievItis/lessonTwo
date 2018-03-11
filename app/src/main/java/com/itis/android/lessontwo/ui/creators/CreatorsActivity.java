@@ -80,8 +80,12 @@ public class CreatorsActivity extends BaseActivity  implements BaseContract.View
 
     @Override
     public void show(@NonNull Creator creator) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creator.getImage().getPath(),
-                creator.getImage().getExtension()));
+        if (creator.getImage() != null) {
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creator.getImage().getPath(),
+                    creator.getImage().getExtension()));
+        } else {
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
+        }
 
         tvName.setText(creator.getName());
         tvDescription.setText(creator.getDescription().trim());

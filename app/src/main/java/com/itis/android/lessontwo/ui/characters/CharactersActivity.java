@@ -81,10 +81,16 @@ public class CharactersActivity extends BaseActivity implements BaseContract.Vie
 
     @Override
     public void show(@NonNull Character character) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
-                character.getImage().getExtension()));
-
         tvName.setText(character.getName());
-        tvDescription.setText(character.getDescription().trim());
+        if (character.getImage() != null) {
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
+                    character.getImage().getExtension()));
+        } else {
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
+        }
+        if (character.getDescription() != null) {
+            tvDescription.setText(character.getDescription().length() > 0 ?
+                    character.getDescription().trim() : getString(R.string.text_desc_not_found));
+        }
     }
 }

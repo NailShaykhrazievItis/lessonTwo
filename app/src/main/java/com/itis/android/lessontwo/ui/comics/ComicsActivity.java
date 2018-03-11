@@ -14,12 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
-import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.comics.ComicsContract.Presenter;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
@@ -65,10 +61,6 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View{
         new ComicsPresenter(this);
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadComics(id);
-        // TODO: 26.02.2018 move to presenter
-        RepositoryProvider.provideComicsRepository()
-                .comics(id)
-                .subscribe(this::showComics, this::handleError);
     }
 
     private void initViews() {
@@ -96,7 +88,7 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View{
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    private void showComics(Comics comics) {
+    public void showComics(@NonNull Comics comics) {
         if (comics.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
                     comics.getImage().getExtension()));

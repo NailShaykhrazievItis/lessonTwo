@@ -9,7 +9,6 @@ import io.realm.RealmObject;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-
 public class Image extends RealmObject implements Serializable {
 
     @SerializedName("path")
@@ -33,5 +32,7 @@ public class Image extends RealmObject implements Serializable {
     public void setExtension(String extension) {
         mExtension = extension;
     }
+
+
 }
 

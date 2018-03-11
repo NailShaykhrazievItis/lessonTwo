@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.comicslist;
+package com.itis.android.lessontwo.ui.creatorslist;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,11 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.entity.comics.Comics;
+import com.itis.android.lessontwo.model.entity.character.Character;
+import com.itis.android.lessontwo.model.entity.creators.Creator;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
 import com.itis.android.lessontwo.ui.base.BaseListContract;
-import com.itis.android.lessontwo.ui.comics.ComicsActivity;
+import com.itis.android.lessontwo.ui.creators.CreatorsActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
 import java.util.ArrayList;
@@ -26,19 +27,19 @@ import java.util.List;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by Nail Shaykhraziev on 25.02.2018.
+ * Created by valera071998@gmail.com on 02.03.2018.
  */
 
-public class ComicsListActivity extends BaseActivity implements BaseListContract.View<Comics>,
-        BaseAdapter.OnItemClickListener<Comics> {
+public class CreatorsListActivity extends BaseActivity implements BaseListContract.View<Creator>,
+        BaseAdapter.OnItemClickListener<Creator> {
 
     private Toolbar toolbar;
     private ProgressBar progressBar;
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
-    private ComicsAdapter adapter;
-    private BaseListContract.Presenter<Comics> presenter;
+    private CreatorsAdapter adapter;
+    private BaseListContract.Presenter<Creator> presenter;
 
     private boolean isLoading = false;
 
@@ -46,15 +47,15 @@ public class ComicsListActivity extends BaseActivity implements BaseListContract
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
-        getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);
+        getLayoutInflater().inflate(R.layout.activity_creators_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new ComicsListPresenter(this);
+        new CreatorsListPresenter(this);
         presenter.load();
     }
 
     @Override
-    public void setPresenter(BaseListContract.Presenter<Comics> presenter) {
+    public void setPresenter(BaseListContract.Presenter<Creator> presenter) {
         this.presenter = presenter;
     }
 
@@ -64,17 +65,17 @@ public class ComicsListActivity extends BaseActivity implements BaseListContract
     }
 
     @Override
-    public void showItems(@NonNull List<Comics> items) {
+    public void showItems(@NonNull List<Creator> items) {
         adapter.changeDataSet(items);
     }
 
     @Override
-    public void showDetails(Comics item) {
-        ComicsActivity.start(this, item);
+    public void showDetails(Creator item) {
+        CreatorsActivity.start(this, item);
     }
 
     @Override
-    public void addMoreItems(List<Comics> items) {
+    public void addMoreItems(List<Creator> items) {
         adapter.addAll(items);
     }
 
@@ -92,12 +93,12 @@ public class ComicsListActivity extends BaseActivity implements BaseListContract
     }
 
     @Override
-    public void onItemClick(@NonNull Comics item) {
+    public void onItemClick(@NonNull Creator item) {
         presenter.onItemClick(item);
     }
 
     private void initRecycler() {
-        adapter = new ComicsAdapter(new ArrayList<>());
+        adapter = new CreatorsAdapter(new ArrayList<>());
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setEmptyView(tvEmpty);
@@ -107,7 +108,6 @@ public class ComicsListActivity extends BaseActivity implements BaseListContract
         recyclerView.setHasFixedSize(true);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int currentPage = 0;
-            // обычно бывает флаг последней страницы, но я че т его не нашел, если не найдется, то можно удалить, всегда тру
             private boolean isLastPage = false;
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -128,10 +128,11 @@ public class ComicsListActivity extends BaseActivity implements BaseListContract
     }
 
     private void initViews() {
-        toolbar = findViewById(R.id.tb_comics_list);
+        toolbar = findViewById(R.id.tb_creators_list);
         progressBar = findViewById(R.id.pg_comics_list);
         recyclerView = findViewById(R.id.rv_comics_list);
         tvEmpty = findViewById(R.id.tv_empty);
         supportActionBar(toolbar);
     }
 }
+

@@ -24,7 +24,7 @@ public class ErrorSingleReadFromCache<T extends RealmObject> implements Function
     @Override
     public Single<T> apply(@io.reactivex.annotations.NonNull Throwable throwable) {
         Realm realm = Realm.getDefaultInstance();
-        RealmResults<T> results =  realm.where(mClass).equalTo("id", id).findAll();
+        RealmResults<T> results = realm.where(mClass).equalTo("id", id).findAll();
         return Single.just(realm.copyFromRealm(results.first()));
     }
 }

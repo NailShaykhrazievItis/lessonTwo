@@ -1,13 +1,10 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.general.ListItem;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
-import com.itis.android.lessontwo.ui.general.ListItemHolder;
 
 import java.util.List;
 

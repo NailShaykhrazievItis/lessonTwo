@@ -14,10 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsTextObject;
-import com.itis.android.lessontwo.repository.RepositoryProvider;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
+import com.itis.android.lessontwo.ui.base.BaseContract;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
@@ -26,7 +26,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity {
+public class ComicsActivity extends BaseActivity  implements BaseContract.View<Comics>{
 
     private CollapsingToolbarLayout collapsingToolbar;
 
@@ -40,6 +40,7 @@ public class ComicsActivity extends BaseActivity {
 
     private TextView tvPages;
 
+    private BaseContract.Presenter presenter;
     private ProgressBar progressBar;
 
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
@@ -57,10 +58,13 @@ public class ComicsActivity extends BaseActivity {
         initViews();
 
         long id = getIntent().getLongExtra(ID_KEY, 0);
-        // TODO: 26.02.2018 move to presenter
-        RepositoryProvider.provideComicsRepository()
-                .comics(id)
-                .subscribe(this::showComics, this::handleError);
+        new ComicsPresenter(this);  // странный способ связывания view и presenter
+        presenter.load(id);
+    }
+
+    @Override
+    public void setPresenter(BaseContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
     private void initViews() {
@@ -79,11 +83,13 @@ public class ComicsActivity extends BaseActivity {
         tvPages = findViewById(R.id.tv_pages);
     }
 
-    private void handleError(Throwable error) {
+    @Override
+    public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    private void showComics(Comics comics) {
+    @Override
+    public void show(@NonNull Comics comics) {
         if (comics.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
                     comics.getImage().getExtension()));

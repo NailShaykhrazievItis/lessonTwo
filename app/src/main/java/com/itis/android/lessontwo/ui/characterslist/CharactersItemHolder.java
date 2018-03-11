@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.comicslist;
+package com.itis.android.lessontwo.ui.characterslist;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -6,15 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.entity.comics.Comics;
+import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 /**
- * Created by Nail Shaykhraziev on 26.02.2018.
+ * Created by Ruslan on 02.03.2018.
  */
 
-public class ComicsItemHolder extends RecyclerView.ViewHolder {
+public class CharactersItemHolder extends RecyclerView.ViewHolder {
 
     private static final int MAX_LENGTH = 80;
     private static final String MORE_TEXT = "...";
@@ -24,20 +25,20 @@ public class ComicsItemHolder extends RecyclerView.ViewHolder {
     private ImageView imageView;
 
     @NonNull
-    public static ComicsItemHolder create(@NonNull Context context) {
+    public static CharactersItemHolder create(@NonNull Context context) {
         View view = View.inflate(context, R.layout.item_comics, null);
-        ComicsItemHolder holder = new ComicsItemHolder(view);
+        CharactersItemHolder holder = new CharactersItemHolder(view);
         return holder;
     }
 
-    public ComicsItemHolder(View itemView) {
+    public CharactersItemHolder(View itemView) {
         super(itemView);
         name = itemView.findViewById(R.id.tv_name);
         description = itemView.findViewById(R.id.tv_description);
         imageView = itemView.findViewById(R.id.iv_cover);
     }
 
-    public void bind(@NonNull Comics item) {
+    public void bind(@NonNull Character item) {
         name.setText(item.getName());
         if (item.getDescription() != null) {
             description.setText(cutLongDescription(item.getDescription()));

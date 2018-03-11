@@ -6,11 +6,11 @@ package com.itis.android.lessontwo.model.general;
 
 public interface ListItem {
 
-    Long getId();
+   Long getId();
 
-    String getName();
+   String getName();
 
-    String getDescription();
+   String getDescription();
 
-    Image getImage();
+   Image getImage();
 }

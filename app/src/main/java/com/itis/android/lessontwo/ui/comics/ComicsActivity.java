@@ -67,22 +67,6 @@ public class ComicsActivity extends BaseActivity  implements BaseContract.View<C
         this.presenter = presenter;
     }
 
-    private void initViews() {
-        findViews();
-        supportActionBar(toolbar);
-        setBackArrow(toolbar);
-        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
-    }
-
-    private void findViews() {
-        collapsingToolbar = findViewById(R.id.ct_comics);
-        toolbar = findViewById(R.id.tb_comics);
-        ivCover = findViewById(R.id.iv_comics);
-        tvDescription = findViewById(R.id.tv_description);
-        tvPrice = findViewById(R.id.tv_price);
-        tvPages = findViewById(R.id.tv_pages);
-    }
-
     @Override
     public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -108,5 +92,21 @@ public class ComicsActivity extends BaseActivity  implements BaseContract.View<C
             tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
         tvPages.setText(String.valueOf(comics.getPageCount()));
+    }
+
+    private void initViews() {
+        findViews();
+        supportActionBar(toolbar);
+        setBackArrow(toolbar);
+        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
+    }
+
+    private void findViews() {
+        collapsingToolbar = findViewById(R.id.ct_comics);
+        toolbar = findViewById(R.id.tb_comics);
+        ivCover = findViewById(R.id.iv_comics);
+        tvDescription = findViewById(R.id.tv_description);
+        tvPrice = findViewById(R.id.tv_price);
+        tvPages = findViewById(R.id.tv_pages);
     }
 }

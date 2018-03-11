@@ -3,10 +3,11 @@ package com.itis.android.lessontwo.model.creator;
 import com.google.gson.annotations.SerializedName;
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;
+import io.realm.RealmObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Creator implements ListItem {
+public class Creator extends RealmObject implements ListItem {
 
     @SerializedName("id")
     private Long id;

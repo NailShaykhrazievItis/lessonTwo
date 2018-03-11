@@ -58,21 +58,6 @@ public class CreatorsActivity extends BaseActivity  implements BaseContract.View
         this.presenter = presenter;
     }
 
-    private void initViews() {
-        findViews();
-        supportActionBar(toolbar);
-        setBackArrow(toolbar);
-        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
-    }
-
-    private void findViews() {
-        collapsingToolbar = findViewById(R.id.ct_creator);
-        toolbar = findViewById(R.id.tb_creator);
-        ivCover = findViewById(R.id.iv_creator);
-        tvName = findViewById(R.id.tv_name);
-        tvDescription = findViewById(R.id.tv_description);
-    }
-
     @Override
     public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -91,5 +76,20 @@ public class CreatorsActivity extends BaseActivity  implements BaseContract.View
             tvDescription.setText(creator.getDescription().length() > 0 ?
                     creator.getDescription().trim() : getString(R.string.text_desc_not_found));
         }
+    }
+
+    private void initViews() {
+        findViews();
+        supportActionBar(toolbar);
+        setBackArrow(toolbar);
+        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
+    }
+
+    private void findViews() {
+        collapsingToolbar = findViewById(R.id.ct_creator);
+        toolbar = findViewById(R.id.tb_creator);
+        ivCover = findViewById(R.id.iv_creator);
+        tvName = findViewById(R.id.tv_name);
+        tvDescription = findViewById(R.id.tv_description);
     }
 }

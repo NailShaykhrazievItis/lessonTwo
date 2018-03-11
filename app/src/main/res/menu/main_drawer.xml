@@ -12,5 +12,4 @@
     <item
         android:id="@+id/menu_creators"
         android:title="@string/creators" />
-
 </menu>

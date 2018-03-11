@@ -59,21 +59,6 @@ public class CharactersActivity extends BaseActivity implements BaseContract.Vie
         this.presenter = presenter;
     }
 
-    private void initViews() {
-        findViews();
-        supportActionBar(toolbar);
-        setBackArrow(toolbar);
-        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
-    }
-
-    private void findViews() {
-        collapsingToolbar = findViewById(R.id.ct_character);
-        toolbar = findViewById(R.id.tb_character);
-        ivCover = findViewById(R.id.iv_character);
-        tvDescription = findViewById(R.id.tv_description);
-        tvName = findViewById(R.id.tv_name);
-    }
-
     @Override
     public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -92,5 +77,20 @@ public class CharactersActivity extends BaseActivity implements BaseContract.Vie
             tvDescription.setText(character.getDescription().length() > 0 ?
                     character.getDescription().trim() : getString(R.string.text_desc_not_found));
         }
+    }
+
+    private void initViews() {
+        findViews();
+        supportActionBar(toolbar);
+        setBackArrow(toolbar);
+        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
+    }
+
+    private void findViews() {
+        collapsingToolbar = findViewById(R.id.ct_character);
+        toolbar = findViewById(R.id.tb_character);
+        ivCover = findViewById(R.id.iv_character);
+        tvDescription = findViewById(R.id.tv_description);
+        tvName = findViewById(R.id.tv_name);
     }
 }

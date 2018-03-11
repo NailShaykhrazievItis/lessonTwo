@@ -31,7 +31,6 @@ public interface CreatorListContract {
         void showLoading(Disposable disposable);
 
         void hideLoading();
-
     }
 
     interface Presenter {

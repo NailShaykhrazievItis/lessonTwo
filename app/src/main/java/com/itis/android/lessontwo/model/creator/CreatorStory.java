@@ -1,8 +1,9 @@
 package com.itis.android.lessontwo.model.creator;
 
 import com.google.gson.annotations.SerializedName;
+import io.realm.RealmObject;
 
-public class CreatorStory {
+public class CreatorStory extends RealmObject{
 
     @SerializedName("name")
     private String name;

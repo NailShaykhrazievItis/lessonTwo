@@ -11,16 +11,19 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
 import com.itis.android.lessontwo.ui.base.BaseListContract;
 import com.itis.android.lessontwo.ui.comics.ComicsActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
-import io.reactivex.disposables.Disposable;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.

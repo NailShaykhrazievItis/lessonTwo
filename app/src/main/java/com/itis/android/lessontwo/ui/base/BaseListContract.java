@@ -2,7 +2,7 @@ package com.itis.android.lessontwo.ui.base;
 
 import android.support.annotation.NonNull;
 
-import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
 
 import java.util.List;
 

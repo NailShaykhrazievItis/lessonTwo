@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.general.ListItem;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by Nail Shaykhraziev on 26.02.2018.

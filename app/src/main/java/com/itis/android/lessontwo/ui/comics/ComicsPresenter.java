@@ -1,11 +1,8 @@
 package com.itis.android.lessontwo.ui.comics;
 
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.base.BaseContract;
-import com.itis.android.lessontwo.utils.RxUtils;
 
 /**
  * Created by Ruslan on 02.03.2018.
@@ -22,12 +19,8 @@ public class ComicsPresenter implements BaseContract.Presenter {
 
     @Override
     public void load(long id) {
-        ApiFactory.getComicsService()
+        RepositoryProvider.provideComicsRepository()
                 .comics(id)
-                .map(ComicsResponse::getData)
-                .map(ComicsResponseData::getResults)
-                .map(list -> list.get(0))
-                .compose(RxUtils.async())
                 .subscribe(this.view::show, this.view::handleError);
     }
 }

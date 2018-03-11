@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.character.Character;
+import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 /**

@@ -1,11 +1,8 @@
 package com.itis.android.lessontwo.ui.characters;
 
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.character.Character;
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.character.CharactersResponseData;
+import com.itis.android.lessontwo.model.entity.character.Character;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.base.BaseContract;
-import com.itis.android.lessontwo.utils.RxUtils;
 
 /**
  * Created by Ruslan on 02.03.2018.
@@ -22,12 +19,8 @@ public class CharactersPresenter implements BaseContract.Presenter {
 
     @Override
     public void load(long id) {
-        ApiFactory.getCharactersService()
+        RepositoryProvider.provideCharacterRepository()
                 .character(id)
-                .map(CharactersResponse::getData)
-                .map(CharactersResponseData::getResults)
-                .map(list -> list.get(0))
-                .compose(RxUtils.async())
                 .subscribe(this.view::show, this.view::handleError);
     }
 }

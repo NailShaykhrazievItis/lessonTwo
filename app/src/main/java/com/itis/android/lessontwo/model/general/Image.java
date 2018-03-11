@@ -4,11 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-
-public class Image implements Serializable {
+public class Image extends RealmObject implements Serializable {
 
     @SerializedName("path")
     private String mPath;
@@ -31,5 +32,7 @@ public class Image implements Serializable {
     public void setExtension(String extension) {
         mExtension = extension;
     }
+
+
 }
 

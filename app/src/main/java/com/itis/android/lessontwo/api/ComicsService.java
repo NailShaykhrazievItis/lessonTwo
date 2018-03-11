@@ -1,9 +1,9 @@
 package com.itis.android.lessontwo.api;
 
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
+import com.itis.android.lessontwo.model.entity.character.CharactersResponse;
+import com.itis.android.lessontwo.model.entity.comics.ComicsResponse;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -15,12 +15,12 @@ import retrofit2.http.Query;
 public interface ComicsService {
 
     @GET("comics")
-    Observable<ComicsResponse> comics(@Query("offset") Long offset, @Query("limit") Long limit,
-                                      @Query("orderBy") String orderBy);
+    Single<ComicsResponse> comics(@Query("offset") Long offset, @Query("limit") Long limit,
+                                  @Query("orderBy") String orderBy);
 
     @GET("comics/{comicsId}")
-    Observable<ComicsResponse> comics(@Path("comicsId") Long id);
+    Single<ComicsResponse> comics(@Path("comicsId") Long id);
 
     @GET("comics/{comicsId}/characters")
-    Observable<CharactersResponse> characters(@Path("comicsId") Long id);
+    Single<CharactersResponse> characters(@Path("comicsId") Long id);
 }

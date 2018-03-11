@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 /**

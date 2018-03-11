@@ -1,8 +1,7 @@
 package com.itis.android.lessontwo.api;
 
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.creators.CreatorsResponse;
+import com.itis.android.lessontwo.model.entity.comics.ComicsResponse;
+import com.itis.android.lessontwo.model.entity.creators.CreatorsResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

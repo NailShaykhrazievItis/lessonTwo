@@ -1,6 +1,5 @@
-package com.itis.android.lessontwo.model.creators;
+package com.itis.android.lessontwo.model.entity.creators;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;

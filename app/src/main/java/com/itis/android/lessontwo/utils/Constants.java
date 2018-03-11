@@ -14,6 +14,8 @@ public final class Constants {
     public final static Long ZERO_OFFSET = 0L;
     public static final String DEFAULT_COMICS_SORT = "-onsaleDate";
 
+    public static final String DEFAULT_CREATOR_SORT = "lastName";
+
     public final static String ID_KEY = "id";
     public final static String IMAGE_KEY = "image";
     public final static String CHARACTER_KEY = "character";

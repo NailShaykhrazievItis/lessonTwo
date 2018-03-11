@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
+import com.itis.android.lessontwo.ui.creatorslist.CreatorListActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -58,6 +59,10 @@ public abstract class BaseActivity extends AppCompatActivity {
             switch (id) {
                 case R.id.menu_comics:
                     Intent intent = new Intent(getApplicationContext(), ComicsListActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.menu_creators:
+                    intent = new Intent(getApplicationContext(), CreatorListActivity.class);
                     startActivity(intent);
                     break;
             }

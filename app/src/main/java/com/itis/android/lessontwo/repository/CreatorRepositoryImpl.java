@@ -16,9 +16,9 @@ public class CreatorRepositoryImpl implements CreatorRepository {
 
     @NonNull
     @Override
-    public Single<List<Creator>> creators(final Long offset, final Long limit, final String sort) {
+    public Single<List<Creator>> creators(final Long offset, final Long limit) {
         return ApiFactory.getCreatorsService()
-                .creators(offset, limit, sort)
+                .creators(offset, limit)
                 .map(CreatorResponse::getData)
                 .map(CreatorResponseData::getResults)
                 .flatMap(new RewriteCache<>(Creator.class))

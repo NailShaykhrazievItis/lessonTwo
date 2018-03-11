@@ -8,7 +8,7 @@ import java.util.List;
 public interface CreatorRepository {
 
     @NonNull
-    Single<List<Creator>> creators(Long offset, Long limit, String sort);
+    Single<List<Creator>> creators(Long offset, Long limit);
 
     Single<Creator> creator(Long id);
 }

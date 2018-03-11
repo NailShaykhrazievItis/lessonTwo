@@ -1,18 +1,8 @@
 package com.itis.android.lessontwo.ui.creatorslist;
 
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.creator.Creator;
-import com.itis.android.lessontwo.model.creator.CreatorResponse;
-import com.itis.android.lessontwo.model.creator.CreatorResponseData;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-import com.itis.android.lessontwo.ui.comicslist.ComicsListContract;
-import com.itis.android.lessontwo.utils.RxUtils;
 
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_CREATOR_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
@@ -33,7 +23,7 @@ public class CreatorListPresenter implements CreatorListContract.Presenter {
     @Override
     public void loadCreators() {
         RepositoryProvider.provideCreatorRepository()
-                .creators(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
+                .creators(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(view::showLoading)
                 .doAfterTerminate(view::hideLoading)
                 .subscribe(view::showItems, view::handleError);
@@ -42,7 +32,7 @@ public class CreatorListPresenter implements CreatorListContract.Presenter {
     @Override
     public void loadNextElements(int page) {
         RepositoryProvider.provideCreatorRepository()
-                .creators(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
+                .creators(page * PAGE_SIZE, PAGE_SIZE)
                 .doOnSubscribe(view::showLoading)
                 .doAfterTerminate(view::hideLoading)
                 .doAfterTerminate(view::setNotLoading)

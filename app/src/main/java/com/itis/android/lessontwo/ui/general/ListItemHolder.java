@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.general.ListItem;
-import com.squareup.picasso.Picasso;
+import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 /**
  * Created by Nail Shaykhraziev on 26.02.2018.
@@ -44,16 +44,10 @@ public class ListItemHolder extends RecyclerView.ViewHolder {
             description.setText(cutLongDescription(item.getDescription()));
         }
         if (item.getImage() != null) {
-            loadPicture(imageView, String.format("%s.%s", item.getImage().getPath(),
+            // есть готовая реализация из ImageLoadHelper
+            ImageLoadHelper.loadPicture(imageView, String.format("%s.%s", item.getImage().getPath(),
                     item.getImage().getExtension()));
         }
-    }
-
-    private void loadPicture(@NonNull ImageView imageView, @NonNull String url) {
-        Picasso.with(imageView.getContext())
-                .load(url)
-                .noFade()
-                .into(imageView);
     }
 
     private String cutLongDescription(String description) {

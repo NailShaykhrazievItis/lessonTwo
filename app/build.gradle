@@ -46,33 +46,40 @@ ext {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     // Support
     implementation "com.android.support:appcompat-v7:${support}"
     implementation "com.android.support:design:${support}"
     implementation "com.android.support:recyclerview-v7:${support}"
+
     // Rx
     implementation "io.reactivex.rxjava2:rxjava:${rxjava}"
     implementation "io.reactivex.rxjava2:rxandroid:${rxandroid}"
     implementation "com.akaita.java:rxjava2-debug:${rxdebug}"
     implementation "org.reactivestreams:reactive-streams:${reactive_streams}"
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofit}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit}"
+
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:${okhttp}"
     implementation "com.squareup.okhttp3:logging-interceptor:${okhttp}"
+
     // Gson
     implementation "com.google.code.gson:gson:${gson}"
+
     // Picasso
     implementation "com.squareup.picasso:picasso:${picasso}"
     implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:${okhttp3downloader}"
+
     // Stetho
     implementation "com.facebook.stetho:stetho:${stetho}"
     implementation "com.facebook.stetho:stetho-okhttp3:${stetho}"
+
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
-
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

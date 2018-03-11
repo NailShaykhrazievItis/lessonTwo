@@ -11,9 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.itis.android.lessontwo.R;
+import com.itis.android.lessontwo.ui.characterslist.CharactersListActivity;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
+import com.itis.android.lessontwo.ui.creatorslist.CreatorsListActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -55,20 +56,26 @@ public abstract class BaseActivity extends AppCompatActivity {
     private void initNavigationDrawer(Toolbar toolbar) {
         mNavigationView.setNavigationItemSelectedListener(menuItem -> {
             int id = menuItem.getItemId();
+            Intent intent;
             switch (id) {
                 case R.id.menu_comics:
-                    Intent intent = new Intent(getApplicationContext(), ComicsListActivity.class);
+                    intent = new Intent(getApplicationContext(), ComicsListActivity.class);
+                    startActivity(intent);
+                    break;
+
+                case R.id.menu_characters:
+                    intent = new Intent(getApplicationContext(), CharactersListActivity.class);
+                    startActivity(intent);
+                    break;
+
+                case R.id.menu_creators:
+                    intent = new Intent(getApplicationContext(), CreatorsListActivity.class);
                     startActivity(intent);
                     break;
             }
             return true;
         });
-        /*
-          Если хотите получить элементы из верхней части бокового меню, то это делается так.
-          Example:
-          View header = mNavigationView.getHeaderView(0);
-          TextView menuText = header.findViewById(R.id.tv_menu);
-         */
+
         View header = mNavigationView.getHeaderView(0);
         ImageView menuCover = header.findViewById(R.id.iv_cover);
         ImageLoadHelper.loadPictureByDrawable(menuCover, R.drawable.image_marvel_logo);

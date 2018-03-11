@@ -43,12 +43,13 @@ public class App extends Application {
     }
 
     private void initRealm() {
-        Realm.init(this);
-        RealmConfiguration configuration = new RealmConfiguration.Builder()
-                .rxFactory(new RealmObservableFactory())
-                .schemaVersion(1)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-        Realm.setDefaultConfiguration(configuration);
-    }
+            Realm.init(this);
+            RealmConfiguration configuration = new RealmConfiguration.Builder()
+                    .rxFactory(new RealmObservableFactory())
+                    .schemaVersion(1)
+                    .deleteRealmIfMigrationNeeded()
+                    .build();
+            Realm.setDefaultConfiguration(configuration);
+        }
+
 }

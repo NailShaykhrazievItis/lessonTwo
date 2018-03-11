@@ -4,12 +4,16 @@ import com.google.gson.annotations.SerializedName;
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
 /**
  * Created by valera071998@gamil.com on 02.03.2018.
  */
 
-public class Creator implements ListItem {
+public class Creator extends RealmObject implements ListItem {
 
+    @PrimaryKey
     @SerializedName("id")
     private Long id;
     

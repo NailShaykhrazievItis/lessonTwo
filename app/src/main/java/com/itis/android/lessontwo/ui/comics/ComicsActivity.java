@@ -61,13 +61,6 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
 
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadComics(id);
-
-
-//        // TODO: 26.02.2018 move to presenter
-//        RepositoryProvider.provideComicsRepository()
-//                .comics(id)
-//                .subscribe(this::showComics, this::handleError);
-
     }
 
     private void initViews() {

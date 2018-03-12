@@ -1,13 +1,10 @@
 package com.itis.android.lessontwo.ui.characterslist;
 
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.character.Character;
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.character.CharactersResponseData;
-import com.itis.android.lessontwo.utils.RxUtils;
-
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
+
+import com.itis.android.lessontwo.model.character.Character;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 /**
  * Created by User on 04.03.2018.
@@ -24,24 +21,15 @@ public class CharactersListPresenter implements CharactersListContract.Presenter
 
     @Override
     public void loadCharacters() {
-        ApiFactory.getCharactersService()
+        RepositoryProvider.provideCharactersRepostitory()
                 .characters(ZERO_OFFSET, PAGE_SIZE)
-                .map(CharactersResponse::getData)
-                .map(CharactersResponseData::getResults)
-//                .doOnSubscribe(view::showLoading)
-//                .doOnTerminate(view::hideLoading)
-                .compose(RxUtils.async())
                 .subscribe(view::showItems, view::handleError);
     }
 
     @Override
     public void loadNextElements(int page) {
-        ApiFactory.getCharactersService()
+        RepositoryProvider.provideCharactersRepostitory()
                 .characters(page * PAGE_SIZE, PAGE_SIZE)
-                .map(CharactersResponse::getData)
-                .map(CharactersResponseData::getResults)
-                .doOnTerminate(view::setNotLoading)
-                .compose(RxUtils.async())
                 .subscribe(view::addMoreItems, view::handleError);
     }
 

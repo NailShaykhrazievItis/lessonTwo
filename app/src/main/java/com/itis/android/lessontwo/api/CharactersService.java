@@ -20,6 +20,6 @@ public interface CharactersService {
     @GET("characters/{characterId}")
     Observable<CharactersResponse> character(@Path("characterId") Long id);
 
-    @GET("characters/{characterId/comics}")
+    @GET("characters/{characterId}/comics")
     Observable<ComicsResponse> comicsByCharacter(@Path("characterId") Long id);
 }

@@ -18,4 +18,7 @@ public final class Constants {
     public final static String IMAGE_KEY = "image";
     public final static String CHARACTER_KEY = "character";
     public final static String NAME_KEY = "name";
+
+    public static final String DEFAULT_CREATORS_SORT = "-firstName";
+
 }

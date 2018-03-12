@@ -1,6 +1,7 @@
 package com.itis.android.lessontwo.model.character;
 
 import com.google.gson.annotations.SerializedName;
+
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;
 
@@ -31,7 +32,6 @@ public class Character implements ListItem{
         this.id = id;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -40,7 +40,6 @@ public class Character implements ListItem{
         this.name = name;
     }
 
-    @Override
     public String getDescription() {
         return description;
     }

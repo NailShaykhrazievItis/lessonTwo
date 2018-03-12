@@ -4,8 +4,13 @@ import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 import com.itis.android.lessontwo.api.ApiFactory;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.rx.RealmObservableFactory;
 
 /**
  * Created by Nail Shaykhraziev on 24.02.2018.
@@ -18,6 +23,8 @@ public class App extends Application {
         super.onCreate();
         initStetho();
         initPicasso();
+        initRealm();
+        RepositoryProvider.init();
         ApiFactory.recreate();
     }
 
@@ -33,5 +40,14 @@ public class App extends Application {
                 .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
                 .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
                 .build());
+    }
+    private void initRealm() {
+        Realm.init(this);
+        RealmConfiguration configuration = new RealmConfiguration.Builder()
+                .rxFactory(new RealmObservableFactory())
+                .schemaVersion(1)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(configuration);
     }
 }

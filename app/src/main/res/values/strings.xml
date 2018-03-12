@@ -14,5 +14,15 @@
     <string name="title_price">Price:</string>
     <string name="price_format">%s$</string>
     <string name="title_pages">Pages:</string>
+    <string name="text_desc_not_found">Description not found</string>
+    <string name="characters">Characters</string>
+    <string name="events">Events</string>
+    <string name="series">Series</string>
+    <string name="stories">Stories</string>
+    <string name="creators">Creators</string>
+    <string name="name">Name</string>
+    <string name="text_empty_character">There are now any character yet</string>
+    <string name="text_empty_creators">There are now any creators yet</string>
+
 
 </resources>

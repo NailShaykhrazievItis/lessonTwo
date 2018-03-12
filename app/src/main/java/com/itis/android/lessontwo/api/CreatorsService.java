@@ -3,7 +3,7 @@ package com.itis.android.lessontwo.api;
 
 import com.itis.android.lessontwo.model.creators.CreatorsResponse;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -14,12 +14,12 @@ import retrofit2.http.Query;
 
 public interface CreatorsService {
     @GET("creators")
-    Observable<CreatorsResponse> creators(@Query("offset") Long offset, @Query("limit") Long limit,
-                                          @Query("orderBy") String orderBy);
+    Single<CreatorsResponse> creators(@Query("offset") Long offset, @Query("limit") Long limit,
+                                      @Query("orderBy") String orderBy);
 
     @GET("creators/{creatorId}")
-    Observable<CreatorsResponse> creators(@Path("creatorId") Long id);
+    Single<CreatorsResponse> creators(@Path("creatorId") Long id);
 
     @GET("creators/{creatorId}/comics")
-    Observable<CreatorsResponse> comicsByCreator(@Path("creatorId") Long id);
+    Single<CreatorsResponse> comicsByCreator(@Path("creatorId") Long id);
 }

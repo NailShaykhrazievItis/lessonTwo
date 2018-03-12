@@ -3,6 +3,7 @@ package com.itis.android.lessontwo.ui.creators;
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.creators.CreatorsResponse;
 import com.itis.android.lessontwo.model.creators.CreatorsResponseData;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.utils.RxUtils;
 
 /**
@@ -20,12 +21,8 @@ public class CreatorPresenter implements CreatorContract.Presenter {
 
     @Override
     public void loadCreators(long id) {
-        ApiFactory.getCreatorService()
+        RepositoryProvider.provideCreatorsRepository()
                 .creators(id)
-                .map(CreatorsResponse::getData)
-                .map(CreatorsResponseData::getResults)
-                .map(list -> list.get(0))
-                .compose(RxUtils.async())
                 .subscribe(view::showCreators, view::handleError);
     }
 }

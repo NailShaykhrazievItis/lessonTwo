@@ -4,6 +4,7 @@ import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.creators.Creators;
 import com.itis.android.lessontwo.model.creators.CreatorsResponse;
 import com.itis.android.lessontwo.model.creators.CreatorsResponseData;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.utils.RxUtils;
 
 import static com.itis.android.lessontwo.utils.Constants.DEFAULT_CREATORS_SORT;
@@ -25,27 +26,22 @@ public class CreatorsListPresenter implements CreatorsListContract.Presenter {
 
     @Override
     public void loadCreators() {
-        ApiFactory.getCreatorService()
+        RepositoryProvider.provideCreatorsRepository()
                 .creators(ZERO_OFFSET, PAGE_SIZE, DEFAULT_CREATORS_SORT)
-                .map(CreatorsResponse::getData)
-                .map(CreatorsResponseData::getResults)
-//                .doOnSubscribe(view::showLoading)
-//                .doOnTerminate(view::hideLoading)
-                .compose(RxUtils.async())
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
                 .subscribe(view::showItems, view::handleError);
     }
 
     @Override
     public void loadNextElements(int page) {
-        ApiFactory.getCreatorService()
-                .creators(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_CREATORS_SORT)
-                .map(CreatorsResponse::getData)
-                .map(CreatorsResponseData::getResults)
-                .doOnTerminate(view::setNotLoading)
-                .compose(RxUtils.async())
+        RepositoryProvider.provideCreatorsRepository()
+                .creators(ZERO_OFFSET, PAGE_SIZE, DEFAULT_CREATORS_SORT)
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
+                .doAfterTerminate(view::setNotLoading)
                 .subscribe(view::addMoreItems, view::handleError);
     }
-
     @Override
     public void onItemClick(Creators creators) {
         view.showDetails(creators);

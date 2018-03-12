@@ -1,15 +1,20 @@
 package com.itis.android.lessontwo.model.character;
 
 import com.google.gson.annotations.SerializedName;
+
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;
+
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
 
-public class Character implements ListItem{
+public class Character extends RealmObject implements ListItem{
 
+    @PrimaryKey
     @SerializedName("id")
     private Long id;
 

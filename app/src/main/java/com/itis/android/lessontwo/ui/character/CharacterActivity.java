@@ -53,21 +53,6 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         presenter.loadCharacter(id);
     }
 
-    private void initViews() {
-        findViews();
-        supportActionBar(toolbar);
-        setBackArrow(toolbar);
-        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
-    }
-
-    private void findViews() {
-        collapsingToolbar = findViewById(R.id.ct_character);
-        toolbar = findViewById(R.id.tb_character);
-        ivCover = findViewById(R.id.iv_character);
-        tvDescription = findViewById(R.id.tv_description_character);
-        progressBar = findViewById(R.id.progress_loader_character);
-    }
-
     @Override
     public void setPresenter(CharacterContract.Presenter presenter) {
         this.presenter = presenter;
@@ -85,11 +70,28 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         if (character.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                     character.getImage().getExtension()));
+        }else{
+            ImageLoadHelper.loadPictureByDrawable(ivCover,R.drawable.image_error_marvel_logo);
         }
         if (character.getDescription() != null) {
             tvDescription.setText(character.getDescription().trim());
         }else{
             tvDescription.setText(R.string.no_description);
         }
+    }
+
+    private void initViews() {
+        findViews();
+        supportActionBar(toolbar);
+        setBackArrow(toolbar);
+        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
+    }
+
+    private void findViews() {
+        collapsingToolbar = findViewById(R.id.ct_character);
+        toolbar = findViewById(R.id.tb_character);
+        ivCover = findViewById(R.id.iv_character);
+        tvDescription = findViewById(R.id.tv_description_character);
+        progressBar = findViewById(R.id.progress_loader_character);
     }
 }

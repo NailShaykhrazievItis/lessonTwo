@@ -43,5 +43,4 @@ public class ComicsRepositoryImpl implements ComicsRepository {
                 .onErrorResumeNext(new ErrorSingleReadFromCache<>(Comics.class, id))
                 .compose(RxUtils.asyncSingle());
     }
-
 }

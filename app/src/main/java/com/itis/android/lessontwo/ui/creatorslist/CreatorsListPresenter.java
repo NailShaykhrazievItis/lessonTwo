@@ -1,11 +1,7 @@
 package com.itis.android.lessontwo.ui.creatorslist;
 
-import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.creators.Creators;
-import com.itis.android.lessontwo.model.creators.CreatorsResponse;
-import com.itis.android.lessontwo.model.creators.CreatorsResponseData;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-import com.itis.android.lessontwo.utils.RxUtils;
 
 import static com.itis.android.lessontwo.utils.Constants.DEFAULT_CREATORS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;

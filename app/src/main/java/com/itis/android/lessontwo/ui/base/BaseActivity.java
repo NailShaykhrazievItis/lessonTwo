@@ -9,9 +9,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
+
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
 import com.itis.android.lessontwo.ui.creatorslist.CreatorsListActivity;
+import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -74,6 +78,9 @@ public abstract class BaseActivity extends AppCompatActivity {
           View header = mNavigationView.getHeaderView(0);
           TextView menuText = header.findViewById(R.id.tv_menu);
          */
+        View header = mNavigationView.getHeaderView(0);
+        ImageView menuCover = header.findViewById(R.id.iv_cover);
+        ImageLoadHelper.loadPictureByDrawable(menuCover, R.drawable.image_marvel_logo);
         setActionBar(toolbar);
     }
 

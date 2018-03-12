@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.repository;
+package com.itis.android.lessontwo.repository.creators;
 
 import android.support.annotation.NonNull;
 

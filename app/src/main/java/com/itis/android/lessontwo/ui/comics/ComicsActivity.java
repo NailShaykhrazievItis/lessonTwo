@@ -87,16 +87,21 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
     }
 
     public void showComics(Comics comics) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
-                comics.getImage().getExtension()));
-        if (comics.getTextObjects() != null){
+        if (comics.getImage() != null) {
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
+                    comics.getImage().getExtension()));
+        } else {
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
+        }
+        if (comics.getTextObjects() != null) {
             StringBuilder description = new StringBuilder();
             for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
                 description.append(comicsTextObject.getText()).append("\n");
             }
-            tvDescription.setText(description.toString().trim());
+            tvDescription.setText(description.length() > 0 ?
+                    description.toString().trim() : getString(R.string.text_desc_not_found));
         }
-        if (comics.getPrices() != null && !comics.getPrices().isEmpty()){
+        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
             tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
         tvPages.setText(String.valueOf(comics.getPageCount()));

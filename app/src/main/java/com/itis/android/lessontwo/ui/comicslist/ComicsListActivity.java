@@ -117,6 +117,7 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
                 int visibleItemCount = manager.getChildCount();
                 int totalItemCount = manager.getItemCount();
                 int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
+
                 if (!isLoading && !isLastPage) {
                     if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                             && firstVisibleItemPosition >= 0

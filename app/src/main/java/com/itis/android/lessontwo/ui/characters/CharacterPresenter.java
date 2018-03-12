@@ -1,9 +1,6 @@
 package com.itis.android.lessontwo.ui.characters;
 
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.character.CharactersResponseData;
-import com.itis.android.lessontwo.utils.RxUtils;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 /**
  * Created by User on 04.03.2018.
@@ -20,12 +17,8 @@ public class CharacterPresenter implements CharacterContract.Presenter {
 
     @Override
     public void initCharacter(long id) {
-        ApiFactory.getCharactersService()
+        RepositoryProvider.provideCharactersRepostitory()
                 .characters(id)
-                .map(CharactersResponse::getData)
-                .map(CharactersResponseData::getResults)
-                .map(list -> list.get(0))
-                .compose(RxUtils.async())
                 .subscribe(view::showCharacter, view::handleError);
     }
 }

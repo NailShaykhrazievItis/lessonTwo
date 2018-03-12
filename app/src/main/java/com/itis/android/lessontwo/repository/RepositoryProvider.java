@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 public class RepositoryProvider {
 
     private static ComicsRepository comicsRepository;
+    private static CharacterRepository characterRepository;
 
     @NonNull
     public static ComicsRepository provideComicsRepository() {
@@ -18,8 +19,17 @@ public class RepositoryProvider {
         return comicsRepository;
     }
 
+    @NonNull
+    public static CharacterRepository provideCharacterRepository() {
+        if(characterRepository == null){
+            characterRepository = new CharacterRepositoryImpl();
+        }
+        return characterRepository;
+    }
+
     @MainThread
     public static void init() {
         comicsRepository = new ComicsRepositoryImpl();
+        characterRepository = new CharacterRepositoryImpl();
     }
 }

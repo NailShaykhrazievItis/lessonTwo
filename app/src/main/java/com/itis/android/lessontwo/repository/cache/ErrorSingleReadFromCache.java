@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
+
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
@@ -15,6 +16,7 @@ import io.realm.RealmResults;
 public class ErrorSingleReadFromCache<T extends RealmObject> implements Function<Throwable, Single<T>> {
 
     private final Class<T> mClass;
+
     private final Long id;
 
     public ErrorSingleReadFromCache(@NonNull Class<T> tClass, Long id) {

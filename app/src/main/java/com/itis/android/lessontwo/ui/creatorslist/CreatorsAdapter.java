@@ -2,6 +2,7 @@ package com.itis.android.lessontwo.ui.creatorslist;
 
 import android.support.annotation.NonNull;
 import android.view.ViewGroup;
+
 import com.itis.android.lessontwo.model.creators.Creators;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
 

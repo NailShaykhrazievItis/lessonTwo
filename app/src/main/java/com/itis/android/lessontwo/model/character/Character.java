@@ -1,6 +1,7 @@
 package com.itis.android.lessontwo.model.character;
 
 import com.google.gson.annotations.SerializedName;
+
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;
 

@@ -1,5 +1,8 @@
 package com.itis.android.lessontwo.ui.comics;
 
+import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
+import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,35 +15,26 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
-import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-
-import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
-import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity {
+public class ComicsActivity extends BaseActivity implements ComicsContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
-
     private Toolbar toolbar;
-
     private ImageView ivCover;
-
     private TextView tvDescription;
-
     private TextView tvPrice;
-
     private TextView tvPages;
-
     private ProgressBar progressBar;
+
+    private ComicsContract.Presenter presenter;
 
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
         Intent intent = new Intent(activity, ComicsActivity.class);
@@ -57,33 +51,23 @@ public class ComicsActivity extends BaseActivity {
         initViews();
 
         long id = getIntent().getLongExtra(ID_KEY, 0);
-        // TODO: 26.02.2018 move to presenter
-        RepositoryProvider.provideComicsRepository()
-                .comics(id)
-                .subscribe(this::showComics, this::handleError);
+        new ComicsPresenter(this);
+        presenter.initComics(id);
+
     }
 
-    private void initViews() {
-        findViews();
-        supportActionBar(toolbar);
-        setBackArrow(toolbar);
-        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
+    @Override
+    public void setPresenter(ComicsContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
-    private void findViews() {
-        collapsingToolbar = findViewById(R.id.ct_comics);
-        toolbar = findViewById(R.id.tb_comics);
-        ivCover = findViewById(R.id.iv_comics);
-        tvDescription = findViewById(R.id.tv_description);
-        tvPrice = findViewById(R.id.tv_price);
-        tvPages = findViewById(R.id.tv_pages);
-    }
-
-    private void handleError(Throwable error) {
+    @Override
+    public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    private void showComics(Comics comics) {
+    @Override
+    public void showComics(@NonNull Comics comics) {
         if (comics.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
                     comics.getImage().getExtension()));
@@ -102,5 +86,21 @@ public class ComicsActivity extends BaseActivity {
             tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
         tvPages.setText(String.valueOf(comics.getPageCount()));
+    }
+
+    private void initViews() {
+        findViews();
+        supportActionBar(toolbar);
+        setBackArrow(toolbar);
+        collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
+    }
+
+    private void findViews() {
+        collapsingToolbar = findViewById(R.id.ct_comics);
+        toolbar = findViewById(R.id.tb_comics);
+        ivCover = findViewById(R.id.iv_comics);
+        tvDescription = findViewById(R.id.tv_description_details_comics);
+        tvPrice = findViewById(R.id.tv_price);
+        tvPages = findViewById(R.id.tv_pages);
     }
 }

@@ -3,7 +3,6 @@ package com.itis.android.lessontwo.model.comics;
 import com.google.gson.annotations.SerializedName;
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;
-
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

@@ -1,7 +1,6 @@
 package com.itis.android.lessontwo.repository;
 
 import android.support.annotation.NonNull;
-
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsResponse;
@@ -10,10 +9,8 @@ import com.itis.android.lessontwo.repository.cache.ErrorReadFromCache;
 import com.itis.android.lessontwo.repository.cache.ErrorSingleReadFromCache;
 import com.itis.android.lessontwo.repository.cache.RewriteCache;
 import com.itis.android.lessontwo.utils.RxUtils;
-
-import java.util.List;
-
 import io.reactivex.Single;
+import java.util.List;
 
 /**
  * Created by Nail Shaykhraziev on 07.03.2018.

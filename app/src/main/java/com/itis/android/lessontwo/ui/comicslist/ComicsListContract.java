@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ComicsListContract {
 
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView<Presenter> {
 
         void showItems(@NonNull List<Comics> items);
 

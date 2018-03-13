@@ -1,14 +1,12 @@
 package com.itis.android.lessontwo.repository.cache;
 
 import android.support.annotation.NonNull;
-
-import java.util.List;
-
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
+import java.util.List;
 
 /**
  * Created by Nail Shaykhraziev on 05.03.2018.

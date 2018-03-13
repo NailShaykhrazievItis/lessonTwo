@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_comics">
+    tools:showIn="@layout/activity_characters">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             android:textSize="@dimen/text_medium" />
 
         <TextView
-            android:id="@+id/tv_description_details_comics"
+            android:id="@+id/tv_description_details_character"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
@@ -31,47 +31,12 @@
             android:textSize="@dimen/text_small"
             tools:text="Description" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text="@string/title_price"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/text_medium" />
-
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:textColor="@color/secondary_text"
-            android:textSize="@dimen/text_small"
-            tools:text="34$" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text="@string/title_pages"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/text_medium" />
-
-        <TextView
-            android:id="@+id/tv_pages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
-            android:layout_marginBottom="@dimen/margin_small"
-            android:textColor="@color/secondary_text"
-            android:textSize="@dimen/text_small"
-            tools:text="34"/>
-
         <ProgressBar
             android:id="@+id/progress_loader"
             style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginTop="@dimen/text_medium"
             android:visibility="gone"
             tools:visibility="visible"/>
     </LinearLayout>

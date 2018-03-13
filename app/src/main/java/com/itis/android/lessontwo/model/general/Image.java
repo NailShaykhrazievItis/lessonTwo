@@ -1,10 +1,8 @@
 package com.itis.android.lessontwo.model.general;
 
 import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
-
 import io.realm.RealmObject;
+import java.io.Serializable;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.

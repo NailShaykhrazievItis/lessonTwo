@@ -1,12 +1,9 @@
 package com.itis.android.lessontwo.repository;
 
 import android.support.annotation.NonNull;
-
 import com.itis.android.lessontwo.model.comics.Comics;
-
-import java.util.List;
-
 import io.reactivex.Single;
+import java.util.List;
 
 /**
  * Created by Nail Shaykhraziev on 07.03.2018.

@@ -4,6 +4,7 @@ package com.itis.android.lessontwo.api;
 import com.itis.android.lessontwo.model.creators.CreatorsResponse;
 
 import io.reactivex.Single;
+
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -14,7 +15,8 @@ import retrofit2.http.Query;
 
 public interface CreatorsService {
     @GET("creators")
-    Single<CreatorsResponse> creators(@Query("offset") Long offset, @Query("limit") Long limit,
+    Single<CreatorsResponse> creators(@Query("offset") Long offset,
+                                      @Query("limit") Long limit,
                                       @Query("orderBy") String orderBy);
 
     @GET("creators/{creatorId}")

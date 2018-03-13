@@ -1,10 +1,10 @@
 package com.itis.android.lessontwo.model.creators;
 
 import com.google.gson.annotations.SerializedName;
+
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;
 
-import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -12,7 +12,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by Aizat on 05.03.2018.
  */
 
-public class Creators extends RealmObject implements ListItem{
+public class Creators extends RealmObject implements ListItem {
 
     @PrimaryKey
     @SerializedName("id")

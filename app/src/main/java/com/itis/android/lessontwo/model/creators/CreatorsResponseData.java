@@ -1,7 +1,6 @@
 package com.itis.android.lessontwo.model.creators;
 
 import com.google.gson.annotations.SerializedName;
-import com.itis.android.lessontwo.model.character.Character;
 
 import java.util.List;
 

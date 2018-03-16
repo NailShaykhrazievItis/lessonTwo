@@ -27,5 +27,6 @@
     <dimen name="height_app_bar">240dp</dimen>
     <dimen name="size_image_list">48dp</dimen>
     <dimen name="size_item_large">72dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

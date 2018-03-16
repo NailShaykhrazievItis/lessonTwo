@@ -10,6 +10,7 @@ public class RepositoryProvider {
 
     private static ComicsRepository comicsRepository;
     private static CharactersRepository charactersRepository;
+    private static StoriesRepository storiesRepository;
 
     @NonNull
     public static ComicsRepository provideComicsRepository() {
@@ -27,9 +28,18 @@ public class RepositoryProvider {
         return charactersRepository;
     }
 
+    @NonNull
+    public static StoriesRepository provideStoriesRepostitory() {
+        if (storiesRepository == null) {
+            storiesRepository = new StoriesRepositoryImpl();
+        }
+        return storiesRepository;
+    }
+
     @MainThread
     public static void init() {
         comicsRepository = new ComicsRepositoryImpl();
         charactersRepository = new CharactersRepositoryImpl();
+        storiesRepository = new StoriesRepositoryImpl();
     }
 }

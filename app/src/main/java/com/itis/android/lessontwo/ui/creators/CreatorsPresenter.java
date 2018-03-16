@@ -1,5 +1,6 @@
 package com.itis.android.lessontwo.ui.creators;
 
+import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.entity.creators.Creator;
 import com.itis.android.lessontwo.model.entity.creators.CreatorsResponse;
@@ -12,19 +13,22 @@ import com.itis.android.lessontwo.utils.RxUtils;
  * Created by valera071998@gmail.com on 02.03.2018.
  */
 
-public class CreatorsPresenter implements BaseContract.Presenter {
-
-    private final BaseContract.View<Creator> view;
-
-    public CreatorsPresenter(BaseContract.View<Creator> view) {
-        this.view = view;
-        this.view.setPresenter(this);
-    }
+public class CreatorsPresenter extends MvpPresenter<CreatorsView> {
 
     @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        getViewState().getCreatorById();
+    }
+
     public void load(long id) {
         RepositoryProvider.provideCreatorRepository()
                 .creator(id)
-                .subscribe(this.view::show, this.view::handleError);
+                .subscribe(
+                        creator -> {
+                            getViewState().setName(creator);
+                            getViewState().setImage(creator);
+                            getViewState().setDescription(creator);
+                        }, getViewState()::handleError);
     }
 }

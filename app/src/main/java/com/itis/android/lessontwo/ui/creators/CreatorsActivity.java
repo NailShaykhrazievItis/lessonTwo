@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.entity.creators.Creator;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -24,7 +26,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by valera071998@gmail.com on 25.02.2018.
  */
-public class CreatorsActivity extends BaseActivity  implements BaseContract.View<Creator>{
+public class CreatorsActivity extends BaseActivity implements CreatorsView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -32,7 +34,10 @@ public class CreatorsActivity extends BaseActivity  implements BaseContract.View
     private TextView tvName;
     private TextView tvDescription;
 
-    private BaseContract.Presenter presenter;
+    @InjectPresenter(type = PresenterType.WEAK)
+    CreatorsPresenter presenter;
+
+    private Long id;
 
     public static void start(@NonNull Activity activity, @NonNull Creator creator) {
         Intent intent = new Intent(activity, CreatorsActivity.class);
@@ -48,14 +53,7 @@ public class CreatorsActivity extends BaseActivity  implements BaseContract.View
         getLayoutInflater().inflate(R.layout.activity_creators, contentFrameLayout);
         initViews();
 
-        long id = getIntent().getLongExtra(ID_KEY, 0);
-        new CreatorsPresenter(this);  // странный способ связывания view и presenter
-        presenter.load(id);
-    }
-
-    @Override
-    public void setPresenter(BaseContract.Presenter presenter) {
-        this.presenter = presenter;
+        id = getIntent().getLongExtra(ID_KEY, 0);
     }
 
     @Override
@@ -64,18 +62,28 @@ public class CreatorsActivity extends BaseActivity  implements BaseContract.View
     }
 
     @Override
-    public void show(@NonNull Creator creator) {
-        tvName.setText(creator.getName());
+    public void getCreatorById() {
+        presenter.load(id);
+    }
+
+    public void setDescription(Creator creator) {
+        if (creator.getDescription() != null) {
+            tvDescription.setText(creator.getDescription().length() > 0 ?
+                    creator.getDescription().trim() : getString(R.string.text_desc_not_found));
+        }
+    }
+
+    public void setImage(Creator creator) {
         if (creator.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creator.getImage().getPath(),
                     creator.getImage().getExtension()));
         } else {
             ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
-        if (creator.getDescription() != null) {
-            tvDescription.setText(creator.getDescription().length() > 0 ?
-                    creator.getDescription().trim() : getString(R.string.text_desc_not_found));
-        }
+    }
+
+    public void setName(@NonNull Creator creator) {
+        tvName.setText(creator.getName());
     }
 
     private void initViews() {

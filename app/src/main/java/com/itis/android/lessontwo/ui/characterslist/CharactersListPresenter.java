@@ -2,7 +2,6 @@ package com.itis.android.lessontwo.ui.characterslist;
 
 import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-import com.itis.android.lessontwo.ui.base.BaseListContract;
 
 import static com.itis.android.lessontwo.utils.Constants.DEFAULT_CHARACTER_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;

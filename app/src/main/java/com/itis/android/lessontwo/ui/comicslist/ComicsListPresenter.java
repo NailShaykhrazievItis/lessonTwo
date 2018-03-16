@@ -3,7 +3,6 @@ package com.itis.android.lessontwo.ui.comicslist;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-import com.itis.android.lessontwo.ui.base.BaseListContract;
 
 import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;

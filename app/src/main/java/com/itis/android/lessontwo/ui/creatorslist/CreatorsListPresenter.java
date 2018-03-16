@@ -1,13 +1,8 @@
 package com.itis.android.lessontwo.ui.creatorslist;
 
 import com.arellomobile.mvp.MvpPresenter;
-import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.entity.creators.Creator;
-import com.itis.android.lessontwo.model.entity.creators.CreatorsResponse;
-import com.itis.android.lessontwo.model.entity.creators.CreatorsResponseData;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-import com.itis.android.lessontwo.ui.base.BaseListContract;
-import com.itis.android.lessontwo.utils.RxUtils;
 
 import static com.itis.android.lessontwo.utils.Constants.DEFAULT_CREATOR_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;

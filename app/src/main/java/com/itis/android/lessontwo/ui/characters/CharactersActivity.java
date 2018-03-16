@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
-import com.itis.android.lessontwo.ui.base.BaseContract;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;

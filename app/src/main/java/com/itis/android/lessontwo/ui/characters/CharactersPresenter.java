@@ -2,7 +2,6 @@ package com.itis.android.lessontwo.ui.characters;
 
 import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-import com.itis.android.lessontwo.ui.base.BaseContract;
 
 /**
  * Created by Ruslan on 02.03.2018.

@@ -16,7 +16,6 @@ import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
-import com.itis.android.lessontwo.ui.base.BaseListContract;
 import com.itis.android.lessontwo.ui.characters.CharactersActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 

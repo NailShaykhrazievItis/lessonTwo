@@ -1,9 +1,7 @@
 package com.itis.android.lessontwo.ui.comics;
 
 import com.arellomobile.mvp.MvpPresenter;
-import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-import com.itis.android.lessontwo.ui.base.BaseContract;
 
 /**
  * Created by Ruslan on 02.03.2018.

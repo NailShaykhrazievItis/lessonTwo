@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -29,7 +31,7 @@ import io.reactivex.disposables.Disposable;
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
 
-public class ComicsListActivity extends BaseActivity implements BaseListContract.View<Comics>,
+public class ComicsListActivity extends BaseActivity implements ComicsListView,
         BaseAdapter.OnItemClickListener<Comics> {
 
     private Toolbar toolbar;
@@ -38,7 +40,9 @@ public class ComicsListActivity extends BaseActivity implements BaseListContract
     private TextView tvEmpty;
 
     private ComicsAdapter adapter;
-    private BaseListContract.Presenter<Comics> presenter;
+
+    @InjectPresenter
+    ComicsListPresenter presenter;
 
     private boolean isLoading = false;
 
@@ -49,13 +53,11 @@ public class ComicsListActivity extends BaseActivity implements BaseListContract
         getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new ComicsListPresenter(this);
-        presenter.load();
     }
 
     @Override
-    public void setPresenter(BaseListContract.Presenter<Comics> presenter) {
-        this.presenter = presenter;
+    public void onItemClick(@NonNull Comics item) {
+        presenter.onItemClick(item);
     }
 
     @Override
@@ -89,11 +91,6 @@ public class ComicsListActivity extends BaseActivity implements BaseListContract
 
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onItemClick(@NonNull Comics item) {
-        presenter.onItemClick(item);
     }
 
     private void initRecycler() {

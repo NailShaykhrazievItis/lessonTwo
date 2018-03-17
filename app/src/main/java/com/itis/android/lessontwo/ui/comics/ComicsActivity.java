@@ -13,11 +13,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.model.entity.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
-import com.itis.android.lessontwo.ui.base.BaseContract;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
@@ -26,7 +27,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity  implements BaseContract.View<Comics>{
+public class ComicsActivity extends BaseActivity implements ComicsView {
 
     private CollapsingToolbarLayout collapsingToolbar;
 
@@ -40,8 +41,13 @@ public class ComicsActivity extends BaseActivity  implements BaseContract.View<C
 
     private TextView tvPages;
 
-    private BaseContract.Presenter presenter;
     private ProgressBar progressBar;
+
+    @InjectPresenter(type = PresenterType.WEAK)
+    ComicsPresenter presenter;
+
+    private Long id;
+
 
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
         Intent intent = new Intent(activity, ComicsActivity.class);
@@ -57,14 +63,12 @@ public class ComicsActivity extends BaseActivity  implements BaseContract.View<C
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
         initViews();
 
-        long id = getIntent().getLongExtra(ID_KEY, 0);
-        new ComicsPresenter(this);  // странный способ связывания view и presenter
-        presenter.load(id);
+        id = getIntent().getLongExtra(ID_KEY, 0);
     }
 
     @Override
-    public void setPresenter(BaseContract.Presenter presenter) {
-        this.presenter = presenter;
+    public void getComicsId() {
+        presenter.init(id);
     }
 
     @Override
@@ -73,25 +77,35 @@ public class ComicsActivity extends BaseActivity  implements BaseContract.View<C
     }
 
     @Override
-    public void show(@NonNull Comics comics) {
-        if (comics.getImage() != null) {
-            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
-                    comics.getImage().getExtension()));
-        } else {
-            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
+    public void setPageCount(Comics comics) {
+        tvPages.setText(String.valueOf(comics.getPageCount()));
+    }
+
+    @Override
+    public void setPrice(Comics comics) {
+        if (comics.getPrices() != null) {
+            tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
+    }
+
+    @Override
+    public void setDescription(Comics comics) {
         if (comics.getTextObjects() != null) {
             StringBuilder description = new StringBuilder();
             for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
                 description.append(comicsTextObject.getText()).append("\n");
             }
             tvDescription.setText(description.length() > 0 ?
-                    description.toString().trim() : getString(R.string.text_desc_not_found));
+                description.toString().trim() : getString(R.string.text_desc_not_found));
         }
-        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
-            tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
+    }
+
+    @Override
+    public void setImage(Comics comics) {
+        if (comics.getImage() != null) {
+            ImageLoadHelper.loadPicture(ivCover,
+                    String.format("%s.%s", comics.getImage().getPath(), comics.getImage().getExtension()));
         }
-        tvPages.setText(String.valueOf(comics.getPageCount()));
     }
 
     private void initViews() {

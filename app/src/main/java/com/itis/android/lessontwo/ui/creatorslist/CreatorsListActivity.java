@@ -12,12 +12,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.model.entity.creators.Creator;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
-import com.itis.android.lessontwo.ui.base.BaseListContract;
 import com.itis.android.lessontwo.ui.creators.CreatorsActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
@@ -30,7 +29,7 @@ import io.reactivex.disposables.Disposable;
  * Created by valera071998@gmail.com on 02.03.2018.
  */
 
-public class CreatorsListActivity extends BaseActivity implements BaseListContract.View<Creator>,
+public class CreatorsListActivity extends BaseActivity implements CreatorsListView,
         BaseAdapter.OnItemClickListener<Creator> {
 
     private Toolbar toolbar;
@@ -39,7 +38,9 @@ public class CreatorsListActivity extends BaseActivity implements BaseListContra
     private TextView tvEmpty;
 
     private CreatorsAdapter adapter;
-    private BaseListContract.Presenter<Creator> presenter;
+
+    @InjectPresenter
+    CreatorsListPresenter presenter;
 
     private boolean isLoading = false;
 
@@ -50,13 +51,6 @@ public class CreatorsListActivity extends BaseActivity implements BaseListContra
         getLayoutInflater().inflate(R.layout.activity_creators_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new CreatorsListPresenter(this);
-        presenter.load();
-    }
-
-    @Override
-    public void setPresenter(BaseListContract.Presenter<Creator> presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -84,17 +78,19 @@ public class CreatorsListActivity extends BaseActivity implements BaseListContra
         isLoading = false;
     }
 
+    @Override
+    public void onItemClick(@NonNull Creator item) {
+        presenter.onItemClick(item);
+    }
+
+    @Override
     public void showLoading(Disposable disposable) {
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onItemClick(@NonNull Creator item) {
-        presenter.onItemClick(item);
     }
 
     private void initRecycler() {

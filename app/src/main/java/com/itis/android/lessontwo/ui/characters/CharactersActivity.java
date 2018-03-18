@@ -34,7 +34,7 @@ public class CharactersActivity extends BaseActivity implements CharactersView{
     private TextView tvDescription;
     private TextView tvName;
 
-    @InjectPresenter(type = PresenterType.WEAK)
+    @InjectPresenter
     CharactersPresenter presenter;
 
     private Long id;

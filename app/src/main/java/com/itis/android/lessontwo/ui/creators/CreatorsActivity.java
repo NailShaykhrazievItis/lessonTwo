@@ -33,7 +33,7 @@ public class CreatorsActivity extends BaseActivity implements CreatorsView {
     private TextView tvName;
     private TextView tvDescription;
 
-    @InjectPresenter(type = PresenterType.WEAK)
+    @InjectPresenter
     CreatorsPresenter presenter;
 
     private Long id;

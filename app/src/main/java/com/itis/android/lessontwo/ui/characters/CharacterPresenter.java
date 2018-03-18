@@ -1,24 +1,28 @@
 package com.itis.android.lessontwo.ui.characters;
 
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 /**
  * Created by User on 04.03.2018.
  */
-
-public class CharacterPresenter implements CharacterContract.Presenter {
-
-    private final CharacterContract.View view;
-
-    public CharacterPresenter(CharacterContract.View view) {
-        this.view = view;
-        this.view.setPresenter(this);
-    }
+@InjectViewState
+public class CharacterPresenter extends MvpPresenter<CharacterView> {
 
     @Override
-    public void initCharacter(long id) {
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        getViewState().getCharacterId();
+    }
+
+    public void init(Long id) {
         RepositoryProvider.provideCharactersRepostitory()
                 .characters(id)
-                .subscribe(view::showCharacter, view::handleError);
+                .subscribe(character-> {
+                    getViewState().setImage(character);
+                    getViewState().setDescription(character);
+                    getViewState().setName(character);
+                }, getViewState()::handleError);
     }
 }

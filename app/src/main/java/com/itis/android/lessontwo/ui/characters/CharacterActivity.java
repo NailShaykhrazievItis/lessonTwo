@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -25,7 +26,7 @@ import com.itis.android.lessontwo.utils.ImageLoadHelper;
  * Created by User on 04.03.2018.
  */
 
-public class CharacterActivity extends BaseActivity implements CharacterContract.View {
+public class CharacterActivity extends BaseActivity implements CharacterView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -34,7 +35,10 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
     private TextView tvName;
     private ProgressBar progressBar;
 
-    private CharacterContract.Presenter presenter;
+    @InjectPresenter
+    CharacterPresenter presenter;
+
+    private Long id;
 
     public static void start(@NonNull Activity activity, @NonNull Character character) {
         Intent intent = new Intent(activity, CharacterActivity.class);
@@ -49,16 +53,12 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         FrameLayout contentFrameLayout = findViewById(R.id.container);
         getLayoutInflater().inflate(R.layout.activity_characters, contentFrameLayout);
         initViews();
-
-        long id = getIntent().getLongExtra(ID_KEY_CHARACTER, 0);
-        new CharacterPresenter(this);
-        presenter.initCharacter(id);
-
+        id = getIntent().getLongExtra(ID_KEY_CHARACTER, 0);
     }
 
     @Override
-    public void setPresenter(CharacterContract.Presenter presenter) {
-        this.presenter = presenter;
+    public void getCharacterId() {
+        presenter.init(id);
     }
 
     @Override
@@ -67,6 +67,26 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
     }
 
     @Override
+    public void setDescription(Character character) {
+        if (character.getDescription() != null && !character.getDescription().equals("")) {
+            tvDescription.setText(character.getDescription());
+        } else {
+            tvDescription.setText(R.string.empty_desc);
+        }
+    }
+
+    @Override
+    public void setImage(Character character) {
+        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
+                character.getImage().getExtension()));
+    }
+
+    @Override
+    public void setName(Character character) {
+        //tvName.setText(character.getName());
+    }
+
+    /*@Override
     public void showCharacter(@NonNull Character character) {
         ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                 character.getImage().getExtension()));
@@ -77,7 +97,9 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
             tvDescription.setText(R.string.empty_desc);
         }
         tvName.setText(character.getName());
-    }
+    }*/
+
+
 
     private void initViews() {
         findViews();

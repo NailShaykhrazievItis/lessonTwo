@@ -79,6 +79,12 @@ dependencies {
     compile "com.android.support:appcompat-v7:${support}"
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
+    // Moxy
+    compile "com.arello-mobile:moxy:${moxy}"
+    annotationProcessor "com.arello-mobile:moxy-compiler:${moxy}"
+    compile "com.arello-mobile:moxy-android:${moxy}"
+    compile "com.arello-mobile:moxy-app-compat:${moxy}"
+    compile "com.android.support:appcompat-v7:${support}"
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'

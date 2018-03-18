@@ -7,14 +7,13 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.arellomobile.mvp.MvpActivity;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.itis.android.lessontwo.R;
+import com.itis.android.lessontwo.ui.characterlist.CharacterListActivity;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
 import com.itis.android.lessontwo.ui.creatorslist.CreatorListActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
@@ -61,6 +60,10 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
             switch (id) {
                 case R.id.menu_comics:
                     Intent intent = new Intent(getApplicationContext(), ComicsListActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.menu_characters:
+                    intent = new Intent(getApplicationContext(), CharacterListActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.menu_creators:

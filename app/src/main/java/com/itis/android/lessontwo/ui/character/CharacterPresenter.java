@@ -8,9 +8,6 @@ import com.itis.android.lessontwo.ui.character.CharacterContract.View;
 @InjectViewState
 public class CharacterPresenter extends MvpPresenter<CharacterContract.View> implements CharacterContract.Presenter {
 
-    public CharacterPresenter() {
-    }
-
     @Override
     public void loadCharacter(final long id) {
         RepositoryProvider.provideCharacterRepository()

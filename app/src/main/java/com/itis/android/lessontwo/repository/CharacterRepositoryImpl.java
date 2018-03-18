@@ -12,7 +12,6 @@ import com.itis.android.lessontwo.utils.RxUtils;
 import io.reactivex.Single;
 import java.util.List;
 
-
 public class CharacterRepositoryImpl implements CharacterRepository {
 
     @NonNull

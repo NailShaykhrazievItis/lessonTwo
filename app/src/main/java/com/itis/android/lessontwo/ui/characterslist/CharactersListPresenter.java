@@ -3,43 +3,42 @@ package com.itis.android.lessontwo.ui.characterslist;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
+
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 /**
  * Created by Home on 04.03.2018.
  */
-
-public class CharactersListPresenter implements CharactersListContract.Presenter {
-
-    private final CharactersListContract.View view;
-
-    public CharactersListPresenter(CharactersListContract.View view) {
-        this.view = view;
-        this.view.setPresenter(this);
-    }
+@InjectViewState
+public class CharactersListPresenter extends MvpPresenter<CharactersListView> {
 
     @Override
-    public void loadCharacters() {
-        RepositoryProvider.provideCharacterRepository()
-                .characters(ZERO_OFFSET, PAGE_SIZE)
-                .doOnSubscribe(view::showLoading)
-                .doAfterTerminate(view::hideLoading)
-                .subscribe(view::showItems, view::handleError);
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        loadCharacters();
     }
 
-    @Override
-    public void loadNextElements(int page) {
+    void loadNextElements(int page) {
         RepositoryProvider.provideCharacterRepository()
                 .characters(page * PAGE_SIZE, PAGE_SIZE)
-                .doOnSubscribe(view::showLoading)
-                .doAfterTerminate(view::hideLoading)
-                .doAfterTerminate(view::setNotLoading)
-                .subscribe(view::addMoreItems, view::handleError);
+                .doOnSubscribe(getViewState()::showLoading)
+                .doAfterTerminate(getViewState()::hideLoading)
+                .doAfterTerminate(getViewState()::setNotLoading)
+                .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 
-    @Override
-    public void onItemClick(Character character) {
-        view.showDetails(character);
+    void onItemClick(Character character) {
+        getViewState().showDetails(character);
+    }
+
+    private void loadCharacters() {
+        RepositoryProvider.provideCharacterRepository()
+                .characters(ZERO_OFFSET, PAGE_SIZE)
+                .doOnSubscribe(getViewState()::showLoading)
+                .doAfterTerminate(getViewState()::hideLoading)
+                .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 }

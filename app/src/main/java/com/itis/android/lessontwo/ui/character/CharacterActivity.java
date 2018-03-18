@@ -14,6 +14,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
+
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -22,15 +25,18 @@ import com.itis.android.lessontwo.utils.ImageLoadHelper;
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 
-public class CharacterActivity extends BaseActivity implements CharacterContract.View {
-
-    private CharacterContract.Presenter presenter;
+public class CharacterActivity extends BaseActivity implements CharacterView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
     private ImageView ivCover;
     private TextView tvDescription;
     private ProgressBar progressBar;
+
+    @InjectPresenter(type = PresenterType.WEAK)
+    CharacterPresenter presenter;
+
+    private Long id;
 
     public static void start(@NonNull Activity activity, @NonNull Character character) {
         Intent intent = new Intent(activity, CharacterActivity.class);
@@ -47,15 +53,7 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         getLayoutInflater().inflate(R.layout.activity_character, contentFrameLayout);
         initViews();
 
-        new CharacterPresenter(this);
-
-        long id = getIntent().getLongExtra(ID_KEY, 0);
-        presenter.loadCharacter(id);
-    }
-
-    @Override
-    public void setPresenter(CharacterContract.Presenter presenter) {
-        this.presenter = presenter;
+        id = getIntent().getLongExtra(ID_KEY, 0);
     }
 
     @Override
@@ -66,13 +64,22 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
     }
 
     @Override
-    public void showCharacter(@NonNull Character character) {
+    public void getCharacterId() {
+        presenter.init(id);
+    }
+
+    @Override
+    public void setImage(@NonNull Character character) {
         if (character.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                     character.getImage().getExtension()));
         }else{
             ImageLoadHelper.loadPictureByDrawable(ivCover,R.drawable.image_error_marvel_logo);
         }
+    }
+
+    @Override
+    public void setDescription(@NonNull Character character){
         if (character.getDescription() != null) {
             tvDescription.setText(character.getDescription().trim());
         }else{

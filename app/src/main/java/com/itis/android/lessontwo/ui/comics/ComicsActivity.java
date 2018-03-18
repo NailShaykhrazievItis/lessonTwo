@@ -14,16 +14,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
+
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
-import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-import com.itis.android.lessontwo.utils.RxUtils;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
@@ -31,9 +29,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity implements ComicsContract.View {
-
-    private ComicsContract.Presenter presenter;
+public class ComicsActivity extends BaseActivity implements ComicsView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -42,6 +38,11 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
     private TextView tvPrice;
     private TextView tvPages;
     private ProgressBar progressBar;
+
+    @InjectPresenter(type = PresenterType.WEAK)
+    ComicsPresenter presenter;
+
+    private Long id;
 
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
         Intent intent = new Intent(activity, ComicsActivity.class);
@@ -56,11 +57,53 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
         FrameLayout contentFrameLayout = findViewById(R.id.container);
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
         initViews();
+        id = getIntent().getLongExtra(ID_KEY, 0);
+    }
 
-        new ComicsPresenter(this);
+    @Override
+    public void getComicsId(){
+        presenter.init(id);
+    }
 
-        long id = getIntent().getLongExtra(ID_KEY, 0);
-        presenter.loadComics(id);
+    @Override
+    public void setPageCount(Comics comics){
+        tvPages.setText(String.valueOf(comics.getPageCount()));
+    }
+
+    @Override
+    public void setPrice(Comics comics){
+        if(comics.getPrices() != null && !comics.getPrices().isEmpty()){
+            tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
+        }
+    }
+
+    @Override
+    public void setDescription(Comics comics){
+        if(comics.getTextObjects() != null){
+            StringBuilder description = new StringBuilder();
+            for(ComicsTextObject comicsTextObject : comics.getTextObjects()){
+                description.append(comicsTextObject.getText()).append("\n");
+            }
+            tvDescription.setText(description.length() > 0 ?
+                    description.toString().trim() : getString(R.string.text_desc_not_found));
+        }
+    }
+
+    @Override
+    public void setImage(Comics comics){
+        if(comics.getImage() != null){
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
+                    comics.getImage().getExtension()));
+        }else{
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
+        }
+    }
+
+    @Override
+    public void handleError(Throwable error) {
+        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+        Log.e("Alm", error.getMessage());
+        error.printStackTrace();
     }
 
     private void initViews() {
@@ -77,39 +120,5 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
         tvDescription = findViewById(R.id.tv_description);
         tvPrice = findViewById(R.id.tv_price);
         tvPages = findViewById(R.id.tv_pages);
-    }
-
-    @Override
-    public void setPresenter(ComicsContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public void handleError(Throwable error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
-        Log.e("Alm", error.getMessage());
-        error.printStackTrace();
-    }
-
-    @Override
-    public void showComics(Comics comics) {
-        if (comics.getImage() != null) {
-            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
-                    comics.getImage().getExtension()));
-        } else {
-            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
-        }
-        if (comics.getTextObjects() != null) {
-            StringBuilder description = new StringBuilder();
-            for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
-                description.append(comicsTextObject.getText()).append("\n");
-            }
-            tvDescription.setText(description.length() > 0 ?
-                    description.toString().trim() : getString(R.string.text_desc_not_found));
-        }
-        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
-            tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
-        }
-        tvPages.setText(String.valueOf(comics.getPageCount()));
     }
 }

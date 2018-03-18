@@ -71,6 +71,12 @@ dependencies {
     implementation "com.facebook.stetho:stetho-okhttp3:${stetho}"
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
+    //moxy
+    compile 'com.arello-mobile:moxy:1.5.3'
+    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
+    compile 'com.arello-mobile:moxy-android:1.5.3'
+    compile 'com.arello-mobile:moxy-app-compat:1.5.3'
+    compile "com.android.support:appcompat-v7:${support}"
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'

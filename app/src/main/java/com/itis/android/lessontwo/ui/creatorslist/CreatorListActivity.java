@@ -12,10 +12,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.creator.Creator;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
+import com.itis.android.lessontwo.ui.creators.CreatorsActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
 import java.util.ArrayList;
@@ -31,13 +33,15 @@ import io.reactivex.disposables.Disposable;
 public class CreatorListActivity extends BaseActivity implements CreatorListContract.View,
         BaseAdapter.OnItemClickListener<Creator> {
 
+    @InjectPresenter
+    CreatorListPresenter presenter;
+
     private Toolbar toolbar;
     private ProgressBar progressBar;
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
     private CreatorAdapter adapter;
-    private CreatorListContract.Presenter presenter;
 
     private boolean isLoading = false;
 
@@ -48,13 +52,8 @@ public class CreatorListActivity extends BaseActivity implements CreatorListCont
         getLayoutInflater().inflate(R.layout.activity_creator_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new CreatorListPresenter(this);
+        new CreatorListPresenter();
         presenter.loadCreators();
-    }
-
-    @Override
-    public void setPresenter(CreatorListContract.Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -69,7 +68,7 @@ public class CreatorListActivity extends BaseActivity implements CreatorListCont
 
     @Override
     public void showDetails(Creator item) {
-//        CreatorActivity.start(this, item);
+        CreatorsActivity.start(this, item);
     }
 
     @Override

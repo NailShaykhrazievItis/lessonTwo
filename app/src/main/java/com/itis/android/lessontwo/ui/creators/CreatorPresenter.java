@@ -1,22 +1,21 @@
 package com.itis.android.lessontwo.ui.creators;
 
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.creator.CreatorResponse;
 import com.itis.android.lessontwo.model.creator.CreatorResponseData;
-import com.itis.android.lessontwo.ui.creators.CreatorContract.View;
 import com.itis.android.lessontwo.utils.RxUtils;
 
 /**
  * Created by Blaheart on 05.03.2018.
  */
 
-public class CreatorPresenter implements CreatorContract.Presenter {
+@InjectViewState
+public class CreatorPresenter extends MvpPresenter<CreatorContract.View> implements CreatorContract.Presenter {
 
-    private final View view;
+    public CreatorPresenter() {
 
-    public CreatorPresenter(View view) {
-        this.view = view;
-        this.view.setPresenter(this);
     }
 
     @Override
@@ -27,6 +26,6 @@ public class CreatorPresenter implements CreatorContract.Presenter {
                 .map(CreatorResponseData::getResults)
                 .map(list -> list.get(0))
                 .compose(RxUtils.async())
-                .subscribe(view::showCreator, view::handleError);
+                .subscribe(getViewState()::showCreator, getViewState()::handleError);
     }
 }

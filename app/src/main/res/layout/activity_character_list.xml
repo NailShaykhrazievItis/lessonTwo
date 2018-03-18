@@ -4,25 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.comicslist.ComicsListActivity">
+    tools:context=".ui.characterslist.CharactersListActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ab_character_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/tb_character_list"
+            android:id="@+id/tb_characters_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/primary"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_scrollFlags="scroll|enterAlways|snap" />
+            app:layout_scrollFlags="scroll|enterAlways|snap"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/fragment_recycler_character_list"/>
+    <include layout="@layout/fragment_recycler_character_list" />
 
 </android.support.design.widget.CoordinatorLayout>

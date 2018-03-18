@@ -21,4 +21,7 @@ public final class Constants {
 
     public static final String DEFAULT_CREATORS_SORT = "-firstName";
 
+    public final static String ID_KEY_CHARACTER = "id_ch";
+    public final static String NAME_KEY_CHARACTER = "name_ch";
+
 }

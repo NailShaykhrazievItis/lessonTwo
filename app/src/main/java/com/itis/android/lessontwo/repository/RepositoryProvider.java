@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 public class RepositoryProvider {
 
     private static CreatorsRepository creatorsRepository;
+    private static CharactersRepository charactersRepository;
     private static ComicsRepository comicsRepository;
 
 
@@ -19,6 +20,14 @@ public class RepositoryProvider {
             creatorsRepository = new CreatorsRepositoryImpl();
         }
         return creatorsRepository;
+    }
+
+    @NonNull
+    public static CharactersRepository provideCharactersRepostitory() {
+        if (charactersRepository == null) {
+            charactersRepository = new CharactersRepositoryImpl();
+        }
+        return charactersRepository;
     }
 
     @NonNull
@@ -32,5 +41,6 @@ public class RepositoryProvider {
     @MainThread
     public static void init() {
         creatorsRepository = new CreatorsRepositoryImpl();
+        charactersRepository = new CharactersRepositoryImpl();
     }
 }

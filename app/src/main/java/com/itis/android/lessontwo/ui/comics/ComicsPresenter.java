@@ -1,26 +1,31 @@
 package com.itis.android.lessontwo.ui.comics;
 
 
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 
 /**
  * Created by Tony on 3/5/2018.
  */
-
-public class ComicsPresenter implements ComicsContract.Presenter {
-
-    private final ComicsContract.View view;
-
-    public ComicsPresenter(ComicsContract.View view) {
-        this.view = view;
-        this.view.setPresenter(this);
-    }
+@InjectViewState
+public class ComicsPresenter extends MvpPresenter<ComicsView> {
 
     @Override
-    public void loadComics(long id) {
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        getViewState().getComicsId();
+    }
+
+    public void init(Long id) {
         RepositoryProvider.provideComicsRepository()
                 .comics(id)
-                .subscribe(view::showComics, view::handleError);
+                .subscribe(comics -> {
+                    getViewState().setImage(comics);
+                    getViewState().setDescription(comics);
+                    getViewState().setPrice(comics);
+                    getViewState().setPageCount(comics);
+                }, getViewState()::handleError);
     }
 }

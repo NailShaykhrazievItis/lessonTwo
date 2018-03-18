@@ -1,5 +1,6 @@
 package com.itis.android.lessontwo.ui.creatorslist;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.model.entity.creators.Creator;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
@@ -11,7 +12,7 @@ import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 /**
  * Created by valera071998@gmail.com on 02.03.2018.
  */
-
+@InjectViewState
 public class CreatorsListPresenter extends MvpPresenter<CreatorsListView> {
 
     @Override

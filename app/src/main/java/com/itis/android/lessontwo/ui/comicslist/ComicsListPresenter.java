@@ -1,5 +1,6 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
+import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
@@ -11,7 +12,7 @@ import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 /**
  * Created by Nail Shaykhraziev on 26.02.2018.
  */
-
+@InjectViewState
 public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
 
     @Override

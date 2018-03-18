@@ -12,6 +12,8 @@ public class RepositoryProvider {
 
     private static CreatorRepository creatorRepository;
 
+    private static CharacterRepository characterRepository;
+
     @NonNull
     public static ComicsRepository provideComicsRepository() {
         if (comicsRepository == null) {
@@ -26,6 +28,14 @@ public class RepositoryProvider {
             creatorRepository = new CreatorRepositoryImpl();
         }
         return creatorRepository;
+    }
+
+    @NonNull
+    public static CharacterRepository provideCharacterRepository() {
+        if (characterRepository == null) {
+            characterRepository = new CharacterRepositoryImpl();
+        }
+        return characterRepository;
     }
 
     @MainThread

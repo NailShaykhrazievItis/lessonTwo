@@ -21,7 +21,7 @@ public interface ComicsListContract {
     @StateStrategyType(SkipStrategy.class)
     interface View extends BaseView<Presenter> {
 
-        @StateStrategyType(AddToEndStrategy.class)
+        @StateStrategyType(AddToEndSingleStrategy.class)
         void showItems(@NonNull List<Comics> items);
 
         void showDetails(Comics item);

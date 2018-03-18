@@ -9,9 +9,6 @@ import com.itis.android.lessontwo.ui.comics.ComicsContract.View;
 @InjectViewState
 public class ComicsPresenter extends MvpPresenter<ComicsContract.View> implements ComicsContract.Presenter {
 
-    public ComicsPresenter() {
-    }
-
     @Override
     public void loadComics(long id) {
         RepositoryProvider.provideComicsRepository()

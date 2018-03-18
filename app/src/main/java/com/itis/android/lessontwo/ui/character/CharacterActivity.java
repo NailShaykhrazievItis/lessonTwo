@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -22,11 +23,18 @@ import com.itis.android.lessontwo.utils.ImageLoadHelper;
 public class CharacterActivity extends BaseActivity implements CharacterContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
+
     private Toolbar toolbar;
+
     private ImageView ivCover;
-    private CharacterContract.Presenter presenter;
+
+    @InjectPresenter
+    CharacterPresenter presenter;
+
     private ProgressBar progressBar;
+
     private TextView tvName;
+
     private TextView tvDescription;
 
     public static void start(@NonNull Activity activity, @NonNull Character character) {
@@ -43,7 +51,7 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         getLayoutInflater().inflate(R.layout.activity_character, frameLayout);
         initViews();
 
-        new CharacterPresenter(this);
+        new CharacterPresenter();
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadCharacter(id);
     }
@@ -51,11 +59,6 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
     @Override
     public void handleError(final Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void setPresenter(final CharacterContract.Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override

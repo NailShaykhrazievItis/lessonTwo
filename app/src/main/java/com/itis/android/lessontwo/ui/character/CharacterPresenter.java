@@ -1,21 +1,20 @@
 package com.itis.android.lessontwo.ui.character;
 
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.character.CharacterContract.View;
 
-public class CharacterPresenter implements CharacterContract.Presenter {
+@InjectViewState
+public class CharacterPresenter extends MvpPresenter<CharacterContract.View> implements CharacterContract.Presenter {
 
-    private final View view;
-
-    public CharacterPresenter(View view) {
-        this.view = view;
-        this.view.setPresenter(this);
+    public CharacterPresenter() {
     }
 
     @Override
     public void loadCharacter(final long id) {
         RepositoryProvider.provideCharacterRepository()
                 .character(id)
-                .subscribe(view::showCharacter, view::handleError);
+                .subscribe(getViewState()::showCharacter, getViewState()::handleError);
     }
 }

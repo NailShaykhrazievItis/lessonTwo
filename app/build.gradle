@@ -42,6 +42,7 @@ ext {
     rxdebug = "1.2.0"
     reactive_streams = "1.0.0"
     retrofit = "2.3.0"
+    moxy = "1.5.3"
 }
 
 dependencies {
@@ -73,11 +74,11 @@ dependencies {
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
     // Moxy
-    compile "com.arello-mobile:moxy:1.5.3"
-    compile "com.arello-mobile:moxy-android:1.5.3"
-    compile "com.arello-mobile:moxy-app-compat:1.5.3"
+    compile "com.arello-mobile:moxy:${moxy}"
+    annotationProcessor "com.arello-mobile:moxy-compiler:${moxy}"
+    compile "com.arello-mobile:moxy-android:${moxy}"
+    compile "com.arello-mobile:moxy-app-compat:${moxy}"
     compile "com.android.support:appcompat-v7:${support}"
-    annotationProcessor "com.arello-mobile:moxy-compiler:1.5.3"
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'

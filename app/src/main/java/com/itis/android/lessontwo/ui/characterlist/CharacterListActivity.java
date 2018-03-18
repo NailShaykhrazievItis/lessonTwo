@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -30,7 +31,9 @@ public class CharacterListActivity extends BaseActivity implements CharacterList
     private TextView tvEmpty;
 
     private CharacterAdapter adapter;
-    private CharacterListContract.Presenter presenter;
+
+    @InjectPresenter
+    CharacterListPresenter presenter;
 
     private boolean isLoading = false;
 
@@ -41,18 +44,13 @@ public class CharacterListActivity extends BaseActivity implements CharacterList
         getLayoutInflater().inflate(R.layout.activity_character_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new CharacterListPresenter(this);
+        new CharacterListPresenter();
         presenter.loadCharacters();
     }
 
     @Override
     public void onItemClick(@NonNull final Character item) {
         presenter.onItemClick(item);
-    }
-
-    @Override
-    public void setPresenter(final Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override

@@ -10,32 +10,29 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.story.Story;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
-import com.itis.android.lessontwo.ui.base.BaseAdapter;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
-
+import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by User on 16.03.2018.
  */
 
-public class StoriesListActivity extends BaseActivity implements StoriesListContract.View,
-        BaseAdapter.OnItemClickListener<Story>{
+public class StoriesListActivity extends BaseActivity implements StoriesListView{
 
     private Toolbar toolbar;
     private ProgressBar progressBar;
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
-
     private StoriesAdapter adapter;
-    private StoriesListContract.Presenter presenter;
+
+    @InjectPresenter
+    StoriesListPresenter presenter;
 
     private boolean isLoading = false;
 
@@ -46,13 +43,7 @@ public class StoriesListActivity extends BaseActivity implements StoriesListCont
         getLayoutInflater().inflate(R.layout.activity_stories_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new StoriesListPresenter(this);
         presenter.loadStories();
-    }
-
-    @Override
-    public void setPresenter(StoriesListContract.Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -65,10 +56,6 @@ public class StoriesListActivity extends BaseActivity implements StoriesListCont
         adapter.changeDataSet(items);
     }
 
-    @Override
-    public void showDetails(Story item) {
-
-    }
 
     @Override
     public void addMoreItems(List<Story> items) {
@@ -90,18 +77,12 @@ public class StoriesListActivity extends BaseActivity implements StoriesListCont
         progressBar.setVisibility(View.GONE);
     }
 
-    @Override
-    public void onItemClick(@NonNull Story item) {
-        presenter.onItemClick(item);
-    }
-
     private void initRecycler() {
         adapter = new StoriesAdapter(new ArrayList<>());
         LinearLayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.setEmptyView(tvEmpty);
         adapter.attachToRecyclerView(recyclerView);
-        adapter.setOnItemClickListener(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

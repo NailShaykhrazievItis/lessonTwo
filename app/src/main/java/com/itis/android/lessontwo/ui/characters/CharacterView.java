@@ -16,6 +16,4 @@ public interface CharacterView extends MvpView {
     void setDescription(Character character);
 
     void setImage(Character character);
-
-    void setName(Character character);
 }

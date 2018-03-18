@@ -12,10 +12,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
@@ -32,8 +30,6 @@ public class CharacterActivity extends BaseActivity implements CharacterView {
     private Toolbar toolbar;
     private ImageView ivCover;
     private TextView tvDescription;
-    private TextView tvName;
-    private ProgressBar progressBar;
 
     @InjectPresenter
     CharacterPresenter presenter;
@@ -80,26 +76,6 @@ public class CharacterActivity extends BaseActivity implements CharacterView {
         ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                 character.getImage().getExtension()));
     }
-
-    @Override
-    public void setName(Character character) {
-        //tvName.setText(character.getName());
-    }
-
-    /*@Override
-    public void showCharacter(@NonNull Character character) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
-                character.getImage().getExtension()));
-
-        if (character.getDescription() != null && !character.getDescription().equals("")) {
-            tvDescription.setText(character.getDescription());
-        } else {
-            tvDescription.setText(R.string.empty_desc);
-        }
-        tvName.setText(character.getName());
-    }*/
-
-
 
     private void initViews() {
         findViews();

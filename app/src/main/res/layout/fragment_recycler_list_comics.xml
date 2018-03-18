@@ -14,7 +14,7 @@
         tools:listitem="@layout/item_comics" />
 
     <TextView
-        android:id="@+id/tv_empty"
+        android:id="@+id/tv_empty_comics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

@@ -11,6 +11,8 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -25,16 +27,17 @@ import java.util.List;
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
 
-public class ComicsListActivity extends BaseActivity implements ComicsListContract.View,
+public class ComicsListActivity extends BaseActivity implements ComicsListView,
         BaseAdapter.OnItemClickListener<Comics> {
 
     private Toolbar toolbar;
     private ProgressBar progressBar;
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
-
     private ComicsAdapter adapter;
-    private ComicsListContract.Presenter presenter;
+
+    @InjectPresenter
+    ComicsListPresenter presenter;
 
     private boolean isLoading = false;
 
@@ -45,13 +48,6 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new ComicsListPresenter(this);
-        presenter.loadComics();
-    }
-
-    @Override
-    public void setPresenter(ComicsListContract.Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -79,10 +75,12 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         isLoading = false;
     }
 
+    @Override
     public void showLoading(Disposable disposable) {
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
     }
@@ -103,14 +101,17 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         recyclerView.setHasFixedSize(true);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int currentPage = 0;
+
             // обычно бывает флаг последней страницы, но я че т его не нашел, если не найдется, то можно удалить, всегда тру
             private boolean isLastPage = false;
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 int visibleItemCount = manager.getChildCount();
                 int totalItemCount = manager.getItemCount();
                 int firstVisibleItemPosition = manager.findFirstVisibleItemPosition();
+
                 if (!isLoading && !isLastPage) {
                     if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount
                             && firstVisibleItemPosition >= 0
@@ -127,7 +128,7 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         toolbar = findViewById(R.id.tb_comics_list);
         progressBar = findViewById(R.id.pg_comics_list);
         recyclerView = findViewById(R.id.rv_comics_list);
-        tvEmpty = findViewById(R.id.tv_empty);
+        tvEmpty = findViewById(R.id.tv_empty_comics);
         supportActionBar(toolbar);
     }
 }

@@ -23,7 +23,7 @@
             android:textSize="@dimen/text_medium" />
 
         <TextView
-            android:id="@+id/tv_description"
+            android:id="@+id/tv_description_details_comics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"

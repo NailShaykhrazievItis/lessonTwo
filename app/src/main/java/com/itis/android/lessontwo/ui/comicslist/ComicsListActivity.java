@@ -11,6 +11,8 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -25,20 +27,17 @@ import java.util.List;
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
 
-public class ComicsListActivity extends BaseActivity implements ComicsListContract.View,
+public class ComicsListActivity extends BaseActivity implements ComicsListView,
         BaseAdapter.OnItemClickListener<Comics> {
 
     private Toolbar toolbar;
-
     private ProgressBar progressBar;
-
     private EmptyStateRecyclerView recyclerView;
-
     private TextView tvEmpty;
-
     private ComicsAdapter adapter;
 
-    private ComicsListContract.Presenter presenter;
+    @InjectPresenter
+    ComicsListPresenter presenter;
 
     private boolean isLoading = false;
 
@@ -49,13 +48,6 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new ComicsListPresenter(this);
-        presenter.loadComics();
-    }
-
-    @Override
-    public void setPresenter(ComicsListContract.Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -83,10 +75,12 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         isLoading = false;
     }
 
+    @Override
     public void showLoading(Disposable disposable) {
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
     }

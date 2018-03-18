@@ -12,10 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
-import com.itis.android.lessontwo.ui.base.BaseContract;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
@@ -25,7 +26,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
  * Created by Ruslan on 02.03.2018.
  */
 
-public class CharactersActivity extends BaseActivity implements BaseContract.View<Character>{
+public class CharactersActivity extends BaseActivity implements CharactersView{
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -33,7 +34,10 @@ public class CharactersActivity extends BaseActivity implements BaseContract.Vie
     private TextView tvDescription;
     private TextView tvName;
 
-    private BaseContract.Presenter presenter;
+    @InjectPresenter(type = PresenterType.WEAK)
+    CharactersPresenter presenter;
+
+    private Long id;
 
     public static void start(@NonNull Activity activity, @NonNull Character character) {
         Intent intent = new Intent(activity, CharactersActivity.class);
@@ -49,14 +53,7 @@ public class CharactersActivity extends BaseActivity implements BaseContract.Vie
         getLayoutInflater().inflate(R.layout.activity_characters, contentFrameLayout);
         initViews();
 
-        long id = getIntent().getLongExtra(ID_KEY, 0);
-        new CharactersPresenter(this);
-        presenter.load(id);
-    }
-
-    @Override
-    public void setPresenter(BaseContract.Presenter presenter) {
-        this.presenter = presenter;
+        id = getIntent().getLongExtra(ID_KEY, 0);
     }
 
     @Override
@@ -65,18 +62,28 @@ public class CharactersActivity extends BaseActivity implements BaseContract.Vie
     }
 
     @Override
-    public void show(@NonNull Character character) {
-        tvName.setText(character.getName());
+    public void getCharacterId() {
+        presenter.load(id);
+    }
+
+    public void setDescription(Character character) {
+        if (character.getDescription() != null) {
+            tvDescription.setText(character.getDescription().length() > 0 ?
+                    character.getDescription().trim() : getString(R.string.text_desc_not_found));
+        }
+    }
+
+    public void setImage(Character character) {
         if (character.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                     character.getImage().getExtension()));
         } else {
             ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
-        if (character.getDescription() != null) {
-            tvDescription.setText(character.getDescription().length() > 0 ?
-                    character.getDescription().trim() : getString(R.string.text_desc_not_found));
-        }
+    }
+
+    public void setName(@NonNull Character character) {
+        tvName.setText(character.getName());
     }
 
     private void initViews() {

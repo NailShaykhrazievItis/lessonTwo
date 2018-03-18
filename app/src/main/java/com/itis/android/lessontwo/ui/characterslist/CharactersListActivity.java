@@ -14,6 +14,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -30,7 +32,7 @@ import io.reactivex.disposables.Disposable;
  * Created by Home on 04.03.2018.
  */
 
-public class CharactersListActivity  extends BaseActivity implements CharactersListContract.View,
+public class CharactersListActivity  extends BaseActivity implements CharactersListView,
         BaseAdapter.OnItemClickListener<Character> {
 
     private Toolbar toolbar;
@@ -38,8 +40,9 @@ public class CharactersListActivity  extends BaseActivity implements CharactersL
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
+    @InjectPresenter
+    CharactersListPresenter presenter;
     private CharactersAdapter adapter;
-    private CharactersListContract.Presenter presenter;
 
     private boolean isLoading = false;
 
@@ -55,13 +58,6 @@ public class CharactersListActivity  extends BaseActivity implements CharactersL
         getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new CharactersListPresenter(this);
-        presenter.loadCharacters();
-    }
-
-    @Override
-    public void setPresenter(CharactersListContract.Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override
@@ -89,10 +85,12 @@ public class CharactersListActivity  extends BaseActivity implements CharactersL
         isLoading = false;
     }
 
+    @Override
     public void showLoading(Disposable disposable) {
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    @Override
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
     }
@@ -115,6 +113,7 @@ public class CharactersListActivity  extends BaseActivity implements CharactersL
             private int currentPage = 0;
             // обычно бывает флаг последней страницы, но я че т его не нашел, если не найдется, то можно удалить, всегда тру
             private boolean isLastPage = false;
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);

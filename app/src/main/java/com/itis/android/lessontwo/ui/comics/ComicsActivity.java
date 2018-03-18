@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
@@ -26,7 +27,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity implements ComicsContract.View{
+public class ComicsActivity extends BaseActivity implements ComicsContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
 
@@ -42,7 +43,8 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View{
 
     private ProgressBar progressBar;
 
-    private Presenter presenter;
+    @InjectPresenter
+    ComicsPresenter presenter;
 
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
         Intent intent = new Intent(activity, ComicsActivity.class);
@@ -58,7 +60,7 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View{
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
         initViews();
 
-        new ComicsPresenter(this);
+        new ComicsPresenter();
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadComics(id);
     }
@@ -77,11 +79,6 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View{
         tvDescription = findViewById(R.id.tv_description);
         tvPrice = findViewById(R.id.tv_price);
         tvPages = findViewById(R.id.tv_pages);
-    }
-
-    @Override
-    public void setPresenter(final Presenter presenter) {
-        this.presenter = presenter;
     }
 
     public void handleError(Throwable error) {

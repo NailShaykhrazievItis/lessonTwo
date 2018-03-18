@@ -71,6 +71,12 @@ dependencies {
     // Stetho
     implementation "com.facebook.stetho:stetho:${stetho}"
     implementation "com.facebook.stetho:stetho-okhttp3:${stetho}"
+    //Moxy
+    compile "com.arello-mobile:moxy:${moxy}"
+    annotationProcessor "com.arello-mobile:moxy-compiler:${moxy}"
+    compile "com.arello-mobile:moxy-android:${moxy}"
+    compile "com.arello-mobile:moxy-app-compat:${moxy}"
+    compile "com.android.support:appcompat-v7:${support}"
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
     // Moxy

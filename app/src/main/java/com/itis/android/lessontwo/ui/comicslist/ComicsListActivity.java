@@ -29,6 +29,11 @@ import java.util.List;
 public class ComicsListActivity extends BaseActivity implements ComicsListContract.View,
         BaseAdapter.OnItemClickListener<Comics> {
 
+    private ProgressBar progressBar;
+    private EmptyStateRecyclerView recyclerView;
+    private Toolbar toolbar;
+    private TextView tvEmpty;
+
     @InjectPresenter
     ComicsListPresenter presenter;
 
@@ -36,13 +41,6 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
 
     private boolean isLoading = false;
 
-    private ProgressBar progressBar;
-
-    private EmptyStateRecyclerView recyclerView;
-
-    private Toolbar toolbar;
-
-    private TextView tvEmpty;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

@@ -9,7 +9,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +17,6 @@ import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
-import com.itis.android.lessontwo.ui.comics.ComicsContract.Presenter;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
@@ -30,18 +28,11 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 public class ComicsActivity extends BaseActivity implements ComicsContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
-
     private Toolbar toolbar;
-
     private ImageView ivCover;
-
     private TextView tvDescription;
-
     private TextView tvPrice;
-
     private TextView tvPages;
-
-    private ProgressBar progressBar;
 
     @InjectPresenter
     ComicsPresenter presenter;
@@ -60,7 +51,6 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
         initViews();
 
-        new ComicsPresenter();
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadComics(id);
     }
@@ -81,6 +71,7 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
         tvPages = findViewById(R.id.tv_pages);
     }
 
+    @Override
     public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }

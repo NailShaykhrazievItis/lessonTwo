@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.itis.android.lessontwo">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -37,6 +37,7 @@
                 android:value=".ui.characterslist.CharactersListActivity" />
         </activity>
         <activity android:name=".ui.seriesList.SeriesListActivity" />
+        <activity android:name=".ui.series.SeriesActivity"></activity>
     </application>
 
 </manifest>

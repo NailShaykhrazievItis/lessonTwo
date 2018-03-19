@@ -24,8 +24,8 @@ public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View>
     public void loadCreators() {
         RepositoryProvider.provideCreatorRepository()
                 .creators(ZERO_OFFSET, PAGE_SIZE)
-                .doOnSubscribe(view::showLoading)
-                .doAfterTerminate(view::hideLoading)
+                .doOnSubscribe(getViewState()::showLoading)
+                .doAfterTerminate(getViewState()::hideLoading)
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 
@@ -33,9 +33,9 @@ public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View>
     public void loadNextElements(int page) {
         RepositoryProvider.provideCreatorRepository()
                 .creators(page * PAGE_SIZE, PAGE_SIZE)
-                .doOnSubscribe(view::showLoading)
-                .doAfterTerminate(view::hideLoading)
-                .doAfterTerminate(view::setNotLoading)
+                .doOnSubscribe(getViewState()::showLoading)
+                .doAfterTerminate(getViewState()::hideLoading)
+                .doAfterTerminate(getViewState()::setNotLoading)
                 .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 

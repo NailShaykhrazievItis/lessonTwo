@@ -16,7 +16,6 @@ import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
 import com.itis.android.lessontwo.ui.character.CharacterActivity;
-import com.itis.android.lessontwo.ui.characterlist.CharacterListContract.Presenter;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
@@ -44,7 +43,6 @@ public class CharacterListActivity extends BaseActivity implements CharacterList
         getLayoutInflater().inflate(R.layout.activity_character_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new CharacterListPresenter();
         presenter.loadCharacters();
     }
 

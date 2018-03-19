@@ -11,7 +11,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -23,19 +22,13 @@ import com.itis.android.lessontwo.utils.ImageLoadHelper;
 public class CharacterActivity extends BaseActivity implements CharacterContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
-
     private Toolbar toolbar;
-
     private ImageView ivCover;
+    private TextView tvName;
+    private TextView tvDescription;
 
     @InjectPresenter
     CharacterPresenter presenter;
-
-    private ProgressBar progressBar;
-
-    private TextView tvName;
-
-    private TextView tvDescription;
 
     public static void start(@NonNull Activity activity, @NonNull Character character) {
         Intent intent = new Intent(activity, CharacterActivity.class);
@@ -51,7 +44,6 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         getLayoutInflater().inflate(R.layout.activity_character, frameLayout);
         initViews();
 
-        new CharacterPresenter();
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadCharacter(id);
     }

@@ -1,6 +1,7 @@
 package com.itis.android.lessontwo.model.comics;
 
 import com.google.gson.annotations.SerializedName;
+
 import com.itis.android.lessontwo.model.general.Image;
 import com.itis.android.lessontwo.model.general.ListItem;
 
@@ -36,6 +37,7 @@ public class Comics extends RealmObject implements ListItem{
     private RealmList<Image> images;
 
     public Comics() {
+
     }
 
     @Override
@@ -63,11 +65,11 @@ public class Comics extends RealmObject implements ListItem{
         this.pageCount = pageCount;
     }
 
-    public RealmList<ComicsTextObject> getTextObjects() {
+    public List<ComicsTextObject> getTextObjects() {
         return textObjects;
     }
 
-    public void setTextObjects(final RealmList<ComicsTextObject> textObjects) {
+    public void setTextObjects(RealmList<ComicsTextObject> textObjects) {
         this.textObjects = textObjects;
     }
 
@@ -75,7 +77,7 @@ public class Comics extends RealmObject implements ListItem{
         return prices;
     }
 
-    public void setPrices(final RealmList<ComicsPrintPrice> prices) {
+    public void setPrices(RealmList<ComicsPrintPrice> prices) {
         this.prices = prices;
     }
 
@@ -83,7 +85,7 @@ public class Comics extends RealmObject implements ListItem{
         return images;
     }
 
-    public void setImages(final RealmList<Image> images) {
+    public void setImages(RealmList<Image> images) {
         this.images = images;
     }
 
@@ -92,15 +94,16 @@ public class Comics extends RealmObject implements ListItem{
     }
 
     public String getDescription() {
-        if (!getTextObjects().isEmpty()) {
+        if (!getTextObjects().isEmpty()){
             return getTextObjects().get(0).getText();
         }
+
         return "";
     }
 
     @Override
     public Image getImage() {
-        if (!images.isEmpty()) {
+        if (!images.isEmpty()){
             return images.get(0);
         } else {
             return null;

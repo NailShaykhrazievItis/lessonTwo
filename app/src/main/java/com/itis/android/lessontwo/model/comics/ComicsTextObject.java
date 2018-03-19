@@ -8,7 +8,7 @@ import io.realm.RealmObject;
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
 
-public class ComicsTextObject extends RealmObject{
+public class ComicsTextObject extends RealmObject {
 
     @SerializedName("text")
     private String text;

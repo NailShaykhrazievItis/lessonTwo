@@ -12,12 +12,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.itis.android.lessontwo.R;
+import com.itis.android.lessontwo.ui.characterslist.CharactersListActivity;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
 import com.itis.android.lessontwo.ui.creatorslist.CreatorsListActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends MvpAppCompatActivity {
 
     protected DrawerLayout mDrawer;
     protected NavigationView mNavigationView;
@@ -65,19 +67,14 @@ public abstract class BaseActivity extends AppCompatActivity {
                     Intent creatorsIntent = new Intent(getApplicationContext(), CreatorsListActivity.class);
                     startActivity(creatorsIntent);
                     break;
-               // case R.id.menu_characters:
-                    //Intent charactersIntent = new Intent(getApplicationContext(), CharactersListActivity.class);
-                    //startActivity(charactersIntent);
-                   // break;
+               case R.id.menu_characters:
+                    Intent charactersIntent = new Intent(getApplicationContext(), CharactersListActivity.class);
+                    startActivity(charactersIntent);
+                   break;
             }
             return true;
         });
-        /*
-          Если хотите получить элементы из верхней части бокового меню, то это делается так.
-          Example:
-          View header = mNavigationView.getHeaderView(0);
-          TextView menuText = header.findViewById(R.id.tv_menu);
-         */
+
         View header = mNavigationView.getHeaderView(0);
         ImageView menuCover = header.findViewById(R.id.iv_cover);
         ImageLoadHelper.loadPictureByDrawable(menuCover, R.drawable.image_marvel_logo);
@@ -85,8 +82,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void setActionBar(Toolbar toolbar) {
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, toolbar,
-                R.string.drawer_open, R.string.drawer_close);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawer,
+                toolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawer.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
     }

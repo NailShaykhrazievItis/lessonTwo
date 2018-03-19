@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.creators.Creators;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -25,14 +26,17 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
  * Created by Tony on 3/5/2018.
  */
 
-public class CreatorsActivity extends BaseActivity implements CreatorContract.View {
+public class CreatorsActivity extends BaseActivity implements CreatorsView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
     private ImageView ivCover;
     private TextView tvName;
 
-    CreatorContract.Presenter presenter;
+    private Long id;
+
+    @InjectPresenter
+    CreatorPresenter presenter;
 
     public static void start(@NonNull Activity activity, @NonNull Creators creator) {
         Intent intent = new Intent(activity, CreatorsActivity.class);
@@ -48,11 +52,38 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
         getLayoutInflater().inflate(R.layout.activity_creators, contentFrameLayout);
         initViews();
 
-        new CreatorPresenter(this);
-
-        long id = getIntent().getLongExtra(ID_KEY, 0);
-        presenter.loadCreators(id);
+        id = getIntent().getLongExtra(ID_KEY, 0);
     }
+
+
+
+    @Override
+    public void setImage(Creators creators) {
+        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creators.getImage().getPath(),
+                creators.getImage().getExtension()));
+
+    }
+
+    @Override
+    public void getCreatorId() {
+        presenter.init(id);
+
+    }
+
+    @Override
+    public void setName(Creators creators) {
+        if (creators.getFullName() != null) {
+            tvName.setText(creators.getFullName().trim());
+        } else {
+            tvName.setText(R.string.name);
+        }
+    }
+
+    public void handleError(Throwable error) {
+        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+
 
     private void initViews() {
         findViews();
@@ -61,33 +92,12 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
         collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
     }
 
+
     private void findViews() {
         collapsingToolbar = findViewById(R.id.ct_creators);
         toolbar = findViewById(R.id.tb_creators);
         ivCover = findViewById(R.id.iv_creators);
         tvName = findViewById(R.id.tv_name);
-    }
-
-    @Override
-    public void setPresenter(CreatorContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    public void handleError(Throwable error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
-    }
-
-    public void showCreators(Creators creators) {
-        if(creators.getFullName() != null){
-           tvName.setText(creators.getFullName().trim());
-        }
-        if (creators.getImage() != null) {
-//            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creators.getImage().getPath(),
-//                    creators.getImage().getExtension()));
-            Picasso.with(this).load(R.drawable.the_homak).into(ivCover);
-        } else {
-            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
-        }
     }
 }
 

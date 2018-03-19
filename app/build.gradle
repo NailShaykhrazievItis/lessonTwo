@@ -32,6 +32,7 @@ android {
 ext {
     commons_codec = "1.11"
     gson = "2.8.2"
+    moxy = "1.5.3"
     okhttp = "3.9.1"
     okhttp3downloader = "1.1.0"
     picasso = "2.5.2"
@@ -70,8 +71,13 @@ dependencies {
     // Stetho
     implementation "com.facebook.stetho:stetho:${stetho}"
     implementation "com.facebook.stetho:stetho-okhttp3:${stetho}"
+
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
+    // Moxy
+    implementation "com.arello-mobile:moxy:${moxy}"
+    implementation "com.arello-mobile:moxy-app-compat:${moxy}"
+    annotationProcessor "com.arello-mobile:moxy-compiler:${moxy}"
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'

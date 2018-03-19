@@ -7,13 +7,8 @@ import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsResponse;
 import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.creator.Creator;
-import com.itis.android.lessontwo.model.creator.CreatorResponse;
-import com.itis.android.lessontwo.model.creator.CreatorResponseData;
-import com.itis.android.lessontwo.ui.comicslist.ComicsListContract;
-import com.itis.android.lessontwo.utils.RxUtils;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_CREATOR_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
@@ -27,24 +22,20 @@ public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View>
 
     @Override
     public void loadCreators() {
-        ApiFactory.getCreatorsService()
-                .creators(ZERO_OFFSET, PAGE_SIZE, DEFAULT_CREATOR_SORT)
-                .map(CreatorResponse::getData)
-                .map(CreatorResponseData::getResults)
-//                .doOnSubscribe(view::showLoading)
-//                .doOnTerminate(view::hideLoading)
-                .compose(RxUtils.async())
+        RepositoryProvider.provideCreatorRepository()
+                .creators(ZERO_OFFSET, PAGE_SIZE)
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 
     @Override
     public void loadNextElements(int page) {
-        ApiFactory.getCreatorsService()
-                .creators(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_CREATOR_SORT)
-                .map(CreatorResponse::getData)
-                .map(CreatorResponseData::getResults)
-                .doOnTerminate(getViewState()::setNotLoading)
-                .compose(RxUtils.async())
+        RepositoryProvider.provideCreatorRepository()
+                .creators(page * PAGE_SIZE, PAGE_SIZE)
+                .doOnSubscribe(view::showLoading)
+                .doAfterTerminate(view::hideLoading)
+                .doAfterTerminate(view::setNotLoading)
                 .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 

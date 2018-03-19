@@ -13,16 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.comics.ComicsContract.Presenter;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
-import com.itis.android.lessontwo.utils.RxUtils;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
@@ -30,16 +27,24 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity implements ComicsContract.View{
+public class ComicsActivity extends BaseActivity implements ComicsContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
+
     private Toolbar toolbar;
+
     private ImageView ivCover;
+
     private TextView tvDescription;
+
     private TextView tvPrice;
+
     private TextView tvPages;
+
     private ProgressBar progressBar;
-    private Presenter presenter;
+
+    @InjectPresenter
+    ComicsPresenter presenter;
 
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
         Intent intent = new Intent(activity, ComicsActivity.class);
@@ -55,7 +60,7 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View{
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
         initViews();
 
-        new ComicsPresenter(this);
+        new ComicsPresenter();
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadComics(id);
     }
@@ -76,27 +81,26 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View{
         tvPages = findViewById(R.id.tv_pages);
     }
 
-    @Override
-    public void setPresenter(final Presenter presenter) {
-        this.presenter = presenter;
-    }
-
     public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    @Override
     public void showComics(@NonNull Comics comics) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
-                comics.getImage().getExtension()));
-        if (comics.getTextObjects() != null){
+        if (comics.getImage() != null) {
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
+                    comics.getImage().getExtension()));
+        } else {
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
+        }
+        if (comics.getTextObjects() != null) {
             StringBuilder description = new StringBuilder();
             for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
                 description.append(comicsTextObject.getText()).append("\n");
             }
-            tvDescription.setText(description.toString().trim());
+            tvDescription.setText(description.length() > 0 ?
+                    description.toString().trim() : getString(R.string.text_desc_not_found));
         }
-        if (comics.getPrices() != null && !comics.getPrices().isEmpty()){
+        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
             tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
         tvPages.setText(String.valueOf(comics.getPageCount()));

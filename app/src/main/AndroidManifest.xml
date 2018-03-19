@@ -28,7 +28,9 @@
                 android:value=".ui.comicslist.ComicsListActivity" />
         </activity>
         <activity android:name=".ui.creatorslist.CreatorListActivity" />
-        <activity android:name=".ui.creators.CreatorsActivity"></activity>
+        <activity android:name=".ui.creators.CreatorsActivity" />
+        <activity android:name=".ui.character.CharacterActivity" />
+        <activity android:name=".ui.characterlist.CharacterListActivity" />
     </application>
 
 </manifest>

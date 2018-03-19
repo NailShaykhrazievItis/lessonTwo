@@ -8,11 +8,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.itis.android.lessontwo.R;
+import com.itis.android.lessontwo.ui.characterlist.CharacterListActivity;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
 import com.itis.android.lessontwo.ui.creatorslist.CreatorListActivity;
+import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 public abstract class BaseActivity extends MvpAppCompatActivity {
 
@@ -58,6 +62,10 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ComicsListActivity.class);
                     startActivity(intent);
                     break;
+                case R.id.menu_characters:
+                    intent = new Intent(getApplicationContext(), CharacterListActivity.class);
+                    startActivity(intent);
+                    break;
                 case R.id.menu_creators:
                     intent = new Intent(getApplicationContext(), CreatorListActivity.class);
                     startActivity(intent);
@@ -71,7 +79,9 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
           View header = mNavigationView.getHeaderView(0);
           TextView menuText = header.findViewById(R.id.tv_menu);
          */
-
+        View header = mNavigationView.getHeaderView(0);
+        ImageView menuCover = header.findViewById(R.id.iv_cover);
+        ImageLoadHelper.loadPictureByDrawable(menuCover, R.drawable.image_marvel_logo);
         setActionBar(toolbar);
     }
 

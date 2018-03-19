@@ -1,28 +1,18 @@
 package com.itis.android.lessontwo.ui.comics;
 
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.ui.comics.ComicsContract.View;
-import com.itis.android.lessontwo.utils.RxUtils;
 
-public class ComicsPresenter implements ComicsContract.Presenter {
-
-    private final View view;
-
-    public ComicsPresenter(View view) {
-        this.view = view;
-        this.view.setPresenter(this);
-    }
+@InjectViewState
+public class ComicsPresenter extends MvpPresenter<ComicsContract.View> implements ComicsContract.Presenter {
 
     @Override
     public void loadComics(long id) {
-        ApiFactory.getComicsService()
+        RepositoryProvider.provideComicsRepository()
                 .comics(id)
-                .map(ComicsResponse::getData)
-                .map(ComicsResponseData::getResults)
-                .map(list -> list.get(0))
-                .compose(RxUtils.async())
-                .subscribe(view::showComics, view::handleError);
+                .subscribe(getViewState()::showComics, getViewState()::handleError);
     }
 }

@@ -15,6 +15,7 @@ import com.itis.android.lessontwo.utils.RxUtils;
 
 @InjectViewState
 public class CreatorPresenter extends MvpPresenter<CreatorsView> {
+
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();

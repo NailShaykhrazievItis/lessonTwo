@@ -17,8 +17,4 @@ public interface CreatorsView extends MvpView {
     void setName(Creators creators);
 
     void handleError(Throwable error);
-
-
-
-
 }

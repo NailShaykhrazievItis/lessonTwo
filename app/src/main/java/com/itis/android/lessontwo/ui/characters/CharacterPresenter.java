@@ -19,10 +19,9 @@ public class CharacterPresenter extends MvpPresenter<CharacterView> {
     public void init(Long id) {
         RepositoryProvider.provideCharactersRepostitory()
                 .characters(id)
-                .subscribe(character-> {
+                .subscribe(character -> {
                     getViewState().setImage(character);
                     getViewState().setDescription(character);
-                    getViewState().setName(character);
                 }, getViewState()::handleError);
     }
 }

@@ -15,6 +15,7 @@
         android:layout_gravity="center_vertical"
         android:scaleType="centerCrop"
         tools:ignore="ContentDescription"
+        android:src="@mipmap/ic_marvel_launcher"
         tools:src="@mipmap/ic_marvel_launcher" />
 
     <LinearLayout

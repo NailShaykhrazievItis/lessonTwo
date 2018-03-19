@@ -1,27 +1,29 @@
-package com.itis.android.lessontwo.ui.comicslist;
+package com.itis.android.lessontwo.ui.creatorslist;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.comics.ComicsResponse;
+import com.itis.android.lessontwo.model.comics.ComicsResponseData;
+import com.itis.android.lessontwo.model.creator.Creator;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-import com.itis.android.lessontwo.ui.comicslist.ComicsListContract.Presenter;
 
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
 /**
- * Created by Nail Shaykhraziev on 26.02.2018.
+ * Created by Bulat Murtazin on 05.03.2018.
+ * KPFU ITIS 11-601
  */
 
-
 @InjectViewState
-public class ComicsListPresenter extends MvpPresenter<ComicsListContract.View> implements Presenter{
+public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View> implements CreatorListContract.Presenter {
 
     @Override
-    public void loadComics() {
-        RepositoryProvider.provideComicsRepository()
-                .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
+    public void loadCreators() {
+        RepositoryProvider.provideCreatorRepository()
+                .creators(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)
                 .doAfterTerminate(getViewState()::hideLoading)
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
@@ -29,8 +31,8 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListContract.View> i
 
     @Override
     public void loadNextElements(int page) {
-        RepositoryProvider.provideComicsRepository()
-                .comics(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
+        RepositoryProvider.provideCreatorRepository()
+                .creators(page * PAGE_SIZE, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)
                 .doAfterTerminate(getViewState()::hideLoading)
                 .doAfterTerminate(getViewState()::setNotLoading)
@@ -38,7 +40,7 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListContract.View> i
     }
 
     @Override
-    public void onItemClick(Comics comics) {
-        getViewState().showDetails(comics);
+    public void onItemClick(Creator creator) {
+        getViewState().showDetails(creator);
     }
 }

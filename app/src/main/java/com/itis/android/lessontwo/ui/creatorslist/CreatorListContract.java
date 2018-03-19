@@ -1,33 +1,36 @@
-package com.itis.android.lessontwo.ui.comicslist;
+package com.itis.android.lessontwo.ui.creatorslist;
 
 import android.support.annotation.NonNull;
-import com.arellomobile.mvp.MvpPresenter;
-import com.arellomobile.mvp.MvpView;
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
+
 import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.creator.Creator;
 import com.itis.android.lessontwo.ui.base.BaseView;
-import io.reactivex.disposables.Disposable;
+import com.itis.android.lessontwo.ui.comicslist.ComicsListContract;
+
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
+
 /**
- * Created by Nail Shaykhraziev on 26.02.2018.
+ * Created by Bulat Murtazin on 05.03.2018.
+ * KPFU ITIS 11-601
  */
 
-public interface ComicsListContract {
+public interface CreatorListContract {
 
     @StateStrategyType(SkipStrategy.class)
     interface View extends BaseView<Presenter> {
 
-        @StateStrategyType(AddToEndSingleStrategy.class)
-        void showItems(@NonNull List<Comics> items);
+        @StateStrategyType(AddToEndStrategy.class)
+        void showItems(@NonNull List<Creator> items);
 
-        void showDetails(Comics item);
+        void showDetails(Creator item);
 
         @StateStrategyType(AddToEndStrategy.class)
-        void addMoreItems(List<Comics> items);
+        void addMoreItems(List<Creator> items);
 
         void setNotLoading();
 
@@ -38,10 +41,10 @@ public interface ComicsListContract {
 
     interface Presenter {
 
-        void loadComics();
+        void loadCreators();
 
         void loadNextElements(int page);
 
-        void onItemClick(Comics comics);
+        void onItemClick(Creator creator);
     }
 }

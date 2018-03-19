@@ -42,6 +42,7 @@ ext {
     rxdebug = "1.2.0"
     reactive_streams = "1.0.0"
     retrofit = "2.3.0"
+    moxy = "1.5.3"
 }
 
 dependencies {
@@ -72,6 +73,10 @@ dependencies {
     implementation "com.facebook.stetho:stetho-okhttp3:${stetho}"
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
+    // Moxy
+    implementation "com.arello-mobile:moxy:${moxy}"
+    implementation "com.arello-mobile:moxy-app-compat:${moxy}"
+    annotationProcessor "com.arello-mobile:moxy-compiler:${moxy}"
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.itis.android.lessontwo.BuildConfig;
+import com.itis.android.lessontwo.repository.StoriesRepository;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -20,6 +21,7 @@ public final class ApiFactory {
 
     private static volatile ComicsService comicsService;
     private static volatile CharactersService charactersService;
+    private static volatile StoriesService storiesService;
 
     private ApiFactory() {
     }
@@ -52,11 +54,26 @@ public final class ApiFactory {
         return service;
     }
 
+    @NonNull
+    public static StoriesService getStoriesService() {
+        StoriesService service = storiesService;
+        if (service == null) {
+            synchronized (ApiFactory.class) {
+                service = storiesService;
+                if (service == null) {
+                    service = storiesService = buildRetrofit().create(StoriesService.class);
+                }
+            }
+        }
+        return service;
+    }
+
     public static void recreate() {
         sClient = null;
         sClient = getClient();
         comicsService = buildRetrofit().create(ComicsService.class);
         charactersService = buildRetrofit().create(CharactersService.class);
+        storiesService = buildRetrofit().create(StoriesService.class);
     }
 
     @NonNull

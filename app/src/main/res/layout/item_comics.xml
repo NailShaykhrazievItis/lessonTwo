@@ -9,12 +9,13 @@
     android:paddingStart="@dimen/padding_medium">
 
     <ImageView
-        android:id="@+id/iv_cover"
+        android:id="@+id/iv_cover_comics"
         android:layout_width="@dimen/size_image_list"
         android:layout_height="@dimen/size_image_list"
         android:layout_gravity="center_vertical"
         android:scaleType="centerCrop"
         tools:ignore="ContentDescription"
+        android:src="@mipmap/ic_marvel_launcher"
         tools:src="@mipmap/ic_marvel_launcher" />
 
     <LinearLayout
@@ -28,7 +29,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_name_comics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
@@ -37,7 +38,7 @@
             tools:text="Iron Man" />
 
         <TextView
-            android:id="@+id/tv_description"
+            android:id="@+id/tv_description_comics"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"

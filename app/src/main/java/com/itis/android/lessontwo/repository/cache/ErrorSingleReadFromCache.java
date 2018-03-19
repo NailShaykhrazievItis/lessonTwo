@@ -1,7 +1,6 @@
 package com.itis.android.lessontwo.repository.cache;
 
 import android.support.annotation.NonNull;
-
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import io.realm.Realm;

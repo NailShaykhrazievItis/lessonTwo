@@ -1,7 +1,6 @@
 package com.itis.android.lessontwo.model.comics;
 
 import com.google.gson.annotations.SerializedName;
-
 import io.realm.RealmObject;
 
 /**

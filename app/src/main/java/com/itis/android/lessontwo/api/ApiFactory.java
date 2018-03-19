@@ -72,6 +72,7 @@ public final class ApiFactory {
         sClient = getClient();
         comicsService = buildRetrofit().create(ComicsService.class);
         charactersService = buildRetrofit().create(CharactersService.class);
+        seriesService = buildRetrofit().create(SeriesService.class);
     }
 
     @NonNull

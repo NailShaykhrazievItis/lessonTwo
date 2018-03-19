@@ -41,5 +41,6 @@ public class RepositoryProvider {
     public static void init() {
         comicsRepository = new ComicsRepositoryImpl();
         characterRepository = new CharacterRepositoryImpl();
+        seriesRepository = new SeriesRepositoryImpl();
     }
 }

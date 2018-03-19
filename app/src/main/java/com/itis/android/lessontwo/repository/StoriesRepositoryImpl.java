@@ -21,7 +21,6 @@ import io.reactivex.Single;
 
 public class StoriesRepositoryImpl implements StoriesRepository {
 
-
     @NonNull
     @Override
     public Single<List<Story>> stories(Long offset, Long limit) {

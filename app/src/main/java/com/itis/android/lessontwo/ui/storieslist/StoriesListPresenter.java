@@ -13,7 +13,6 @@ import com.itis.android.lessontwo.repository.RepositoryProvider;
 @InjectViewState
 public class StoriesListPresenter extends MvpPresenter<StoriesListView> {
 
-
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();

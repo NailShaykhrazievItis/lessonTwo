@@ -24,5 +24,4 @@
         android:layout_gravity="center"
         android:background="@color/divider"
         android:layout_marginTop="@dimen/margin_xsmall"/>
-
 </LinearLayout>

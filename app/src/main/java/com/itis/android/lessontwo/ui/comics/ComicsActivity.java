@@ -37,7 +37,7 @@ public class ComicsActivity extends BaseActivity implements ComicsView {
     private TextView tvPages;
     private ProgressBar progressBar;
 
-    @InjectPresenter(type = PresenterType.WEAK)
+    @InjectPresenter
     ComicsPresenter presenter;
 
     private Long id;

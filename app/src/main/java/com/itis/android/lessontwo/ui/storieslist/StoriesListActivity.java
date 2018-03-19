@@ -56,7 +56,6 @@ public class StoriesListActivity extends BaseActivity implements StoriesListView
         adapter.changeDataSet(items);
     }
 
-
     @Override
     public void addMoreItems(List<Story> items) {
         adapter.addAll(items);

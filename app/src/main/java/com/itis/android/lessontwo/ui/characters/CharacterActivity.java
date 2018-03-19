@@ -80,22 +80,7 @@ public class CharacterActivity extends BaseActivity implements CharacterView {
 
     @Override
     public void setName(Character character) {
-        //tvName.setText(character.getName());
     }
-
-    /*@Override
-    public void showCharacter(@NonNull Character character) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
-                character.getImage().getExtension()));
-        if (character.getDescription() != null && !character.getDescription().equals("")) {
-            tvDescription.setText(character.getDescription());
-        } else {
-            tvDescription.setText(R.string.empty_desc);
-        }
-        tvName.setText(character.getName());
-    }*/
-
-
 
     private void initViews() {
         findViews();

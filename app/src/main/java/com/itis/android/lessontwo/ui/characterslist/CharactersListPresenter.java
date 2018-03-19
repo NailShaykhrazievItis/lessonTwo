@@ -30,7 +30,6 @@ public class CharactersListPresenter extends MvpPresenter<CharactersListView> {
                 .doAfterTerminate(getViewState()::hideLoading)
                 .doAfterTerminate(getViewState()::setNotLoading)
                 .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
-
     }
 
     void onItemClick(Character character) {

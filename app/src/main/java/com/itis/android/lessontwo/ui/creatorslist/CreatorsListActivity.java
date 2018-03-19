@@ -15,11 +15,9 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.model.creators.Creators;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
-import com.itis.android.lessontwo.ui.characterslist.CharactersListView;
 import com.itis.android.lessontwo.ui.creators.CreatorsActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
@@ -54,7 +52,6 @@ public class CreatorsListActivity extends BaseActivity implements CreatorsListVi
         initRecycler();
     }
 
-
     @Override
     public void showItems(@NonNull List<Creators> items) {
         adapter.changeDataSet(items);
@@ -77,7 +74,6 @@ public class CreatorsListActivity extends BaseActivity implements CreatorsListVi
         CreatorsActivity.start(this,item);
     }
 
-
     @Override
     public void setNotLoading() {
         isLoading = false;
@@ -90,9 +86,6 @@ public class CreatorsListActivity extends BaseActivity implements CreatorsListVi
     public void hideLoading() {
         progressBar.setVisibility(View.GONE);
     }
-
-
-
 
     @Override
     public void onItemClick(@NonNull Creators item) {
@@ -109,8 +102,10 @@ public class CreatorsListActivity extends BaseActivity implements CreatorsListVi
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
             private int currentPage = 0;
             private boolean isLastPage = false;
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);

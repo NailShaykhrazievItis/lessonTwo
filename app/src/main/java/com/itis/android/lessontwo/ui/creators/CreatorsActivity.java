@@ -55,19 +55,19 @@ public class CreatorsActivity extends BaseActivity implements CreatorsView {
         id = getIntent().getLongExtra(ID_KEY, 0);
     }
 
-
-
     @Override
     public void setImage(Creators creators) {
-        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creators.getImage().getPath(),
-                creators.getImage().getExtension()));
-
+        // Потому что api(шка) почему-то всегда Null возвращает
+//        ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creators.getImage().getPath(),
+//                creators.getImage().getExtension()));
+        Picasso.with(getApplicationContext())
+                .load(R.drawable.the_homak)
+                .into(ivCover);
     }
 
     @Override
     public void getCreatorId() {
         presenter.init(id);
-
     }
 
     @Override
@@ -83,15 +83,12 @@ public class CreatorsActivity extends BaseActivity implements CreatorsView {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-
-
     private void initViews() {
         findViews();
         supportActionBar(toolbar);
         setBackArrow(toolbar);
         collapsingToolbar.setTitle(getIntent().getStringExtra(NAME_KEY));
     }
-
 
     private void findViews() {
         collapsingToolbar = findViewById(R.id.ct_creators);

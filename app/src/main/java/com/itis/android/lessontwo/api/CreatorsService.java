@@ -14,6 +14,7 @@ import retrofit2.http.Query;
  */
 
 public interface CreatorsService {
+
     @GET("creators")
     Single<CreatorsResponse> creators(@Query("offset") Long offset,
                                       @Query("limit") Long limit,

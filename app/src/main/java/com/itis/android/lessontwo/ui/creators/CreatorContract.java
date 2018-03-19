@@ -1,6 +1,9 @@
 package com.itis.android.lessontwo.ui.creators;
 
 import android.support.annotation.NonNull;
+
+import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.itis.android.lessontwo.model.creator.Creator;
 import com.itis.android.lessontwo.ui.base.BaseView;
 
@@ -10,6 +13,7 @@ import com.itis.android.lessontwo.ui.base.BaseView;
 
 public interface CreatorContract {
 
+    @StateStrategyType(AddToEndSingleStrategy.class)
     interface View extends BaseView<Presenter> {
 
         void showCreator(@NonNull Creator creator);

@@ -1,8 +1,5 @@
 package com.itis.android.lessontwo.ui.creators;
 
-import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
-import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,18 +11,25 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.creator.Creator;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
-import com.itis.android.lessontwo.ui.creators.CreatorContract.Presenter;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
+
+import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
+import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 
 public class CreatorsActivity extends BaseActivity implements CreatorContract.View {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
     private ImageView ivCover;
-    private Presenter presenter;
+
+    @InjectPresenter
+    CreatorPresenter presenter;
+
     private ProgressBar progressBar;
     private TextView tvName;
     private TextView tvStories;
@@ -44,7 +48,7 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
         getLayoutInflater().inflate(R.layout.activity_creator, frameLayout);
         initViews();
 
-        new CreatorPresenter(this);
+        new CreatorPresenter();
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadCreator(id);
     }
@@ -52,11 +56,6 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
     @Override
     public void handleError(final Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void setPresenter(final CreatorContract.Presenter presenter) {
-        this.presenter = presenter;
     }
 
     @Override

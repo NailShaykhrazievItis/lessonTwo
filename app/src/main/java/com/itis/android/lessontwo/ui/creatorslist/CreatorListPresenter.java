@@ -1,5 +1,11 @@
 package com.itis.android.lessontwo.ui.creatorslist;
 
+import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
+import com.itis.android.lessontwo.api.ApiFactory;
+import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.comics.ComicsResponse;
+import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.creator.Creator;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
@@ -11,14 +17,8 @@ import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
  * KPFU ITIS 11-601
  */
 
-public class CreatorListPresenter implements CreatorListContract.Presenter {
-
-    private final CreatorListContract.View view;
-
-    public CreatorListPresenter(CreatorListContract.View view) {
-        this.view = view;
-        this.view.setPresenter(this);
-    }
+@InjectViewState
+public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View> implements CreatorListContract.Presenter {
 
     @Override
     public void loadCreators() {
@@ -26,7 +26,7 @@ public class CreatorListPresenter implements CreatorListContract.Presenter {
                 .creators(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(view::showLoading)
                 .doAfterTerminate(view::hideLoading)
-                .subscribe(view::showItems, view::handleError);
+                .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 
     @Override
@@ -36,11 +36,11 @@ public class CreatorListPresenter implements CreatorListContract.Presenter {
                 .doOnSubscribe(view::showLoading)
                 .doAfterTerminate(view::hideLoading)
                 .doAfterTerminate(view::setNotLoading)
-                .subscribe(view::addMoreItems, view::handleError);
+                .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 
     @Override
     public void onItemClick(Creator creator) {
-        view.showDetails(creator);
+        getViewState().showDetails(creator);
     }
 }

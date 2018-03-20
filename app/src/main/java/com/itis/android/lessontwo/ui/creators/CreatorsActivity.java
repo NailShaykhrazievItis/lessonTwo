@@ -31,6 +31,8 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
     @InjectPresenter
     CreatorPresenter presenter;
 
+    private long id;
+
     public static void start(@NonNull Activity activity, @NonNull Creator creator) {
         Intent intent = new Intent(activity, CreatorsActivity.class);
         intent.putExtra(NAME_KEY, creator.getName());
@@ -45,23 +47,16 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
         getLayoutInflater().inflate(R.layout.activity_creator, frameLayout);
         initViews();
 
-        long id = getIntent().getLongExtra(ID_KEY, 0);
-        presenter.loadCreator(id);
+        id = getIntent().getLongExtra(ID_KEY, 0);
     }
 
     @Override
-    public void handleError(final Throwable error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+    public void getCreatorId() {
+        presenter.init(id);
     }
 
     @Override
-    public void showCreator(@NonNull final Creator creator) {
-        showCreatorImage(creator);
-        showCreatorName(creator);
-        showCreatorStories(creator);
-    }
-
-    private void showCreatorImage(Creator creator) {
+    public void setImage(final Creator creator) {
         if (creator.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creator.getImage().getPath(),
                     creator.getImage().getExtension()));
@@ -70,12 +65,19 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
         }
     }
 
-    private void showCreatorName(Creator creator) {
+    @Override
+    public void setName(final Creator creator) {
         tvName.setText(creator.getName());
     }
 
-    private void showCreatorStories(Creator creator) {
+    @Override
+    public void setStories(final Creator creator) {
         tvStories.setText(creator.getDescription());
+    }
+
+    @Override
+    public void handleError(final Throwable error) {
+        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     private void findViews() {

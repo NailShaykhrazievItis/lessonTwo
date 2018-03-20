@@ -8,9 +8,20 @@ import com.itis.android.lessontwo.repository.RepositoryProvider;
 public class ComicsPresenter extends MvpPresenter<ComicsContract.View> implements ComicsContract.Presenter {
 
     @Override
-    public void loadComics(long id) {
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        getViewState().getComicsId();
+    }
+
+    @Override
+    public void init(final long id) {
         RepositoryProvider.provideComicsRepository()
                 .comics(id)
-                .subscribe(getViewState()::showComics, getViewState()::handleError);
+                .subscribe(comics -> {
+                    getViewState().setImage(comics);
+                    getViewState().setDescription(comics);
+                    getViewState().setPrice(comics);
+                    getViewState().setPageCount(comics);
+                }, getViewState()::handleError);
     }
 }

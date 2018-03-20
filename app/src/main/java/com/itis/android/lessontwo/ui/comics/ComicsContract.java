@@ -12,11 +12,19 @@ public interface ComicsContract {
     @StateStrategyType(AddToEndSingleStrategy.class)
     interface View extends BaseView<Presenter> {
 
-        void showComics(@NonNull Comics comics);
+        void getComicsId();
+
+        void setPageCount(Comics comics);
+
+        void setPrice(Comics comics);
+
+        void setDescription(Comics comics);
+
+        void setImage(Comics comics);
     }
 
     interface Presenter {
 
-        void loadComics(long id);
+        void init(long id);
     }
 }

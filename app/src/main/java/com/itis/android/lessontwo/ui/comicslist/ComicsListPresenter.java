@@ -20,6 +20,7 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListContract.View> i
 
     @Override
     protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         loadComics();
     }
 

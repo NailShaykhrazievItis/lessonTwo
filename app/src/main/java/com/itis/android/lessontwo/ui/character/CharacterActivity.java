@@ -30,6 +30,8 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
     @InjectPresenter
     CharacterPresenter presenter;
 
+    private long id;
+
     public static void start(@NonNull Activity activity, @NonNull Character character) {
         Intent intent = new Intent(activity, CharacterActivity.class);
         intent.putExtra(NAME_KEY, character.getName());
@@ -44,23 +46,16 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         getLayoutInflater().inflate(R.layout.activity_character, frameLayout);
         initViews();
 
-        long id = getIntent().getLongExtra(ID_KEY, 0);
-        presenter.loadCharacter(id);
+        id = getIntent().getLongExtra(ID_KEY, 0);
     }
 
     @Override
-    public void handleError(final Throwable error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+    public void getCharacterId() {
+        presenter.init(id);
     }
 
     @Override
-    public void showCharacter(@NonNull final Character character) {
-        showCharacterImage(character);
-        showCharacterName(character);
-        showCharacterDescription(character);
-    }
-
-    private void showCharacterImage(Character character) {
+    public void setCharacterImage(final Character character) {
         if (character.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                     character.getImage().getExtension()));
@@ -69,12 +64,20 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         }
     }
 
-    private void showCharacterName(Character character) {
+    @Override
+    public void setCharacterName(final Character character) {
         tvName.setText(character.getName());
     }
 
-    private void showCharacterDescription(Character character) {
+    @Override
+    public void setCharacterDescription(final Character character) {
         tvDescription.setText(character.getDescription());
+    }
+
+
+    @Override
+    public void handleError(final Throwable error) {
+        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     private void findViews() {

@@ -16,11 +16,17 @@ public interface CreatorContract {
     @StateStrategyType(AddToEndSingleStrategy.class)
     interface View extends BaseView<Presenter> {
 
-        void showCreator(@NonNull Creator creator);
+        void getCreatorId();
+
+        void setImage(Creator creator);
+
+        void setName(Creator creator);
+
+        void setStories(Creator creator);
     }
 
     interface Presenter {
 
-        void loadCreator(long id);
+        void init(long id);
     }
 }

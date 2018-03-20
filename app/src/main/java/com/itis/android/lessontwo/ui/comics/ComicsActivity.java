@@ -37,6 +37,8 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
     @InjectPresenter
     ComicsPresenter presenter;
 
+    private long id;
+
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
         Intent intent = new Intent(activity, ComicsActivity.class);
         intent.putExtra(NAME_KEY, comics.getName());
@@ -51,32 +53,28 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
         initViews();
 
-        long id = getIntent().getLongExtra(ID_KEY, 0);
-        presenter.loadComics(id);
+        id = getIntent().getLongExtra(ID_KEY, 0);
     }
 
     @Override
-    public void handleError(Throwable error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+    public void getComicsId() {
+        presenter.init(id);
     }
 
-    public void showComics(@NonNull Comics comics) {
-        showComicsImage(comics);
-        showComicsDescription(comics);
-        showComicsPrice(comics);
-        showComicsPageCount(comics);
+    @Override
+    public void setPageCount(final Comics comics) {
+        tvPages.setText(String.valueOf(comics.getPageCount()));
     }
 
-    private void showComicsImage(Comics comics) {
-        if (comics.getImage() != null) {
-            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
-                    comics.getImage().getExtension()));
-        } else {
-            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
+    @Override
+    public void setPrice(final Comics comics) {
+        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
+            tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
     }
 
-    private void showComicsDescription(Comics comics) {
+    @Override
+    public void setDescription(final Comics comics) {
         if (comics.getTextObjects() != null) {
             StringBuilder description = new StringBuilder();
             for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
@@ -87,14 +85,19 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
         }
     }
 
-    private void showComicsPrice(Comics comics) {
-        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
-            tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
+    @Override
+    public void setImage(final Comics comics) {
+        if (comics.getImage() != null) {
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
+                    comics.getImage().getExtension()));
+        } else {
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
     }
 
-    private void showComicsPageCount(Comics comics) {
-        tvPages.setText(String.valueOf(comics.getPageCount()));
+    @Override
+    public void handleError(Throwable error) {
+        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     private void initViews() {

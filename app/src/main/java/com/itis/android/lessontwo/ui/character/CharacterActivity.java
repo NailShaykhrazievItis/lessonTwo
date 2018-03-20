@@ -55,12 +55,20 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
 
     @Override
     public void showCharacter(@NonNull final Character character) {
+        showCharacterImage(character);
+        showCharacterInfo(character);
+    }
+
+    public void showCharacterImage(Character character) {
         if (character.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                     character.getImage().getExtension()));
         } else {
             ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
+    }
+
+    public void showCharacterInfo(Character character) {
         tvName.setText(character.getName());
         tvDescription.setText(character.getDescription());
     }

@@ -9,7 +9,6 @@ import java.util.List;
  * Created by Tony on 3/18/2018.
  */
 
-
 public interface CharactersRepository {
 
     @NonNull

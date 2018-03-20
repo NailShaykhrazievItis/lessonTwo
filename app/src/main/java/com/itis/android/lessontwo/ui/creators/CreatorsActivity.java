@@ -33,10 +33,10 @@ public class CreatorsActivity extends BaseActivity implements CreatorsView {
     private ImageView ivCover;
     private TextView tvName;
 
-    private Long id;
-
     @InjectPresenter
     CreatorPresenter presenter;
+
+    private Long id;
 
     public static void start(@NonNull Activity activity, @NonNull Creators creator) {
         Intent intent = new Intent(activity, CreatorsActivity.class);

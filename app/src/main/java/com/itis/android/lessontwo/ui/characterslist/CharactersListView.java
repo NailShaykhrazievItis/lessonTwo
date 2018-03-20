@@ -36,5 +36,4 @@ public interface CharactersListView extends MvpView {
     //* Navigation methods*/
     @StateStrategyType(SkipStrategy.class)
     void showDetails(Character item);
-
 }

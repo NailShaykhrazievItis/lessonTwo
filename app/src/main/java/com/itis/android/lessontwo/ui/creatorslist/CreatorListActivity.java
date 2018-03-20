@@ -52,8 +52,6 @@ public class CreatorListActivity extends BaseActivity implements CreatorListCont
         getLayoutInflater().inflate(R.layout.activity_creator_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new CreatorListPresenter();
-        presenter.loadCreators();
     }
 
     @Override

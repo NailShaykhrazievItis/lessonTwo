@@ -29,10 +29,10 @@ public class CharacterListActivity extends BaseActivity implements CharacterList
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
-    private CharacterAdapter adapter;
-
     @InjectPresenter
     CharacterListPresenter presenter;
+
+    private CharacterAdapter adapter;
 
     private boolean isLoading = false;
 
@@ -43,7 +43,6 @@ public class CharacterListActivity extends BaseActivity implements CharacterList
         getLayoutInflater().inflate(R.layout.activity_character_list, contentFrameLayout);
         initViews();
         initRecycler();
-        presenter.loadCharacters();
     }
 
     @Override

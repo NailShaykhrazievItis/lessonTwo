@@ -21,6 +21,11 @@ import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View> implements CreatorListContract.Presenter {
 
     @Override
+    protected void onFirstViewAttach() {
+        loadCreators();
+    }
+
+    @Override
     public void loadCreators() {
         RepositoryProvider.provideCreatorRepository()
                 .creators(ZERO_OFFSET, PAGE_SIZE)

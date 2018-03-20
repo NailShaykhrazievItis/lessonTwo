@@ -49,8 +49,6 @@ public class ComicsListActivity extends BaseActivity implements ComicsListContra
         getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);
         initViews();
         initRecycler();
-        new ComicsListPresenter();
-        presenter.loadComics();
     }
 
     @Override

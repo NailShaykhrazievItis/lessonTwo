@@ -19,6 +19,11 @@ import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 public class ComicsListPresenter extends MvpPresenter<ComicsListContract.View> implements Presenter{
 
     @Override
+    protected void onFirstViewAttach() {
+        loadComics();
+    }
+
+    @Override
     public void loadComics() {
         RepositoryProvider.provideComicsRepository()
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)

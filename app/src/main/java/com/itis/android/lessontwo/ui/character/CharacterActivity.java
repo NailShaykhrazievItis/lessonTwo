@@ -56,10 +56,11 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
     @Override
     public void showCharacter(@NonNull final Character character) {
         showCharacterImage(character);
-        showCharacterInfo(character);
+        showCharacterName(character);
+        showCharacterDescription(character);
     }
 
-    public void showCharacterImage(Character character) {
+    private void showCharacterImage(Character character) {
         if (character.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                     character.getImage().getExtension()));
@@ -68,8 +69,11 @@ public class CharacterActivity extends BaseActivity implements CharacterContract
         }
     }
 
-    public void showCharacterInfo(Character character) {
+    private void showCharacterName(Character character) {
         tvName.setText(character.getName());
+    }
+
+    private void showCharacterDescription(Character character) {
         tvDescription.setText(character.getDescription());
     }
 

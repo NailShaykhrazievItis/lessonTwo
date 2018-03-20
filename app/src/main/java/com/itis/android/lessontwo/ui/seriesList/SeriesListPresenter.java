@@ -40,5 +40,4 @@ public class SeriesListPresenter extends MvpPresenter<SeriesListView> {
                 .doAfterTerminate(getViewState()::hideLoading)
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
-
 }

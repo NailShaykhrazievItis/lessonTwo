@@ -8,7 +8,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,13 +25,11 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
     private ImageView ivCover;
+    private TextView tvName;
+    private TextView tvStories;
 
     @InjectPresenter
     CreatorPresenter presenter;
-
-    private ProgressBar progressBar;
-    private TextView tvName;
-    private TextView tvStories;
 
     public static void start(@NonNull Activity activity, @NonNull Creator creator) {
         Intent intent = new Intent(activity, CreatorsActivity.class);
@@ -48,7 +45,6 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
         getLayoutInflater().inflate(R.layout.activity_creator, frameLayout);
         initViews();
 
-        new CreatorPresenter();
         long id = getIntent().getLongExtra(ID_KEY, 0);
         presenter.loadCreator(id);
     }
@@ -60,13 +56,25 @@ public class CreatorsActivity extends BaseActivity implements CreatorContract.Vi
 
     @Override
     public void showCreator(@NonNull final Creator creator) {
+        showCreatorImage(creator);
+        showCreatorName(creator);
+        showCreatorStories(creator);
+    }
+
+    private void showCreatorImage(Creator creator) {
         if (creator.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creator.getImage().getPath(),
                     creator.getImage().getExtension()));
         } else {
             ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
+    }
+
+    private void showCreatorName(Creator creator) {
         tvName.setText(creator.getName());
+    }
+
+    private void showCreatorStories(Creator creator) {
         tvStories.setText(creator.getDescription());
     }
 

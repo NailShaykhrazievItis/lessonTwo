@@ -12,6 +12,11 @@ import com.itis.android.lessontwo.repository.RepositoryProvider;
 public class CharacterListPresenter extends MvpPresenter<CharacterListContract.View> implements CharacterListContract
         .Presenter {
 
+    @Override
+    protected void onFirstViewAttach() {
+        loadCharacters();
+    }
+
     public void loadCharacters() {
         RepositoryProvider.provideCharacterRepository()
                 .characters(ZERO_OFFSET, PAGE_SIZE)

@@ -55,6 +55,48 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
         presenter.loadComics(id);
     }
 
+    @Override
+    public void handleError(Throwable error) {
+        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+    }
+
+    public void showComics(@NonNull Comics comics) {
+        showComicsImage(comics);
+        showComicsDescription(comics);
+        showComicsPrice(comics);
+        showComicsPageCount(comics);
+    }
+
+    private void showComicsImage(Comics comics) {
+        if (comics.getImage() != null) {
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
+                    comics.getImage().getExtension()));
+        } else {
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
+        }
+    }
+
+    private void showComicsDescription(Comics comics) {
+        if (comics.getTextObjects() != null) {
+            StringBuilder description = new StringBuilder();
+            for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
+                description.append(comicsTextObject.getText()).append("\n");
+            }
+            tvDescription.setText(description.length() > 0 ?
+                    description.toString().trim() : getString(R.string.text_desc_not_found));
+        }
+    }
+
+    private void showComicsPrice(Comics comics) {
+        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
+            tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
+        }
+    }
+
+    private void showComicsPageCount(Comics comics) {
+        tvPages.setText(String.valueOf(comics.getPageCount()));
+    }
+
     private void initViews() {
         findViews();
         supportActionBar(toolbar);
@@ -69,31 +111,5 @@ public class ComicsActivity extends BaseActivity implements ComicsContract.View 
         tvDescription = findViewById(R.id.tv_description);
         tvPrice = findViewById(R.id.tv_price);
         tvPages = findViewById(R.id.tv_pages);
-    }
-
-    @Override
-    public void handleError(Throwable error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
-    }
-
-    public void showComics(@NonNull Comics comics) {
-        if (comics.getImage() != null) {
-            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
-                    comics.getImage().getExtension()));
-        } else {
-            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
-        }
-        if (comics.getTextObjects() != null) {
-            StringBuilder description = new StringBuilder();
-            for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
-                description.append(comicsTextObject.getText()).append("\n");
-            }
-            tvDescription.setText(description.length() > 0 ?
-                    description.toString().trim() : getString(R.string.text_desc_not_found));
-        }
-        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
-            tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
-        }
-        tvPages.setText(String.valueOf(comics.getPageCount()));
     }
 }

@@ -24,9 +24,6 @@ public class Creators extends RealmObject implements ListItem {
     @SerializedName("thumbnail")
     private Image image;
 
-//    @SerializedName("comics")
-//    private List<Comics> comics;
-
     @Override
     public Long getId() {
         return id;
@@ -52,12 +49,4 @@ public class Creators extends RealmObject implements ListItem {
     public void setImage(Image image) {
         this.image = image;
     }
-
-    //    public List<Comics> getComics() {
-//        return comics;
-//    }
-//
-//    public void setComics(List<Comics> comics) {
-//        this.comics = comics;
-//    }
 }

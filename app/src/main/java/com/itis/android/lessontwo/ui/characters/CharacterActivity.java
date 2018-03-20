@@ -78,10 +78,6 @@ public class CharacterActivity extends BaseActivity implements CharacterView {
                 character.getImage().getExtension()));
     }
 
-    @Override
-    public void setName(Character character) {
-    }
-
     private void initViews() {
         findViews();
         supportActionBar(toolbar);

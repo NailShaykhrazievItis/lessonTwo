@@ -37,9 +37,10 @@ public class CreatorsListActivity extends BaseActivity implements CreatorsListVi
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
-    private CreatorsAdapter adapter;
     @InjectPresenter
     CreatorsListPresenter presenter;
+
+    private CreatorsAdapter adapter;
 
     private boolean isLoading = false;
 

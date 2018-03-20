@@ -20,6 +20,7 @@ import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.series.Series;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
+import com.itis.android.lessontwo.ui.series.SeriesActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class SeriesListActivity extends BaseActivity implements SeriesListView,
 
     @Override
     public void showDetails(Series item) {
-        //TODO start details activity
+        SeriesActivity.start(this, item);
     }
 
     @Override

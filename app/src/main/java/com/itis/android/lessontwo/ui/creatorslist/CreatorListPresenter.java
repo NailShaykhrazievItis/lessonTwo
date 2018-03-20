@@ -22,6 +22,7 @@ public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View>
 
     @Override
     protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         loadCreators();
     }
 

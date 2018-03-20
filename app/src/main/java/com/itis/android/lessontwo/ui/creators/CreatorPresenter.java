@@ -17,9 +17,19 @@ import com.itis.android.lessontwo.utils.RxUtils;
 public class CreatorPresenter extends MvpPresenter<CreatorContract.View> implements CreatorContract.Presenter {
 
     @Override
-    public void loadCreator(long id) {
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        getViewState().getCreatorId();
+    }
+
+    @Override
+    public void init(long id) {
         RepositoryProvider.provideCreatorRepository()
                 .creator(id)
-                .subscribe(getViewState()::showCreator, getViewState()::handleError);
+                .subscribe(creator -> {
+                    getViewState().setImage(creator);
+                    getViewState().setName(creator);
+                    getViewState().setStories(creator);
+                }, getViewState()::handleError);
     }
 }

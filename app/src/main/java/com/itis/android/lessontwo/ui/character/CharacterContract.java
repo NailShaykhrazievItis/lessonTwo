@@ -12,11 +12,17 @@ public interface CharacterContract {
     @StateStrategyType(AddToEndSingleStrategy.class)
     interface View extends BaseView<CharacterContract.Presenter> {
 
-        void showCharacter(@NonNull Character character);
+        void getCharacterId();
+
+        void setCharacterImage(Character character);
+
+        void setCharacterName(Character character);
+
+        void setCharacterDescription(Character character);
     }
 
     interface Presenter{
 
-        void loadCharacter(long id);
+        void init(long id);
     }
 }

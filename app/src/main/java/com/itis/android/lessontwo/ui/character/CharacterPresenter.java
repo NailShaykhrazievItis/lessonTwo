@@ -9,9 +9,19 @@ import com.itis.android.lessontwo.ui.character.CharacterContract.View;
 public class CharacterPresenter extends MvpPresenter<CharacterContract.View> implements CharacterContract.Presenter {
 
     @Override
-    public void loadCharacter(final long id) {
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        getViewState().getCharacterId();
+    }
+
+    @Override
+    public void init(final long id) {
         RepositoryProvider.provideCharacterRepository()
                 .character(id)
-                .subscribe(getViewState()::showCharacter, getViewState()::handleError);
+                .subscribe(character -> {
+                    getViewState().setCharacterImage(character);
+                    getViewState().setCharacterName(character);
+                    getViewState().setCharacterDescription(character);
+                        }, getViewState()::handleError);
     }
 }

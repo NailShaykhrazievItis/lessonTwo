@@ -14,6 +14,7 @@ public class CharacterListPresenter extends MvpPresenter<CharacterListContract.V
 
     @Override
     protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
         loadCharacters();
     }
 

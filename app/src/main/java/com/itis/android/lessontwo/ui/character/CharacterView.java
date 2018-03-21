@@ -2,6 +2,8 @@ package com.itis.android.lessontwo.ui.character;
 
 import com.arellomobile.mvp.MvpView;
 
+import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.itis.android.lessontwo.model.character.Character;
 
 /**
@@ -16,5 +18,6 @@ public interface CharacterView extends MvpView {
 
     void setDescription(Character character);
 
+    @StateStrategyType(OneExecutionStateStrategy.class)
     void handleError(Throwable throwable);
 }

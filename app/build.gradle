@@ -32,6 +32,7 @@ android {
 ext {
     commons_codec = "1.11"
     gson = "2.8.2"
+    moxy = "1.5.3"
     okhttp = "3.9.1"
     okhttp3downloader = "1.1.0"
     picasso = "2.5.2"
@@ -42,7 +43,6 @@ ext {
     rxdebug = "1.2.0"
     reactive_streams = "1.0.0"
     retrofit = "2.3.0"
-    moxy = "1.5.3"
 }
 
 dependencies {

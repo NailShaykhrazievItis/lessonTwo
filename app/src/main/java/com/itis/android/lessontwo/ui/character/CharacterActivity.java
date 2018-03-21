@@ -28,12 +28,16 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 public class CharacterActivity extends BaseActivity implements CharacterView {
 
     private CollapsingToolbarLayout collapsingToolbar;
+
     private Toolbar toolbar;
+
     private ImageView ivCover;
+
     private TextView tvDescription;
+
     private ProgressBar progressBar;
 
-    @InjectPresenter(type = PresenterType.WEAK)
+    @InjectPresenter
     CharacterPresenter presenter;
 
     private Long id;
@@ -60,7 +64,6 @@ public class CharacterActivity extends BaseActivity implements CharacterView {
     public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
         Log.e("Alm", error.getMessage());
-        error.printStackTrace();
     }
 
     @Override
@@ -73,16 +76,16 @@ public class CharacterActivity extends BaseActivity implements CharacterView {
         if (character.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                     character.getImage().getExtension()));
-        }else{
-            ImageLoadHelper.loadPictureByDrawable(ivCover,R.drawable.image_error_marvel_logo);
+        } else {
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
     }
 
     @Override
-    public void setDescription(@NonNull Character character){
+    public void setDescription(@NonNull Character character) {
         if (character.getDescription() != null) {
             tvDescription.setText(character.getDescription().trim());
-        }else{
+        } else {
             tvDescription.setText(R.string.no_description);
         }
     }

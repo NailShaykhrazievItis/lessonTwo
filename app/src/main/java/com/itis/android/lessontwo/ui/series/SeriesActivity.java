@@ -32,7 +32,7 @@ public class SeriesActivity extends BaseActivity implements SeriesView{
     private TextView tvDescription;
     private ProgressBar progressBar;
 
-    @InjectPresenter(type = PresenterType.WEAK)
+    @InjectPresenter
     SeriesPresenter presenter;
 
     private Long id;
@@ -81,7 +81,6 @@ public class SeriesActivity extends BaseActivity implements SeriesView{
     public void handleError(@NonNull Throwable throwable) {
         Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
         Log.e("Alm", throwable.getMessage());
-        throwable.printStackTrace();
     }
 
     private void initViews() {

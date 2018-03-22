@@ -9,12 +9,14 @@ import com.itis.android.lessontwo.repository.ComicsRepositoryImpl;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.utils.RxUtils;
 
+import org.bouncycastle.pqc.jcajce.provider.McEliece;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -25,6 +27,7 @@ import io.reactivex.Single;
 
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 
 /**
@@ -49,6 +52,8 @@ public class ComicsListPresenterTest {
         MockitoAnnotations.initMocks(this);
         presenter = Mockito.spy(ComicsListPresenter.class);
         presenter.setViewState(viewState);
+        mockStatic(ApiFactory.class);
+        mockStatic(RxUtils.class);
     }
 
     @Test
@@ -62,7 +67,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void loadComics() throws Exception {
+    public void loadComicsMockError() throws Exception {
         // Arrange
         Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
                         .thenReturn(Single.error(new Throwable()));
@@ -72,6 +77,20 @@ public class ComicsListPresenterTest {
         Mockito.verify(viewState).showLoading(Mockito.any());
         Mockito.verify(viewState).hideLoading();
         Mockito.verify(viewState).handleError(Mockito.any(Throwable.class));
+    }
+
+    @Test
+    public void loadComicsMockSuccess() throws Exception {
+        // Arrange
+        List<Comics> comicsList = new ArrayList<>();
+        Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
+                .thenReturn(Single.just(comicsList));
+        // Act
+        presenter.loadComics();
+        // Assert
+        Mockito.verify(viewState).showLoading(Mockito.any());
+        Mockito.verify(viewState).hideLoading();
+        Mockito.verify(viewState).showItems(comicsList);
     }
 
     @Test

@@ -13,5 +13,4 @@ public class ComicsPresenterTest {
     @Test
     public void init() throws Exception {
     }
-
 }

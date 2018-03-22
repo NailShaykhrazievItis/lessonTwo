@@ -9,8 +9,7 @@ import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 @InjectViewState
-public class CharacterListPresenter extends MvpPresenter<CharacterListContract.View> implements CharacterListContract
-        .Presenter {
+public class CharacterListPresenter extends MvpPresenter<CharacterListView> {
 
     @Override
     protected void onFirstViewAttach() {
@@ -26,7 +25,6 @@ public class CharacterListPresenter extends MvpPresenter<CharacterListContract.V
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 
-    @Override
     public void loadNextElements(final int page) {
         RepositoryProvider.provideCharacterRepository()
                 .characters(page * PAGE_SIZE, PAGE_SIZE)
@@ -36,7 +34,6 @@ public class CharacterListPresenter extends MvpPresenter<CharacterListContract.V
                 .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 
-    @Override
     public void onItemClick(final Character character) {
         getViewState().showDetails(character);
     }

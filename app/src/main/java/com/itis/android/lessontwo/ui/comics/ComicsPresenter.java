@@ -5,7 +5,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 @InjectViewState
-public class ComicsPresenter extends MvpPresenter<ComicsContract.View> implements ComicsContract.Presenter {
+public class ComicsPresenter extends MvpPresenter<ComicsView> {
 
     @Override
     protected void onFirstViewAttach() {
@@ -13,7 +13,6 @@ public class ComicsPresenter extends MvpPresenter<ComicsContract.View> implement
         getViewState().getComicsId();
     }
 
-    @Override
     public void init(final long id) {
         RepositoryProvider.provideComicsRepository()
                 .comics(id)

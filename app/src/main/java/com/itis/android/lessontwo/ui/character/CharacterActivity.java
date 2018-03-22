@@ -19,7 +19,7 @@ import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
-public class CharacterActivity extends BaseActivity implements CharacterContract.View {
+public class CharacterActivity extends BaseActivity implements CharacterView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;

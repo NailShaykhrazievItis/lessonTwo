@@ -8,9 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.creator.Creator;
-import com.itis.android.lessontwo.ui.comicslist.ComicsItemHolder;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 /**

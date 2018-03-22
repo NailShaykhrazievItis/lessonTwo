@@ -2,10 +2,6 @@ package com.itis.android.lessontwo.ui.creatorslist;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
 import com.itis.android.lessontwo.model.creator.Creator;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
@@ -18,7 +14,7 @@ import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
  */
 
 @InjectViewState
-public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View> implements CreatorListContract.Presenter {
+public class CreatorListPresenter extends MvpPresenter<CreatorListView> {
 
     @Override
     protected void onFirstViewAttach() {
@@ -26,7 +22,6 @@ public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View>
         loadCreators();
     }
 
-    @Override
     public void loadCreators() {
         RepositoryProvider.provideCreatorRepository()
                 .creators(ZERO_OFFSET, PAGE_SIZE)
@@ -35,7 +30,6 @@ public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View>
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 
-    @Override
     public void loadNextElements(int page) {
         RepositoryProvider.provideCreatorRepository()
                 .creators(page * PAGE_SIZE, PAGE_SIZE)
@@ -45,7 +39,6 @@ public class CreatorListPresenter extends MvpPresenter<CreatorListContract.View>
                 .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 
-    @Override
     public void onItemClick(Creator creator) {
         getViewState().showDetails(creator);
     }

@@ -30,7 +30,7 @@ import io.reactivex.disposables.Disposable;
  * KPFU ITIS 11-601
  */
 
-public class CreatorListActivity extends BaseActivity implements CreatorListContract.View,
+public class CreatorListActivity extends BaseActivity implements CreatorListView,
         BaseAdapter.OnItemClickListener<Creator> {
 
     @InjectPresenter

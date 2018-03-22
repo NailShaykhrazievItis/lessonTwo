@@ -21,7 +21,7 @@ import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CharacterListActivity extends BaseActivity implements CharacterListContract.View,
+public class CharacterListActivity extends BaseActivity implements CharacterListView,
         BaseAdapter.OnItemClickListener<Character> {
 
     private Toolbar toolbar;

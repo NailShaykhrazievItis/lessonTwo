@@ -37,10 +37,9 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
-    private ComicsAdapter adapter;
-
     @InjectPresenter
     ComicsListPresenter presenter;
+    private ComicsAdapter adapter;
 
     private boolean isLoading = false;
 
@@ -69,11 +68,6 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     }
 
     @Override
-    public void showDetails(Comics item) {
-        ComicsActivity.start(this, item);
-    }
-
-    @Override
     public void addMoreItems(List<Comics> items) {
         adapter.addAll(items);
     }
@@ -91,6 +85,11 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
         progressBar.setVisibility(View.GONE);
     }
 
+    @Override
+    public void showDetails(Comics item) {
+        ComicsActivity.start(this, item);
+    }
+
     private void initRecycler() {
         adapter = new ComicsAdapter(new ArrayList<>());
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -104,6 +103,7 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
             private int currentPage = 0;
             // обычно бывает флаг последней страницы, но я че т его не нашел, если не найдется, то можно удалить, всегда тру
             private boolean isLastPage = false;
+
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);

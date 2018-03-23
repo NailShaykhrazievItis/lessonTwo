@@ -1,11 +1,11 @@
-package com.itis.android.lessontwo.ui.comics;
+package com.itis.android.lessontwo.ui.creators;
 
 import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.entity.comics.Comics;
-import com.itis.android.lessontwo.repository.ComicsRepositoryImpl;
-import com.itis.android.lessontwo.ui.comicslist.ComicsListView;
+import com.itis.android.lessontwo.model.entity.creators.Creator;
+import com.itis.android.lessontwo.repository.CreatorRepositoryImpl;
 import com.itis.android.lessontwo.utils.RxUtils;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,61 +25,60 @@ import static org.mockito.Mockito.*;
  */
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({RxUtils.class, ApiFactory.class})
-public class ComicsPresenterTest {
+@PrepareForTest({ApiFactory.class, RxUtils.class})
+public class CreatorsPresenterTest {
 
     @SuppressWarnings("WeakAccess")
     @Mock
-    ComicsView viewState;
+    CreatorsView viewState;
 
     @SuppressWarnings("WeakAccess")
     @Mock
-    ComicsRepositoryImpl repository;
+    CreatorRepositoryImpl repository;
 
-    private ComicsPresenter presenter;
+    private CreatorsPresenter presenter;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        presenter = Mockito.spy(ComicsPresenter.class);
+        presenter = Mockito.spy(CreatorsPresenter.class);
         presenter.setViewState(viewState);
         PowerMockito.mockStatic(ApiFactory.class);
         PowerMockito.mockStatic(RxUtils.class);
     }
 
     @Test
-    protected void onFirstViewAttach() {
+    public void onFirstViewAttach() throws Exception {
         // Arrange
-        Mockito.doNothing().when(presenter).init(anyLong());
+        Mockito.doNothing().when(presenter).load(anyLong());
         // Act
         presenter.onFirstViewAttach();
         // Assert
-        Mockito.verify(viewState).getComicsId();
+        Mockito.verify(viewState).getCreatorById();
     }
 
     @Test
-    public void initError() {
+    public void loadError() throws Exception {
         // Arrange
-        Mockito.when(repository.comics(anyLong()))
+        Mockito.when(repository.creator(anyLong()))
                 .thenReturn(Single.error(new Throwable()));
         // Act
-        presenter.init(anyLong());
+        presenter.load(anyLong());
         // Assert
         Mockito.verify(viewState).handleError(any(Throwable.class));
     }
 
     @Test
-    public void initSuccess() {
+    public void loadSuccess() throws Exception {
         // Arrange
-        Comics comics = Mockito.mock(Comics.class);
-        Mockito.when(repository.comics(anyLong()))
-                .thenReturn(Single.just(comics));
+        Creator creator = Mockito.mock(Creator.class);
+        Mockito.when(repository.creator(anyLong()))
+                .thenReturn(Single.just(creator));
         // Act
-        presenter.init(anyLong());
+        presenter.load(anyLong());
         // Assert
-        Mockito.verify(viewState).setImage(comics);
-        Mockito.verify(viewState).setDescription(comics);
-        Mockito.verify(viewState).setPrice(comics);
-        Mockito.verify(viewState).setPageCount(comics);
+        Mockito.verify(viewState).setName(creator);
+        Mockito.verify(viewState).setImage(creator);
+        Mockito.verify(viewState).setDescription(creator);
     }
 }

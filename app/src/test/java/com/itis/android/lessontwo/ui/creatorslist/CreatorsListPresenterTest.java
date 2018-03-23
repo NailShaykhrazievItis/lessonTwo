@@ -1,16 +1,12 @@
-package com.itis.android.lessontwo.ui.comicslist;
-
-import android.support.annotation.NonNull;
+package com.itis.android.lessontwo.ui.creatorslist;
 
 import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.entity.comics.Comics;
-import com.itis.android.lessontwo.repository.ComicsRepository;
-import com.itis.android.lessontwo.repository.ComicsRepositoryImpl;
+import com.itis.android.lessontwo.model.entity.creators.Creator;
+import com.itis.android.lessontwo.repository.CreatorRepository;
+import com.itis.android.lessontwo.repository.CreatorRepositoryImpl;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-import com.itis.android.lessontwo.ui.comics.ComicsPresenter;
 import com.itis.android.lessontwo.utils.RxUtils;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,26 +28,24 @@ import static org.mockito.Mockito.*;
 /**
  * Created by valera071998@gmail.com on 23.03.2018.
  */
-
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({RxUtils.class, ApiFactory.class})
-public class ComicsListPresenterTest {
+@PrepareForTest({ApiFactory.class, RxUtils.class})
+public class CreatorsListPresenterTest {
 
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings("WeakAccess")
     @Mock
-    ComicsListView viewState;   // TODO ComicsListView$$State
-                                // https://stackoverflow.com/questions/7484210/what-is-the-meaning-of-in-a-variable-name
+    CreatorsListView viewState;
 
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings("WeakAccess")
     @Mock
-    ComicsRepositoryImpl repository;
+    CreatorRepositoryImpl repository;
 
-    private ComicsListPresenter presenter;
+    private CreatorsListPresenter presenter;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        presenter = Mockito.spy(ComicsListPresenter.class);
+        presenter = Mockito.spy(CreatorsListPresenter.class);
         presenter.setViewState(viewState);
         PowerMockito.mockStatic(ApiFactory.class);
         PowerMockito.mockStatic(RxUtils.class);
@@ -60,20 +54,49 @@ public class ComicsListPresenterTest {
     @Test
     public void onFirstViewAttach() throws Exception {
         // Arrange
-        Mockito.doNothing().when(presenter).loadComics();
+        Mockito.doNothing().when(repository.creators(anyLong(), anyLong(), anyString()));
         // Act
         presenter.onFirstViewAttach();
         // Assert
-        Mockito.verify(presenter).loadComics();
+        Mockito.verify(presenter).load();
     }
 
     @Test
-    public void loadComicsMockError() throws Exception {
+    public void loadCreatorsMockError() throws Exception {
         // Arrange
-        Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
+        Mockito.when(repository.creators(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.error(new Throwable()));
         // Act
-        presenter.loadComics();
+        presenter.load();
+        // Assert
+        Mockito.verify(viewState).showLoading(any());
+        Mockito.verify(viewState).hideLoading();
+        Mockito.verify(viewState).handleError(any(Throwable.class));
+    }
+
+
+    @Test
+    public void loadCreatorsMockSuccess() throws Exception {
+        // Arrange
+        List<Creator> creatorList = new ArrayList<>();
+        Mockito.when(repository.creators(anyLong(), anyLong(), anyString()))
+                .thenReturn(Single.just(creatorList));
+        // Act
+        presenter.load();
+        // Assert
+        Mockito.verify(viewState).showLoading(any());
+        Mockito.verify(viewState).hideLoading();
+        Mockito.verify(viewState).showItems(creatorList);
+    }
+
+    @Test
+    public void loadCreatorsError() throws Exception {
+        // Arrange
+        List<Creator> creatorList = new ArrayList<>();
+        Creator creator = Mockito.mock(Creator.class);
+        RepositoryProvider.setCreatorRepository(new TestRepository(true, creator, creatorList));
+        // Act
+        presenter.load();
         // Assert
         Mockito.verify(viewState).showLoading(any());
         Mockito.verify(viewState).hideLoading();
@@ -81,53 +104,26 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void loadComicsMockSuccess() throws Exception {
+    public void loadCreatorsSuccess() throws Exception {
         // Arrange
-        List<Comics> comicsList = new ArrayList<>();
-        Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
-                .thenReturn(Single.just(comicsList));
+        List<Creator> creatorList = new ArrayList<>();
+        Creator creator = Mockito.mock(Creator.class);
+        RepositoryProvider.setCreatorRepository(new TestRepository(false, creator, creatorList));
         // Act
-        presenter.loadComics();
+        presenter.load();
         // Assert
         Mockito.verify(viewState).showLoading(any());
         Mockito.verify(viewState).hideLoading();
-        Mockito.verify(viewState).showItems(comicsList);
+        Mockito.verify(viewState).showItems(creatorList);
     }
 
-    @Test
-    public void loadComicsError() throws Exception {
-        // Arrange
-        List<Comics> comicsList = new ArrayList<>();
-        Comics comics = Mockito.mock(Comics.class);
-        RepositoryProvider.setComicsRepository(new TestRepository(true, comicsList, comics));
-        // Act
-        presenter.loadComics();
-        // Assert
-        Mockito.verify(viewState).showLoading(any());
-        Mockito.verify(viewState).hideLoading();
-        Mockito.verify(viewState).handleError(any(Throwable.class));
-    }
-
-    @Test
-    public void loadComicsSuccess() throws Exception {
-        // Arrange
-        List<Comics> comicsList = new ArrayList<>();
-        Comics comics = Mockito.mock(Comics.class);
-        RepositoryProvider.setComicsRepository(new TestRepository(false, comicsList, comics));
-        // Act
-        presenter.loadComics();
-        // Assert
-        Mockito.verify(viewState).showLoading(any());
-        Mockito.verify(viewState).hideLoading();
-        Mockito.verify(viewState).showItems(comicsList);
-    }
 
     @Test
     public void loadNextElementsError() throws Exception {
         // Arrange
-        List<Comics> comicsList = new ArrayList<>();
-        Comics comics = Mockito.mock(Comics.class);
-        RepositoryProvider.setComicsRepository(new TestRepository(true, comicsList, comics));
+        List<Creator> creatorList = new ArrayList<>();
+        Creator creator = Mockito.mock(Creator.class);
+        RepositoryProvider.setCreatorRepository(new TestRepository(true, creator, creatorList));
         // Act
         presenter.loadNextElements(anyInt());
         // Assert
@@ -140,26 +136,26 @@ public class ComicsListPresenterTest {
     @Test
     public void loadNextElementsSuccess() throws Exception {
         // Arrange
-        List<Comics> comicsList = new ArrayList<>();
-        Comics comics = Mockito.mock(Comics.class);
-        RepositoryProvider.setComicsRepository(new TestRepository(false, comicsList, comics));
+        List<Creator> creatorList = new ArrayList<>();
+        Creator creator = Mockito.mock(Creator.class);
+        RepositoryProvider.setCreatorRepository(new TestRepository(false, creator, creatorList));
         // Act
         presenter.loadNextElements(anyInt());
         // Assert
         Mockito.verify(viewState).showLoading(any());
         Mockito.verify(viewState).hideLoading();
         Mockito.verify(viewState).setNotLoading();
-        Mockito.verify(viewState).addMoreItems(comicsList);
+        Mockito.verify(viewState).addMoreItems(creatorList);
     }
 
     @Test
     public void onItemClick() throws Exception {
         // Arrange
-        Comics comics = Mockito.mock(Comics.class);
+        Creator creator = Mockito.mock(Creator.class);
         // Act
-        presenter.onItemClick(comics);
+        presenter.onItemClick(creator);
         // Assert
-        Mockito.verify(viewState).showDetails(comics);
+        Mockito.verify(viewState).showDetails(creator);
     }
 
     @Test
@@ -167,34 +163,33 @@ public class ComicsListPresenterTest {
         Mockito.verifyNoMoreInteractions(viewState);
     }
 
-    private class TestRepository implements ComicsRepository {
+    private class TestRepository implements CreatorRepository {
 
         private boolean error;
-        private List<Comics> comicsList;
-        private Comics comics;
+        private Creator creator;
+        private List<Creator> creatorList;
 
-        public TestRepository(boolean error, List<Comics> comicsList, Comics comics) {
+        public TestRepository(boolean error, Creator creator, List<Creator> creatorList) {
             this.error = error;
-            this.comicsList = comicsList;
-            this.comics = comics;
+            this.creator = creator;
+            this.creatorList = creatorList;
         }
 
-        @NonNull
         @Override
-        public Single<List<Comics>> comics(Long offset, Long limit, String sort) {
+        public Single<List<Creator>> creators(Long offset, Long limit, String sort) {
             if (this.error) {
                 return Single.error(new Throwable());
             } else {
-                return Single.just(this.comicsList);
+                return Single.just(this.creatorList);
             }
         }
 
         @Override
-        public Single<Comics> comics(Long id) {
+        public Single<Creator> creator(Long id) {
             if (this.error) {
                 return Single.error(new Throwable());
             } else {
-                return Single.just(this.comics);
+                return Single.just(this.creator);
             }
         }
     }

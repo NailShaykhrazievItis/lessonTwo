@@ -32,10 +32,8 @@ public class MockitoConfiguration extends DefaultMockitoConfiguration {
     }
 
     @NonNull
-    private RuntimeException createException(
-            InvocationOnMock invocation) {
-        String s = invocation.toString();
-        return new RuntimeException(
-                "No mock defined for invocation " + s);
+    private RuntimeException  createException(InvocationOnMock inv) {
+        String s = inv.toString();
+        return new RuntimeException("No mock defined for invocation " + s);
     }
 }

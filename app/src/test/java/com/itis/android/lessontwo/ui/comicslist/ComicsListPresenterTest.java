@@ -23,14 +23,14 @@ import java.util.List;
 
 import io.reactivex.Single;
 
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.anyString;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
-
 /**
- * Created by Nail Shaykhraziev on 18.03.2018.
+ * Created by valera071998@gmail.com on 23.03.2018.
  */
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({RxUtils.class, ApiFactory.class})
 public class ComicsListPresenterTest {

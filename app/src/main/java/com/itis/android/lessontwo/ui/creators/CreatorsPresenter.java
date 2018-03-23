@@ -1,5 +1,7 @@
 package com.itis.android.lessontwo.ui.creators;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
@@ -16,6 +18,7 @@ public class CreatorsPresenter extends MvpPresenter<CreatorsView> {
         getViewState().getCreatorById();
     }
 
+    @VisibleForTesting
     public void load(long id) {
         RepositoryProvider.provideCreatorRepository()
                 .creator(id)

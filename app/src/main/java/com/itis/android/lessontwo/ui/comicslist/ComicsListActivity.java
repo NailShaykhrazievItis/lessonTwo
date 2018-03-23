@@ -26,7 +26,7 @@ import java.util.List;
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
 
-public class ComicsListActivity extends BaseActivity implements ComicsListContract.View,
+public class ComicsListActivity extends BaseActivity implements ComicsListView,
         BaseAdapter.OnItemClickListener<Comics> {
 
     private ProgressBar progressBar;

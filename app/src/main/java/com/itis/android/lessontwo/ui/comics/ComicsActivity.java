@@ -27,7 +27,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity implements ComicsContract.View {
+public class ComicsActivity extends BaseActivity implements ComicsView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;

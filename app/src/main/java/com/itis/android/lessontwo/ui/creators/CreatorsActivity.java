@@ -20,7 +20,7 @@ import com.itis.android.lessontwo.utils.ImageLoadHelper;
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 
-public class CreatorsActivity extends BaseActivity implements CreatorContract.View {
+public class CreatorsActivity extends BaseActivity implements CreatorView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;

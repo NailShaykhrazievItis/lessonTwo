@@ -13,7 +13,6 @@ import com.itis.android.lessontwo.repository.RepositoryProvider;
  * Created by Nail Shaykhraziev on 26.02.2018.
  */
 
-
 @InjectViewState
 public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
 

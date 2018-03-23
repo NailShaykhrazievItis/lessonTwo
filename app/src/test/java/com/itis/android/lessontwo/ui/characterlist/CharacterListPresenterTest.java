@@ -24,7 +24,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * Created by Blaheart on 23.03.2018.
  */
 
-
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({RxUtils.class, ApiFactory.class})
 public class CharacterListPresenterTest {

@@ -1,5 +1,7 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.model.entity.comics.Comics;
@@ -21,7 +23,10 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
         loadComics();
     }
 
-    public void loadComics() {
+    @VisibleForTesting // TODO check access. By default it is PRIVATE.
+    // https://medium.com/modernnerd-code/java-for-humans-encapsulation-access-modifiers-a1ee247acb5e:
+    // In Java, by default fields, method, and classes are PACKAGE-PRIVATE
+    void loadComics() {
         RepositoryProvider.provideComicsRepository()
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .doOnSubscribe(getViewState()::showLoading)

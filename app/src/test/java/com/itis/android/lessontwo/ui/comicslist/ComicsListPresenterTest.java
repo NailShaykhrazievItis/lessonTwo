@@ -69,6 +69,7 @@ public class ComicsListPresenterTest {
         // Arrange
         Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
                         .thenReturn(Single.error(new Throwable()));
+        RepositoryProvider.setComicsRepository(repository);
         // Act
         presenter.loadComics();
         // Assert
@@ -83,6 +84,7 @@ public class ComicsListPresenterTest {
         List<Comics> comicsList = new ArrayList<>();
         Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.just(comicsList));
+        RepositoryProvider.setComicsRepository(repository);
         // Act
         presenter.loadComics();
         // Assert

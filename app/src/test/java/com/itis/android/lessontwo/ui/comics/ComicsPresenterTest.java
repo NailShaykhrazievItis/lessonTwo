@@ -3,6 +3,7 @@ package com.itis.android.lessontwo.ui.comics;
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.repository.ComicsRepositoryImpl;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.utils.RxUtils;
 
 import org.junit.Before;
@@ -48,7 +49,7 @@ public class ComicsPresenterTest {
     }
 
     @Test
-    protected void onFirstViewAttach() {
+    public void onFirstViewAttach() {
         // Arrange
         Mockito.doNothing().when(presenter).init(anyLong());
         // Act
@@ -62,6 +63,7 @@ public class ComicsPresenterTest {
         // Arrange
         Mockito.when(repository.comics(anyLong()))
                 .thenReturn(Single.error(new Throwable()));
+        RepositoryProvider.setComicsRepository(repository);
         // Act
         presenter.init(anyLong());
         // Assert
@@ -74,6 +76,7 @@ public class ComicsPresenterTest {
         Comics comics = Mockito.mock(Comics.class);
         Mockito.when(repository.comics(anyLong()))
                 .thenReturn(Single.just(comics));
+        RepositoryProvider.setComicsRepository(repository);
         // Act
         presenter.init(anyLong());
         // Assert

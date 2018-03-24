@@ -1,5 +1,7 @@
 package com.itis.android.lessontwo.ui.characterslist;
 
+import android.support.annotation.NonNull;
+
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.repository.CharacterRepository;
@@ -57,7 +59,7 @@ public class CharactersListPresenterTest {
     @Test
     public void onFirstViewAttach() throws Exception {
         // Arrange
-        Mockito.doNothing().when(repository.characters(anyLong(), anyLong(), anyString()));
+        Mockito.doNothing().when(presenter).load();
         // Act
         presenter.onFirstViewAttach();
         // Assert
@@ -69,6 +71,7 @@ public class CharactersListPresenterTest {
         // Arrange
         Mockito.when(repository.characters(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.error(new Throwable()));
+        RepositoryProvider.setCharacterRepository(repository);
         // Act
         presenter.load();
         // Assert
@@ -84,6 +87,7 @@ public class CharactersListPresenterTest {
         List<Character> characterList = new ArrayList<>();
         Mockito.when(repository.characters(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.just(characterList));
+        RepositoryProvider.setCharacterRepository(repository);
         // Act
         presenter.load();
         // Assert
@@ -97,13 +101,13 @@ public class CharactersListPresenterTest {
         // Arrange
         List<Character> characterList = new ArrayList<>();
         Character character = Mockito.mock(Character.class);
-        RepositoryProvider.setCharacterRepository(new TestRepository(false, character, characterList));
+        RepositoryProvider.setCharacterRepository(new TestRepository(true, character, characterList));
         // Act
         presenter.load();
         // Assert
         Mockito.verify(viewState).showLoading(any());
         Mockito.verify(viewState).hideLoading();
-        Mockito.verify(viewState).handleError(any(Throwable.class));
+        Mockito.verify(viewState).handleError(Mockito.any(Throwable.class));
     }
 
     @Test
@@ -126,14 +130,14 @@ public class CharactersListPresenterTest {
         // Arrange
         List<Character> characterList = new ArrayList<>();
         Character character = Mockito.mock(Character.class);
-        RepositoryProvider.setCharacterRepository(new TestRepository(false, character, characterList));
+        RepositoryProvider.setCharacterRepository(new TestRepository(true, character, characterList));
         // Act
         presenter.loadNextElements(anyInt());
         // Assert
         Mockito.verify(viewState).showLoading(any());
         Mockito.verify(viewState).hideLoading();
         Mockito.verify(viewState).setNotLoading();
-        Mockito.verify(viewState).handleError(any(Throwable.class));
+        Mockito.verify(viewState).handleError(Mockito.any(Throwable.class));
     }
 
     @Test
@@ -178,6 +182,7 @@ public class CharactersListPresenterTest {
             this.characterList = characterList;
         }
 
+        @NonNull
         @Override
         public Single<List<Character>> characters(Long offset, Long limit, String sort) {
             if (this.error) {

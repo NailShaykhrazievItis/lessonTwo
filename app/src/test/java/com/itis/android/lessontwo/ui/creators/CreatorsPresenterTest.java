@@ -3,6 +3,7 @@ package com.itis.android.lessontwo.ui.creators;
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.entity.creators.Creator;
 import com.itis.android.lessontwo.repository.CreatorRepositoryImpl;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.utils.RxUtils;
 
 import org.junit.Before;
@@ -62,6 +63,7 @@ public class CreatorsPresenterTest {
         // Arrange
         Mockito.when(repository.creator(anyLong()))
                 .thenReturn(Single.error(new Throwable()));
+        RepositoryProvider.setCreatorRepository(repository);
         // Act
         presenter.load(anyLong());
         // Assert
@@ -74,6 +76,7 @@ public class CreatorsPresenterTest {
         Creator creator = Mockito.mock(Creator.class);
         Mockito.when(repository.creator(anyLong()))
                 .thenReturn(Single.just(creator));
+        RepositoryProvider.setCreatorRepository(repository);
         // Act
         presenter.load(anyLong());
         // Assert

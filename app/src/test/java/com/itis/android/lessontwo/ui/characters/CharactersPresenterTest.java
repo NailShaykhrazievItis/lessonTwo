@@ -3,6 +3,7 @@ package com.itis.android.lessontwo.ui.characters;
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.model.entity.character.Character;
 import com.itis.android.lessontwo.repository.CharacterRepositoryImpl;
+import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.utils.RxUtils;
 
 import org.junit.Before;
@@ -62,6 +63,7 @@ public class CharactersPresenterTest {
         // Arrange
         Mockito.when(repository.character(anyLong()))
                 .thenReturn(Single.error(new Throwable()));
+        RepositoryProvider.setCharacterRepository(repository);
         // Act
         presenter.load(anyLong());
         // Assert
@@ -74,6 +76,7 @@ public class CharactersPresenterTest {
         Character character = Mockito.mock(Character.class);
         Mockito.when(repository.character(anyLong()))
                 .thenReturn(Single.just(character));
+        RepositoryProvider.setCharacterRepository(repository);
         // Act
         presenter.load(anyLong());
         // Assert

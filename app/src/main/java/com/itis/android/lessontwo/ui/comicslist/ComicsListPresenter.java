@@ -23,17 +23,15 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
         loadComics();
     }
 
-   /* @VisibleForTesting // TODO check access. By default it is PRIVATE.
-    // https://medium.com/modernnerd-code/java-for-humans-encapsulation-access-modifiers-a1ee247acb5e:
-    // In Java, by default fields, method, and classes are PACKAGE-PRIVATE
-    void loadComics() {
+    @VisibleForTesting
+    public void loadComics() {
         RepositoryProvider.provideComicsRepository()
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .doOnSubscribe(getViewState()::showLoading)
                 .doAfterTerminate(getViewState()::hideLoading)
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
-*/
+
     public void loadNextElements(int page) {
         RepositoryProvider.provideComicsRepository()
                 .comics(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
@@ -45,14 +43,5 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
 
     public void onItemClick(Comics comics) {
         getViewState().showDetails(comics);
-    }
-
-    @VisibleForTesting
-    void loadComics() {
-        RepositoryProvider.provideComicsRepository()
-                .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
-                .doOnSubscribe(getViewState()::showLoading)
-                .doAfterTerminate(getViewState()::hideLoading)
-                .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 }

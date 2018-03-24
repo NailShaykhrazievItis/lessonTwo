@@ -56,7 +56,7 @@ public class CreatorsListPresenterTest {
     @Test
     public void onFirstViewAttach() throws Exception {
         // Arrange
-        Mockito.doNothing().when(repository.creators(anyLong(), anyLong(), anyString()));
+        Mockito.doNothing().when(presenter).load();
         // Act
         presenter.onFirstViewAttach();
         // Assert
@@ -68,6 +68,8 @@ public class CreatorsListPresenterTest {
         // Arrange
         Mockito.when(repository.creators(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.error(new Throwable()));
+        RepositoryProvider.setCreatorRepository(repository);
+
         // Act
         presenter.load();
         // Assert
@@ -83,6 +85,7 @@ public class CreatorsListPresenterTest {
         List<Creator> creatorList = new ArrayList<>();
         Mockito.when(repository.creators(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.just(creatorList));
+        RepositoryProvider.setCreatorRepository(repository);
         // Act
         presenter.load();
         // Assert

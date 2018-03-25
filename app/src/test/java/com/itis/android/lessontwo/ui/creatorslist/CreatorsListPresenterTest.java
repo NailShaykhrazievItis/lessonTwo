@@ -69,7 +69,6 @@ public class CreatorsListPresenterTest {
         Mockito.when(repository.creators(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.error(new Throwable()));
         RepositoryProvider.setCreatorRepository(repository);
-
         // Act
         presenter.load();
         // Assert
@@ -77,7 +76,6 @@ public class CreatorsListPresenterTest {
         Mockito.verify(viewState).hideLoading();
         Mockito.verify(viewState).handleError(any(Throwable.class));
     }
-
 
     @Test
     public void loadCreatorsMockSuccess() throws Exception {
@@ -121,7 +119,6 @@ public class CreatorsListPresenterTest {
         Mockito.verify(viewState).hideLoading();
         Mockito.verify(viewState).showItems(creatorList);
     }
-
 
     @Test
     public void loadNextElementsError() throws Exception {

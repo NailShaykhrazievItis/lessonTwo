@@ -1,5 +1,6 @@
 package com.itis.android.lessontwo.ui.characters;
 
+import android.support.annotation.VisibleForTesting;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
@@ -16,7 +17,8 @@ public class CharacterPresenter extends MvpPresenter<CharacterView> {
         getViewState().getCharacterId();
     }
 
-    public void init(Long id) {
+    @VisibleForTesting
+    void init(Long id) {
         RepositoryProvider.provideCharactersRepostitory()
                 .characters(id)
                 .subscribe(character -> {

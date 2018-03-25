@@ -43,7 +43,6 @@ public class StoriesListActivity extends BaseActivity implements StoriesListView
         getLayoutInflater().inflate(R.layout.activity_stories_list, contentFrameLayout);
         initViews();
         initRecycler();
-        presenter.loadStories();
     }
 
     @Override

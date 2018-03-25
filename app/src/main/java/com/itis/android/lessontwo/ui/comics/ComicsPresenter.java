@@ -1,5 +1,7 @@
 package com.itis.android.lessontwo.ui.comics;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
@@ -16,7 +18,8 @@ public class ComicsPresenter extends MvpPresenter<ComicsView> {
         getViewState().getComicsId();
     }
 
-    public void init(Long id) {
+    @VisibleForTesting
+    void init(Long id) {
         RepositoryProvider.provideComicsRepository()
                 .comics(id)
                 .subscribe(comics -> {

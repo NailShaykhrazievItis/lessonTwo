@@ -1,5 +1,7 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
+import android.support.annotation.VisibleForTesting;
+
 import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
@@ -34,7 +36,8 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
         getViewState().showDetails(comics);
     }
 
-    private void loadComics() {
+    @VisibleForTesting
+    void loadComics() {
         RepositoryProvider.provideComicsRepository()
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .doOnSubscribe(getViewState()::showLoading)

@@ -13,7 +13,7 @@ public class CharacterPresenter extends MvpPresenter<CharacterView> {
         getViewState().getCharacterId();
     }
 
-    public void init(final long id) {
+    public void init(long id) {
         RepositoryProvider.provideCharacterRepository()
                 .character(id)
                 .subscribe(character -> {

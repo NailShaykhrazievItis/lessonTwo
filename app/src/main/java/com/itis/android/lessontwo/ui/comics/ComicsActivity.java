@@ -9,12 +9,10 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.PresenterType;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
@@ -64,19 +62,19 @@ public class ComicsActivity extends BaseActivity implements ComicsView {
     }
 
     @Override
-    public void setPageCount(final Comics comics) {
+    public void setPageCount(Comics comics) {
         tvPages.setText(String.valueOf(comics.getPageCount()));
     }
 
     @Override
-    public void setPrice(final Comics comics) {
+    public void setPrice(Comics comics) {
         if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
             tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
     }
 
     @Override
-    public void setDescription(final Comics comics) {
+    public void setDescription(Comics comics) {
         if (comics.getTextObjects() != null) {
             StringBuilder description = new StringBuilder();
             for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
@@ -88,7 +86,7 @@ public class ComicsActivity extends BaseActivity implements ComicsView {
     }
 
     @Override
-    public void setImage(final Comics comics) {
+    public void setImage(Comics comics) {
         if (comics.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
                     comics.getImage().getExtension()));

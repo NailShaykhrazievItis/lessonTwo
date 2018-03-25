@@ -46,27 +46,27 @@ public class CharacterListActivity extends BaseActivity implements CharacterList
     }
 
     @Override
-    public void onItemClick(@NonNull final Character item) {
+    public void onItemClick(@NonNull Character item) {
         presenter.onItemClick(item);
     }
 
     @Override
-    public void handleError(final Throwable error) {
+    public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void showItems(@NonNull final List<Character> items) {
+    public void showItems(@NonNull List<Character> items) {
         adapter.changeDataSet(items);
     }
 
     @Override
-    public void showDetails(final Character item) {
+    public void showDetails(Character item) {
         CharacterActivity.start(this, item);
     }
 
     @Override
-    public void addMoreItems(final List<Character> items) {
+    public void addMoreItems(List<Character> items) {
         adapter.addAll(items);
     }
 
@@ -76,7 +76,7 @@ public class CharacterListActivity extends BaseActivity implements CharacterList
     }
 
     @Override
-    public void showLoading(final Disposable disposable) {
+    public void showLoading(Disposable disposable) {
         progressBar.setVisibility(View.VISIBLE);
     }
 

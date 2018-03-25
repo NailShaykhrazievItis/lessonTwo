@@ -12,7 +12,7 @@ import com.itis.android.lessontwo.repository.RepositoryProvider;
 public class CreatorPresenter extends MvpPresenter<CreatorView> {
 
     @Override
-    protected void onFirstViewAttach() {
+    public void onFirstViewAttach() {
         super.onFirstViewAttach();
         getViewState().getCreatorId();
     }

@@ -16,7 +16,7 @@ public class CreatorRepositoryImpl implements CreatorRepository {
 
     @NonNull
     @Override
-    public Single<List<Creator>> creators(final Long offset, final Long limit) {
+    public Single<List<Creator>> creators(Long offset, Long limit) {
         return ApiFactory.getCreatorsService()
                 .creators(offset, limit)
                 .map(CreatorResponse::getData)
@@ -27,7 +27,7 @@ public class CreatorRepositoryImpl implements CreatorRepository {
     }
 
     @Override
-    public Single<Creator> creator(final Long id) {
+    public Single<Creator> creator(Long id) {
         return ApiFactory.getCreatorsService()
                 .creators(id)
                 .map(CreatorResponse::getData)

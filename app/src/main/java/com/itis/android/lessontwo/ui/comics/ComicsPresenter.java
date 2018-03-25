@@ -13,7 +13,7 @@ public class ComicsPresenter extends MvpPresenter<ComicsView> {
         getViewState().getComicsId();
     }
 
-    public void init(final long id) {
+    public void init(long id) {
         RepositoryProvider.provideComicsRepository()
                 .comics(id)
                 .subscribe(comics -> {

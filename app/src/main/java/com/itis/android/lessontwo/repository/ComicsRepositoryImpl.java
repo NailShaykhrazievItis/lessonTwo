@@ -33,7 +33,7 @@ public class ComicsRepositoryImpl implements ComicsRepository {
     }
 
     @Override
-    public Single<Comics> comics(final Long id) {
+    public Single<Comics> comics(Long id) {
         return ApiFactory.getComicsService()
                 .comics(id)
                 .map(ComicsResponse::getData)

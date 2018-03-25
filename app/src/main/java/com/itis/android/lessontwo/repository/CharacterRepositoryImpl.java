@@ -16,7 +16,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
     @NonNull
     @Override
-    public Single<List<Character>> characters(final Long offset, final Long limit) {
+    public Single<List<Character>> characters(Long offset, Long limit) {
         return ApiFactory.getCharactersService()
                 .characters(offset, limit)
                 .map(CharactersResponse::getData)
@@ -27,7 +27,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
 
     @Override
-    public Single<Character> character(final Long id) {
+    public Single<Character> character(Long id) {
         return ApiFactory.getCharactersService()
                 .character(id)
                 .map(CharactersResponse::getData)

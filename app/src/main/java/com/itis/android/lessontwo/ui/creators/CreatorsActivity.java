@@ -56,7 +56,7 @@ public class CreatorsActivity extends BaseActivity implements CreatorView {
     }
 
     @Override
-    public void setImage(final Creator creator) {
+    public void setImage(Creator creator) {
         if (creator.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", creator.getImage().getPath(),
                     creator.getImage().getExtension()));
@@ -66,17 +66,17 @@ public class CreatorsActivity extends BaseActivity implements CreatorView {
     }
 
     @Override
-    public void setName(final Creator creator) {
+    public void setName(Creator creator) {
         tvName.setText(creator.getName());
     }
 
     @Override
-    public void setStories(final Creator creator) {
+    public void setStories(Creator creator) {
         tvStories.setText(creator.getDescription());
     }
 
     @Override
-    public void handleError(final Throwable error) {
+    public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 

@@ -37,7 +37,7 @@ public class RepositoryProvider {
     }
 
     public static void setComicsRepository(ComicsRepository repository) {
-        comicsRepository = repository;
+        RepositoryProvider.comicsRepository = repository;
     }
 
     public static void setCharactersRepository(CharactersRepository repository) {

@@ -3,7 +3,6 @@ package com.itis.android.lessontwo.ui.characterlist;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.mockito.Mockito.*;
-import static org.powermock.api.support.membermodification.MemberMatcher.everythingDeclaredIn;
 
 import android.support.annotation.NonNull;
 import com.itis.android.lessontwo.api.ApiFactory;
@@ -41,7 +40,7 @@ public class CharacterListPresenterTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        presenter = Mockito.spy(CharacterListPresenter.class);
+        presenter = spy(CharacterListPresenter.class);
         presenter.setViewState(viewState);
         mockStatic(RxUtils.class);
         mockStatic(ApiFactory.class);

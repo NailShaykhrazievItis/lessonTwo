@@ -23,9 +23,6 @@ public class Creator extends RealmObject implements ListItem {
     @SerializedName("stories")
     private CreatorStoryList stories;
 
-    public Creator() {
-    }
-
     public void setId(Long id) {
         this.id = id;
     }

@@ -32,7 +32,6 @@ android {
 ext {
     commons_codec = "1.11"
     gson = "2.8.2"
-    moxy = "1.5.3"
     okhttp = "3.9.1"
     okhttp3downloader = "1.1.0"
     picasso = "2.5.2"
@@ -43,43 +42,62 @@ ext {
     rxdebug = "1.2.0"
     reactive_streams = "1.0.0"
     retrofit = "2.3.0"
+    moxy = "1.5.3"
+    mockito = "2.13.0"
+    power = "2.0.0-beta.5"
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     // Support
     implementation "com.android.support:appcompat-v7:${support}"
     implementation "com.android.support:design:${support}"
     implementation "com.android.support:recyclerview-v7:${support}"
+
     // Rx
     implementation "io.reactivex.rxjava2:rxjava:${rxjava}"
     implementation "io.reactivex.rxjava2:rxandroid:${rxandroid}"
     implementation "com.akaita.java:rxjava2-debug:${rxdebug}"
     implementation "org.reactivestreams:reactive-streams:${reactive_streams}"
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${retrofit}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${retrofit}"
+
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:${okhttp}"
     implementation "com.squareup.okhttp3:logging-interceptor:${okhttp}"
+
     // Gson
     implementation "com.google.code.gson:gson:${gson}"
+
     // Picasso
     implementation "com.squareup.picasso:picasso:${picasso}"
     implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:${okhttp3downloader}"
+
     // Stetho
     implementation "com.facebook.stetho:stetho:${stetho}"
     implementation "com.facebook.stetho:stetho-okhttp3:${stetho}"
+
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:${mockito}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp}"
+    testImplementation "org.powermock:powermock-api-mockito2:${power}"
+    testImplementation "org.powermock:powermock-module-junit4:${power}"
+    testImplementation "org.powermock:powermock-module-junit4-rule:${power}"
+
+    testImplementation "org.powermock:powermock-classloading-xstream:${power}"
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
     // Moxy
     implementation "com.arello-mobile:moxy:${moxy}"
     implementation "com.arello-mobile:moxy-app-compat:${moxy}"
     annotationProcessor "com.arello-mobile:moxy-compiler:${moxy}"
-
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

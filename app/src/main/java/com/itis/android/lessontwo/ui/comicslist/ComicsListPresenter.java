@@ -1,8 +1,10 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
@@ -21,7 +23,16 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
         loadComics();
     }
 
-    void loadNextElements(int page) {
+    @VisibleForTesting
+    public void loadComics() {
+        RepositoryProvider.provideComicsRepository()
+                .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
+                .doOnSubscribe(getViewState()::showLoading)
+                .doAfterTerminate(getViewState()::hideLoading)
+                .subscribe(getViewState()::showItems, getViewState()::handleError);
+    }
+
+    public void loadNextElements(int page) {
         RepositoryProvider.provideComicsRepository()
                 .comics(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .doOnSubscribe(getViewState()::showLoading)
@@ -30,15 +41,7 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
                 .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 
-    void onItemClick(Comics comics) {
+    public void onItemClick(Comics comics) {
         getViewState().showDetails(comics);
-    }
-
-    private void loadComics() {
-        RepositoryProvider.provideComicsRepository()
-                .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
-                .doOnSubscribe(getViewState()::showLoading)
-                .doAfterTerminate(getViewState()::hideLoading)
-                .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 }

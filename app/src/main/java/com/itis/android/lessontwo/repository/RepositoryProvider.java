@@ -42,4 +42,16 @@ public class RepositoryProvider {
     public static void init() {
         comicsRepository = new ComicsRepositoryImpl();
     }
+
+    public static void setComicsRepository(ComicsRepository comicsRepository) {
+        RepositoryProvider.comicsRepository = comicsRepository;
+    }
+
+    public static void setCharacterRepository(CharacterRepository characterRepository) {
+        RepositoryProvider.characterRepository = characterRepository;
+    }
+
+    public static void setCreatorRepository(CreatorRepository creatorRepository) {
+        RepositoryProvider.creatorRepository = creatorRepository;
+    }
 }

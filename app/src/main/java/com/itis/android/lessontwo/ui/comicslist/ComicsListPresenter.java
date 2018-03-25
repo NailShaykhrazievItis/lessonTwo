@@ -1,5 +1,7 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.model.entity.comics.Comics;
@@ -21,6 +23,7 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
         loadComics();
     }
 
+    @VisibleForTesting
     public void loadComics() {
         RepositoryProvider.provideComicsRepository()
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)

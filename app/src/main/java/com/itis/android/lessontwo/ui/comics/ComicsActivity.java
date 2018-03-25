@@ -30,24 +30,17 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 public class ComicsActivity extends BaseActivity implements ComicsView {
 
     private CollapsingToolbarLayout collapsingToolbar;
-
     private Toolbar toolbar;
-
     private ImageView ivCover;
-
     private TextView tvDescription;
-
     private TextView tvPrice;
-
     private TextView tvPages;
-
     private ProgressBar progressBar;
 
     @InjectPresenter
     ComicsPresenter presenter;
 
     private Long id;
-
 
     public static void start(@NonNull Activity activity, @NonNull Comics comics) {
         Intent intent = new Intent(activity, ComicsActivity.class);
@@ -62,7 +55,6 @@ public class ComicsActivity extends BaseActivity implements ComicsView {
         FrameLayout contentFrameLayout = findViewById(R.id.container);
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);
         initViews();
-
         id = getIntent().getLongExtra(ID_KEY, 0);
     }
 
@@ -83,7 +75,7 @@ public class ComicsActivity extends BaseActivity implements ComicsView {
 
     @Override
     public void setPrice(Comics comics) {
-        if (comics.getPrices() != null) {
+        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
             tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
     }
@@ -103,8 +95,10 @@ public class ComicsActivity extends BaseActivity implements ComicsView {
     @Override
     public void setImage(Comics comics) {
         if (comics.getImage() != null) {
-            ImageLoadHelper.loadPicture(ivCover,
-                    String.format("%s.%s", comics.getImage().getPath(), comics.getImage().getExtension()));
+            ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
+                    comics.getImage().getExtension()));
+        } else {
+            ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
     }
 

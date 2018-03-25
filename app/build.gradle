@@ -43,6 +43,8 @@ ext {
     reactive_streams = "1.0.0"
     retrofit = "2.3.0"
     moxy = "1.5.3"
+    mockito = "2.13.0"
+    power = "2.0.0-beta.5"
 }
 
 dependencies {
@@ -82,7 +84,15 @@ dependencies {
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:${mockito}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp}"
+    testImplementation "org.powermock:powermock-api-mockito2:${power}"
+    testImplementation "org.powermock:powermock-module-junit4:${power}"
+    testImplementation "org.powermock:powermock-module-junit4-rule:${power}"
+
+    testImplementation "org.powermock:powermock-classloading-xstream:${power}"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 

@@ -7,9 +7,7 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.itis.android.lessontwo.model.entity.comics.Comics;
-
 import java.util.List;
-
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -32,5 +30,7 @@ public interface ComicsListView extends MvpView {
 
     void hideLoading();
 
-    void showDetails(Comics comics);
+    //* Navigation methods*/
+    void showDetails(Comics item);
+
 }

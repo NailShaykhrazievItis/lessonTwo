@@ -1,5 +1,7 @@
 package com.itis.android.lessontwo.ui.characterslist;
 
+import android.support.annotation.VisibleForTesting;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.model.entity.character.Character;
@@ -21,6 +23,7 @@ public class CharactersListPresenter extends MvpPresenter<CharactersListView> {
         load();
     }
 
+    @VisibleForTesting
     public void load() {
         RepositoryProvider.provideCharacterRepository()
                 .characters(ZERO_OFFSET, PAGE_SIZE, DEFAULT_CHARACTER_SORT)

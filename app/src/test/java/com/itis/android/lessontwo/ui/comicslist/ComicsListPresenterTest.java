@@ -106,6 +106,7 @@ public class ComicsListPresenterTest {
         Mockito.verify(viewState).hideLoading();
         Mockito.verify(viewState).handleError(Mockito.any(Throwable.class));
     }
+
     @Test
     public void loadComicsSuccess() throws Exception {
         // Arrange

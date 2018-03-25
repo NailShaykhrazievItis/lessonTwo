@@ -80,7 +80,6 @@ public class CharactersListPresenterTest {
         Mockito.verify(viewState).handleError(any(Throwable.class));
     }
 
-
     @Test
     public void loadCreatorsMockSuccess() throws Exception {
         // Arrange
@@ -123,7 +122,6 @@ public class CharactersListPresenterTest {
         Mockito.verify(viewState).hideLoading();
         Mockito.verify(viewState).showItems(characterList);
     }
-
 
     @Test
     public void loadNextElementsError() throws Exception {

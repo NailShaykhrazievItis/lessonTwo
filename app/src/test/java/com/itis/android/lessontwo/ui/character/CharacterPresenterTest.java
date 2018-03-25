@@ -50,6 +50,7 @@ public class CharacterPresenterTest {
         mockStatic(ApiFactory.class);
         mockStatic(RxUtils.class);
     }
+
     @Test
     public void onFirstViewAttach() throws Exception {
         //Arrange

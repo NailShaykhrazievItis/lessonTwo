@@ -36,6 +36,18 @@ public class RepositoryProvider {
         return storiesRepository;
     }
 
+    public static void setComicsRepository(ComicsRepository repository) {
+        comicsRepository = repository;
+    }
+
+    public static void setCharactersRepository(CharactersRepository repository) {
+        charactersRepository = repository;
+    }
+
+    public static void setStoriesRepository(StoriesRepository repository) {
+        storiesRepository = repository;
+    }
+
     @MainThread
     public static void init() {
         comicsRepository = new ComicsRepositoryImpl();

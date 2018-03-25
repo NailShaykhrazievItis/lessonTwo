@@ -3,6 +3,7 @@ package com.itis.android.lessontwo.ui.storieslist;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
+import android.support.annotation.VisibleForTesting;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
@@ -27,7 +28,8 @@ public class StoriesListPresenter extends MvpPresenter<StoriesListView> {
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 
-    public void loadNextElements(int page) {
+    @VisibleForTesting
+    void loadNextElements(int page) {
         RepositoryProvider.provideStoriesRepostitory()
                 .stories(page * PAGE_SIZE, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)

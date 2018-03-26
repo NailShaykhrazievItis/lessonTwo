@@ -73,6 +73,7 @@ public class CreatorListPresenterTest {
         MockitoAnnotations.initMocks(this);
         presenter = spy(CreatorListPresenter.class);
         presenter.setViewState(viewState);
+        RepositoryProvider.setCreatorRepository(repository);
         mockStatic(RxUtils.class);
         mockStatic(ApiFactory.class);
     }

@@ -16,5 +16,7 @@ public interface ComicsRepository {
     @NonNull
     Single<List<Comics>> comics(Long offset, Long limit, String sort);
 
+    Single<List<Comics>> comicsTest(Long offset, Long limit, String sort);
+
     Single<Comics> comics(Long id);
 }

@@ -17,7 +17,7 @@ import com.itis.android.lessontwo.utils.RxUtils;
 public class CreatorPresenter extends MvpPresenter<CreatorsView> {
 
     @Override
-    protected void onFirstViewAttach() {
+    public void onFirstViewAttach() {
         super.onFirstViewAttach();
         getViewState().getCreatorId();
     }

@@ -3,6 +3,10 @@ package com.itis.android.lessontwo.repository;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 
+import com.itis.android.lessontwo.repository.characters.CharactersRepository;
+import com.itis.android.lessontwo.repository.characters.CharactersRepositoryImpl;
+import com.itis.android.lessontwo.repository.comics.ComicsRepository;
+import com.itis.android.lessontwo.repository.comics.ComicsRepositoryImpl;
 import com.itis.android.lessontwo.repository.creators.CreatorsRepository;
 import com.itis.android.lessontwo.repository.creators.CreatorsRepositoryImpl;
 
@@ -44,5 +48,17 @@ public class RepositoryProvider {
     public static void init() {
         creatorsRepository = new CreatorsRepositoryImpl();
         charactersRepository = new CharactersRepositoryImpl();
+    }
+
+    public static void setComicsRepository(ComicsRepository comicsRepository) {
+        RepositoryProvider.comicsRepository = comicsRepository;
+    }
+
+    public static void setCharacterRepository(CharactersRepository characterRepository) {
+        RepositoryProvider.charactersRepository = characterRepository;
+    }
+
+    public static void setCreatorRepository(CreatorsRepository creatorRepository) {
+        RepositoryProvider.creatorsRepository = creatorRepository;
     }
 }

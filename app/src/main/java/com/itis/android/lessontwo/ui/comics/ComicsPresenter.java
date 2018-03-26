@@ -1,10 +1,8 @@
 package com.itis.android.lessontwo.ui.comics;
 
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
-
 
 /**
  * Created by Tony on 3/5/2018.
@@ -13,7 +11,7 @@ import com.itis.android.lessontwo.repository.RepositoryProvider;
 public class ComicsPresenter extends MvpPresenter<ComicsView> {
 
     @Override
-    protected void onFirstViewAttach() {
+    public void onFirstViewAttach() {
         super.onFirstViewAttach();
         getViewState().getComicsId();
     }

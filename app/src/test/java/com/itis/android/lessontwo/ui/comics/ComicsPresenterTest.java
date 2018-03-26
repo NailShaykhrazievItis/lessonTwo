@@ -41,7 +41,7 @@ public class ComicsPresenterTest {
         MockitoAnnotations.initMocks(this);
         presenter = spy(ComicsPresenter.class);
         presenter.setViewState(viewState);
-        repository = mock(ComicsRepository.class);
+        RepositoryProvider.setComicsRepository(repository);
         mockStatic(ApiFactory.class);
         mockStatic(RxUtils.class);
     }

@@ -2,12 +2,7 @@ package com.itis.android.lessontwo.ui.character;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 import android.support.annotation.NonNull;
@@ -47,6 +42,7 @@ public class CharacterPresenterTest {
         MockitoAnnotations.initMocks(this);
         presenter = spy(CharacterPresenter.class);
         presenter.setViewState(viewState);
+        RepositoryProvider.setCharacterRepository(repository);
         mockStatic(ApiFactory.class);
         mockStatic(RxUtils.class);
     }

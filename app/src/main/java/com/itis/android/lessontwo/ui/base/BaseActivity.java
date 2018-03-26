@@ -15,7 +15,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.ui.characterslist.CharactersListActivity;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
-import com.itis.android.lessontwo.ui.seriesList.SeriesListActivity;
+import com.itis.android.lessontwo.ui.serieslist.SeriesListActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 public abstract class BaseActivity extends MvpAppCompatActivity {

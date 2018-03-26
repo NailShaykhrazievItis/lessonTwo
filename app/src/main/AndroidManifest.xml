@@ -36,7 +36,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.characterslist.CharactersListActivity" />
         </activity>
-        <activity android:name=".ui.seriesList.SeriesListActivity" />
+        <activity android:name=".ui.serieslist.SeriesListActivity" />
         <activity android:name=".ui.series.SeriesActivity"></activity>
     </application>
 

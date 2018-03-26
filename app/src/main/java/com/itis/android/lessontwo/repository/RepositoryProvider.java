@@ -20,12 +20,20 @@ public class RepositoryProvider {
         return comicsRepository;
     }
 
+    public static void setComicsRepository(ComicsRepository comicsRepository) {
+        RepositoryProvider.comicsRepository = comicsRepository;
+    }
+
     @NonNull
     public static CharacterRepository provideCharacterRepository() {
-        if(characterRepository == null){
+        if (characterRepository == null) {
             characterRepository = new CharacterRepositoryImpl();
         }
         return characterRepository;
+    }
+
+    public static void setCharactersRepository(CharacterRepository charactersRepository) {
+        RepositoryProvider.characterRepository = charactersRepository;
     }
 
     @NonNull
@@ -36,6 +44,9 @@ public class RepositoryProvider {
         return seriesRepository;
     }
 
+    public static void setSeriesRepository(SeriesRepository seriesRepository) {
+        RepositoryProvider.seriesRepository = seriesRepository;
+    }
 
     @MainThread
     public static void init() {

@@ -20,6 +20,7 @@ public final class ApiFactory {
 
     private static volatile ComicsService comicsService;
     private static volatile CharactersService charactersService;
+    private static volatile CreatorsService creatorsService;
 
     private ApiFactory() {
     }
@@ -52,11 +53,26 @@ public final class ApiFactory {
         return service;
     }
 
+    @NonNull
+    public static CreatorsService getCreatorsService() {
+        CreatorsService service = creatorsService;
+        if (service == null) {
+            synchronized (ApiFactory.class) {
+                service = creatorsService;
+                if (service == null) {
+                    service = creatorsService = buildRetrofit().create(CreatorsService.class);
+                }
+            }
+        }
+        return service;
+    }
+
     public static void recreate() {
         sClient = null;
         sClient = getClient();
         comicsService = buildRetrofit().create(ComicsService.class);
         charactersService = buildRetrofit().create(CharactersService.class);
+        creatorsService = buildRetrofit().create(CreatorsService.class);
     }
 
     @NonNull

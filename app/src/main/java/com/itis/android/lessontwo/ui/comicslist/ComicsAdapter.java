@@ -1,13 +1,10 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.general.ListItem;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
-import com.itis.android.lessontwo.ui.general.ListItemHolder;
 
 import java.util.List;
 
@@ -21,13 +18,14 @@ public class ComicsAdapter extends BaseAdapter<Comics, ComicsItemHolder>{
         super(items);
     }
 
+    @NonNull
     @Override
-    public ComicsItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ComicsItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return ComicsItemHolder.create(parent.getContext());
     }
 
     @Override
-    public void onBindViewHolder(ComicsItemHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ComicsItemHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         Comics item = getItem(position);
         holder.bind(item);

@@ -1,44 +1,40 @@
-package com.itis.android.lessontwo.ui.comicslist;
+package com.itis.android.lessontwo.ui.characterlist;
 
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
-/**
- * Created by Nail Shaykhraziev on 26.02.2018.
- */
-
 @InjectViewState
-public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
+public class CharacterListPresenter extends MvpPresenter<CharacterListView> {
 
-    public void loadComics() {
-        RepositoryProvider.provideComicsRepository()
-                .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
+    @Override
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        loadCharacters();
+    }
+
+    public void loadCharacters() {
+        RepositoryProvider.provideCharacterRepository()
+                .characters(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)
                 .doAfterTerminate(getViewState()::hideLoading)
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 
     public void loadNextElements(int page) {
-        RepositoryProvider.provideComicsRepository()
-                .comics(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
+        RepositoryProvider.provideCharacterRepository()
+                .characters(page * PAGE_SIZE, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)
                 .doAfterTerminate(getViewState()::hideLoading)
                 .doAfterTerminate(getViewState()::setNotLoading)
                 .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 
-    public void onItemClick(Comics comics) {
-        getViewState().showDetails(comics);
-    }
-
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
-        loadComics();
+    public void onItemClick(Character character) {
+        getViewState().showDetails(character);
     }
 }

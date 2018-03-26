@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.seriesList;
+package com.itis.android.lessontwo.ui.serieslist;
 
 import android.app.Activity;
 import android.content.Intent;

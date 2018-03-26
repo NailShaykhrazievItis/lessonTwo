@@ -1,13 +1,14 @@
 package com.itis.android.lessontwo.ui.characterslist;
 
-import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
-import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
+import android.support.annotation.VisibleForTesting;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
+
+import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
+import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
 /**
  * Created by Home on 04.03.2018.
@@ -34,7 +35,8 @@ public class CharactersListPresenter extends MvpPresenter<CharactersListView> {
         getViewState().showDetails(character);
     }
 
-    private void loadCharacters() {
+    @VisibleForTesting
+    public void loadCharacters() {
         RepositoryProvider.provideCharacterRepository()
                 .characters(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)

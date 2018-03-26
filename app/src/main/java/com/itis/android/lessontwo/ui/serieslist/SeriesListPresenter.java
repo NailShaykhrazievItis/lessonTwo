@@ -1,4 +1,6 @@
-package com.itis.android.lessontwo.ui.seriesList;
+package com.itis.android.lessontwo.ui.serieslist;
+
+import android.support.annotation.VisibleForTesting;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -33,7 +35,8 @@ public class SeriesListPresenter extends MvpPresenter<SeriesListView> {
         getViewState().showDetails(series);
     }
 
-    private void loadSeries() {
+    @VisibleForTesting
+    public void loadSeries() {
         RepositoryProvider.provideSeriesRepository()
                 .series(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)

@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.repository;
+package com.itis.android.lessontwo.repository.characters;
 
 import android.support.annotation.NonNull;
 import com.itis.android.lessontwo.model.character.Character;

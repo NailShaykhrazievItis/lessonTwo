@@ -21,7 +21,7 @@ import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 public class CreatorsListPresenter extends MvpPresenter<CreatorsListView> {
 
     @Override
-    protected void onFirstViewAttach() {
+    public void onFirstViewAttach() {
         super.onFirstViewAttach();
         loadCreators();
     }

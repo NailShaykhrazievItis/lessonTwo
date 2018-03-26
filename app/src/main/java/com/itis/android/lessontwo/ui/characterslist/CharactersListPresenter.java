@@ -36,7 +36,7 @@ public class CharactersListPresenter extends MvpPresenter<CharactersListView> {
     }
 
     @VisibleForTesting
-    public void loadCharacters() {
+    void loadCharacters() {
         RepositoryProvider.provideCharacterRepository()
                 .characters(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)

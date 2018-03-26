@@ -36,7 +36,7 @@ public class SeriesListPresenter extends MvpPresenter<SeriesListView> {
     }
 
     @VisibleForTesting
-    public void loadSeries() {
+    void loadSeries() {
         RepositoryProvider.provideSeriesRepository()
                 .series(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)

@@ -23,7 +23,7 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
         loadComics();
     }
 
-    void loadNextElements(int page){
+    void loadNextElements(int page) {
         RepositoryProvider.provideComicsRepository()
                 .comics(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .doOnSubscribe(getViewState()::showLoading)
@@ -37,7 +37,7 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
     }
 
     @VisibleForTesting
-    public void loadComics() {
+    void loadComics() {
         RepositoryProvider.provideComicsRepository()
                 .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .doOnSubscribe(getViewState()::showLoading)

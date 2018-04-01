@@ -33,6 +33,7 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({RxUtils.class, ApiFactory.class})
 public class ComicsPresenterTest {
+
     @SuppressWarnings("WeakerAccess")
     @Mock
     ComicsView$$State viewState;

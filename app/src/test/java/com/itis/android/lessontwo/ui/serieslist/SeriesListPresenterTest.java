@@ -34,7 +34,6 @@ import static org.powermock.api.mockito.PowerMockito.mockStatic;
 @PrepareForTest({RxUtils.class, ApiFactory.class})
 public class SeriesListPresenterTest {
 
-
     @SuppressWarnings("WeakerAccess")
     @Mock
     SeriesListView$$State viewState;

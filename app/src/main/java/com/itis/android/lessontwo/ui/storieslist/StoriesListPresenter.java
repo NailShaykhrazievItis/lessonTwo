@@ -21,7 +21,7 @@ public class StoriesListPresenter extends MvpPresenter<StoriesListView> {
     }
 
     public void loadStories() {
-        RepositoryProvider.provideStoriesRepostitory()
+        RepositoryProvider.provideStoriesRepository()
                 .stories(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)
                 .doAfterTerminate(getViewState()::hideLoading)
@@ -30,7 +30,7 @@ public class StoriesListPresenter extends MvpPresenter<StoriesListView> {
 
     @VisibleForTesting
     void loadNextElements(int page) {
-        RepositoryProvider.provideStoriesRepostitory()
+        RepositoryProvider.provideStoriesRepository()
                 .stories(page * PAGE_SIZE, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)
                 .doAfterTerminate(getViewState()::hideLoading)

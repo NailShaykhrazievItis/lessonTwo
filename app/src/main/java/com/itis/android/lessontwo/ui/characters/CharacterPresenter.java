@@ -19,7 +19,7 @@ public class CharacterPresenter extends MvpPresenter<CharacterView> {
 
     @VisibleForTesting
     void init(Long id) {
-        RepositoryProvider.provideCharactersRepostitory()
+        RepositoryProvider.provideCharactersRepository()
                 .characters(id)
                 .subscribe(character -> {
                     getViewState().setImage(character);

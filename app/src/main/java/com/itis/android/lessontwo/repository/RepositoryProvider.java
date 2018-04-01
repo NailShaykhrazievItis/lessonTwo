@@ -21,7 +21,7 @@ public class RepositoryProvider {
     }
 
     @NonNull
-    public static CharactersRepository provideCharactersRepostitory() {
+    public static CharactersRepository provideCharactersRepository() {
         if (charactersRepository == null) {
             charactersRepository = new CharactersRepositoryImpl();
         }
@@ -29,7 +29,7 @@ public class RepositoryProvider {
     }
 
     @NonNull
-    public static StoriesRepository provideStoriesRepostitory() {
+    public static StoriesRepository provideStoriesRepository() {
         if (storiesRepository == null) {
             storiesRepository = new StoriesRepositoryImpl();
         }

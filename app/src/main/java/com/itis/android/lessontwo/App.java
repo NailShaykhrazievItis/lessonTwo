@@ -1,11 +1,15 @@
 package com.itis.android.lessontwo;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.annotation.NonNull;
+
 import com.facebook.stetho.Stetho;
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.rx.RealmObservableFactory;
@@ -15,6 +19,13 @@ import io.realm.rx.RealmObservableFactory;
  */
 
 public class App extends Application {
+
+    private static Context sContext;
+
+    @NonNull
+    public static Context getsContext() {
+        return sContext;
+    }
 
     @Override
     public void onCreate() {

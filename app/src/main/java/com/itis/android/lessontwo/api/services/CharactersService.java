@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.api;
+package com.itis.android.lessontwo.api.services;
 
 import com.itis.android.lessontwo.model.character.CharactersResponse;
 import io.reactivex.Single;
@@ -17,4 +17,7 @@ public interface CharactersService {
 
     @GET("characters/{characterId}")
     Single<CharactersResponse> characters(@Path("characterId") Long id);
+
+    @GET("characters_test")
+    Single<CharactersResponse> charactersTest(@Query("offset") Long offset, @Query("limit") Long limit);
 }

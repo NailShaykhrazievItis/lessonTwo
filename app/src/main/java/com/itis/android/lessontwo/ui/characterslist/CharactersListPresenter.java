@@ -2,7 +2,6 @@ package com.itis.android.lessontwo.ui.characterslist;
 
 import android.support.annotation.VisibleForTesting;
 
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 
@@ -24,7 +23,7 @@ public class CharactersListPresenter extends MvpPresenter<CharactersListView> {
     }
 
     void loadNextElements(int page) {
-        RepositoryProvider.provideCharactersRepostitory()
+        RepositoryProvider.provideCharactersRepository()
                 .characters(page * PAGE_SIZE, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)
                 .doAfterTerminate(getViewState()::hideLoading)
@@ -39,7 +38,7 @@ public class CharactersListPresenter extends MvpPresenter<CharactersListView> {
 
     @VisibleForTesting
     void loadCharacters() {
-        RepositoryProvider.provideCharactersRepostitory()
+        RepositoryProvider.provideCharactersRepository()
                 .characters(ZERO_OFFSET, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)
                 .doAfterTerminate(getViewState()::hideLoading)

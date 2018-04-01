@@ -9,14 +9,12 @@ import com.itis.android.lessontwo.repository.ComicsRepositoryImpl;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.utils.RxUtils;
 
-import org.bouncycastle.pqc.jcajce.provider.McEliece;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
@@ -83,7 +81,8 @@ public class ComicsListPresenterTest {
     public void loadComicsMockSuccess() throws Exception {
         // Arrange
         List<Comics> comicsList = new ArrayList<>();
-        Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
+        Mockito.when(RepositoryProvider.provideComicsRepository()
+                .comics(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.just(comicsList));
         // Act
         presenter.loadComics();

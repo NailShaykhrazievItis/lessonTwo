@@ -27,10 +27,22 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    flavorDimensions "tier"
+
+    productFlavors {
+        prod {
+        }
+
+        mock {
+        }
+    }
+    sourceSets { mock { assets.srcDirs = ['src/mock/assets', 'src/mock/assets/'] } }
 }
 
 ext {
     commons_codec = "1.11"
+    espressoVersion = "3.0.1"
     gson = "2.8.2"
     mockito = "2.13.0"
     moxy = "1.5.3"
@@ -96,5 +108,7 @@ dependencies {
     testImplementation "org.powermock:powermock-module-junit4-rule:${power}"
     testImplementation "org.powermock:powermock-classloading-xstream:${power}"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${espressoVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espressoVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${espressoVersion}"
 }

@@ -55,7 +55,7 @@ public class CharacterActivity extends BaseActivity implements CharacterView {
     }
 
     @Override
-    public void setCharacterImage(final Character character) {
+    public void setCharacterImage(Character character) {
         if (character.getImage() != null) {
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", character.getImage().getPath(),
                     character.getImage().getExtension()));
@@ -65,18 +65,18 @@ public class CharacterActivity extends BaseActivity implements CharacterView {
     }
 
     @Override
-    public void setCharacterName(final Character character) {
+    public void setCharacterName(Character character) {
         tvName.setText(character.getName());
     }
 
     @Override
-    public void setCharacterDescription(final Character character) {
+    public void setCharacterDescription(Character character) {
         tvDescription.setText(character.getDescription());
     }
 
 
     @Override
-    public void handleError(final Throwable error) {
+    public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 

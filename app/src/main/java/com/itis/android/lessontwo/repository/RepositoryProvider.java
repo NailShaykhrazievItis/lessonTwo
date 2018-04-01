@@ -49,11 +49,11 @@ public class RepositoryProvider {
         characterRepository = new CharacterRepositoryImpl();
     }
 
-    public static void setCreatorRepository(final CreatorRepository creatorRepository) {
+    public static void setCreatorRepository(CreatorRepository creatorRepository) {
         RepositoryProvider.creatorRepository = creatorRepository;
     }
 
-    public static void setCharacterRepository(final CharacterRepository characterRepository) {
+    public static void setCharacterRepository(CharacterRepository characterRepository) {
         RepositoryProvider.characterRepository = characterRepository;
     }
 }

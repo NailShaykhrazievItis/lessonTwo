@@ -50,6 +50,7 @@ public class ComicsListPresenterTest {
         MockitoAnnotations.initMocks(this);
         presenter = Mockito.spy(ComicsListPresenter.class);
         presenter.setViewState(viewState);
+        RepositoryProvider.setComicsRepository(repository);
         mockStatic(ApiFactory.class);
         mockStatic(RxUtils.class);
     }

@@ -25,7 +25,7 @@ public class CharacterListPresenter extends MvpPresenter<CharacterListView> {
                 .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 
-    public void loadNextElements(final int page) {
+    public void loadNextElements(int page) {
         RepositoryProvider.provideCharacterRepository()
                 .characters(page * PAGE_SIZE, PAGE_SIZE)
                 .doOnSubscribe(getViewState()::showLoading)
@@ -34,7 +34,7 @@ public class CharacterListPresenter extends MvpPresenter<CharacterListView> {
                 .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 
-    public void onItemClick(final Character character) {
+    public void onItemClick(Character character) {
         getViewState().showDetails(character);
     }
 }

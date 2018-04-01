@@ -42,6 +42,7 @@ public class CharacterListPresenterTest {
         MockitoAnnotations.initMocks(this);
         presenter = spy(CharacterListPresenter.class);
         presenter.setViewState(viewState);
+        RepositoryProvider.setCharacterRepository(repository);
         mockStatic(RxUtils.class);
         mockStatic(ApiFactory.class);
     }

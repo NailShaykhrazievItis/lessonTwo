@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.api;
+package com.itis.android.lessontwo.api.services;
 
 import com.itis.android.lessontwo.model.story.StoryResponse;
 

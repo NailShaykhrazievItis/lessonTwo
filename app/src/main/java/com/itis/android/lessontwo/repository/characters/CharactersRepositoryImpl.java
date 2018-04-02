@@ -27,6 +27,17 @@ public class CharactersRepositoryImpl implements CharactersRepository {
     }
 
     @Override
+    public Single<List<Character>> charactersTest(Long offset, Long limit) {
+        return ApiFactory.getCharactersService()
+                .charactersTest(offset, limit)
+                .map(CharactersResponse::getData)
+                .map(CharactersResponseData::getResults)
+                .flatMap(new RewriteCache<>(Character.class))
+                .onErrorResumeNext(new ErrorReadFromCache<>(Character.class))
+                .compose(RxUtils.asyncSingle());
+    }
+
+    @Override
     public Single<Character> characters(final Long id) {
         return ApiFactory.getCharactersService()
                 .characters(id)

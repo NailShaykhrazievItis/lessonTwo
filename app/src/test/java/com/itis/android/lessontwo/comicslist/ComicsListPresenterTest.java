@@ -79,7 +79,8 @@ public class ComicsListPresenterTest {
     @Test
     public void loadComicsMockSuccess() throws Exception {
         List<Comics> comicsList = new ArrayList<>();
-        Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
+        Mockito.when(RepositoryProvider.provideComicsRepository()
+                .comics(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.just(comicsList));
         RepositoryProvider.setComicsRepository(repository);
         presenter.loadComics();
@@ -175,6 +176,11 @@ public class ComicsListPresenterTest {
             } else {
                 return Single.just(this.comics);
             }
+        }
+
+        @Override
+        public Single<List<Comics>> comicsTest(Long offset, Long limit, String sort) {
+            return null;
         }
     }
 }

@@ -43,4 +43,16 @@ public class ComicsRepositoryImpl implements ComicsRepository{
                 .onErrorResumeNext(new ErrorSingleReadFromCache<>(Comics.class, id))
                 .compose(RxUtils.asyncSingle());
     }
+
+    @Override
+    public Single<List<Comics>> comicsTest(Long offset, Long limit, String sort) {
+        return ApiFactory.getComicsService()
+                .comicsTest(offset, limit, sort)
+                .map(ComicsResponse::getData)
+                .map(ComicsResponseData::getResults)
+                .flatMap(new RewriteCache<>(Comics.class))
+                .onErrorResumeNext(new ErrorReadFromCache<>(Comics.class))
+                .compose(RxUtils.asyncSingle());
+    }
+
 }

@@ -18,4 +18,6 @@ public interface ComicsRepository {
     Single<List<Comics>> comics(Long offset, Long limit, String sort);
 
     Single<Comics> comics(Long id);
+
+    Single<List<Comics>> comicsTest(Long offset, Long limit, String sort);
 }

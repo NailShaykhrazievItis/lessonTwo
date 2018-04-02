@@ -15,4 +15,6 @@ public interface CharactersRepository {
     Single<List<Character>> characters(Long offset, Long limit);
 
     Single<Character> characters(Long id);
+
+    Single<List<Character>> charactersTest(Long offset, Long limit);
 }

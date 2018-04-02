@@ -107,4 +107,12 @@ public final class ApiFactory {
                 .addInterceptor(new StethoInterceptor())
                 .build();
     }
+
+    public static void setCharactersService(CharactersService charactersService) {
+        ApiFactory.charactersService = charactersService;
+    }
+
+    public static void setComicsService(ComicsService comicsService) {
+        ApiFactory.comicsService = comicsService;
+    }
 }

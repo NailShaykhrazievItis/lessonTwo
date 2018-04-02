@@ -27,6 +27,19 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    flavorDimensions "tier"
+
+    productFlavors {
+        prod {
+        }
+
+        mock {
+        }
+    }
+    sourceSets { mock { assets.srcDirs = ['src/mock/assets', 'src/mock/assets/'] } }
+
+
 }
 
 ext {
@@ -44,6 +57,7 @@ ext {
     reactive_streams = "1.0.0"
     retrofit = "2.3.0"
     power = "2.0.0-beta.5"
+    espressoVersion = "3.0.1"
 }
 
 dependencies {
@@ -90,8 +104,6 @@ dependencies {
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'org.mockito:mockito-core:2.16.0'
     compile 'junit:junit:4.12'
 
@@ -100,4 +112,8 @@ dependencies {
     testImplementation "org.powermock:powermock-module-junit4:${power}"
     testImplementation "org.powermock:powermock-module-junit4-rule:${power}"
     testImplementation "org.powermock:powermock-classloading-xstream:${power}"
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${espressoVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espressoVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${espressoVersion}"
 }

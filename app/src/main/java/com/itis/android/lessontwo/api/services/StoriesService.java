@@ -1,7 +1,6 @@
 package com.itis.android.lessontwo.api.services;
 
 import com.itis.android.lessontwo.model.story.StoryResponse;
-
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -18,4 +17,7 @@ public interface StoriesService {
 
     @GET("stories/{storyId}")
     Single<StoryResponse> stories(@Path("storyId") Long id);
+
+    @GET("characters_test")
+    Single<StoryResponse> storiesTest(@Query("offset") Long offset, @Query("limit") Long limit);
 }

@@ -10,19 +10,16 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
-import com.itis.android.lessontwo.ui.characters.CharacterActivity;
+import com.itis.android.lessontwo.ui.character.CharacterActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
-
+import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by User on 04.03.2018.

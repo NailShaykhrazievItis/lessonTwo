@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.characters;
+package com.itis.android.lessontwo.ui.character;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;

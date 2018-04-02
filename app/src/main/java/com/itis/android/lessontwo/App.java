@@ -1,6 +1,8 @@
 package com.itis.android.lessontwo;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.facebook.stetho.Stetho;
 import com.itis.android.lessontwo.api.ApiFactory;
@@ -17,6 +19,13 @@ import io.realm.rx.RealmObservableFactory;
  */
 
 public class App extends Application {
+
+    private static Context sContext;
+
+    @NonNull
+    public static Context getsContext() {
+        return sContext;
+    }
 
     @Override
     public void onCreate() {

@@ -1,6 +1,7 @@
 package com.itis.android.lessontwo.repository.cache;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ErrorReadFromCache<T extends RealmObject> implements Function<Throw
 
     @Override
     public Single<List<T>> apply(@io.reactivex.annotations.NonNull Throwable throwable) {
+        Log.d("TAG","error cache");
         Realm realm = Realm.getDefaultInstance();
         RealmResults<T> results = realm.where(mClass).findAll();
         return Single.just(realm.copyFromRealm(results));

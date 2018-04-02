@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.model.comics;
+package com.itis.android.lessontwo.model.entity.comics;
 
 import com.google.gson.annotations.SerializedName;
 import com.itis.android.lessontwo.model.general.Image;
@@ -8,10 +8,10 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-
 public class Comics extends RealmObject implements ListItem {
 
     @PrimaryKey
@@ -65,7 +65,7 @@ public class Comics extends RealmObject implements ListItem {
         return textObjects;
     }
 
-    public void setTextObjects(final RealmList<ComicsTextObject> textObjects) {
+    public void setTextObjects(RealmList<ComicsTextObject> textObjects) {
         this.textObjects = textObjects;
     }
 
@@ -73,7 +73,7 @@ public class Comics extends RealmObject implements ListItem {
         return prices;
     }
 
-    public void setPrices(final RealmList<ComicsPrintPrice> prices) {
+    public void setPrices(RealmList<ComicsPrintPrice> prices) {
         this.prices = prices;
     }
 
@@ -81,7 +81,7 @@ public class Comics extends RealmObject implements ListItem {
         return images;
     }
 
-    public void setImages(final RealmList<Image> images) {
+    public void setImages(RealmList<Image> images) {
         this.images = images;
     }
 

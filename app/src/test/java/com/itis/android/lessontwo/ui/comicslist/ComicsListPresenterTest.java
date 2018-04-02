@@ -3,7 +3,7 @@ package com.itis.android.lessontwo.ui.comicslist;
 import android.support.annotation.NonNull;
 
 import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
 import com.itis.android.lessontwo.repository.ComicsRepository;
 import com.itis.android.lessontwo.repository.ComicsRepositoryImpl;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
@@ -23,14 +23,14 @@ import java.util.List;
 
 import io.reactivex.Single;
 
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.anyString;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
-
 /**
- * Created by Nail Shaykhraziev on 18.03.2018.
+ * Created by valera071998@gmail.com on 23.03.2018.
  */
+
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({RxUtils.class, ApiFactory.class})
 public class ComicsListPresenterTest {
@@ -69,6 +69,7 @@ public class ComicsListPresenterTest {
         // Arrange
         Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
                         .thenReturn(Single.error(new Throwable()));
+        RepositoryProvider.setComicsRepository(repository);
         // Act
         presenter.loadComics();
         // Assert
@@ -84,6 +85,7 @@ public class ComicsListPresenterTest {
         Mockito.when(RepositoryProvider.provideComicsRepository()
                 .comics(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.just(comicsList));
+        RepositoryProvider.setComicsRepository(repository);
         // Act
         presenter.loadComics();
         // Assert
@@ -105,6 +107,7 @@ public class ComicsListPresenterTest {
         Mockito.verify(viewState).hideLoading();
         Mockito.verify(viewState).handleError(Mockito.any(Throwable.class));
     }
+
     @Test
     public void loadComicsSuccess() throws Exception {
         // Arrange
@@ -184,6 +187,11 @@ public class ComicsListPresenterTest {
             } else {
                 return Single.just(this.comicsList);
             }
+        }
+
+        @Override
+        public Single<List<Comics>> comicsTest(Long offset, Long limit, String sort) {
+            return null;
         }
 
         @Override

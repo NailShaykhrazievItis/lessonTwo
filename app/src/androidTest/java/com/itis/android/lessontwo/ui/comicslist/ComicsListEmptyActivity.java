@@ -38,7 +38,7 @@ public class ComicsListEmptyActivity {
         onView(withId(R.id.tv_empty)).check(matches(isDisplayed()));
         onView(withId(R.id.rv_comics_list)).check(matches(not(isDisplayed())));
 
-        onView(withId(R.id.tv_empty)).check(matches(withText(R.string.text_empty_comics)));
+        onView(withId(R.id.tv_empty)).check(matches(withText(R.string.text_empty_content)));
     }
 
     private void launchActivity() {

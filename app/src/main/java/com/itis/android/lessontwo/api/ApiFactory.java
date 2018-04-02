@@ -16,6 +16,7 @@ public final class ApiFactory {
 
     private static volatile ComicsService comicsService;
     private static volatile CharactersService charactersService;
+    private static volatile CreatorsService creatorsService;
 
     private ApiFactory() {
     }
@@ -48,14 +49,37 @@ public final class ApiFactory {
         return service;
     }
 
+    @NonNull
+    public static CreatorsService getCreatorsService() {
+        CreatorsService service = creatorsService;
+        if (service == null) {
+            synchronized (ApiFactory.class) {
+                service = creatorsService;
+                if (service == null) {
+                    service = creatorsService = buildRetrofit().create(CreatorsService.class);
+                }
+            }
+        }
+        return service;
+    }
+
     public static void recreate() {
         OkHttpProvider.recreate();
         comicsService = buildRetrofit().create(ComicsService.class);
         charactersService = buildRetrofit().create(CharactersService.class);
+        creatorsService = buildRetrofit().create(CreatorsService.class);
     }
 
     public static void setComicsService(ComicsService comicsService) {
         ApiFactory.comicsService = comicsService;
+    }
+
+    public static void setCharactersService(CharactersService charactersService) {
+        ApiFactory.charactersService = charactersService;
+    }
+
+    public static void setCreatorsService(CreatorsService creatorsService) {
+        ApiFactory.creatorsService = creatorsService;
     }
 
     @NonNull

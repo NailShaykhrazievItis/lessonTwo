@@ -16,8 +16,8 @@ import android.widget.Toast;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsTextObject;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
@@ -27,7 +27,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity implements ComicsView{
+public class ComicsActivity extends BaseActivity implements ComicsView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -37,7 +37,7 @@ public class ComicsActivity extends BaseActivity implements ComicsView{
     private TextView tvPages;
     private ProgressBar progressBar;
 
-    @InjectPresenter(type = PresenterType.WEAK)
+    @InjectPresenter
     ComicsPresenter presenter;
 
     private Long id;
@@ -88,7 +88,7 @@ public class ComicsActivity extends BaseActivity implements ComicsView{
                 description.append(comicsTextObject.getText()).append("\n");
             }
             tvDescription.setText(description.length() > 0 ?
-                    description.toString().trim() : getString(R.string.text_desc_not_found));
+                description.toString().trim() : getString(R.string.text_desc_not_found));
         }
     }
 

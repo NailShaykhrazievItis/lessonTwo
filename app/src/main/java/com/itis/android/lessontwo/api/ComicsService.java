@@ -1,7 +1,7 @@
 package com.itis.android.lessontwo.api;
 
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
+import com.itis.android.lessontwo.model.entity.character.CharactersResponse;
+import com.itis.android.lessontwo.model.entity.comics.ComicsResponse;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;

@@ -1,13 +1,14 @@
 package com.itis.android.lessontwo.repository;
 
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.api.ComicsService;
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
+import com.itis.android.lessontwo.model.entity.character.CharactersResponse;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.ComicsResponse;
+import com.itis.android.lessontwo.model.entity.comics.ComicsResponseData;
 
 import org.junit.After;
 import org.junit.Before;
@@ -42,6 +43,7 @@ public class ComicsRepositoryTest {
     @Before
     public void setUp() throws Exception {
         repository = new ComicsRepositoryImpl();
+//        ApiFactory.setComicsService(new TestService());
     }
 
     @After
@@ -98,31 +100,53 @@ public class ComicsRepositoryTest {
 
     @Test
     public void comicsListMockSuccess() throws Exception {
-        TestObserver<List<Comics>> testObserver = new TestObserver<>();
-        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
-                .toObservable()
-                .subscribe(testObserver);
+        Log.d("TAG","mockSuccess");
 
-        testObserver.await().assertNoErrors();
+        List<Comics> list = repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).blockingGet();
+        Log.d("TAG","list size = " + list.size());
+
+        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
+                .test()
+                .assertNoErrors()
+                .assertValueCount(20);
+
+       /* Observable.just(1)
+                .test()
+                .assertSubscribed()
+                .assertValues(1)
+                .assertComplete()
+                .assertNoErrors();*/
+
+       /* testObserver.await().assertNoErrors();
+        Log.d("TAG","findAll");
         testObserver.await().assertValueCount(20);
+        Log.d("TAG","findAfter");*/
     }
 
     @Test
     public void testComicsListSaved() throws Exception {
-        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).subscribe();
+        Log.d("TAG","listSaved");
 
-        int savedCount = Realm.getDefaultInstance()
-                .where(Comics.class)
-                .findAll()
-                .size();
-        assertEquals(20, savedCount);
+        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).subscribe(comics -> {
+
+            int savedCount = Realm.getDefaultInstance()
+                    .where(Comics.class)
+                    .findAll()
+                    .size();
+
+            assertEquals(20, savedCount);
+        });
+
     }
 
     @Test
     public void testRepositoriesRestoredFromCache() throws Exception {
+        Log.d("TAG","restore");
         repository.comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).subscribe();
 
+
         //force error for loading
+
 
         TestObserver<List<Comics>> testObserver = new TestObserver<>();
         repository.comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
@@ -138,12 +162,33 @@ public class ComicsRepositoryTest {
         @Override
         public Single<ComicsResponse> comics(@Query("offset") Long offset, @Query("limit") Long limit,
                                              @Query("orderBy") String orderBy) {
-            return null;
+            ComicsResponse response = new ComicsResponse();
+            ComicsResponseData data = new ComicsResponseData();
+            List<Comics> res = new ArrayList<>();
+            for(int i = 0; i < 20; i++){
+                Comics comics = new Comics();
+                comics.setId((long) i);
+                res.add(comics);
+            }
+            data.setResults(res);
+            response.setData(data);
+            return Single.just(response);
         }
 
         @Override
         public Single<ComicsResponse> comicsTest(Long offset, Long limit, String orderBy) {
-            return null;
+            ComicsResponse response = new ComicsResponse();
+            ComicsResponseData data = new ComicsResponseData();
+            List<Comics> res = new ArrayList<>();
+            for(int i = 0; i < 20; i++){
+                Comics comics = new Comics();
+                comics.setId((long) i);
+                res.add(comics);
+            }
+            Log.d("TAG","res size = " + res.size());
+            data.setResults(res);
+            response.setData(data);
+            return Single.just(response);
         }
 
         @Override

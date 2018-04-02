@@ -1,10 +1,10 @@
 package com.itis.android.lessontwo.ui.comics;
 
 import com.arellomobile.mvp.MvpView;
-import com.itis.android.lessontwo.model.comics.Comics;
+import com.itis.android.lessontwo.model.entity.comics.Comics;
 
 /**
- * Created by Nail Shaykhraziev on 12.03.2018.
+ * Created by valera071998@gmail.com on 16.03.2018.
  */
 
 public interface ComicsView extends MvpView {

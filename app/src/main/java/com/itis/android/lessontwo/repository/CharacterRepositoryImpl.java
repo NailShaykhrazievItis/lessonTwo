@@ -36,4 +36,15 @@ public class CharacterRepositoryImpl implements CharacterRepository {
                 .onErrorResumeNext(new ErrorSingleReadFromCache<>(Character.class, id))
                 .compose(RxUtils.asyncSingle());
     }
+
+    @Override
+    public Single<List<Character>> characterTest(final Long offset, final Long limit) {
+        return ApiFactory.getCharactersService()
+                .characters(offset, limit)
+                .map(CharactersResponse::getData)
+                .map(CharactersResponseData::getResults)
+                .flatMap(new RewriteCache<>(Character.class))
+                .onErrorResumeNext(new ErrorReadFromCache<>(Character.class))
+                .compose(RxUtils.asyncSingle());
+    }
 }

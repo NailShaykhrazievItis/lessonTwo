@@ -2,15 +2,9 @@ package com.itis.android.lessontwo.repository;
 
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.api.CharactersService;
-import com.itis.android.lessontwo.api.ComicsService;
 import com.itis.android.lessontwo.model.character.Character;
 import com.itis.android.lessontwo.model.character.CharactersResponse;
 import com.itis.android.lessontwo.model.character.CharactersResponseData;
-import com.itis.android.lessontwo.model.comics.Comics;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponseData;
-import com.itis.android.lessontwo.model.creator.Creator;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +19,6 @@ import io.realm.Realm;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
 import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
 import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
 import static org.junit.Assert.assertEquals;
@@ -106,13 +99,15 @@ public class CharacterRepositoryTest {
 
     @Test
     public void testCharacterListSaved() throws Exception {
-        repository.characterTest(ZERO_OFFSET, PAGE_SIZE).subscribe();
-
-        int savedCount = Realm.getDefaultInstance()
-                .where(Character.class)
-                .findAll()
-                .size();
-        assertEquals(20, savedCount);
+        repository.characterTest(ZERO_OFFSET, PAGE_SIZE).subscribe(
+                characters -> {
+                    int savedCount = Realm.getDefaultInstance()
+                            .where(Character.class)
+                            .findAll()
+                            .size();
+                    assertEquals(20, savedCount);
+                }
+        );
     }
 
     @Test
@@ -164,7 +159,7 @@ public class CharacterRepositoryTest {
         }
 
         @Override
-        public Single<CharactersResponse> character(@Path("comicsId") Long id) {
+        public Single<CharactersResponse> character(@Path("characterId") Long id) {
             if (Objects.equals(id, ID)) {
                 CharactersResponse response = new CharactersResponse();
                 CharactersResponseData data = new CharactersResponseData();
@@ -178,11 +173,6 @@ public class CharacterRepositoryTest {
             } else {
                 return Single.error(new Throwable());
             }
-        }
-
-        @Override
-        public Single<ComicsResponse> comicsByCharacter(Long id) {
-            return null;
         }
     }
 }

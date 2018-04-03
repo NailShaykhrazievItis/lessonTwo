@@ -11,7 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
@@ -19,11 +18,9 @@ import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
 import com.itis.android.lessontwo.ui.comics.ComicsActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
-
+import io.reactivex.disposables.Disposable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
@@ -32,16 +29,18 @@ import io.reactivex.disposables.Disposable;
 public class ComicsListActivity extends BaseActivity implements ComicsListView,
         BaseAdapter.OnItemClickListener<Comics> {
 
-    private Toolbar toolbar;
     private ProgressBar progressBar;
     private EmptyStateRecyclerView recyclerView;
+    private Toolbar toolbar;
     private TextView tvEmpty;
 
     @InjectPresenter
     ComicsListPresenter presenter;
+
     private ComicsAdapter adapter;
 
     private boolean isLoading = false;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,8 +52,8 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     }
 
     @Override
-    public void onItemClick(@NonNull Comics item) {
-        presenter.onItemClick(item);
+    public void addMoreItems(List<Comics> items) {
+        adapter.addAll(items);
     }
 
     @Override
@@ -62,14 +61,13 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void showItems(@NonNull List<Comics> items) {
-        adapter.changeDataSet(items);
+    public void hideLoading() {
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
-    public void addMoreItems(List<Comics> items) {
-        adapter.addAll(items);
+    public void onItemClick(@NonNull Comics item) {
+        presenter.onItemClick(item);
     }
 
     @Override
@@ -77,17 +75,18 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
         isLoading = false;
     }
 
-    public void showLoading(Disposable disposable) {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    public void hideLoading() {
-        progressBar.setVisibility(View.GONE);
-    }
-
     @Override
     public void showDetails(Comics item) {
         ComicsActivity.start(this, item);
+    }
+
+    @Override
+    public void showItems(@NonNull List<Comics> items) {
+        adapter.changeDataSet(items);
+    }
+
+    public void showLoading(Disposable disposable) {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     private void initRecycler() {
@@ -101,6 +100,7 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
         recyclerView.setHasFixedSize(true);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             private int currentPage = 0;
+
             // обычно бывает флаг последней страницы, но я че т его не нашел, если не найдется, то можно удалить, всегда тру
             private boolean isLastPage = false;
 

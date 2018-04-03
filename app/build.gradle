@@ -27,15 +27,29 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    flavorDimensions "tier"
+
+    productFlavors {
+        prod {
+        }
+
+        mock {
+        }
+    }
+    sourceSets { mock { assets.srcDirs = ['src/mock/assets', 'src/mock/assets/'] } }
 }
 
 ext {
     commons_codec = "1.11"
+    espressoVersion = "3.0.1"
     gson = "2.8.2"
+    mockito = "2.13.0"
     moxy = "1.5.3"
     okhttp = "3.9.1"
     okhttp3downloader = "1.1.0"
     picasso = "2.5.2"
+    power = "2.0.0-beta.5"
     support = "27.1.0"
     stetho = "1.5.0"
     rxjava = "2.1.3"
@@ -43,6 +57,7 @@ ext {
     rxdebug = "1.2.0"
     reactive_streams = "1.0.0"
     retrofit = "2.3.0"
+    moxy = "1.5.3"
 }
 
 dependencies {
@@ -71,15 +86,24 @@ dependencies {
     // Stetho
     implementation "com.facebook.stetho:stetho:${stetho}"
     implementation "com.facebook.stetho:stetho-okhttp3:${stetho}"
+    //Moxy
+    implementation "com.arello-mobile:moxy:${moxy}"
+    annotationProcessor "com.arello-mobile:moxy-compiler:${moxy}"
+    implementation "com.arello-mobile:moxy-android:${moxy}"
+    implementation "com.arello-mobile:moxy-app-compat:${moxy}"
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
-    // Moxy
-    implementation "com.arello-mobile:moxy:${moxy}"
-    implementation "com.arello-mobile:moxy-app-compat:${moxy}"
-    annotationProcessor "com.arello-mobile:moxy-compiler:${moxy}"
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-core:${mockito}"
+    testImplementation "com.squareup.okhttp3:mockwebserver:${okhttp}"
+    testImplementation "org.powermock:powermock-api-mockito2:${power}"
+    testImplementation "org.powermock:powermock-module-junit4:${power}"
+    testImplementation "org.powermock:powermock-module-junit4-rule:${power}"
+    testImplementation "org.powermock:powermock-classloading-xstream:${power}"
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:${espressoVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espressoVersion}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${espressoVersion}"
 }

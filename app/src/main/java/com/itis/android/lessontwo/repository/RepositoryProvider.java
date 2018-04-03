@@ -10,6 +10,10 @@ public class RepositoryProvider {
 
     private static ComicsRepository comicsRepository;
 
+    private static CreatorRepository creatorRepository;
+
+    private static CharacterRepository characterRepository;
+
     @NonNull
     public static ComicsRepository provideComicsRepository() {
         if (comicsRepository == null) {
@@ -18,8 +22,38 @@ public class RepositoryProvider {
         return comicsRepository;
     }
 
+    @NonNull
+    public static CreatorRepository provideCreatorRepository() {
+        if (creatorRepository == null) {
+            creatorRepository = new CreatorRepositoryImpl();
+        }
+        return creatorRepository;
+    }
+
+    @NonNull
+    public static CharacterRepository provideCharacterRepository() {
+        if (characterRepository == null) {
+            characterRepository = new CharacterRepositoryImpl();
+        }
+        return characterRepository;
+    }
+
+    public static void setComicsRepository(ComicsRepository repository) {
+        comicsRepository = repository;
+    }
+
     @MainThread
     public static void init() {
         comicsRepository = new ComicsRepositoryImpl();
+        creatorRepository = new CreatorRepositoryImpl();
+        characterRepository = new CharacterRepositoryImpl();
+    }
+
+    public static void setCreatorRepository(CreatorRepository creatorRepository) {
+        RepositoryProvider.creatorRepository = creatorRepository;
+    }
+
+    public static void setCharacterRepository(CharacterRepository characterRepository) {
+        RepositoryProvider.characterRepository = characterRepository;
     }
 }

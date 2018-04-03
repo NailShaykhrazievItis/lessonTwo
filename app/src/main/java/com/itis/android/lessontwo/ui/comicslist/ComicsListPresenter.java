@@ -1,27 +1,30 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
+import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
+import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
+import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
-import static com.itis.android.lessontwo.utils.Constants.DEFAULT_COMICS_SORT;
-import static com.itis.android.lessontwo.utils.Constants.PAGE_SIZE;
-import static com.itis.android.lessontwo.utils.Constants.ZERO_OFFSET;
-
 /**
  * Created by Nail Shaykhraziev on 26.02.2018.
  */
+
 @InjectViewState
 public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
 
-    @Override
-    protected void onFirstViewAttach() {
-        super.onFirstViewAttach();
-        loadComics();
+    public void loadComics() {
+        RepositoryProvider.provideComicsRepository()
+                .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
+                .doOnSubscribe(getViewState()::showLoading)
+                .doAfterTerminate(getViewState()::hideLoading)
+                .subscribe(getViewState()::showItems, getViewState()::handleError);
     }
 
-    void loadNextElements(int page) {
+    public void loadNextElements(int page) {
         RepositoryProvider.provideComicsRepository()
                 .comics(page * PAGE_SIZE, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .doOnSubscribe(getViewState()::showLoading)
@@ -30,15 +33,12 @@ public class ComicsListPresenter extends MvpPresenter<ComicsListView> {
                 .subscribe(getViewState()::addMoreItems, getViewState()::handleError);
     }
 
-    void onItemClick(Comics comics) {
+    public void onItemClick(Comics comics) {
         getViewState().showDetails(comics);
     }
 
-    private void loadComics() {
-        RepositoryProvider.provideComicsRepository()
-                .comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
-                .doOnSubscribe(getViewState()::showLoading)
-                .doAfterTerminate(getViewState()::hideLoading)
-                .subscribe(getViewState()::showItems, getViewState()::handleError);
+    protected void onFirstViewAttach() {
+        super.onFirstViewAttach();
+        loadComics();
     }
 }

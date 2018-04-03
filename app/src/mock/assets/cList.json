@@ -140,7 +140,7 @@
         "stories":{"available":2,"collectionURI":"http://gateway.marvel.com/v1/public/comics/59539/stories","items":[{"resourceURI":"http://gateway.marvel.com/v1/public/stories/129584","name":"cover from Doctor Strange (2015) #10 (HENDERSON MOP VARIANT)","type":"cover"},{"resourceURI":"http://gateway.marvel.com/v1/public/stories/129585","name":"story from Doctor Strange (2015) #10 (HENDERSON MOP VARIANT)","type":"interiorStory"}],"returned":2},
         "events":{"available":0,"collectionURI":"http://gateway.marvel.com/v1/public/comics/59539/events","items":[],"returned":0}
       }
-      ]
+    ]
   }
 }
 

@@ -27,13 +27,13 @@ public class ComicsListEmptyActivity {
 
     @Rule
     public final ActivityTestRule<ComicsListActivity> rule
-            = new ActivityTestRule<>(ComicsListActivity.class, false, false);
+            = new ActivityTestRule<>(ComicsListActivity.class, false, true);
 
     @Test
     public void testErrorDisplayed() throws Exception {
         // need generate error, i haven't fantasy
 
-        launchActivity();
+        //launchActivity();
 
         onView(withId(R.id.tv_empty)).check(matches(isDisplayed()));
         onView(withId(R.id.rv_comics_list)).check(matches(not(isDisplayed())));

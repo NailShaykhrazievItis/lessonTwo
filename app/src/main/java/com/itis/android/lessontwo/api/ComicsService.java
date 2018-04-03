@@ -1,7 +1,7 @@
 package com.itis.android.lessontwo.api;
 
-import com.itis.android.lessontwo.model.character.CharactersResponse;
-import com.itis.android.lessontwo.model.comics.ComicsResponse;
+import com.itis.android.lessontwo.model.entity.character.CharactersResponse;
+import com.itis.android.lessontwo.model.entity.comics.ComicsResponse;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -16,6 +16,10 @@ public interface ComicsService {
 
     @GET("comics")
     Single<ComicsResponse> comics(@Query("offset") Long offset, @Query("limit") Long limit,
+                                  @Query("orderBy") String orderBy);
+
+    @GET("comics_test")
+    Single<ComicsResponse> comicsTest(@Query("offset") Long offset, @Query("limit") Long limit,
                                   @Query("orderBy") String orderBy);
 
     @GET("comics/{comicsId}")

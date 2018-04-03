@@ -146,6 +146,11 @@ public class SeriesPresenterTest {
         }
 
         @Override
+        public Single<List<Series>> seriesTest(Long offset, Long limit) {
+            return null;
+        }
+
+        @Override
         public Single<Series> series(Long id) {
             if (this.error) {
                 return Single.error(new Throwable());

@@ -34,6 +34,17 @@ public class SeriesRepositoryImpl implements SeriesRepository {
     }
 
     @Override
+    public Single<List<Series>> seriesTest(Long offset, Long limit) {
+        return ApiFactory.getSeriesService()
+                .seriesTest(offset, limit)
+                .map(SeriesResponse::getData)
+                .map(SeriesResponseData::getResults)
+                .flatMap(new RewriteCache<>(Series.class))
+                .onErrorResumeNext(new ErrorReadFromCache<>(Series.class))
+                .compose(RxUtils.asyncSingle());
+    }
+
+    @Override
     public Single<Series> series(Long id) {
         return ApiFactory.getSeriesService()
                 .series(id)

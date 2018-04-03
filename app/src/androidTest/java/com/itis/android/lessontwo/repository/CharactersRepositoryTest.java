@@ -33,7 +33,6 @@ import static org.junit.Assert.*;
 public class CharactersRepositoryTest {
 
     private static final Long ID_OK = 1017100L;
-
     private CharactersRepository repository;
 
     @Before
@@ -132,6 +131,7 @@ public class CharactersRepositoryTest {
     }
 
     private class TestService implements CharactersService {
+
         @Override
         public Single<CharactersResponse> characters(@Query("offset") Long offset, @Query("limit") Long limit) {
             return null;
@@ -158,6 +158,5 @@ public class CharactersRepositoryTest {
                 return Single.error(new Throwable());
             }
         }
-
     }
 }

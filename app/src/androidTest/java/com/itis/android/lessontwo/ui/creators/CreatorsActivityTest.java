@@ -3,7 +3,6 @@ package com.itis.android.lessontwo.ui.creators;
 import android.support.test.rule.ActivityTestRule;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.ui.characters.CharacterActivity;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -18,17 +17,17 @@ import static org.hamcrest.core.IsNot.not;
 public class CreatorsActivityTest {
     @Rule
     public final ActivityTestRule<CreatorsActivity> rule =
-            new ActivityTestRule<>(CreatorsActivity.class,false);
+            new ActivityTestRule<>(CreatorsActivity.class, false);
 
     private CreatorsActivity creatorsActivity;
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         creatorsActivity = rule.getActivity();
     }
 
     @Test
-    public void displayTextViews(){
+    public void displayTextViews() {
         onView(withId(R.id.ct_creators)).check(matches(isDisplayed()));
         onView(withId(R.id.tb_creators)).check(matches(isDisplayed()));
         onView(withId(R.id.iv_creators)).check(matches(isDisplayed()));

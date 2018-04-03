@@ -33,19 +33,19 @@ public class CharactersListActivityTest {
             new ActivityTestRule<>(CharactersListActivity.class);
 
     @Before
-    public void setUp(){
+    public void setUp() {
         Intents.init();
     }
 
     @Test
-    public void testRecyclerViewDisplayed() throws Exception{
+    public void testRecyclerViewDisplayed() throws Exception {
         Thread.sleep(5000);
         onView(withId(R.id.tv_empty_characters)).check(matches(not(isDisplayed())));
         onView(withId(R.id.rv_characters_list)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void testScrollRecyclerView() throws Exception{
+    public void testScrollRecyclerView() throws Exception {
         Thread.sleep(5000);
         onView(withId(R.id.rv_characters_list))
                 .perform(scrollToPosition(4))
@@ -55,16 +55,15 @@ public class CharactersListActivityTest {
     }
 
     @Test
-    public void testClickOnItem() throws Exception{
+    public void testClickOnItem() throws Exception {
         Thread.sleep(5000);
         onView(withId(R.id.rv_characters_list))
-                .perform(actionOnItemAtPosition(3,click()));
+                .perform(actionOnItemAtPosition(3, click()));
         Intents.intended(hasComponent(CharacterActivity.class.getName()));
-
     }
 
     @After
-    public void tearDown() throws Exception{
+    public void tearDown() throws Exception {
         Intents.release();
         Realm.getDefaultInstance().executeTransaction(realm -> realm.deleteAll());
     }

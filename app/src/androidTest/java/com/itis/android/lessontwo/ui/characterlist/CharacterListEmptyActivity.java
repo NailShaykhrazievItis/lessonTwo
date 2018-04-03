@@ -26,10 +26,10 @@ public class CharacterListEmptyActivity {
 
     @Rule
     public final ActivityTestRule<CharactersListActivity> rule
-            = new ActivityTestRule<>(CharactersListActivity.class,false,true);
+            = new ActivityTestRule<>(CharactersListActivity.class, false, true);
 
     @Test
-    public void testErrorDisplayed() throws Exception{
+    public void testErrorDisplayed() throws Exception {
         //launchActivity();
 
         onView(withId(R.id.tv_empty_characters)).check(matches(isDisplayed()));
@@ -39,7 +39,7 @@ public class CharacterListEmptyActivity {
 
     private void launchActivity() {
         Context context = InstrumentationRegistry.getContext();
-        Intent intent = new Intent(context,CharactersListActivity.class);
+        Intent intent = new Intent(context, CharactersListActivity.class);
         rule.launchActivity(intent);
     }
 }

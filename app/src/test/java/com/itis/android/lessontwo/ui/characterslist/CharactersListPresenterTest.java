@@ -191,6 +191,11 @@ public class CharactersListPresenterTest {
         }
 
         @Override
+        public Single<List<Character>> charactersTest(Long offset, Long limit, String sort) {
+            return null;
+        }
+
+        @Override
         public Single<Character> character(Long id) {
             if (this.error) {
                 return Single.error(new Throwable());

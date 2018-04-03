@@ -17,5 +17,7 @@ public interface CharacterRepository {
     @NonNull
     Single<List<Character>> characters(Long offset, Long limit, String sort);
 
+    Single<List<Character>> charactersTest(Long offset, Long limit, String sort);
+
     Single<Character> character(Long id);
 }

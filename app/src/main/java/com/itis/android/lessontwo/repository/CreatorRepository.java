@@ -10,5 +10,7 @@ public interface CreatorRepository {
     @NonNull
     Single<List<Creator>> creators(Long offset, Long limit);
 
+    Single<List<Creator>> creatorsTest(Long offset, Long limit);
+
     Single<Creator> creator(Long id);
 }

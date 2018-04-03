@@ -27,6 +27,17 @@ public class CreatorRepositoryImpl implements CreatorRepository {
     }
 
     @Override
+    public Single<List<Creator>> creatorsTest(final Long offset, final Long limit) {
+        return ApiFactory.getCreatorsService()
+                .creators(offset, limit)
+                .map(CreatorResponse::getData)
+                .map(CreatorResponseData::getResults)
+                .flatMap(new RewriteCache<>(Creator.class))
+                .onErrorResumeNext(new ErrorReadFromCache<>(Creator.class))
+                .compose(RxUtils.asyncSingle());
+    }
+
+    @Override
     public Single<Creator> creator(Long id) {
         return ApiFactory.getCreatorsService()
                 .creators(id)

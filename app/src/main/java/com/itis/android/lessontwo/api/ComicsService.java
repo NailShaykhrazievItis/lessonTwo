@@ -25,4 +25,8 @@ public interface ComicsService {
 
     @GET("comics/{comicsId}/characters")
     Single<CharactersResponse> characters(@Path("comicsId") Long id);
+
+    @GET("comics_test")
+    Single<ComicsResponse> comicsTest(@Query("offset") Long offset, @Query("limit") Long limit,
+                                      @Query("orderBy") String orderBy);
 }

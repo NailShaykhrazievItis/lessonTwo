@@ -21,7 +21,7 @@
             android:layout_marginTop="@dimen/margin_small"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/text_xxlarge"
-            tools:text="Description" />
+            tools:text="@string/description_creators" />
 
         <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->

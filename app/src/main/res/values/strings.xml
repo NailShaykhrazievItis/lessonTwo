@@ -24,6 +24,7 @@
     <string name="text_empty_character">There are now any character yet</string>
     <string name="text_empty_creators">There are now any creators yet</string>
     <string name="there_are_no_characters_yet"> There are now any creators yet</string>
+    <string name="description_creators">Description</string>
 
 
 </resources>

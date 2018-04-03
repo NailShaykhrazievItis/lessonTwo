@@ -35,7 +35,7 @@ public class MockingInterceptor implements Interceptor {
         String path = request.url().encodedPath();
         if (handler.shouldIntercept(path)) {
             Response response = handler.proceed(request, path);
-            int stubDelay = 500 + random.nextInt(2500);
+            int stubDelay = 50 + random.nextInt(250);
             SystemClock.sleep(stubDelay);
             return response;
         }

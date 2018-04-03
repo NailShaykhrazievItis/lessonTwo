@@ -35,7 +35,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class ComicsRepositoryTest {
 
-    private static final Long ID = 59539L;
+    private static final Long ID_OK = 59539L;
 
     private ComicsRepository repository;
 
@@ -47,14 +47,15 @@ public class ComicsRepositoryTest {
     @After
     public void tearDown() throws Exception {
         Realm.getDefaultInstance()
-                .executeTransaction(realm -> realm.delete(Comics.class));
+                .executeTransaction(realm -> realm.deleteAll());
+        ApiFactory.recreate();
     }
 
     @Test
     public void comicsIdSuccess() throws Exception {
         ApiFactory.setComicsService(new TestService());
-        Comics comics = repository.comics(59539L).blockingGet();
-        assertEquals(ID, comics.getId());
+        Comics comics = repository.comics(ID_OK).blockingGet();
+        assertEquals(ID_OK, comics.getId());
     }
 
     @Test
@@ -69,11 +70,11 @@ public class ComicsRepositoryTest {
     public void comicsIdMockSuccess() throws Exception {
         TestObserver<Comics> testObserver = new TestObserver<>();
 
-        repository.comics(59539L).toObservable().subscribe(testObserver);
+        repository.comics(ID_OK).toObservable().subscribe(testObserver);
 
         testObserver.await().assertNoErrors();
         testObserver.await().assertValueCount(1);
-        assertEquals(ID, testObserver.await().values().get(0).getId());
+        assertEquals(ID_OK, testObserver.await().values().get(0).getId());
     }
 
     @Test
@@ -87,7 +88,7 @@ public class ComicsRepositoryTest {
 
     @Test
     public void testComicsNotSaved() throws Exception {
-        repository.comics(59539L).subscribe();
+        repository.comics(ID_OK).subscribe();
 
         int savedCount = Realm.getDefaultInstance()
                 .where(Comics.class)
@@ -104,12 +105,20 @@ public class ComicsRepositoryTest {
                 .subscribe(testObserver);
 
         testObserver.await().assertNoErrors();
-        testObserver.await().assertValueCount(20);
+        testObserver.await().assertValueCount(1);
     }
 
     @Test
     public void testComicsListSaved() throws Exception {
-        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).subscribe();
+        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).blockingGet();
+
+        //без этого не работает, если тест запускается после realm.deleteAll()
+        //возможно, проблема внутри Realm
+        Realm.getDefaultInstance().executeTransaction(realm -> {
+        });
+
+        //пробовал вставить sleep, но без executeTransaction не работало
+        //Thread.sleep(5000);
 
         int savedCount = Realm.getDefaultInstance()
                 .where(Comics.class)
@@ -120,17 +129,18 @@ public class ComicsRepositoryTest {
 
     @Test
     public void testRepositoriesRestoredFromCache() throws Exception {
-        repository.comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).subscribe();
-
-        //force error for loading
+        //write to DB
+        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).blockingGet();
 
         TestObserver<List<Comics>> testObserver = new TestObserver<>();
-        repository.comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
+
+        //force error for loading
+        repository.comicsTest(-5L, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .toObservable()
                 .subscribe(testObserver);
 
-        testObserver.assertNoErrors();
-        testObserver.assertValueCount(20);
+        testObserver.await().assertNoErrors();
+        testObserver.await().assertValueCount(1);
     }
 
     private class TestService implements ComicsService {
@@ -148,11 +158,11 @@ public class ComicsRepositoryTest {
 
         @Override
         public Single<ComicsResponse> comics(@Path("comicsId") Long id) {
-            if (Objects.equals(id, ID)) {
+            if (Objects.equals(id, ID_OK)) {
                 ComicsResponse response = new ComicsResponse();
                 ComicsResponseData data = new ComicsResponseData();
                 Comics comics = new Comics();
-                comics.setId(59539L);
+                comics.setId(ID_OK);
                 List<Comics> res = new ArrayList<>(1);
                 res.add(comics);
                 data.setResults(res);

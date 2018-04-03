@@ -39,8 +39,8 @@ public class OkHttpProvider {
     private static OkHttpClient buildClient() {
         return new OkHttpClient.Builder()
                 .addInterceptor(ApiKeyInterceptor.create())
-                .addInterceptor(MockingInterceptor.create())
                 .addInterceptor(LoggingInterceptor.create())
+                .addInterceptor(MockingInterceptor.create())
                 .addInterceptor(new StethoInterceptor())
                 .build();
     }

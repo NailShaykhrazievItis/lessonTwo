@@ -37,10 +37,14 @@ public class RequestsHandler {
     }
 
     @NonNull
-    public Response proceed(@NonNull Request request, @NonNull String path) {
+    public Response proceed(@NonNull Request request, @NonNull String path) throws IOException {
 //        if ("error".equals(token)) { // я не придумал пример
 //            return OkHttpResponse.error(request, 400, "Error for path " + path);
 //        }
+        if (request.url().queryParameter("offset") != null &&
+                Long.decode(request.url().queryParameter("offset")) < 0) {
+            return OkHttpResponse.error(request, 400, "Error for path " + path);
+        }
         Set<String> keys = responsesMap.keySet();
         for (String interceptUrl : keys) {
             if (path.contains(interceptUrl)) {

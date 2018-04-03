@@ -18,9 +18,10 @@ public interface ComicsService {
     Single<ComicsResponse> comics(@Query("offset") Long offset, @Query("limit") Long limit,
                                   @Query("orderBy") String orderBy);
 
+    //как-то не очень
     @GET("comics_test")
     Single<ComicsResponse> comicsTest(@Query("offset") Long offset, @Query("limit") Long limit,
-                                  @Query("orderBy") String orderBy);
+                                      @Query("orderBy") String orderBy);
 
     @GET("comics/{comicsId}")
     Single<ComicsResponse> comics(@Path("comicsId") Long id);

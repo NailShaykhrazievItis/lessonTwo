@@ -147,6 +147,11 @@ public class ComicsPresenterTest {
         }
 
         @Override
+        public Single<List<Comics>> comicsTest(Long offset, Long limit, String sort) {
+            return null;
+        }
+
+        @Override
         public Single<Comics> comics(Long id) {
             if (this.error) {
                 return Single.error(new Throwable());

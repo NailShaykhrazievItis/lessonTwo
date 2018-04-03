@@ -91,7 +91,6 @@ dependencies {
     annotationProcessor "com.arello-mobile:moxy-compiler:${moxy}"
     implementation "com.arello-mobile:moxy-android:${moxy}"
     implementation "com.arello-mobile:moxy-app-compat:${moxy}"
-    implementation "com.android.support:appcompat-v7:${support}"
     // simple encoder
     implementation "commons-codec:commons-codec:${commons_codec}"
 

@@ -109,13 +109,15 @@ public class ComicsRepositoryTest {
 
     @Test
     public void testComicsListSaved() throws Exception {
-        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).subscribe();
-
-        int savedCount = Realm.getDefaultInstance()
-                .where(Comics.class)
-                .findAll()
-                .size();
-        assertEquals(20, savedCount);
+        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).subscribe(
+                comics -> {
+                    int savedCount = Realm.getDefaultInstance()
+                            .where(Comics.class)
+                            .findAll()
+                            .size();
+                    assertEquals(20, savedCount);
+                }
+        );
     }
 
     @Test
@@ -138,12 +140,32 @@ public class ComicsRepositoryTest {
         @Override
         public Single<ComicsResponse> comics(@Query("offset") Long offset, @Query("limit") Long limit,
                                              @Query("orderBy") String orderBy) {
-            return null;
+            ComicsResponse response = new ComicsResponse();
+            ComicsResponseData data = new ComicsResponseData();
+            List<Comics> res = new ArrayList<>();
+            for(int i = 0; i < 20; i++){
+                Comics comics = new Comics();
+                comics.setId((long) i);
+                res.add(comics);
+            }
+            data.setResults(res);
+            response.setData(data);
+            return Single.just(response);
         }
 
         @Override
         public Single<ComicsResponse> comicsTest(Long offset, Long limit, String orderBy) {
-            return null;
+            ComicsResponse response = new ComicsResponse();
+            ComicsResponseData data = new ComicsResponseData();
+            List<Comics> res = new ArrayList<>();
+            for(int i = 0; i < 20; i++){
+                Comics comics = new Comics();
+                comics.setId((long) i);
+                res.add(comics);
+            }
+            data.setResults(res);
+            response.setData(data);
+            return Single.just(response);
         }
 
         @Override

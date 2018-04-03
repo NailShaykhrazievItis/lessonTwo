@@ -17,5 +17,7 @@ public interface SeriesRepository {
     @NonNull
     Single<List<Series>> series(Long offset, Long limit);
 
+    Single<List<Series>> seriesTest(Long offset, Long limit);
+
     Single<Series> series(Long id);
 }

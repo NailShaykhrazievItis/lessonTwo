@@ -16,6 +16,11 @@ public interface SeriesService {
     @GET("series")
     Single<SeriesResponse> series(@Query("offset") Long offset, @Query("limit") Long limit);
 
+    //как-то не очень
+
+    @GET("series_test")
+    Single<SeriesResponse> seriesTest(@Query("offset") Long offset, @Query("limit") Long limit);
+
     @GET("series/{seriesId}")
     Single<SeriesResponse> series(@Path("seriesId") Long id);
 }

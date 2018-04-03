@@ -27,6 +27,9 @@ public class RequestsHandler {
 
         responsesMap.put("series_test", "seriesList.json");
         responsesMap.put("series/18454", "series.json");
+
+        responsesMap.put("characters_test", "charactersList.json");
+        responsesMap.put("characters/1011334", "characters.json");
     }
 
     public boolean shouldIntercept(@NonNull String path) {

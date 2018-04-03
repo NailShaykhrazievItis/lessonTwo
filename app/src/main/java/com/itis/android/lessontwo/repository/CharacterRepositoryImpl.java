@@ -11,9 +11,9 @@ import com.itis.android.lessontwo.repository.cache.ErrorSingleReadFromCache;
 import com.itis.android.lessontwo.repository.cache.RewriteCache;
 import com.itis.android.lessontwo.utils.RxUtils;
 
-import io.reactivex.Single;
-
 import java.util.List;
+
+import io.reactivex.Single;
 
 /**
  * Created by Home on 12.03.2018.
@@ -26,6 +26,17 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     public Single<List<Character>> characters(final Long offset, final Long limit) {
         return ApiFactory.getCharactersService()
                 .characters(offset,limit)
+                .map(CharactersResponse::getData)
+                .map(CharactersResponseData::getResults)
+                .flatMap(new RewriteCache<>(Character.class))
+                .onErrorResumeNext(new ErrorReadFromCache<>(Character.class))
+                .compose(RxUtils.asyncSingle());
+    }
+
+    @Override
+    public Single<List<Character>> charactersTest(Long offset, Long limit) {
+        return ApiFactory.getCharactersService()
+                .charactersTest(offset, limit)
                 .map(CharactersResponse::getData)
                 .map(CharactersResponseData::getResults)
                 .flatMap(new RewriteCache<>(Character.class))

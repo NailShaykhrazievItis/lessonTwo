@@ -21,4 +21,7 @@ public interface CharactersService {
 
     @GET("characters/{characterId}/comics")
     Single<ComicsResponse> comicsByCharacter(@Path("characterId") Long id);
+
+    @GET("comics_test")
+    Single<CharactersResponse> charactersTest(@Query("offset") Long offset, @Query("limit") Long limit);
 }

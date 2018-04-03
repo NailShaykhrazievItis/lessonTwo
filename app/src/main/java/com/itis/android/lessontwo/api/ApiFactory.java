@@ -74,6 +74,10 @@ public final class ApiFactory {
         ApiFactory.comicsService = comicsService;
     }
 
+    public static void setCharactersService(CharactersService charactersService) {
+        ApiFactory.charactersService = charactersService;
+    }
+
     @NonNull
     private static Retrofit buildRetrofit() {
         return new Retrofit.Builder()

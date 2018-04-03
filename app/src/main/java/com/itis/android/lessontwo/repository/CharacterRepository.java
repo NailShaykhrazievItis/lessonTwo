@@ -1,9 +1,12 @@
 package com.itis.android.lessontwo.repository;
 
 import android.support.annotation.NonNull;
+
 import com.itis.android.lessontwo.model.character.Character;
-import io.reactivex.Single;
+
 import java.util.List;
+
+import io.reactivex.Single;
 
 public interface CharacterRepository {
 
@@ -11,4 +14,6 @@ public interface CharacterRepository {
     Single<List<Character>> characters(Long offset, Long limit);
 
     Single<Character> character(Long id);
+
+    Single<List<Character>> characterTest(Long offset, Long limit);
 }

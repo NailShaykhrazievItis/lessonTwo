@@ -18,7 +18,7 @@ public interface CharactersService {
     Single<CharactersResponse> characters(@Query("offset") Long offset, @Query("limit") Long limit,
                                               @Query("orderBy") String orderBy);
 
-    @GET("comics_test")
+    @GET("characters_test")
     Single<CharactersResponse> charactersTest(@Query("offset") Long offset, @Query("limit") Long limit,
                                       @Query("orderBy") String orderBy);
 

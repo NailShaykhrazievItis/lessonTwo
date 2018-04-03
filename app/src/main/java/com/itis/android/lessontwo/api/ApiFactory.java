@@ -74,8 +74,8 @@ public final class ApiFactory {
         ApiFactory.comicsService = comicsService;
     }
 
-    public static void setCreatorsService(final CreatorsService creatorsService) {
-        ApiFactory.creatorsService = creatorsService;
+    public static void setCharactersService(CharactersService charactersService) {
+        ApiFactory.charactersService = charactersService;
     }
 
     @NonNull

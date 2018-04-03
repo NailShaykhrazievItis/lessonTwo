@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.characters;
+package com.itis.android.lessontwo.ui.character;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;

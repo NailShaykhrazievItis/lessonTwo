@@ -2,15 +2,12 @@ package com.itis.android.lessontwo.api;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-
 import com.itis.android.lessontwo.App;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -25,6 +22,8 @@ public class RequestsHandler {
         //characters
         responsesMap.put("character/1011334", "character.json");
         responsesMap.put("characters_test", "charactersList.json");
+        //stories
+        responsesMap.put("stories_test","storiesList.json");
     }
 
     public boolean shouldIntercept(@NonNull String path) {

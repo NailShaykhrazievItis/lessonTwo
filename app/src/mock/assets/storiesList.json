@@ -1,0 +1,169 @@
+{
+  "data": {
+    "offset": 0,
+    "limit": 20,
+    "total": 91878,
+    "count": 20,
+    "results": [
+      {
+        "id": 7,
+        "title": "Investigating the murder of a teenage girl, Cage suddenly learns that a three-way gang war is under way for control of the turf",
+        "description": "",
+        "resourceURI": "http://gateway.marvel.com/v1/public/stories/7",
+        "type": "story",
+        "modified": "1969-12-31T19:00:00-0500",
+        "thumbnail": null,
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/7/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/7/characters",
+          "items": [],
+          "returned": 0
+        },
+        "series": {
+          "available": 1,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/7/series",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/6",
+              "name": "Cage Vol. I (2002)"
+            }
+          ],
+          "returned": 1
+        },
+        "comics": {
+          "available": 1,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/7/comics",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/941",
+              "name": "Cage Vol. I (Hardcover)"
+            }
+          ],
+          "returned": 1
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/7/events",
+          "items": [],
+          "returned": 0
+        },
+        "originalIssue": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/comics/941",
+          "name": "Cage Vol. I (Hardcover)"
+        }
+      },
+      {
+        "id": 8,
+        "title": "In the wake of September 11th, the world watched as firefighters, police officers and EMT workers selflessly risked their lives",
+        "description": "",
+        "resourceURI": "http://gateway.marvel.com/v1/public/stories/8",
+        "type": "story",
+        "modified": "1969-12-31T19:00:00-0500",
+        "thumbnail": null,
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/8/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/8/characters",
+          "items": [],
+          "returned": 0
+        },
+        "series": {
+          "available": 1,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/8/series",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/7",
+              "name": "Call, the Vol. 1: The Brotherhood & the Wagon (2002)"
+            }
+          ],
+          "returned": 1
+        },
+        "comics": {
+          "available": 1,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/8/comics",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/942",
+              "name": "Call, the Vol. 1: The Brotherhood & the Wagon (Trade Paperback)"
+            }
+          ],
+          "returned": 1
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/8/events",
+          "items": [],
+          "returned": 0
+        },
+        "originalIssue": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/comics/942",
+          "name": "Call, the Vol. 1: The Brotherhood & the Wagon (Trade Paperback)"
+        }
+      },
+      {
+        "id": 9,
+        "title": "Ordinary New York City cop Frankie &QUOT;Gunz&QUOT; Gunzer now has a new call to duty Ñ not just to uphold the law, but to save ",
+        "description": "",
+        "resourceURI": "http://gateway.marvel.com/v1/public/stories/9",
+        "type": "story",
+        "modified": "1969-12-31T19:00:00-0500",
+        "thumbnail": null,
+        "creators": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/9/creators",
+          "items": [],
+          "returned": 0
+        },
+        "characters": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/9/characters",
+          "items": [],
+          "returned": 0
+        },
+        "series": {
+          "available": 1,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/9/series",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/series/8",
+              "name": "Call, the Vol. 2: The Precinct (2003)"
+            }
+          ],
+          "returned": 1
+        },
+        "comics": {
+          "available": 1,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/9/comics",
+          "items": [
+            {
+              "resourceURI": "http://gateway.marvel.com/v1/public/comics/943",
+              "name": "Call, the Vol. 2: The Precinct (Trade Paperback)"
+            }
+          ],
+          "returned": 1
+        },
+        "events": {
+          "available": 0,
+          "collectionURI": "http://gateway.marvel.com/v1/public/stories/9/events",
+          "items": [],
+          "returned": 0
+        },
+        "originalIssue": {
+          "resourceURI": "http://gateway.marvel.com/v1/public/comics/943",
+          "name": "Call, the Vol. 2: The Precinct (Trade Paperback)"
+        }
+      }
+    ]
+  }
+}

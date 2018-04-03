@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.characters;
+package com.itis.android.lessontwo.ui.character;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY_CHARACTER;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY_CHARACTER;

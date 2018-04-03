@@ -29,7 +29,7 @@
         </activity>
         <activity android:name=".ui.characterslist.CharactersListActivity" />
         <activity
-            android:name=".ui.characters.CharacterActivity"
+            android:name=".ui.character.CharacterActivity"
             android:label="@string/characters"
             android:parentActivityName=".ui.characterslist.CharactersListActivity">
             <meta-data

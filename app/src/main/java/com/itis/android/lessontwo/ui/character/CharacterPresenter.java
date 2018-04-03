@@ -1,4 +1,4 @@
-package com.itis.android.lessontwo.ui.characters;
+package com.itis.android.lessontwo.ui.character;
 
 import android.support.annotation.VisibleForTesting;
 import com.arellomobile.mvp.InjectViewState;

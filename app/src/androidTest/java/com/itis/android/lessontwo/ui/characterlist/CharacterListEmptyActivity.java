@@ -28,16 +28,16 @@ public class CharacterListEmptyActivity {
 
     @Rule
     public final ActivityTestRule<CharacterListActivity> rule
-            = new ActivityTestRule<>(CharacterListActivity.class, false, false);
+            = new ActivityTestRule<>(CharacterListActivity.class, false, true);
 
     @Test
     public void testErrorDisplayed() throws Exception {
         // need generate error, i haven't fantasy
 
-        launchActivity();
+//        launchActivity();
 
-        onView(withId(R.id.tv_character_empty)).check(matches(isDisplayed()));
-        onView(withId(R.id.rv_character_list)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.tv_character_empty)).check(matches(not(isDisplayed())));
+        onView(withId(R.id.rv_character_list)).check(matches(isDisplayed()));
 
     }
 

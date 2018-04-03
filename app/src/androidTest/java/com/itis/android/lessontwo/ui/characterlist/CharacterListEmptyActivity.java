@@ -36,9 +36,8 @@ public class CharacterListEmptyActivity {
 
 //        launchActivity();
 
-        onView(withId(R.id.tv_character_empty)).check(matches(not(isDisplayed())));
-        onView(withId(R.id.rv_character_list)).check(matches(isDisplayed()));
-
+        onView(withId(R.id.tv_character_empty)).check(matches(isDisplayed()));
+        onView(withId(R.id.rv_character_list)).check(matches(not(isDisplayed())));
     }
 
     private void launchActivity() {

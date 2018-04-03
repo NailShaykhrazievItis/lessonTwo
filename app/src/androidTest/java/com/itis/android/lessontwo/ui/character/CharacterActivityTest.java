@@ -31,6 +31,6 @@ public class CharacterActivityTest {
         onView(withId(R.id.ct_characters)).check(matches(isDisplayed()));
         onView(withId(R.id.tb_characters)).check(matches(isDisplayed()));
         onView(withId(R.id.iv_characters)).check(matches(isDisplayed()));
-        onView(withId(R.id.tv_description_character)).check(matches(not((isDisplayed()))));
+        onView(withId(R.id.tv_description_details_character)).check(matches(not((isDisplayed()))));
     }
 }

@@ -21,17 +21,17 @@ public class CharacterActivityTest {
 
     @Rule
     public final ActivityTestRule<CharacterActivity> rule =
-            new ActivityTestRule<>(CharacterActivity.class,false);
+            new ActivityTestRule<>(CharacterActivity.class, false);
 
     private CharacterActivity characterActivity;
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         characterActivity = rule.getActivity();
     }
 
     @Test
-    public void displayTextViews(){
+    public void displayTextViews() {
         onView(withId(R.id.ct_characters)).check(matches(isDisplayed()));
         onView(withId(R.id.tb_characters)).check(matches(isDisplayed()));
         onView(withId(R.id.iv_characters)).check(matches(isDisplayed()));

@@ -23,7 +23,6 @@ import static android.support.test.espresso.contrib.RecyclerViewActions.scrollTo
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.core.IsNot.not;
 
 @RunWith(AndroidJUnit4.class)
 public class CreatorsListActivityTest {
@@ -59,7 +58,6 @@ public class CreatorsListActivityTest {
         onView(withId(R.id.rv_creators_list))
                 .perform(actionOnItemAtPosition(3, click()));
         Intents.intended(hasComponent(CreatorsActivity.class.getName()));
-
     }
 
     @After

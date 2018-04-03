@@ -35,7 +35,6 @@ import static org.junit.Assert.*;
 public class ComicsRepositoryTest {
 
     private static final Long ID = 59559L;
-
     private ComicsRepository repository;
 
     @Before
@@ -110,12 +109,9 @@ public class ComicsRepositoryTest {
     @Test
     public void testComicsListSaved() throws Exception {
 //        repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).blockingGet();
-//        //без этого не работает, если тест запускается после realm.deleteAll()
-//        //возможно, проблема внутри Realm
 //        Realm.getDefaultInstance().executeTransaction(realm -> {
 //        });
 //
-//        //пробовал вставить sleep, но без executeTransaction не работало
 //        //Thread.sleep(5000);
 //        int savedCount = Realm.getDefaultInstance()
 //                .where(Comics.class)

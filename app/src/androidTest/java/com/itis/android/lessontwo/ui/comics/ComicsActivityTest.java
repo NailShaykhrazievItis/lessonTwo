@@ -20,17 +20,17 @@ public class ComicsActivityTest {
 
     @Rule
     public final ActivityTestRule<ComicsActivity> rule =
-            new ActivityTestRule<>(ComicsActivity.class,false);
+            new ActivityTestRule<>(ComicsActivity.class, false);
 
     private ComicsActivity comicsActivity;
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         comicsActivity = rule.getActivity();
     }
 
     @Test
-    public void displayTextViews(){
+    public void displayTextViews() {
         onView(withId(R.id.ct_comics)).check(matches(isDisplayed()));
         onView(withId(R.id.tb_comics)).check(matches(isDisplayed()));
         onView(withId(R.id.iv_comics)).check(matches(isDisplayed()));

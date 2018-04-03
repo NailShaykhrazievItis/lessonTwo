@@ -51,14 +51,14 @@ public class CharacterRepositoryTest {
     }
 
     @Test
-    public void comicsIdSuccess() throws Exception {
+    public void charactersIdSuccess() throws Exception {
         ApiFactory.setCharactersService(new TestService());
         Character character = repository.character(59539L).blockingGet();
         assertEquals(ID, character.getId());
     }
 
     @Test
-    public void comicsIdError() throws Exception {
+    public void charactersIdError() throws Exception {
         ApiFactory.setCharactersService(new TestService());
         TestObserver<Character> testObserver = new TestObserver<>();
         repository.character(123L).toObservable().subscribe(testObserver);
@@ -66,7 +66,7 @@ public class CharacterRepositoryTest {
     }
 
     @Test
-    public void comicsIdMockSuccess() throws Exception {
+    public void charactersIdMockSuccess() throws Exception {
         TestObserver<Character> testObserver = new TestObserver<>();
 
         repository.character(59539L).toObservable().subscribe(testObserver);
@@ -77,7 +77,7 @@ public class CharacterRepositoryTest {
     }
 
     @Test
-    public void comicsIdMockError() throws Exception {
+    public void charactersIdMockError() throws Exception {
         TestObserver<Character> testObserver = new TestObserver<>();
 
         repository.character(6455621L).toObservable().subscribe(testObserver);
@@ -86,7 +86,7 @@ public class CharacterRepositoryTest {
     }
 
     @Test
-    public void testComicsNotSaved() throws Exception {
+    public void testCharactersNotSaved() throws Exception {
         repository.character(59539L).subscribe();
 
         int savedCount = Realm.getDefaultInstance()
@@ -97,7 +97,7 @@ public class CharacterRepositoryTest {
     }
 
     @Test
-    public void comicsListMockSuccess() throws Exception {
+    public void charactersListMockSuccess() throws Exception {
         TestObserver<List<Character>> testObserver = new TestObserver<>();
         repository.charactersTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_CHARACTER_SORT)
                 .toObservable()
@@ -108,7 +108,7 @@ public class CharacterRepositoryTest {
     }
 
     @Test
-    public void testComicsListSaved() throws Exception {
+    public void testCharactersListSaved() throws Exception {
         repository.charactersTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_CHARACTER_SORT).subscribe(comics -> {
 
             int savedCount = Realm.getDefaultInstance()

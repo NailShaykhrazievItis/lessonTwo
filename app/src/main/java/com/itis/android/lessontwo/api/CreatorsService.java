@@ -18,6 +18,10 @@ public interface CreatorsService {
     Single<CreatorsResponse> creators(@Query("offset") Long offset, @Query("limit") Long limit,
                                       @Query("orderBy") String orderBy);
 
+    @GET("creators_test")
+    Single<CreatorsResponse> creatorsTest(@Query("offset") Long offset, @Query("limit") Long limit,
+                                      @Query("orderBy") String orderBy);
+
     @GET("creators/{creatorId}")
     Single<CreatorsResponse> creator(@Path("creatorId") Long id);
 

@@ -11,7 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Nail Shaykhraziev on 24.02.2018.
  */
-
 public final class ApiFactory {
 
     private static volatile ComicsService comicsService;

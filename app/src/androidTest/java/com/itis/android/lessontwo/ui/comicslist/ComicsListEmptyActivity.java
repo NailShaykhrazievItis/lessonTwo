@@ -31,6 +31,7 @@ public class ComicsListEmptyActivity {
 
     @Test
     public void testErrorDisplayed() throws Exception {
+
         // need generate error, i haven't fantasy
 
         launchActivity();

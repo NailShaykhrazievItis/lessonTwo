@@ -61,7 +61,9 @@ public class ComicsRepositoryTest {
     public void comicsIdError() throws Exception {
         ApiFactory.setComicsService(new TestService());
         TestObserver<Comics> testObserver = new TestObserver<>();
+
         repository.comics(123L).toObservable().subscribe(testObserver);
+
         testObserver.await().assertFailure(Throwable.class);
     }
 
@@ -99,12 +101,13 @@ public class ComicsRepositoryTest {
     @Test
     public void comicsListMockSuccess() throws Exception {
         TestObserver<List<Comics>> testObserver = new TestObserver<>();
+
         repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT)
                 .toObservable()
                 .subscribe(testObserver);
 
         testObserver.await().assertNoErrors();
-        testObserver.await().assertValueCount(20);
+        testObserver.await().assertValueCount(5);
     }
 
     @Test
@@ -115,7 +118,7 @@ public class ComicsRepositoryTest {
                 .where(Comics.class)
                 .findAll()
                 .size();
-        assertEquals(20, savedCount);
+        assertEquals(5, savedCount);
     }
 
     @Test

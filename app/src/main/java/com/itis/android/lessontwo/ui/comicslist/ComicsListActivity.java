@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.itis.android.lessontwo.App;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -22,6 +24,9 @@ import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 import io.reactivex.disposables.Disposable;
 
@@ -37,14 +42,25 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
+    @Inject
+    ComicsAdapter adapter;
+
     @InjectPresenter
     ComicsListPresenter presenter;
-    private ComicsAdapter adapter;
+
+    @Inject
+    Provider<ComicsListPresenter> presenterProvider;
+
+    @ProvidePresenter
+    ComicsListPresenter providePresenter() {
+        return presenterProvider.get();
+    }
 
     private boolean isLoading = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
         getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);

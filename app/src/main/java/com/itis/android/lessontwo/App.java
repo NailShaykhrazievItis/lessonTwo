@@ -1,12 +1,16 @@
 package com.itis.android.lessontwo;
 
 import android.app.Application;
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.facebook.stetho.Stetho;
-import com.itis.android.lessontwo.api.ApiFactory;
-import com.itis.android.lessontwo.repository.RepositoryProvider;
+import com.itis.android.lessontwo.di.ClientModule;
+import com.itis.android.lessontwo.di.DaggerAppComponent;
+import com.itis.android.lessontwo.di.component.AppComponent;
+import com.itis.android.lessontwo.di.module.AppModule;
+import com.itis.android.lessontwo.di.module.DataModule;
+import com.itis.android.lessontwo.di.module.PresenterModule;
+import com.itis.android.lessontwo.di.module.ServiceModule;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -17,15 +21,11 @@ import io.realm.rx.RealmObservableFactory;
 /**
  * Created by Nail Shaykhraziev on 24.02.2018.
  */
-
 public class App extends Application {
 
-    private static Context sContext;
-
-    @NonNull
-    public static Context getsContext() {
-        return sContext;
-    }
+    private static AppComponent sAppComponent;
+//    private static ApiComponent sApiComponent;
+//    private static ComicsComponent sComicsComponent;
 
     @Override
     public void onCreate() {
@@ -33,8 +33,29 @@ public class App extends Application {
         initStetho();
         initPicasso();
         initRealm();
-        RepositoryProvider.init();
-        ApiFactory.recreate();
+        sAppComponent = DaggerAppComponent.builder()
+                .dataModule(new DataModule())
+                .presenterModule(new PresenterModule())
+                .appModule(new AppModule(this))
+                .clientModule(new ClientModule())
+                .serviceModule(new ServiceModule())
+                .build();
+
+//        sApiComponent = DaggerAppComponent.builder()
+//                .clientModule(new ClientModule())
+//                .serviceModule(new ServiceModule())
+//                .build();
+//
+//        sComicsComponent = DaggerAppComponent.builder()
+//                .apiComponent(sApiComponent)
+//                .appComponent(sAppComponent)
+//                .comicsModule(new ComicsModule())
+//                .build(();
+    }
+
+    @NonNull
+    public static AppComponent getAppComponent() {
+        return sAppComponent;
     }
 
     private void initPicasso() {

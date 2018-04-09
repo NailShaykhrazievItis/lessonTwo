@@ -21,7 +21,10 @@ public class RequestsHandler {
 
     private final Map<String, String> responsesMap = new HashMap<>();
 
-    public RequestsHandler() {
+    private Context context;
+
+    public RequestsHandler(Context context) {
+        this.context = context;
         responsesMap.put("comics/59539", "comics.json");
         responsesMap.put("comics_test", "cList.json");
     }
@@ -53,13 +56,9 @@ public class RequestsHandler {
 
     @NonNull
     private Response createResponseFromAssets(@NonNull Request request, @NonNull String assetPath) {
-        Context context = App.getsContext();
         try {
-            final InputStream stream = context.getAssets().open(assetPath);
-            try {
+            try (InputStream stream = context.getAssets().open(assetPath)) {
                 return OkHttpResponse.success(request, stream);
-            } finally {
-                stream.close();
             }
         } catch (IOException e) {
             return OkHttpResponse.error(request, 500, e.getMessage());

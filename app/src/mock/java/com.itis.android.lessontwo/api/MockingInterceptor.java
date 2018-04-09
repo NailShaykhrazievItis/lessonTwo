@@ -3,6 +3,8 @@ package com.itis.android.lessontwo.api;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 
+import com.itis.android.lessontwo.App;
+
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -20,7 +22,7 @@ public class MockingInterceptor implements Interceptor {
     private final Random random;
 
     private MockingInterceptor() {
-        handler = new RequestsHandler();
+        handler = new RequestsHandler(App.getAppComponent().provideApp());
         random = new SecureRandom();
     }
 

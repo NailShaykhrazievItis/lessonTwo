@@ -14,12 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.PresenterType;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.itis.android.lessontwo.App;
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 import static com.itis.android.lessontwo.utils.Constants.ID_KEY;
 import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
@@ -37,8 +41,16 @@ public class ComicsActivity extends BaseActivity implements ComicsView{
     private TextView tvPages;
     private ProgressBar progressBar;
 
-    @InjectPresenter(type = PresenterType.WEAK)
+    @InjectPresenter
     ComicsPresenter presenter;
+
+    @Inject
+    Provider<ComicsPresenter> presenterProvider;
+
+    @ProvidePresenter
+    ComicsPresenter providePresenter() {
+        return presenterProvider.get();
+    }
 
     private Long id;
 
@@ -51,6 +63,7 @@ public class ComicsActivity extends BaseActivity implements ComicsView{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
         getLayoutInflater().inflate(R.layout.activity_comics, contentFrameLayout);

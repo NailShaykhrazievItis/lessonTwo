@@ -2,7 +2,7 @@ package com.itis.android.lessontwo.repository;
 
 import android.support.annotation.NonNull;
 
-import com.itis.android.lessontwo.api.ApiFactory;
+import com.itis.android.lessontwo.api.ComicsService;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsResponse;
 import com.itis.android.lessontwo.model.comics.ComicsResponseData;
@@ -20,10 +20,16 @@ import io.reactivex.Single;
  */
 public class ComicsRepositoryImpl implements ComicsRepository {
 
+    private ComicsService comicsService;
+
+    public ComicsRepositoryImpl(ComicsService comicsService) {
+        this.comicsService = comicsService;
+    }
+
     @NonNull
     @Override
     public Single<List<Comics>> comics(Long offset, Long limit, String sort) {
-        return ApiFactory.getComicsService()
+        return comicsService
                 .comics(offset, limit, sort)
                 .map(ComicsResponse::getData)
                 .map(ComicsResponseData::getResults)
@@ -34,7 +40,7 @@ public class ComicsRepositoryImpl implements ComicsRepository {
 
     @Override
     public Single<List<Comics>> comicsTest(Long offset, Long limit, String sort) {
-        return ApiFactory.getComicsService()
+        return comicsService
                 .comicsTest(offset, limit, sort)
                 .map(ComicsResponse::getData)
                 .map(ComicsResponseData::getResults)
@@ -45,7 +51,7 @@ public class ComicsRepositoryImpl implements ComicsRepository {
 
     @Override
     public Single<Comics> comics(final Long id) {
-        return ApiFactory.getComicsService()
+        return comicsService
                 .comics(id)
                 .map(ComicsResponse::getData)
                 .map(ComicsResponseData::getResults)

@@ -26,4 +26,7 @@
     <string name="series">Series</string>
     <string name="text_empty_series">There are now any series yet</string>
 
+    <string name="text_empty_elements">There are now any elements yet</string>
+
+
 </resources>

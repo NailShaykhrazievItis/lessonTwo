@@ -3,11 +3,17 @@ package com.itis.android.lessontwo.ui.serieslist;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.ui.comics.ComicsActivity;
+import com.itis.android.lessontwo.ui.series.SeriesActivity;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import io.realm.Realm;
-import org.junit.*;
-import org.junit.runner.*;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -36,12 +42,16 @@ public class SeriesListActivityTest {
 
     @Test
     public void testRecyclerViewDisplayed() throws Exception{
+        Thread.sleep(2000);
+
         onView(withId(R.id.tv_empty)).check(matches(not(isDisplayed())));
         onView(withId(R.id.rv_comics_list)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testScrollRecyclerView() throws Exception{
+        Thread.sleep(2000);
+
         onView(withId(R.id.rv_comics_list))
                 .perform(scrollToPosition(4))
                 .perform(scrollToPosition(3))
@@ -51,9 +61,11 @@ public class SeriesListActivityTest {
 
     @Test
     public void testClickOnItem() throws Exception{
+        Thread.sleep(2000);
+
         onView(withId(R.id.rv_comics_list))
                 .perform(actionOnItemAtPosition(3,click()));
-        Intents.intended(hasComponent(ComicsActivity.class.getName()));
+        Intents.intended(hasComponent(SeriesActivity.class.getName()));
     }
 
     @After

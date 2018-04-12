@@ -13,7 +13,9 @@ import android.widget.ImageView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.itis.android.lessontwo.R;
+import com.itis.android.lessontwo.ui.characterslist.CharactersListActivity;
 import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity;
+import com.itis.android.lessontwo.ui.serieslist.SeriesListActivity;
 import com.itis.android.lessontwo.utils.ImageLoadHelper;
 
 public abstract class BaseActivity extends MvpAppCompatActivity {
@@ -59,6 +61,12 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
                 case R.id.menu_comics:
                     Intent intent = new Intent(getApplicationContext(), ComicsListActivity.class);
                     startActivity(intent);
+                    break;
+                case R.id.menu_characters:
+                    CharactersListActivity.start(this);
+                    break;
+                case R.id.menu_series:
+                    SeriesListActivity.start(this);
                     break;
             }
             return true;

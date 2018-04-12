@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
+
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.model.comics.ComicsTextObject;
@@ -27,7 +29,7 @@ import static com.itis.android.lessontwo.utils.Constants.NAME_KEY;
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
  */
-public class ComicsActivity extends BaseActivity implements ComicsView{
+public class ComicsActivity extends BaseActivity implements ComicsView {
 
     private CollapsingToolbarLayout collapsingToolbar;
     private Toolbar toolbar;
@@ -37,7 +39,7 @@ public class ComicsActivity extends BaseActivity implements ComicsView{
     private TextView tvPages;
     private ProgressBar progressBar;
 
-    @InjectPresenter(type = PresenterType.WEAK)
+    @InjectPresenter
     ComicsPresenter presenter;
 
     private Long id;
@@ -59,32 +61,27 @@ public class ComicsActivity extends BaseActivity implements ComicsView{
     }
 
     @Override
-    public void getComicsId() {
+    public void getComicsId(){
         presenter.init(id);
     }
 
     @Override
-    public void handleError(Throwable error) {
-        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void setPageCount(Comics comics) {
+    public void setPageCount(Comics comics){
         tvPages.setText(String.valueOf(comics.getPageCount()));
     }
 
     @Override
-    public void setPrice(Comics comics) {
-        if (comics.getPrices() != null && !comics.getPrices().isEmpty()) {
+    public void setPrice(Comics comics){
+        if(comics.getPrices() != null && !comics.getPrices().isEmpty()){
             tvPrice.setText(getString(R.string.price_format, String.valueOf(comics.getPrices().get(0).getPrice())));
         }
     }
 
     @Override
-    public void setDescription(Comics comics) {
-        if (comics.getTextObjects() != null) {
+    public void setDescription(Comics comics){
+        if(comics.getTextObjects() != null){
             StringBuilder description = new StringBuilder();
-            for (ComicsTextObject comicsTextObject : comics.getTextObjects()) {
+            for(ComicsTextObject comicsTextObject : comics.getTextObjects()){
                 description.append(comicsTextObject.getText()).append("\n");
             }
             tvDescription.setText(description.length() > 0 ?
@@ -93,13 +90,19 @@ public class ComicsActivity extends BaseActivity implements ComicsView{
     }
 
     @Override
-    public void setImage(Comics comics) {
-        if (comics.getImage() != null) {
+    public void setImage(Comics comics){
+        if(comics.getImage() != null){
             ImageLoadHelper.loadPicture(ivCover, String.format("%s.%s", comics.getImage().getPath(),
                     comics.getImage().getExtension()));
-        } else {
+        }else{
             ImageLoadHelper.loadPictureByDrawable(ivCover, R.drawable.image_error_marvel_logo);
         }
+    }
+
+    @Override
+    public void handleError(Throwable error) {
+        Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
+        Log.e("Alm", error.getMessage());
     }
 
     private void initViews() {

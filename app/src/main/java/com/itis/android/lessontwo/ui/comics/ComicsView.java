@@ -1,17 +1,18 @@
 package com.itis.android.lessontwo.ui.comics;
 
 import com.arellomobile.mvp.MvpView;
+
+import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.itis.android.lessontwo.model.comics.Comics;
 
 /**
- * Created by Nail Shaykhraziev on 12.03.2018.
+ * Created by Home on 18.03.2018.
  */
 
-public interface ComicsView extends MvpView {
+public interface ComicsView extends MvpView{
 
     void getComicsId();
-
-    void handleError(Throwable error);
 
     void setPageCount(Comics comics);
 
@@ -20,4 +21,7 @@ public interface ComicsView extends MvpView {
     void setDescription(Comics comics);
 
     void setImage(Comics comics);
+
+    @StateStrategyType(OneExecutionStateStrategy.class)
+    void handleError(Throwable throwable);
 }

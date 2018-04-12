@@ -2,10 +2,11 @@ package com.itis.android.lessontwo.ui.comics;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+
 import com.itis.android.lessontwo.repository.RepositoryProvider;
 
 /**
- * Created by Nail Shaykhraziev on 12.03.2018.
+ * Created by a9 on 02.03.18.
  */
 @InjectViewState
 public class ComicsPresenter extends MvpPresenter<ComicsView> {
@@ -16,7 +17,7 @@ public class ComicsPresenter extends MvpPresenter<ComicsView> {
         getViewState().getComicsId();
     }
 
-    public void init(Long id) {
+    public void init(long id) {
         RepositoryProvider.provideComicsRepository()
                 .comics(id)
                 .subscribe(comics -> {
@@ -24,6 +25,6 @@ public class ComicsPresenter extends MvpPresenter<ComicsView> {
                     getViewState().setDescription(comics);
                     getViewState().setPrice(comics);
                     getViewState().setPageCount(comics);
-                }, getViewState()::handleError);
+                },getViewState()::handleError);
     }
 }

@@ -16,4 +16,17 @@
     <string name="title_pages">Pages:</string>
     <string name="text_desc_not_found">Description not found</string>
 
+    <!--Character screen-->
+    <string name="character">Character</string>
+    <string name="characters">Characters</string>
+    <string name="text_empty_characters">There are now any characters yet</string>
+    <string name="no_description">No description available</string>
+
+    <!--Series screen-->
+    <string name="series">Series</string>
+    <string name="text_empty_series">There are now any series yet</string>
+
+    <string name="text_empty_elements">There are now any elements yet</string>
+
+
 </resources>

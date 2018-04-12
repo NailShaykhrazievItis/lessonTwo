@@ -2,10 +2,8 @@ package com.itis.android.lessontwo.api;
 
 import android.support.annotation.NonNull;
 
-import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.itis.android.lessontwo.BuildConfig;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,10 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class ApiFactory {
 
-    private static OkHttpClient sClient;
-
     private static volatile ComicsService comicsService;
     private static volatile CharactersService charactersService;
+    private static volatile SeriesService seriesService;
 
     private ApiFactory() {
     }
@@ -52,43 +49,46 @@ public final class ApiFactory {
         return service;
     }
 
+    @NonNull
+    public static SeriesService getSeriesService() {
+        SeriesService service = seriesService;
+        if (service == null) {
+            synchronized (ApiFactory.class) {
+                service = seriesService;
+                if (service == null) {
+                    service = seriesService = buildRetrofit().create(SeriesService.class);
+                }
+            }
+        }
+        return service;
+    }
+
     public static void recreate() {
-        sClient = null;
-        sClient = getClient();
+        OkHttpProvider.recreate();
         comicsService = buildRetrofit().create(ComicsService.class);
         charactersService = buildRetrofit().create(CharactersService.class);
+        seriesService = buildRetrofit().create(SeriesService.class);
+    }
+
+    public static void setComicsService(ComicsService comicsService) {
+        ApiFactory.comicsService = comicsService;
+    }
+
+    public static void setSeriesService(SeriesService seriesService) {
+        ApiFactory.seriesService = seriesService;
+    }
+
+    public static void setCharactersService(CharactersService charactersService) {
+        ApiFactory.charactersService = charactersService;
     }
 
     @NonNull
     private static Retrofit buildRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_ENDPOINT)
-                .client(getClient())
+                .client(OkHttpProvider.provideClient())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-    }
-
-    @NonNull
-    private static OkHttpClient getClient() {
-        OkHttpClient client = sClient;
-        if (client == null) {
-            synchronized (ApiFactory.class) {
-                client = sClient;
-                if (client == null) {
-                    client = sClient = buildClient();
-                }
-            }
-        }
-        return client;
-    }
-
-    @NonNull
-    private static OkHttpClient buildClient() {
-        return new OkHttpClient.Builder()
-                .addInterceptor(ApiKeyInterceptor.create())
-                .addInterceptor(LoggingInterceptor.create())
-                .addInterceptor(new StethoInterceptor())
                 .build();
     }
 }

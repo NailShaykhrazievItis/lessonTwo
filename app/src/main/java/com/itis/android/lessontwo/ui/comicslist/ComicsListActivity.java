@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import com.itis.android.lessontwo.R;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
@@ -20,10 +21,10 @@ import com.itis.android.lessontwo.ui.base.BaseAdapter;
 import com.itis.android.lessontwo.ui.comics.ComicsActivity;
 import com.itis.android.lessontwo.widget.EmptyStateRecyclerView;
 
+import io.reactivex.disposables.Disposable;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by Nail Shaykhraziev on 25.02.2018.
@@ -37,9 +38,10 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
+    private ComicsAdapter adapter;
+
     @InjectPresenter
     ComicsListPresenter presenter;
-    private ComicsAdapter adapter;
 
     private boolean isLoading = false;
 
@@ -53,11 +55,6 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     }
 
     @Override
-    public void onItemClick(@NonNull Comics item) {
-        presenter.onItemClick(item);
-    }
-
-    @Override
     public void handleError(Throwable error) {
         Toast.makeText(this, error.getMessage(), Toast.LENGTH_SHORT).show();
     }
@@ -65,6 +62,11 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     @Override
     public void showItems(@NonNull List<Comics> items) {
         adapter.changeDataSet(items);
+    }
+
+    @Override
+    public void showDetails(Comics item) {
+        ComicsActivity.start(this, item);
     }
 
     @Override
@@ -86,8 +88,8 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     }
 
     @Override
-    public void showDetails(Comics item) {
-        ComicsActivity.start(this, item);
+    public void onItemClick(@NonNull Comics item) {
+        presenter.onItemClick(item);
     }
 
     private void initRecycler() {

@@ -4,4 +4,10 @@
     <item
         android:id="@+id/menu_comics"
         android:title="@string/comics" />
+    <item
+        android:id="@+id/menu_characters"
+        android:title="@string/characters" />
+    <item
+        android:id="@+id/menu_series"
+        android:title="@string/series" />
 </menu>

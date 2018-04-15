@@ -60,7 +60,7 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        App.getAppComponent().inject(this);
+        App.getsComicsComponent().inject(this);
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
         getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);

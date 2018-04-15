@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.itis.android.lessontwo.BuildConfig;
 import com.itis.android.lessontwo.api.CharactersService;
-import com.itis.android.lessontwo.api.ComicsService;
 
 import javax.inject.Singleton;
 
@@ -21,11 +20,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ServiceModule {
 
-    @Provides
-    @Singleton
-    ComicsService provideComicsService(@NonNull Retrofit retrofit) {
-        return retrofit.create(ComicsService.class);
-    }
+//    @Provides
+//    @Singleton
+//    ComicsService provideComicsService(@NonNull Retrofit retrofit) {
+//        return retrofit.create(ComicsService.class);
+//    }
 
     @Provides
     @Singleton

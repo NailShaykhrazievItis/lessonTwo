@@ -9,6 +9,10 @@ jobs:
           JVM_OPTS: -Xmx3200m
     steps:
       - checkout
+      before_install:
+        - pwd
+        - ls -la
+        - chmod +x /.gradlew
       - restore_cache:
           paths:
               - ~/.gradle

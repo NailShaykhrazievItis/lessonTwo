@@ -14,5 +14,4 @@
         android:name="com.itis.android.lessontwo.ui.comics.ComicsActivity"
         android:label="activity_comics"
         tools:layout="@layout/activity_comics" />
-
 </navigation>

@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/lessonTwo
+    working_directory: ~/NailShaykhrazievItis/lessonTwo
     docker:
       # specify the version you desire here
       - image: circleci/android:api-26-alpha

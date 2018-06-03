@@ -5,9 +5,10 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/android:api-27-node8-alpha
-      - image: circleci/openjdk:8-jdk
+    machine: java: version: openjdk8
     environment:
           JVM_OPTS: -Xmx3200m
+          ANDROID_HOME: /usr/local/android-sdk-linux
     steps:
       - checkout
       - restore_cache:

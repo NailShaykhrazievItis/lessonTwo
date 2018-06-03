@@ -5,6 +5,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/android:api-27-node8-alpha
+      - image: circleci/openjdk:8-jdk
     environment:
           JVM_OPTS: -Xmx3200m
     steps:

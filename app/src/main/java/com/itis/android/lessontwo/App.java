@@ -2,6 +2,7 @@ package com.itis.android.lessontwo;
 
 import android.app.Application;
 
+import com.arellomobile.mvp.MvpFacade;
 import com.facebook.stetho.Stetho;
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
@@ -21,6 +22,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MvpFacade.init();
         initStetho();
         initPicasso();
         initRealm();

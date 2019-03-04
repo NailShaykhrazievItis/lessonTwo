@@ -38,7 +38,7 @@ class ComicsPresenterTest {
     }
 
     @Test
-    fun init() {
+    fun whenInitExpectedSuccess() {
         // Arrange
         val expectedId = 5L
         val mockComics = mock(Comics::class.java)
@@ -52,5 +52,22 @@ class ComicsPresenterTest {
         verify(mockViewState).setDescription(mockComics)
         verify(mockViewState).setPageCount(mockComics)
         verify(mockViewState).setPrice(mockComics)
+    }
+
+    @Test
+    fun whenInitExpectedError() {
+        // Arrange
+        val expectedId = 566L
+        val expectedError = Throwable()
+        val mockComics = mock(Comics::class.java)
+        doReturn(Single.error<Comics>(expectedError)).`when`(mockComicsRepository).comics(expectedId)
+        // Act
+        presenter.init(expectedId)
+        // Assert
+        verify(mockViewState).handleError(expectedError)
+        verify(mockViewState, never()).setPrice(mockComics)
+        verify(mockViewState, never()).setDescription(mockComics)
+        verify(mockViewState, never()).setPageCount(mockComics)
+        verify(mockViewState, never()).setImage(mockComics)
     }
 }

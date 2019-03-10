@@ -29,7 +29,7 @@ public class ComicsActivityTest {
     private ComicsActivity comicsActivity;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         comicsActivity = rule.getActivity();
     }
 

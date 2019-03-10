@@ -6,7 +6,7 @@ import com.itis.android.lessontwo.repository.ComicsRepository
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
-class ComicsPresenter(
+class ComicsPresenter (
         private val comicsRepository: ComicsRepository
 ) : MvpPresenter<ComicsView>() {
 

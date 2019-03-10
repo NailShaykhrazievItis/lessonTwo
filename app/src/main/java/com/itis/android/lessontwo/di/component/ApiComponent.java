@@ -1,7 +1,7 @@
 package com.itis.android.lessontwo.di.component;
 
 import com.itis.android.lessontwo.api.ComicsService;
-import com.itis.android.lessontwo.di.ClientModule;
+import com.itis.android.lessontwo.di.module.NetModule;
 import com.itis.android.lessontwo.di.module.ServiceModule;
 
 import javax.inject.Singleton;
@@ -14,8 +14,8 @@ import retrofit2.Retrofit;
  * Created by Nail Shaykhraziev on 09.04.2018.
  */
 @Singleton
-@Component(modules= {
-        ClientModule.class,
+@Component(modules = {
+        NetModule.class,
         ServiceModule.class
 })
 public interface ApiComponent {

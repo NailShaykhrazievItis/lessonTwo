@@ -42,7 +42,7 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     private EmptyStateRecyclerView recyclerView;
     private TextView tvEmpty;
 
-    @Inject
+//    @Inject
     ComicsAdapter adapter;
 
     @InjectPresenter

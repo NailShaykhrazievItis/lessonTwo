@@ -45,7 +45,7 @@ android {
 
 ext {
     commons_codec = "1.11"
-    dagger = "2.15"
+    dagger = "2.16"
     espressoVersion = "3.0.2"
     gson = "2.8.2"
     mockito = "2.24.5"
@@ -99,7 +99,7 @@ dependencies {
     kapt "com.arello-mobile:moxy-compiler:${moxy}"
     // Dagger
     implementation "com.google.dagger:dagger:${dagger}"
-    annotationProcessor "com.google.dagger:dagger-compiler:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
 
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 

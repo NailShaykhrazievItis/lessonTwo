@@ -5,7 +5,6 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.itis.android.lessontwo.R;
-import com.itis.android.lessontwo.ui.comics.ComicsActivity;
 
 import org.junit.After;
 import org.junit.Before;

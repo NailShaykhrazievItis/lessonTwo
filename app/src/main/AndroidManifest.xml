@@ -19,14 +19,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.comics.ComicsActivity"
-            android:label="@string/comics"
-            android:parentActivityName=".ui.comicslist.ComicsListActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.comicslist.ComicsListActivity" />
-        </activity>
     </application>
 
 </manifest>

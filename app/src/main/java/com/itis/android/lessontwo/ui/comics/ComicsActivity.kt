@@ -8,15 +8,15 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.*
 import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.PresenterType
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.itis.android.lessontwo.App
 import com.itis.android.lessontwo.R
 import com.itis.android.lessontwo.model.comics.Comics
-import com.itis.android.lessontwo.repository.RepositoryProvider
 import com.itis.android.lessontwo.ui.base.BaseActivity
 import com.itis.android.lessontwo.utils.Constants.ID_KEY
 import com.itis.android.lessontwo.utils.Constants.NAME_KEY
 import com.itis.android.lessontwo.utils.ImageLoadHelper
+import javax.inject.Inject
 
 class ComicsActivity : BaseActivity(), ComicsView {
 
@@ -30,14 +30,28 @@ class ComicsActivity : BaseActivity(), ComicsView {
 
     private var id: Long = 0
 
-    @InjectPresenter(type = PresenterType.LOCAL)
+//    @InjectPresenter(type = PresenterType.LOCAL)
+//    lateinit var presenter: ComicsPresenter
+
+//    @ProvidePresenter
+//    fun initPresenter(): ComicsPresenter =
+//            ComicsPresenter(RepositoryProvider.provideComicsRepository())
+
+    @Inject
+    @InjectPresenter
     lateinit var presenter: ComicsPresenter
 
     @ProvidePresenter
-    fun initPresenter(): ComicsPresenter =
-            ComicsPresenter(RepositoryProvider.provideComicsRepository())
+    fun providePresenter() = presenter
+
+//    @Inject
+//    lateinit var presenterProvider: Provider<ComicsPresenter>
+//
+//    @ProvidePresenter
+//    fun providePresenter(): ComicsPresenter = presenterProvider.get()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.getsComicsComponent().inject(this)
         super.onCreate(savedInstanceState)
         val contentFrameLayout = findViewById<FrameLayout>(R.id.container)
         layoutInflater.inflate(R.layout.activity_comics, contentFrameLayout)

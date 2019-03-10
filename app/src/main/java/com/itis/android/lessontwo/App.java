@@ -5,14 +5,14 @@ import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.MvpFacade;
 import com.facebook.stetho.Stetho;
-import com.itis.android.lessontwo.di.ClientModule;
-import com.itis.android.lessontwo.di.DaggerAppComponent;
 import com.itis.android.lessontwo.di.component.ApiComponent;
 import com.itis.android.lessontwo.di.component.AppComponent;
 import com.itis.android.lessontwo.di.component.ComicsComponent;
+import com.itis.android.lessontwo.di.component.DaggerAppComponent;
 import com.itis.android.lessontwo.di.module.AppModule;
-import com.itis.android.lessontwo.di.module.ComicsModule;
 import com.itis.android.lessontwo.di.module.DataModule;
+import com.itis.android.lessontwo.di.module.NetModule;
+import com.itis.android.lessontwo.di.module.PresenterModule;
 import com.itis.android.lessontwo.di.module.ServiceModule;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
@@ -42,15 +42,15 @@ public class App extends Application {
                 .build();
 
         sApiComponent = DaggerAppComponent.builder()
-                .clientModule(new ClientModule())
+                .netModule(new NetModule())
                 .serviceModule(new ServiceModule())
                 .build();
 
         sComicsComponent = DaggerAppComponent.builder()
                 .apiComponent(sApiComponent)
                 .appComponent(sAppComponent)
-                .comicsModule(new ComicsModule())
-                .dataMdule(new DataModule())
+                .presenterModule(new PresenterModule())
+                .dataModule(new DataModule())
                 .build();
     }
 

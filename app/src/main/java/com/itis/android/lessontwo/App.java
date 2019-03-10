@@ -5,14 +5,10 @@ import android.support.annotation.NonNull;
 
 import com.arellomobile.mvp.MvpFacade;
 import com.facebook.stetho.Stetho;
-import com.itis.android.lessontwo.di.component.ApiComponent;
 import com.itis.android.lessontwo.di.component.AppComponent;
-import com.itis.android.lessontwo.di.component.ComicsComponent;
 import com.itis.android.lessontwo.di.component.DaggerAppComponent;
 import com.itis.android.lessontwo.di.module.AppModule;
-import com.itis.android.lessontwo.di.module.DataModule;
 import com.itis.android.lessontwo.di.module.NetModule;
-import com.itis.android.lessontwo.di.module.PresenterModule;
 import com.itis.android.lessontwo.di.module.ServiceModule;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
@@ -20,6 +16,7 @@ import com.squareup.picasso.Picasso;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.rx.RealmObservableFactory;
+import timber.log.Timber;
 
 /**
  * Created by Nail Shaykhraziev on 24.02.2018.
@@ -27,44 +24,25 @@ import io.realm.rx.RealmObservableFactory;
 public class App extends Application {
 
     private static AppComponent sAppComponent;
-    private static ApiComponent sApiComponent;
-    private static ComicsComponent sComicsComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
         MvpFacade.init();
+        Timber.plant(new Timber.DebugTree());
         initStetho();
         initPicasso();
         initRealm();
         sAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
-                .build();
-
-        sApiComponent = DaggerAppComponent.builder()
                 .netModule(new NetModule())
                 .serviceModule(new ServiceModule())
-                .build();
-
-        sComicsComponent = DaggerAppComponent.builder()
-                .apiComponent(sApiComponent)
-                .appComponent(sAppComponent)
-                .presenterModule(new PresenterModule())
-                .dataModule(new DataModule())
                 .build();
     }
 
     @NonNull
     public static AppComponent getAppComponent() {
         return sAppComponent;
-    }
-
-    public static ApiComponent getsApiComponent() {
-        return sApiComponent;
-    }
-
-    public static ComicsComponent getsComicsComponent() {
-        return sComicsComponent;
     }
 
     private void initPicasso() {

@@ -3,6 +3,7 @@ package com.itis.android.lessontwo;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
+import com.arellomobile.mvp.MvpFacade;
 import com.facebook.stetho.Stetho;
 import com.itis.android.lessontwo.di.ClientModule;
 import com.itis.android.lessontwo.di.DaggerAppComponent;
@@ -32,6 +33,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MvpFacade.init();
         initStetho();
         initPicasso();
         initRealm();

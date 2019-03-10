@@ -28,9 +28,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.powermock.api.mockito.PowerMockito.mockStatic;
 
 
-/**
- * Created by Nail Shaykhraziev on 18.03.2018.
- */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({RxUtils.class, ApiFactory.class})
 public class ComicsListPresenterTest {
@@ -55,7 +52,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void onFirstViewAttach() throws Exception {
+    public void onFirstViewAttach() {
         // Arrange
         Mockito.doNothing().when(presenter).loadComics();
         // Act
@@ -65,7 +62,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void loadComicsMockError() throws Exception {
+    public void loadComicsMockError() {
         // Arrange
         Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
                         .thenReturn(Single.error(new Throwable()));
@@ -78,7 +75,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void loadComicsMockSuccess() throws Exception {
+    public void loadComicsMockSuccess() {
         // Arrange
         List<Comics> comicsList = new ArrayList<>();
         Mockito.when(RepositoryProvider.provideComicsRepository()
@@ -93,7 +90,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void loadComicsError() throws Exception {
+    public void loadComicsError() {
         // Arrange
         List<Comics> comicsList = new ArrayList<>();
         Comics comics = Mockito.mock(Comics.class);
@@ -106,7 +103,7 @@ public class ComicsListPresenterTest {
         Mockito.verify(viewState).handleError(Mockito.any(Throwable.class));
     }
     @Test
-    public void loadComicsSuccess() throws Exception {
+    public void loadComicsSuccess() {
         // Arrange
         List<Comics> comicsList = new ArrayList<>();
         Comics comics = Mockito.mock(Comics.class);
@@ -120,7 +117,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void loadNextElementsError() throws Exception {
+    public void loadNextElementsError() {
         // Arrange
         List<Comics> comicsList = new ArrayList<>();
         Comics comics = Mockito.mock(Comics.class);
@@ -135,7 +132,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void loadNextElementsSuccess() throws Exception {
+    public void loadNextElementsSuccess() {
         // Arrange
         List<Comics> comicsList = new ArrayList<>();
         Comics comics = Mockito.mock(Comics.class);
@@ -150,7 +147,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void onItemClick() throws Exception {
+    public void onItemClick() {
         // Arrange
         Comics comics = Mockito.mock(Comics.class);
         // Act
@@ -160,7 +157,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
-    public void doActionInView() throws Exception {
+    public void doActionInView() {
         Mockito.verifyNoMoreInteractions(viewState);
     }
 
@@ -170,7 +167,7 @@ public class ComicsListPresenterTest {
         private List<Comics> comicsList;
         private Comics comics;
 
-        public TestRepository(boolean error, List<Comics> comicsList, Comics comics) {
+        TestRepository(boolean error, List<Comics> comicsList, Comics comics) {
             this.error = error;
             this.comicsList = comicsList;
             this.comics = comics;

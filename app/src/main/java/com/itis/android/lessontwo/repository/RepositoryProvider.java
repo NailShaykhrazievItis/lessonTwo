@@ -18,6 +18,10 @@ public class RepositoryProvider {
         return comicsRepository;
     }
 
+    public static void setComicsRepository(ComicsRepository repository) {
+        comicsRepository = repository;
+    }
+
     @MainThread
     public static void init() {
         comicsRepository = new ComicsRepositoryImpl();

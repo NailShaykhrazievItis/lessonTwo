@@ -2,11 +2,13 @@ package com.itis.android.lessontwo.ui.comics
 
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.itis.android.lessontwo.repository.RepositoryProvider
+import com.itis.android.lessontwo.repository.ComicsRepository
 import io.reactivex.rxkotlin.subscribeBy
 
 @InjectViewState
-class ComicsPresenter : MvpPresenter<ComicsView>() {
+class ComicsPresenter(
+        private val comicsRepository: ComicsRepository
+) : MvpPresenter<ComicsView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -14,8 +16,7 @@ class ComicsPresenter : MvpPresenter<ComicsView>() {
     }
 
     fun init(id: Long) {
-        RepositoryProvider.provideComicsRepository()
-                .comics(id)
+       comicsRepository.comics(id)
                 .doOnSubscribe { viewState.showProgress() }
                 .doAfterTerminate { viewState.hideProgress() }
                 .subscribeBy(onSuccess = { comics ->

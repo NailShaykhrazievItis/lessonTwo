@@ -13,8 +13,6 @@ gen-external-apklibs/**
 # Gradle generated files
 .gradle/
 build/**
-/gradlew
-/gradlew.bat
 
 # Signing files
 .signing/

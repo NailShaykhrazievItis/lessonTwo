@@ -5,6 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.itis.android.lessontwo.R;
+import com.itis.android.lessontwo.ui.comics.ComicsActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -34,18 +35,18 @@ public class ComicsListActivityTest {
     public final ActivityTestRule<ComicsListActivity> rule = new ActivityTestRule<>(ComicsListActivity.class);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Intents.init();
     }
 
     @Test
-    public void testRecyclerViewDisplayed() throws Exception {
+    public void testRecyclerViewDisplayed() {
         onView(withId(R.id.tv_empty)).check(matches(not(isDisplayed())));
         onView(withId(R.id.rv_comics_list)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void testScrollRecyclerView() throws Exception {
+    public void testScrollRecyclerView() {
         onView(withId(R.id.rv_comics_list))
                 .perform(scrollToPosition(4))
                 .perform(scrollToPosition(3))
@@ -54,14 +55,14 @@ public class ComicsListActivityTest {
     }
 
     @Test
-    public void testClickOnItem() throws Exception {
+    public void testClickOnItem() {
         onView(withId(R.id.rv_comics_list))
                 .perform(actionOnItemAtPosition(3, click()));
         Intents.intended(hasComponent(ComicsActivity.class.getName()));
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Intents.release();
         Realm.getDefaultInstance().executeTransaction(realm -> realm.deleteAll());
     }

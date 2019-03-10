@@ -11,8 +11,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.itis.android.lessontwo.App
 import com.itis.android.lessontwo.R
-import com.itis.android.lessontwo.di.component.DaggerComicsComponent
-import com.itis.android.lessontwo.di.module.ComicsModule
 import com.itis.android.lessontwo.model.comics.Comics
 import com.itis.android.lessontwo.ui.base.BaseActivity
 import com.itis.android.lessontwo.utils.Constants.ID_KEY
@@ -53,16 +51,17 @@ class ComicsActivity : BaseActivity(), ComicsView {
 //    fun providePresenter(): ComicsPresenter = presenterProvider.get()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        DaggerComicsComponent.builder()
-                .appComponent(App.getAppComponent())
-                .comicsModule(ComicsModule())
-                .build()
-                .inject(this)
+        App.plusComicsDetailsSComponent().inject(this)
         super.onCreate(savedInstanceState)
         val contentFrameLayout = findViewById<FrameLayout>(R.id.container)
         layoutInflater.inflate(R.layout.activity_comics, contentFrameLayout)
         initViews()
         id = intent.getLongExtra(ID_KEY, 0)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        App.clearComicsDetailsSComponent()
     }
 
     override fun getComicsId() = presenter.init(id)

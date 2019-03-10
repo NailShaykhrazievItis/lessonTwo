@@ -1,16 +1,16 @@
 package com.itis.android.lessontwo.di.component
 
+import com.itis.android.lessontwo.di.module.ComicsDetailsScModule
+import com.itis.android.lessontwo.di.module.ComicsListScModule
 import com.itis.android.lessontwo.di.module.ComicsModule
 import com.itis.android.lessontwo.di.scope.ComicsScope
-import com.itis.android.lessontwo.ui.comics.ComicsActivity
-import com.itis.android.lessontwo.ui.comicslist.ComicsListActivity
-import dagger.Component
+import dagger.Subcomponent
 
-@Component(dependencies = [AppComponent::class], modules = [ComicsModule::class])
+@Subcomponent(modules = [ComicsModule::class])
 @ComicsScope
 interface ComicsComponent {
 
-    fun inject(comicsActivity: ComicsActivity)
+    fun plusComicsDetailsSComponent(comicsDetailsModule: ComicsDetailsScModule): ComicsDetailsSComponent
 
-    fun inject(comicsListActivity: ComicsListActivity)
+    fun plusComicsListSComponent(comicsListModule: ComicsListScModule): ComicsListSComponent
 }

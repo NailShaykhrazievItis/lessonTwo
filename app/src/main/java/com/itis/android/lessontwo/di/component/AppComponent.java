@@ -5,6 +5,7 @@ import android.content.Context;
 import com.itis.android.lessontwo.api.CharactersService;
 import com.itis.android.lessontwo.api.ComicsService;
 import com.itis.android.lessontwo.di.module.AppModule;
+import com.itis.android.lessontwo.di.module.ComicsModule;
 import com.itis.android.lessontwo.di.module.NetModule;
 import com.itis.android.lessontwo.di.module.ServiceModule;
 
@@ -22,6 +23,8 @@ import dagger.Component;
         ServiceModule.class
 })
 public interface AppComponent {
+
+    ComicsComponent plusComicsComponent(ComicsModule comicsModule);
 
     Context provideApp();
 

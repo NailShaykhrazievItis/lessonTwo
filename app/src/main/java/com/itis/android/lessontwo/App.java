@@ -6,8 +6,14 @@ import android.support.annotation.NonNull;
 import com.arellomobile.mvp.MvpFacade;
 import com.facebook.stetho.Stetho;
 import com.itis.android.lessontwo.di.component.AppComponent;
+import com.itis.android.lessontwo.di.component.ComicsComponent;
+import com.itis.android.lessontwo.di.component.ComicsDetailsSComponent;
+import com.itis.android.lessontwo.di.component.ComicsListSComponent;
 import com.itis.android.lessontwo.di.component.DaggerAppComponent;
 import com.itis.android.lessontwo.di.module.AppModule;
+import com.itis.android.lessontwo.di.module.ComicsDetailsScModule;
+import com.itis.android.lessontwo.di.module.ComicsListScModule;
+import com.itis.android.lessontwo.di.module.ComicsModule;
 import com.itis.android.lessontwo.di.module.NetModule;
 import com.itis.android.lessontwo.di.module.ServiceModule;
 import com.jakewharton.picasso.OkHttp3Downloader;
@@ -24,6 +30,9 @@ import timber.log.Timber;
 public class App extends Application {
 
     private static AppComponent sAppComponent;
+    private static ComicsComponent comicsComponent;
+    private static ComicsDetailsSComponent comicsDetailsSComponent;
+    private static ComicsListSComponent comicsListSComponent;
 
     @Override
     public void onCreate() {
@@ -43,6 +52,39 @@ public class App extends Application {
     @NonNull
     public static AppComponent getAppComponent() {
         return sAppComponent;
+    }
+
+    public static ComicsComponent plusComicsComponent() {
+        if (comicsComponent == null) {
+            comicsComponent = getAppComponent().plusComicsComponent(new ComicsModule());
+        }
+        return comicsComponent;
+    }
+
+    public static void clearComicsComponent() {
+        comicsComponent = null;
+    }
+
+    public static ComicsDetailsSComponent plusComicsDetailsSComponent() {
+        if (comicsDetailsSComponent == null) {
+            comicsDetailsSComponent = plusComicsComponent().plusComicsDetailsSComponent(new ComicsDetailsScModule());
+        }
+        return comicsDetailsSComponent;
+    }
+
+    public static void clearComicsDetailsSComponent() {
+        comicsDetailsSComponent = null;
+    }
+
+    public static ComicsListSComponent plusComicsListSComponent() {
+        if (comicsListSComponent == null) {
+            comicsListSComponent = plusComicsComponent().plusComicsListSComponent(new ComicsListScModule());
+        }
+        return comicsListSComponent;
+    }
+
+    public static void clearComicsListSComponent() {
+        comicsListSComponent = null;
     }
 
     private void initPicasso() {

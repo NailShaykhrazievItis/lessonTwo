@@ -19,9 +19,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.IsNot.not;
 
-/**
- * Created by Nail Shaykhraziev on 26.03.2018.
- */
 @RunWith(AndroidJUnit4.class)
 public class ComicsListEmptyActivity {
 
@@ -30,7 +27,7 @@ public class ComicsListEmptyActivity {
             = new ActivityTestRule<>(ComicsListActivity.class, false, false);
 
     @Test
-    public void testErrorDisplayed() throws Exception {
+    public void testErrorDisplayed() {
 
         // need generate error, i haven't fantasy
 

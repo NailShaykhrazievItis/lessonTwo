@@ -40,18 +40,18 @@ public class ComicsRepositoryTest {
     private ComicsRepository repository;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         repository = new ComicsRepositoryImpl();
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         Realm.getDefaultInstance()
                 .executeTransaction(realm -> realm.delete(Comics.class));
     }
 
     @Test
-    public void comicsIdSuccess() throws Exception {
+    public void comicsIdSuccess() {
         ApiFactory.setComicsService(new TestService());
         Comics comics = repository.comics(59539L).blockingGet();
         assertEquals(ID, comics.getId());
@@ -88,7 +88,7 @@ public class ComicsRepositoryTest {
     }
 
     @Test
-    public void testComicsNotSaved() throws Exception {
+    public void testComicsNotSaved() {
         repository.comics(59539L).subscribe();
 
         int savedCount = Realm.getDefaultInstance()
@@ -111,7 +111,7 @@ public class ComicsRepositoryTest {
     }
 
     @Test
-    public void testComicsListSaved() throws Exception {
+    public void testComicsListSaved() {
         repository.comicsTest(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).subscribe();
 
         int savedCount = Realm.getDefaultInstance()
@@ -122,7 +122,7 @@ public class ComicsRepositoryTest {
     }
 
     @Test
-    public void testRepositoriesRestoredFromCache() throws Exception {
+    public void testRepositoriesRestoredFromCache() {
         repository.comics(ZERO_OFFSET, PAGE_SIZE, DEFAULT_COMICS_SORT).subscribe();
 
         //force error for loading

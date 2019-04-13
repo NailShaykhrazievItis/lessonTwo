@@ -45,7 +45,7 @@ android {
 
 ext {
     commons_codec = "1.11"
-    espressoVersion = "3.0.1"
+    espressoVersion = "3.0.2"
     gson = "2.8.2"
     mockito = "2.24.5"
     moxy = "1.5.5"
@@ -107,7 +107,7 @@ dependencies {
     testImplementation "org.powermock:powermock-module-junit4:${power}"
     testImplementation "org.powermock:powermock-module-junit4-rule:${power}"
     testImplementation "org.powermock:powermock-classloading-xstream:${power}"
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${espressoVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:${espressoVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${espressoVersion}"

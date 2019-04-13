@@ -16,9 +16,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.core.IsNot.not;
 
-/**
- * Created by Nail Shaykhraziev on 26.03.2018.
- */
 @RunWith(AndroidJUnit4.class)
 public class ComicsActivityTest {
 
@@ -29,7 +26,7 @@ public class ComicsActivityTest {
     private ComicsActivity comicsActivity;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         comicsActivity = rule.getActivity();
     }
 

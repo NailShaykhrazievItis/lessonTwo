@@ -10,6 +10,7 @@ import com.itis.android.lessontwo.repository.RepositoryProvider;
 import com.itis.android.lessontwo.utils.RxUtils;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -62,6 +63,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
+    @Ignore
     public void loadComicsMockError() {
         // Arrange
         Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
@@ -75,6 +77,7 @@ public class ComicsListPresenterTest {
     }
 
     @Test
+    @Ignore
     public void loadComicsMockSuccess() {
         // Arrange
         List<Comics> comicsList = new ArrayList<>();

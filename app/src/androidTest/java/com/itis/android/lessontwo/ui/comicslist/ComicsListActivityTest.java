@@ -1,7 +1,7 @@
 package com.itis.android.lessontwo.ui.comicslist;
 
 import android.support.test.espresso.intent.Intents;
-import android.support.test.rule.ActivityTestRule;
+import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.itis.android.lessontwo.R;
@@ -29,11 +29,11 @@ import static org.hamcrest.core.IsNot.not;
 public class ComicsListActivityTest {
 
     @Rule
-    public final ActivityTestRule<ComicsListActivity> rule = new ActivityTestRule<>(ComicsListActivity.class);
+    public final IntentsTestRule<ComicsListActivity> rule = new IntentsTestRule<>(ComicsListActivity.class);
 
     @Before
     public void setUp() {
-        Intents.init();
+//        Intents.init();
     }
 
     @Test
@@ -54,13 +54,13 @@ public class ComicsListActivityTest {
     @Test
     public void testClickOnItem() {
         onView(withId(R.id.rv_comics_list))
-                .perform(actionOnItemAtPosition(3, click()));
+                .perform(actionOnItemAtPosition(2, click()));
         Intents.intended(hasComponent(ComicsActivity.class.getName()));
     }
 
     @After
     public void tearDown() {
-        Intents.release();
+//        Intents.release();
         Realm.getDefaultInstance().executeTransaction(realm -> realm.deleteAll());
     }
 }

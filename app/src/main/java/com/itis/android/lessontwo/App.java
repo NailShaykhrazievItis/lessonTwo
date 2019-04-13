@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.arellomobile.mvp.MvpFacade;
 import com.facebook.stetho.Stetho;
 import com.itis.android.lessontwo.api.ApiFactory;
 import com.itis.android.lessontwo.repository.RepositoryProvider;
@@ -30,6 +31,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MvpFacade.init();
         initStetho();
         initPicasso();
         initRealm();

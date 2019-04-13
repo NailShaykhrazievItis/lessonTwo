@@ -2,72 +2,97 @@ package com.itis.android.lessontwo.ui.comics
 
 import com.itis.android.lessontwo.model.comics.Comics
 import com.itis.android.lessontwo.repository.ComicsRepository
+import io.mockk.*
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit5.MockKExtension
 import io.reactivex.Single
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.InjectMocks
-import org.mockito.Mock
-import org.mockito.Mockito.*
-import org.mockito.Spy
-import org.mockito.junit.MockitoJUnitRunner
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
-@RunWith(MockitoJUnitRunner::class)
+@ExtendWith(MockKExtension::class)
 class ComicsPresenterTest {
 
-    @Mock
+    @MockK
     lateinit var mockComicsRepository: ComicsRepository
-
-    @Mock
+    @MockK
     lateinit var mockViewState: `ComicsView$$State`
 
-    @InjectMocks
-    @Spy
     lateinit var presenter: ComicsPresenter
 
-    @Before
-    fun setUp() = presenter.setViewState(mockViewState)
+    @BeforeEach
+    fun setUp() {
+        presenter = spyk(ComicsPresenter(mockComicsRepository))
+        presenter.setViewState(mockViewState)
+    }
 
     @Test
+    @DisplayName("OOO MY GOSH IS A DOUBLE RAINBOW!!! I CAN BELIEVE IT")
     fun onFirstViewAttach() {
-        val mockView = mock(ComicsView::class.java)
+        val mockView = mockk<ComicsView>()
+        every { mockViewState.getComicsId() } just Runs
+        every { mockViewState.attachView(mockView) } just Runs
 
         presenter.attachView(mockView)
 
-        verify(mockViewState).getComicsId()
+        verify {
+            mockViewState.getComicsId()
+        }
     }
 
     @Test
+    @DisplayName("Шо пацаны ониме?!")
     fun whenInitExpectedSuccess() {
         // Arrange
         val expectedId = 5L
-        val mockComics = mock(Comics::class.java)
-        doReturn(Single.just(mockComics)).`when`(mockComicsRepository).comics(expectedId)
+        val mockComics = mockk<Comics>()
+        every { mockComicsRepository.comics(expectedId) } returns Single.just(mockComics)
+        every { mockViewState.showProgress() } just Runs
+        every { mockViewState.hideProgress() } just Runs
+        every { mockViewState.setImage(mockComics) } just Runs
+        every { mockViewState.setDescription(mockComics) } just Runs
+        every { mockViewState.setPageCount(mockComics) } just Runs
+        every { mockViewState.setPrice(mockComics) } just Runs
         // Act
         presenter.init(expectedId)
         // Assert
-        verify(mockViewState).showProgress()
-        verify(mockViewState).hideProgress()
-        verify(mockViewState).setImage(mockComics)
-        verify(mockViewState).setDescription(mockComics)
-        verify(mockViewState).setPageCount(mockComics)
-        verify(mockViewState).setPrice(mockComics)
+        verifyOrder {
+            mockViewState.showProgress()
+            mockViewState.hideProgress()
+        }
+        verify {
+            mockViewState.setImage(mockComics)
+            mockViewState.setDescription(mockComics)
+            mockViewState.setPageCount(mockComics)
+            mockViewState.setPrice(mockComics)
+        }
     }
 
     @Test
+    @DisplayName("should DIO muda muda muda")
     fun whenInitExpectedError() {
         // Arrange
         val expectedId = 566L
-        val expectedError = Throwable()
-        val mockComics = mock(Comics::class.java)
-        doReturn(Single.error<Comics>(expectedError)).`when`(mockComicsRepository).comics(expectedId)
+        val expectedError = mockk<Throwable>()
+        val mockComics = mockk<Comics>()
+        every { mockComicsRepository.comics(expectedId) } returns Single.error(expectedError)
+        every { mockViewState.handleError(expectedError) } just Runs
+        every { mockViewState.showProgress() } just Runs
+        every { mockViewState.hideProgress() } just Runs
         // Act
         presenter.init(expectedId)
         // Assert
-        verify(mockViewState).handleError(expectedError)
-        verify(mockViewState, never()).setPrice(mockComics)
-        verify(mockViewState, never()).setDescription(mockComics)
-        verify(mockViewState, never()).setPageCount(mockComics)
-        verify(mockViewState, never()).setImage(mockComics)
+        verifyOrder {
+            mockViewState.showProgress()
+            mockViewState.hideProgress()
+        }
+        verify { mockViewState.handleError(expectedError) }
+        verify(inverse = true) {
+            mockViewState.setPrice(mockComics)
+            mockViewState.setDescription(mockComics)
+            mockViewState.setPageCount(mockComics)
+            mockViewState.setImage(mockComics)
+        }
     }
 }

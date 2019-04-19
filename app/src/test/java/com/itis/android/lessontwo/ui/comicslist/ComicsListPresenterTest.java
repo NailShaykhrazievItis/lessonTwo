@@ -81,7 +81,8 @@ public class ComicsListPresenterTest {
     public void loadComicsMockSuccess() {
         // Arrange
         List<Comics> comicsList = new ArrayList<>();
-        Mockito.when(repository.comics(anyLong(), anyLong(), anyString()))
+        Mockito.when(RepositoryProvider.provideComicsRepository()
+                .comics(anyLong(), anyLong(), anyString()))
                 .thenReturn(Single.just(comicsList));
         // Act
         presenter.loadComics();

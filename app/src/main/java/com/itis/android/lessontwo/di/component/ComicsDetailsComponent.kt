@@ -7,7 +7,15 @@ import dagger.Subcomponent
 
 @Subcomponent(modules = [ComicsDetailsScModule::class])
 @ComicsDetailsScope
-interface ComicsDetailsSComponent {
+interface ComicsDetailsComponent {
 
     fun inject(comicsActivity: ComicsActivity)
+
+    @Subcomponent.Builder
+    interface Builder {
+
+        fun comicsDetailModule(comicsModule: ComicsDetailsScModule): Builder
+
+        fun build(): ComicsDetailsComponent
+    }
 }

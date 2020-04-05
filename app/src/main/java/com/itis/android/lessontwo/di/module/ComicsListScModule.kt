@@ -13,8 +13,7 @@ class ComicsListScModule {
 
     @Provides
     @ComicsListScope
-    fun provideComicsListPresenter(repository: ComicsRepository): ComicsListPresenter =
-            ComicsListPresenter(repository)
+    fun provideComicsListPresenter(repository: ComicsRepository): ComicsListPresenter = ComicsListPresenter(repository)
 
     @Provides
     @ComicsListScope

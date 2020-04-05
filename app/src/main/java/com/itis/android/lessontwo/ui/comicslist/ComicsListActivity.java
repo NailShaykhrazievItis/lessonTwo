@@ -16,6 +16,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.itis.android.lessontwo.App;
 import com.itis.android.lessontwo.R;
+import com.itis.android.lessontwo.di.Injector;
 import com.itis.android.lessontwo.model.comics.Comics;
 import com.itis.android.lessontwo.ui.base.BaseActivity;
 import com.itis.android.lessontwo.ui.base.BaseAdapter;
@@ -60,7 +61,7 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        App.plusComicsListSComponent().inject(this);
+        Injector.INSTANCE.plusComicsListComponent().inject(this);
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.container);
         getLayoutInflater().inflate(R.layout.activity_comics_list, contentFrameLayout);
@@ -71,7 +72,7 @@ public class ComicsListActivity extends BaseActivity implements ComicsListView,
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        App.clearComicsListSComponent();
+        Injector.INSTANCE.clearComicsListComponent();
     }
 
     @Override

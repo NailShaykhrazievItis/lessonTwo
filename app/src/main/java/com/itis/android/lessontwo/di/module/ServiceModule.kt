@@ -12,11 +12,9 @@ class ServiceModule {
 
     @Provides
     @Singleton
-    fun provideComicsService(retrofit: Retrofit): ComicsService =
-            retrofit.create(ComicsService::class.java)
+    fun provideComicsService(retrofit: Retrofit): ComicsService = retrofit.create(ComicsService::class.java)
 
     @Provides
     @Singleton
-    fun provideCharactersService(retrofit: Retrofit): CharactersService =
-            retrofit.create(CharactersService::class.java)
+    fun provideCharactersService(retrofit: Retrofit): CharactersService = retrofit.create(CharactersService::class.java)
 }

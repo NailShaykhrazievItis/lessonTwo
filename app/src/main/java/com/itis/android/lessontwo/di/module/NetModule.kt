@@ -38,38 +38,38 @@ class NetModule {
             @Named(NAME_API_KEY) apiKeyInterceptor: Interceptor,
             @Named(NAME_LOGGING) loggingInterceptor: Interceptor,
             @Named(NAME_STETHO) stethoInterceptor: Interceptor
-    ): OkHttpClient =
-            OkHttpClient.Builder()
-                    .addInterceptor(apiKeyInterceptor)
-                    .addInterceptor(loggingInterceptor)
-                    .addInterceptor(stethoInterceptor)
-                    .build()
+    ): OkHttpClient = OkHttpClient.Builder()
+            .addInterceptor(apiKeyInterceptor)
+            .addInterceptor(loggingInterceptor)
+            .addInterceptor(stethoInterceptor)
+            .build()
 
     @Provides
     @Singleton
     @Named(NAME_BASE_URL)
     fun provideBaseUrlString(): String = BuildConfig.API_ENDPOINT
 
-    @Provides @Singleton fun provideGsonConverterFactory(): GsonConverterFactory =
-            GsonConverterFactory.create()
+    @Provides
+    @Singleton
+    fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
     @Singleton
-    fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory =
-            RxJava2CallAdapterFactory.create()
+    fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
 
     @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient,
-                        converterFactory: GsonConverterFactory,
-                        callAdapterFactory: RxJava2CallAdapterFactory,
-                        @Named(NAME_BASE_URL) baseUrl: String): Retrofit =
-            Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .client(client)
-                    .addConverterFactory(converterFactory)
-                    .addCallAdapterFactory(callAdapterFactory)
-                    .build()
+    fun provideRetrofit(
+            client: OkHttpClient,
+            converterFactory: GsonConverterFactory,
+            callAdapterFactory: RxJava2CallAdapterFactory,
+            @Named(NAME_BASE_URL) baseUrl: String
+    ): Retrofit = Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .client(client)
+            .addConverterFactory(converterFactory)
+            .addCallAdapterFactory(callAdapterFactory)
+            .build()
 
     companion object {
         private const val NAME_API_KEY = "ApiKeyInterceptor"

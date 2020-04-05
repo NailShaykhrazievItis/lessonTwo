@@ -9,8 +9,8 @@ import android.view.View
 import android.widget.*
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.itis.android.lessontwo.App
 import com.itis.android.lessontwo.R
+import com.itis.android.lessontwo.di.Injector
 import com.itis.android.lessontwo.model.comics.Comics
 import com.itis.android.lessontwo.ui.base.BaseActivity
 import com.itis.android.lessontwo.utils.Constants.ID_KEY
@@ -38,8 +38,7 @@ class ComicsActivity : BaseActivity(), ComicsView {
 //            ComicsPresenter(RepositoryProvider.provideComicsRepository())
 
     @Inject
-    @InjectPresenter
-    lateinit var presenter: ComicsPresenter
+    lateinit var viewModel: ComicsViewModel
 
     @ProvidePresenter
     fun providePresenter() = presenter
@@ -51,7 +50,7 @@ class ComicsActivity : BaseActivity(), ComicsView {
 //    fun providePresenter(): ComicsPresenter = presenterProvider.get()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.plusComicsDetailsSComponent().inject(this)
+        Injector.plusComicsDetailsComponent().inject(this)
         super.onCreate(savedInstanceState)
         val contentFrameLayout = findViewById<FrameLayout>(R.id.container)
         layoutInflater.inflate(R.layout.activity_comics, contentFrameLayout)
@@ -61,7 +60,7 @@ class ComicsActivity : BaseActivity(), ComicsView {
 
     override fun onDestroy() {
         super.onDestroy()
-        App.clearComicsDetailsSComponent()
+        Injector.clearComicsDetailsComponent()
     }
 
     override fun getComicsId() = presenter.init(id)

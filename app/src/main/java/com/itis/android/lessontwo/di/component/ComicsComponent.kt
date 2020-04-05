@@ -1,7 +1,5 @@
 package com.itis.android.lessontwo.di.component
 
-import com.itis.android.lessontwo.di.module.ComicsDetailsScModule
-import com.itis.android.lessontwo.di.module.ComicsListScModule
 import com.itis.android.lessontwo.di.module.ComicsModule
 import com.itis.android.lessontwo.di.scope.ComicsScope
 import dagger.Subcomponent
@@ -10,7 +8,15 @@ import dagger.Subcomponent
 @ComicsScope
 interface ComicsComponent {
 
-    fun plusComicsDetailsSComponent(comicsDetailsModule: ComicsDetailsScModule): ComicsDetailsSComponent
+    fun plusComicsDetailsComponentBuilder(): ComicsDetailsComponent.Builder
 
-    fun plusComicsListSComponent(comicsListModule: ComicsListScModule): ComicsListSComponent
+    fun plusComicsListComponentBuilder(): ComicsListComponent.Builder
+
+    @Subcomponent.Builder
+    interface Builder {
+
+        fun comicsModule(comicsModule: ComicsModule): Builder
+
+        fun build(): ComicsComponent
+    }
 }

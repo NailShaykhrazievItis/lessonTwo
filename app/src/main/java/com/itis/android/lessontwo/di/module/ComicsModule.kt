@@ -12,6 +12,5 @@ class ComicsModule {
 
     @Provides
     @ComicsScope
-    fun provideComicsRepository(service: ComicsService): ComicsRepository =
-            ComicsRepositoryImpl(service)
+    fun provideComicsRepository(service: ComicsService): ComicsRepository = ComicsRepositoryImpl(service)
 }

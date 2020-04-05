@@ -7,7 +7,15 @@ import dagger.Subcomponent
 
 @Subcomponent(modules = [ComicsListScModule::class])
 @ComicsListScope
-interface ComicsListSComponent {
+interface ComicsListComponent {
 
     fun inject(comicsListActivity: ComicsListActivity)
+
+    @Subcomponent.Builder
+    interface Builder {
+
+        fun comicsListModule(comicsModule: ComicsListScModule): Builder
+
+        fun build(): ComicsListComponent
+    }
 }

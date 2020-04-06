@@ -38,7 +38,8 @@ class ComicsActivity : BaseActivity(), ComicsView {
 //            ComicsPresenter(RepositoryProvider.provideComicsRepository())
 
     @Inject
-    lateinit var viewModel: ComicsViewModel
+    @InjectPresenter
+    lateinit var presenter: ComicsPresenter
 
     @ProvidePresenter
     fun providePresenter() = presenter
@@ -56,11 +57,6 @@ class ComicsActivity : BaseActivity(), ComicsView {
         layoutInflater.inflate(R.layout.activity_comics, contentFrameLayout)
         initViews()
         id = intent.getLongExtra(ID_KEY, 0)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Injector.clearComicsDetailsComponent()
     }
 
     override fun getComicsId() = presenter.init(id)

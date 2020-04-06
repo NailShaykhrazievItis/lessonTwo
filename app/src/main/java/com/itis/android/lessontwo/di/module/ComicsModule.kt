@@ -8,9 +8,4 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ComicsModule {
-
-    @Provides
-    @ComicsScope
-    fun provideComicsRepository(service: ComicsService): ComicsRepository = ComicsRepositoryImpl(service)
-}
+class ComicsModule
